@@ -37,7 +37,9 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026 |
+| [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté |
+| [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté |
 
 ## Page HTML
 
