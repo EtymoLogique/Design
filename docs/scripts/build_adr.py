@@ -41,6 +41,7 @@ XREFS = {
     "0023": [("codex.html#codex", "Les textures dans le codex"), ("identite.html#textures", "La règle des textures"), ("cartes-visuels.html#declinaison", "Les dix pistes et la piste retenue")],
     "0022": [("plis.html#fascicules", "Les fascicules côté joueur"), ("modele.html#sources", "Le choix d’un fascicule")],
     "0025": [("plis.html#jaquettes", "Les jaquettes, servies en statique"), ("codex.html#codex", "Les silhouettes des cartes découvertes")],
+    "0026": [("modele.html#sources", "Sources et fascicules, éditées dans le dépôt privé"), ("modele.html#schema", "Le schéma, public")],
     "0013": [("modele.html", "Le modèle de données"), ("modele.html#decisions", "Quatre cas, quatre règles"), ("codex.html#filiation", "Formes et filiation dans le codex")],
 }
 

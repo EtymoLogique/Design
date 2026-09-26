@@ -55,6 +55,8 @@ Tout le contenu est rédigé **en français**, avec la typographie française (�
 - **Modification visuelle** : contrôlez l'identité avec `python3 .agents/skills/visual-identity-check/check_identity.py --base master`.
 - Respectez le vocabulaire du jeu : « pli » (jamais « pack »), « codex », « exemplaire », « réserve », « brique ».
 
+Le catalogue du jeu (recettes, mots, silhouettes des fascicules) est édité dans un dépôt privé, pour ne rien dévoiler avant la parution. Il ne contient que des données : tout le code, compilateur et validations compris, reste ici ([ADR 0026](docs/adr/0026-depot-prive-du-catalogue-sans-logique.md)).
+
 Les sources de vérité, les règles et les skills des agents sont détaillés dans [AGENTS.md](AGENTS.md).
 
 ## Licences
