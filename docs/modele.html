@@ -418,7 +418,7 @@
     <div class="wrap">
       <div class="sec-head">
         <div data-reveal><span class="sec-num">Modèle · Stockage</span><h2>Où vivent <em>les données</em></h2></div>
-        <div class="sec-intro" data-reveal style="--d:120ms"><p>Le catalogue est publié en fichiers statiques, lus par tous. L’état du joueur reste dans une base privée, que seul le serveur modifie. Le reste vit à part.</p><p class="xrefs"><span>Voir aussi</span><a class="xref" href="adr.html#adr-0027" data-kind="adr">ADR 0027 : catalogue statique</a><a class="xref" href="adr.html#adr-0024" data-kind="adr">ADR 0024 : hébergement</a><a class="xref" href="adr.html#adr-0025" data-kind="adr">ADR 0025 : parution programmée</a><a class="xref" href="adr.html#adr-0026" data-kind="adr">ADR 0026 : dépôt privé</a></p></div>
+        <div class="sec-intro" data-reveal style="--d:120ms"><p>Le catalogue est publié en fichiers statiques, lus par tous. L’état du joueur reste dans une base privée, que seul le serveur modifie. Le reste vit à part.</p><p class="xrefs"><span>Voir aussi</span><a class="xref" href="adr.html#adr-0027" data-kind="adr">ADR 0027 : catalogue statique</a><a class="xref" href="adr.html#adr-0024" data-kind="adr">ADR 0024 : hébergement</a><a class="xref" href="adr.html#adr-0025" data-kind="adr">ADR 0025 : parution programmée</a><a class="xref" href="adr.html#adr-0026" data-kind="adr">ADR 0026 : dépôt privé</a><a class="xref" href="adr.html#adr-0029" data-kind="adr">ADR 0029 : parution par préfixe</a></p></div>
       </div>
 
       <div class="dm-sources">
@@ -428,7 +428,8 @@
           <p>Le catalogue compilé, dans l’Object Storage public derrière le CDN : index, manifestes de fascicule, cartes, recettes, exclusions, jaquettes et silhouettes. Lu par le client comme par le serveur, sans API de contenu.</p>
           <ul class="dm-checks">
             <li>Fichiers statiques, en cache sans limite</li>
-            <li>Lecture publique, sans listage</li>
+            <li>Lecture publique de <code>public/</code>, sans listage</li>
+            <li class="no">Fascicules à venir illisibles, sous <code>staging/</code></li>
             <li class="no">Aucune note interne, aucun brouillon</li>
           </ul>
         </article>
@@ -515,8 +516,8 @@
 
       <ol class="dm-steps" data-reveal>
         <li><b>Compilation</b><span>Ressources et manifeste produits, empreintes vérifiées.</span></li>
-        <li><b>Dépôt</b><span>À l’avance, par la CI du dépôt privé : aucun chemin n’est encore publié.</span></li>
-        <li><b>Parution</b><span>À la date d’effet, une tâche planifiée applique les migrations et l’ajoute à l’index global.</span></li>
+        <li><b>Dépôt</b><span>À l’avance, par la CI du dépôt privé, sous <code>staging/</code> : illisible avant la parution.</span></li>
+        <li><b>Parution</b><span>À la date d’effet, une tâche planifiée copie les fichiers vers <code>public/</code>, applique les migrations et l’ajoute à l’index global.</span></li>
         <li><b>Lecture</b><span>Le client voit le fascicule à sa prochaine lecture de l’index.</span></li>
         <li><b>Correction</b><span>Nouveau hash, nouveau manifeste, nouvelle version de l’index.</span></li>
       </ol>

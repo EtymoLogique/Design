@@ -43,6 +43,7 @@ XREFS = {
     "0025": [("plis.html#jaquettes", "Les jaquettes, servies en statique"), ("codex.html#codex", "Les silhouettes des cartes découvertes")],
     "0026": [("modele.html#sources", "Sources et fascicules, éditées dans le dépôt privé"), ("modele.html#schema", "Le schéma, public")],
     "0027": [("modele.html#stockage", "Où vivent les données"), ("modele.html#joueur", "Les données du joueur")],
+    "0029": [("modele.html#stockage", "Où vivent les données")],
     "0013": [("modele.html", "Le modèle de données"), ("modele.html#decisions", "Quatre cas, quatre règles"), ("codex.html#filiation", "Formes et filiation dans le codex")],
 }
 

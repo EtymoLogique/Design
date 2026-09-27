@@ -374,14 +374,16 @@ Les sections précédentes décrivent des tables logiques. Elles ne sont pas sto
 
 ```mermaid
 flowchart LR
-    DEPOT["Dépôt privé du catalogue<br/>sources, médias, manifeste daté"] -->|CI : compilation et validation| ASSETS
-    subgraph ASSETS["Stockage des assets · public, sans listage"]
+    DEPOT["Dépôt privé du catalogue<br/>sources, médias, manifeste daté"]
+    subgraph ASSETS["Stockage des assets · public/, lisible par nom, sans listage"]
         INDEX["index.json<br/>index global"] --> MF["f/‹sha256›.json<br/>manifeste de fascicule"]
         MF --> CARTE["r/‹sha256›.json<br/>carte"]
         MF --> RECETTE["r/‹sha256›.json<br/>recette"]
         MF --> EXCL["r/‹sha256›.json<br/>exclusions"]
         MF --> ASSET["a/‹sha256›.‹ext›<br/>jaquette, silhouettes"]
     end
+    DEPOT -->|CI : dépôt à l'avance| STAGING["staging/ · fascicules à venir<br/>illisible"]
+    STAGING -->|tâche de parution : copie à la date| ASSETS
     BATCH["Tâche planifiée de parution"] -->|ajoute le fascicule à sa date| INDEX
     CLIENT["Client PWA"] -->|lit| ASSETS
     SERVEUR["Serveur"] -->|lit| ASSETS
@@ -417,7 +419,7 @@ Le stockage des assets ne contient donc que des faits `relu` et publiés. Rien d
 - Chaque manifeste et chaque ressource est rangé sous l'empreinte **SHA-256** de son contenu, comme les médias de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md). Le chemin ne contient ni identifiant ni graphie.
 - Un fichier publié **ne change jamais**. Le client et le CDN le gardent en cache sans limite. Une unité reprise comme ingrédient par un fascicule suivant garde le même fichier : les deux manifestes pointent vers le même chemin.
 - L'**index global** est le seul fichier modifiable, à chemin fixe. Il tient le rôle du manifeste public de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md). Le client le revalide à chaque lancement ; l'API le relit au plus toutes les 60 s.
-- Le conteneur est **public en lecture et sans listage** : on ne peut lire un fichier qu'en connaissant son chemin.
+- Le préfixe `public/` du bucket est **lisible par nom et sans listage** : on ne peut lire un fichier qu'en connaissant son chemin. Le préfixe `staging/`, où attendent les fascicules à venir, n'est lisible que par la tâche de parution et la CI du catalogue ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
 
 ### Index global
 
@@ -458,8 +460,8 @@ La carte d'une langue n'est pas un fichier : le client la construit à partir de
 ### Parution d'un fascicule
 
 1. Le compilateur produit les ressources et le manifeste, puis vérifie chaque empreinte.
-2. La CI du dépôt privé dépose les fichiers **à l'avance** et inscrit la date d'effet dans le manifeste serveur daté. Aucun chemin n'est encore publié, et l'empreinte d'un contenu inconnu ne se devine pas.
-3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API, qui suit sa propre horloge, accepte les commandes du fascicule dès cette date.
+2. La CI du dépôt privé dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
+3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) copie les fichiers du fascicule vers `public/`, applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API accepte les commandes du fascicule dès qu'elle lit le nouvel index.
 4. Le client voit le nouveau fascicule à sa prochaine lecture de l'index.
 
 Une correction produit une ressource au nouveau hash, donc un nouveau manifeste et une nouvelle version de l'index. L'ancienne version reste lisible pour les parties qui l'utilisent encore.

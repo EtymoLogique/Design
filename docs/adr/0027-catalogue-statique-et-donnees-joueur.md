@@ -1,6 +1,6 @@
 # ADR 0027 — Catalogue statique par fascicules, recettes publiques, serveur qui fait foi
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l'[ADR 0029](0029-parution-par-promotion-de-prefixe.md) : un fascicule à venir attend sous `staging/`, illisible, jusqu'à sa promotion dans `public/` ; le reste reste en vigueur
 - **Remplace partiellement** :
   - [ADR 0003](0003-recettes-de-fusion.md), pour le secret des recettes verrouillées ;
   - [ADR 0024](0024-architecture-logicielle-et-hebergement.md), pour les deux artefacts (public et serveur), la projection du contenu par joueur et le bucket privé du catalogue ;
