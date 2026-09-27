@@ -1,6 +1,6 @@
 # ADR 0026 — Un dépôt privé pour le catalogue brut, sans aucune logique
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : les recettes d’un fascicule paru sont publiées dans l’artefact ; le dépôt, lui, reste privé
 - **Portée** : organisation des dépôts, pipeline de contenu, publication des fascicules
 - **Remplace partiellement** : [ADR 0024](0024-architecture-logicielle-et-hebergement.md), pour le contenu du dépôt privé (sources éditoriales et artefact serveur)
 - **Complète** : [ADR 0005](0005-pipeline-de-contenu.md) (pipeline), [ADR 0017](0017-licences.md) (licences), [ADR 0025](0025-medias-statiques-et-publication-programmee.md) (publication programmée)

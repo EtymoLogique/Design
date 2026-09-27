@@ -471,14 +471,14 @@ Le niveau de confiance ne doit pas être transformé en rareté ludique.
 
 ## Architecture technique
 
-Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](adr/0025-medias-statiques-et-publication-programmee.md) et [0026](adr/0026-depot-prive-du-catalogue-sans-logique.md). En résumé :
+Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](adr/0025-medias-statiques-et-publication-programmee.md), [0026](adr/0026-depot-prive-du-catalogue-sans-logique.md) et [0027](adr/0027-catalogue-statique-et-donnees-joueur.md) (proposé). En résumé :
 
 - la PWA React est servie comme des fichiers statiques, chez Scaleway, en France ;
-- le catalogue est un artefact statique publié à chaque fascicule. Le client n'en reçoit ni recette ni brique : le serveur lui envoie seulement ce que le joueur a débloqué (réserve, fiches découvertes, silhouettes, chances), sans jamais trahir une légendaire ;
-- les jaquettes et les silhouettes sont des fichiers statiques au nom opaque, servis par le CDN. Seul le serveur sait quelle silhouette va avec quelle carte, et n’en donne le lien qu’une fois la carte découverte ;
+- le catalogue est un artefact statique unique, publié à chaque fascicule : un index global, un manifeste par fascicule et ses ressources (cartes, recettes, médias) sous des noms tirés de l'empreinte de leur contenu. Une fois le fascicule paru, ses recettes sont lisibles ; l'interface ne trahit jamais une légendaire inconnue (ADR 0027) ;
+- les jaquettes et les silhouettes sont des fichiers statiques au nom opaque, servis par le CDN. Le manifeste d'un fascicule paru dit quelle silhouette va avec quelle carte (ADR 0027) ;
 - un fascicule se prépare à l’avance et paraît seul à sa date, choisie par l’horloge du serveur. Le client ne voit jamais un fascicule à venir ;
 - tout le code est dans le dépôt public, compilateur et validations du catalogue compris. Le contenu brut (sources, médias, manifeste daté, migrations déclaratives) vit dans un dépôt privé, sans aucune logique hormis la CI qui appelle les outils publics ;
-- une seule API serverless, écrite en Rust, résout chaque fusion et chaque pli. Hors connexion, la table se prépare, mais le résultat attend le réseau ;
+- une seule API serverless, écrite en Rust, fait foi pour chaque fusion et chaque pli : elle valide la recette, vérifie la réserve, consomme et met à jour le codex. En ligne, le client peut prévisualiser le résultat ; hors connexion, la table se prépare, mais le résultat attend le réseau ;
 - la progression vit dans des tables relationnelles PostgreSQL, qui garantissent les plafonds et soldes, et chaque commande est une transaction.
 
 ## Périmètre du MVP

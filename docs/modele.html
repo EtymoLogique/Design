@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Le modèle de données des briques d’ÉtymoLogique : langues, mots, préfixes et suffixes.">
+  <meta name="description" content="Le modèle de données d’ÉtymoLogique : langues, mots, préfixes et suffixes, stockage du catalogue et données du joueur.">
   <meta name="theme-color" content="#f3eee3">
   <title>Modèle de données · ÉtymoLogique</title>
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
@@ -414,6 +414,236 @@
     </div>
   </section>
 
+  <section class="section" id="stockage">
+    <div class="wrap">
+      <div class="sec-head">
+        <div data-reveal><span class="sec-num">Modèle · Stockage</span><h2>Où vivent <em>les données</em></h2></div>
+        <div class="sec-intro" data-reveal style="--d:120ms"><p>Le catalogue est publié en fichiers statiques, lus par tous. L’état du joueur reste dans une base privée, que seul le serveur modifie. Le reste vit à part.</p><p class="xrefs"><span>Voir aussi</span><a class="xref" href="adr.html#adr-0027" data-kind="adr">ADR 0027 : catalogue statique</a><a class="xref" href="adr.html#adr-0024" data-kind="adr">ADR 0024 : hébergement</a><a class="xref" href="adr.html#adr-0025" data-kind="adr">ADR 0025 : parution programmée</a><a class="xref" href="adr.html#adr-0026" data-kind="adr">ADR 0026 : dépôt privé</a></p></div>
+      </div>
+
+      <div class="dm-sources">
+        <article class="dm-source" data-reveal>
+          <span class="dm-source-k">Public</span>
+          <h3>Stockage des assets</h3>
+          <p>Le catalogue compilé, dans l’Object Storage public derrière le CDN : index, manifestes de fascicule, cartes, recettes, exclusions, jaquettes et silhouettes. Lu par le client comme par le serveur, sans API de contenu.</p>
+          <ul class="dm-checks">
+            <li>Fichiers statiques, en cache sans limite</li>
+            <li>Lecture publique, sans listage</li>
+            <li class="no">Aucune note interne, aucun brouillon</li>
+          </ul>
+        </article>
+        <article class="dm-source" data-reveal style="--d:100ms">
+          <span class="dm-source-k">Privé</span>
+          <h3>Données du joueur</h3>
+          <p>Réserve, codex, énergie, encre, sabliers, plis, indices, jalons et commandes. Des tables PostgreSQL, que seul le serveur lit et écrit.</p>
+          <ul class="dm-checks">
+            <li>Le serveur fait foi pour chaque règle</li>
+            <li class="no">Aucune donnée personnelle</li>
+            <li class="no">Aucune proposition de fusion stockée</li>
+          </ul>
+        </article>
+        <article class="dm-source is-reperage" data-reveal style="--d:200ms">
+          <span class="dm-source-k">Ailleurs</span>
+          <h3>Le reste</h3>
+          <dl class="dm-refs">
+            <dt>Dépôt privé</dt><dd>des données seulement : sources, brouillons, notes internes, médias bruts, manifeste daté</dd>
+            <dt>Secret Manager</dt><dd>secrets du serveur, de la base et de la CI</dd>
+            <dt>Télémétrie</dt><dd>événements et journaux séparés, à durée limitée</dd>
+            <dt>Client</dt><dd>fichiers lus, état confirmé, file de commandes, réglages</dd>
+          </dl>
+        </article>
+      </div>
+
+      <div class="dm-block" data-reveal>
+        <div class="dm-block-head"><span>Assets · trois niveaux</span><h3>Un index, des fascicules, des ressources</h3><p>Chaque manifeste et chaque ressource est rangé sous l’empreinte SHA-256 de son contenu : un fichier publié ne change jamais. Seul l’index global est modifiable.</p></div>
+        <div class="dm-tables">
+          <article class="dm-table" id="f-index">
+            <h4>index global</h4>
+            <ul>
+              <li><code>index.json</code><small>chemin fixe, seul fichier modifiable</small></li>
+              <li><code>version</code><small>version linguistique et version ludique</small></li>
+              <li><code>langues</code><small>avec écritures, conventions et libellés</small></li>
+              <li><code>fascicules</code><small>numéro, date de parution, chemin du manifeste</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="f-manifeste">
+            <h4>manifeste de fascicule</h4>
+            <ul>
+              <li><code>f/‹sha256›.json</code><small>chemin donné par l’index</small></li>
+              <li><code>numero</code></li>
+              <li><code>parution</code><small>date et heure</small></li>
+              <li><code>jaquette</code><a class="dm-k fk" href="#f-asset">asset</a></li>
+              <li><code>compteurs</code><small>mots, préfixes, suffixes, langues ; légendaires exclues</small></li>
+              <li><code>pli</code><small>briques tirables, raretés, poids, encre</small></li>
+              <li><code>cartes</code><a class="dm-k fk" href="#f-carte">carte</a><small>rôle résultat ou ingrédient</small></li>
+              <li><code>recettes</code><a class="dm-k fk" href="#f-recette">recette</a></li>
+              <li><code>exclusions</code><small>combinaisons écartées et leur raison</small></li>
+              <li><code>jalons</code><small>conditions et récompenses</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="f-carte">
+            <h4>carte</h4>
+            <ul>
+              <li><code>r/‹sha256›.json</code><small>une brique ou un mot</small></li>
+              <li><code>unite</code><small>formes, translittérations, sens, libellés</small></li>
+              <li><code>relations</code><small>étymons, avec forme, langue et glose</small></li>
+              <li><code>compositions</code><small>pour un mot : parties, segments, transformations</small></li>
+              <li><code>brique</code><small>forme et sens affichés, rareté</small></li>
+              <li><code>faits</code><small>confiance, note de simplification, sources</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="f-recette">
+            <h4>recette</h4>
+            <ul>
+              <li><code>r/‹sha256›.json</code></li>
+              <li><code>resultat</code><a class="dm-k fk" href="#f-carte">carte</a></li>
+              <li><code>emplacements</code><small>ordonnés, briques acceptées</small></li>
+              <li><code>preconditions</code></li>
+              <li><code>deblocages</code></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="f-asset">
+            <h4>asset</h4>
+            <p><code>a/‹sha256›.‹ext›</code> : jaquette, silhouettes et images des cartes.</p>
+          </article>
+          <article class="dm-table is-derived">
+            <h4>carte de langue</h4>
+            <p>Pas de fichier : le client la construit à partir de l’index et des cartes découvertes.</p>
+          </article>
+        </div>
+      </div>
+
+      <ol class="dm-steps" data-reveal>
+        <li><b>Compilation</b><span>Ressources et manifeste produits, empreintes vérifiées.</span></li>
+        <li><b>Dépôt</b><span>À l’avance, par la CI du dépôt privé : aucun chemin n’est encore publié.</span></li>
+        <li><b>Parution</b><span>À la date d’effet, une tâche planifiée applique les migrations et l’ajoute à l’index global.</span></li>
+        <li><b>Lecture</b><span>Le client voit le fascicule à sa prochaine lecture de l’index.</span></li>
+        <li><b>Correction</b><span>Nouveau hash, nouveau manifeste, nouvelle version de l’index.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="joueur">
+    <div class="wrap">
+      <div class="sec-head">
+        <div data-reveal><span class="sec-num">Modèle · Joueur</span><h2>Le serveur <em>fait foi</em></h2></div>
+        <div class="sec-intro" data-reveal style="--d:120ms"><p>Une fois le fascicule paru, ses recettes sont lisibles. En ligne, le client prévisualise la fusion ; le serveur valide la recette, vérifie la réserve, consomme les exemplaires et met à jour le codex, dans une seule transaction.</p><p class="xrefs"><span>Voir aussi</span><a class="xref" href="adr.html#adr-0027" data-kind="adr">ADR 0027 : serveur qui fait foi</a><a class="xref" href="adr.html#adr-0024" data-kind="adr">ADR 0024 : tables PostgreSQL</a><a class="xref" href="adr.html#adr-0012" data-kind="adr">ADR 0012 : réserve</a><a class="xref" href="adr.html#adr-0020" data-kind="adr">ADR 0020 : énergie et sabliers</a></p></div>
+      </div>
+
+      <div class="dm-block" data-reveal>
+        <div class="dm-block-head"><span>PostgreSQL · privé</span><h3>L’état du joueur</h3><p>Chaque ligne référence le catalogue par ses identifiants opaques. Toute variation passe par une commande idempotente et laisse un mouvement.</p></div>
+        <div class="dm-tables">
+          <article class="dm-table" id="t-joueur">
+            <h4>joueur</h4>
+            <ul>
+              <li><code>id</code><span class="dm-k pk">PK</span><small>aléatoire, sans donnée personnelle</small></li>
+              <li><code>empreinte_secret</code></li>
+              <li><code>version_etat</code><small>détecte un conflit</small></li>
+              <li><code>version_catalogue</code></li>
+              <li><code>derniere_activite</code></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-exemplaire">
+            <h4>exemplaire</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>brique_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-brique">brique</a></li>
+              <li><code>nombre</code><small>0 à 5 ; 0 = épuisée, toujours connue</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-decouverte">
+            <h4>decouverte</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>mot_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-mot">mot</a></li>
+              <li><code>recette_id</code><a class="dm-k fk" href="#t-recette">recette</a></li>
+              <li><code>numero</code><small>rang de la découverte</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-energie">
+            <h4>energie</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>charges</code><small>0 à 2, une toutes les 12 h</small></li>
+              <li><code>prochaine_charge</code><small>nulle quand l’énergie est pleine</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-encre">
+            <h4>encre · sablier</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>gouttes</code><small>jamais négatives</small></li>
+              <li><code>detenus</code><small>36 sabliers au plus ; 12 utilisés par 24 h</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-compteur_pli">
+            <h4>compteur_pli</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>fascicule_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-fascicule">fascicule</a></li>
+              <li><code>plis_sans_nouveaute</code><small>garantie au 6ᵉ pli</small></li>
+              <li><code>plis_sans_utilite</code><small>filet au 5ᵉ pli</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-ouverture_pli">
+            <h4>ouverture_pli</h4>
+            <ul>
+              <li><code>id</code><span class="dm-k pk">PK</span></li>
+              <li><code>fascicule_id</code><a class="dm-k fk" href="#t-fascicule">fascicule</a></li>
+              <li><code>brique_id</code><a class="dm-k fk" href="#t-brique">brique</a></li>
+              <li><code>resultat</code><small>nouvelle, doublon, réserve pleine</small></li>
+              <li><code>regle</code><small>tirage, garantie, filet, déterministe</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-indice">
+            <h4>indice · jalon_atteint · reglage · migration</h4>
+            <p>Un niveau d’indice par recette, un jalon atteint, une préférence énumérée ou une migration de version par ligne.</p>
+          </article>
+          <article class="dm-table" id="t-commande">
+            <h4>commande</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>id</code><span class="dm-k pk">PK</span><small>clé d’idempotence du client</small></li>
+              <li><code>type</code><small>fusion, ouvrir un pli, sablier, indice…</small></li>
+              <li><code>reponse</code><small>rejouée à l’identique, purgée après 30 jours</small></li>
+            </ul>
+          </article>
+          <article class="dm-table" id="t-mouvement">
+            <h4>mouvement</h4>
+            <ul>
+              <li><code>commande_id</code><small>trace, sans clé étrangère</small></li>
+              <li><code>ressource</code><small>exemplaire, encre, sablier, charge</small></li>
+              <li><code>delta</code><small>ajout seul ; la somme égale le solde</small></li>
+              <li><code>motif</code></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <div class="rules">
+        <article class="rule-col do" data-reveal>
+          <h3><span>✓</span>Le serveur vérifie</h3>
+          <ol>
+            <li><span>La recette appartient à un fascicule paru, dans le bon ordre, préconditions remplies.</span></li>
+            <li><span>La réserve contient un exemplaire de chaque brique utilisée.</span></li>
+            <li><span>Consommation, découverte et récompenses réussissent ou échouent ensemble.</span></li>
+            <li><span>Énergie, plis, encre, sabliers, indices et jalons suivent leurs plafonds.</span></li>
+            <li><span>Une commande rejouée renvoie la même réponse, sans rien changer.</span></li>
+          </ol>
+        </article>
+        <article class="rule-col dont" data-reveal style="--d:120ms">
+          <h3><span>✗</span>Jamais stocké</h3>
+          <ol>
+            <li><span>Les propositions de fusion : échecs, « presque », recettes déjà connues.</span></li>
+            <li><span>Un nom, une adresse électronique, une adresse réseau.</span></li>
+            <li><span>Un texte libre saisi par le joueur.</span></li>
+            <li><span>Les exemplaires réservés sur la table : ils restent locaux.</span></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="decisions">
     <div class="wrap">
       <div class="sec-head">
@@ -460,6 +690,7 @@
             <li><span>Que dit le jeu devant une combinaison attestée mais exclue ?</span></li>
             <li><span>Le mauvais homographe sur la table : échec neutre, ou indice « même forme, autre sens » ?</span></li>
             <li><span>Dans une petite brique en ligne, comment distinguer deux homographes ?</span></li>
+            <li><span>Combien de temps garder un profil invité inactif, et une version remplacée du catalogue ?</span></li>
           </ol>
         </article>
       </div>

@@ -1,6 +1,6 @@
 # ADR 0025 — Médias du catalogue en statique, publication programmée des fascicules
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : la correspondance entre cartes et médias est dans le manifeste public du fascicule, et l’index global remplace le manifeste public
 - **Portée** : application du MVP (catalogue, médias, publication), hors dossier de conception
 - **Remplace partiellement** : [ADR 0024](0024-architecture-logicielle-et-hebergement.md), pour la publication par un manifeste unique changé à la main
 - **Complète** : [ADR 0005](0005-pipeline-de-contenu.md) (artefact publié), [ADR 0016](0016-plis-et-jaquettes-par-fascicule.md) (jaquettes), [ADR 0023](0023-textures-des-cartes.md) (silhouettes), [ADR 0024](0024-architecture-logicielle-et-hebergement.md) (catalogue public et serveur)

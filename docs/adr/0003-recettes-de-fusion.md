@@ -1,6 +1,6 @@
 # ADR 0003 — Recettes explicites et transformations expliquées
 
-- **Statut** : Accepté
+- **Statut** : Accepté, secret des recettes verrouillées remplacé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md)
 
 ## Contexte
 
@@ -46,6 +46,8 @@ Une recette ne prétend pas nécessairement que le mot a été historiquement «
 - `invalid` : aucune correspondance.
 
 Le serveur ne renvoie pas l'identifiant ou les ingrédients secrets d'une recette verrouillée.
+
+> Remplacé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : le catalogue est publié en fichiers statiques, et les recettes d'un fascicule paru y sont lisibles. Le serveur fait toujours foi pour valider une fusion et modifier la réserve et le codex.
 
 ## Options envisagées
 

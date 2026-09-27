@@ -1,6 +1,6 @@
 # ADR 0015 — Codex par fascicule et légendaires secrètes
 
-- **Statut** : Accepté
+- **Statut** : Accepté, précisé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : le secret tient à l'interface, pas aux fichiers publiés
 - **Remplace partiellement** : [ADR 0011](0011-plis-raretes-et-doublons.md), pour l'affichage des chances des briques légendaires inconnues
 - **Complète** : [ADR 0014](0014-sources-et-fascicules.md) (fascicules dans le codex)
 
@@ -68,6 +68,7 @@ Mais un compteur exact dévoile tout, y compris le nombre de briques légendaire
 - « Complet » ne veut pas dire « tout trouvé » : il peut rester des légendaires. Le texte doit rester honnête et ne jamais annoncer qu'il ne reste plus rien.
 - La garantie de nouveauté peut trahir l'existence d'au moins une légendaire : si toutes les autres briques sont connues, le message de garantie reste affiché. Le nombre, lui, reste caché.
 - Un mot qui dépend d'une légendaire n'est visible qu'après elle : le validateur doit vérifier qu'aucun indice public (piste, lien, filiation) ne le dévoile avant.
+- Depuis l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md), les fichiers d'un fascicule paru sont publics : un joueur qui les lit peut y trouver ses légendaires. Le secret vaut pour l'interface : écrans, compteurs, silhouettes et manifestes.
 
 ## Critères de réévaluation
 

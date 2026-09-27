@@ -1,6 +1,6 @@
 # ÉtymoLogique — Modèle de données des briques
 
-Ce document décrit le **schéma relationnel logique** des objets au cœur du jeu : **langues, mots, préfixes et suffixes**. Il ne choisit ni base de données, ni format de fichier, ni moteur. Il fixe les entités, leurs attributs, leurs clés, leurs cardinalités et les contraintes que tout stockage devra respecter.
+Ce document décrit le **schéma relationnel logique** des objets au cœur du jeu : **langues, mots, préfixes et suffixes**. Ce schéma logique ne dépend pas du moteur. Il fixe les entités, leurs attributs, leurs clés, leurs cardinalités et les contraintes que tout stockage devra respecter. Les sections 6 et 7 disent où vit chaque donnée : catalogue statique publié par fascicules, données du joueur dans PostgreSQL sous autorité serveur, et le reste ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md) à [ADR 0027](adr/0027-catalogue-statique-et-donnees-joueur.md)).
 
 Une présentation illustrée est disponible sur la page [modèle de données](modele.html). Les choix structurants sont actés dans l'[ADR 0013](adr/0013-schema-des-briques.md). Le document applique les ADR [0002](adr/0002-graphe-linguistique-editorial.md) (graphe éditorial), [0003](adr/0003-recettes-de-fusion.md) (recettes), [0006](adr/0006-architecture-multilingue.md) (multilingue) et [0009](adr/0009-contenu-et-equilibrage.md) (séparation des couches).
 
@@ -364,6 +364,280 @@ erDiagram
 - Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique.
 - Les **familles** sont hors du périmètre de ce document.
 
+## 6. Où vivent les données
+
+Les sections précédentes décrivent des tables logiques. Elles ne sont pas stockées telles quelles : le compilateur ([ADR 0005](adr/0005-pipeline-de-contenu.md)) les regroupe en fichiers. L'[ADR 0027](adr/0027-catalogue-statique-et-donnees-joueur.md) fixe trois lieux :
+
+- le **stockage des assets** : le catalogue publié, en fichiers statiques dans l'Object Storage public, derrière le CDN ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). Le client et le serveur lisent les mêmes fichiers ; aucune API ne sert le contenu ;
+- le **stockage des données du joueur** : les tables PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit (section 7) ;
+- **ailleurs** : le dépôt privé du catalogue ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)), Secret Manager, la télémétrie et le stockage local du client.
+
+```mermaid
+flowchart LR
+    DEPOT["Dépôt privé du catalogue<br/>sources, médias, manifeste daté"] -->|CI : compilation et validation| ASSETS
+    subgraph ASSETS["Stockage des assets · public, sans listage"]
+        INDEX["index.json<br/>index global"] --> MF["f/‹sha256›.json<br/>manifeste de fascicule"]
+        MF --> CARTE["r/‹sha256›.json<br/>carte"]
+        MF --> RECETTE["r/‹sha256›.json<br/>recette"]
+        MF --> EXCL["r/‹sha256›.json<br/>exclusions"]
+        MF --> ASSET["a/‹sha256›.‹ext›<br/>jaquette, silhouettes"]
+    end
+    BATCH["Tâche planifiée de parution"] -->|ajoute le fascicule à sa date| INDEX
+    CLIENT["Client PWA"] -->|lit| ASSETS
+    SERVEUR["Serveur"] -->|lit| ASSETS
+    CLIENT -->|commandes idempotentes| SERVEUR
+    SERVEUR <-->|transactions| JOUEUR[("PostgreSQL · données du joueur")]
+```
+
+### Carte de répartition
+
+| Donnée | Lieu | Lisible |
+|---|---|---|
+| `langue`, `systeme_ecriture`, `convention_translitteration` et leurs libellés | index global | par tous |
+| Liste des fascicules parus : numéro, date, chemin du manifeste | index global | par tous, à partir de la date de parution |
+| `fascicule`, `fascicule_unite`, jaquette, compteurs hors légendaires, paramètres du pli (raretés, poids) | manifeste de fascicule | par tous, dès la parution |
+| `unite_lexicale`, `mot` ou `affixe`, `forme`, `translitteration`, `sens` et leurs libellés | carte de l'unité | par tous, dès la parution |
+| `relation_etymologique` dont l'unité est la cible, avec les étymons qu'elles désignent | carte de l'unité | par tous, dès la parution |
+| `composition`, `partie_composition`, `transformation` et leurs libellés | carte du mot résultat | par tous, dès la parution |
+| `brique` : forme et sens affichés, rareté | carte de l'unité | par tous, dès la parution |
+| `recette`, `emplacement`, préconditions, déblocages | recette | par tous, dès la parution |
+| `exclusion` relue | exclusions du fascicule | par tous, dès la parution |
+| `fait` : confiance ; `fait_libelle` : `note_simplification` ; `source` et `fait_source` des faits publiés | recopiés dans chaque carte qui les cite | par tous, dès la parution |
+| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue`, sources de repérage seules | dépôt privé du catalogue | équipe éditoriale |
+| Imports datés du Wiktionnaire, médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt privé du catalogue | équipe éditoriale |
+| Réserve, codex, énergie, encre, sabliers, plis, indices, jalons, commandes | données du joueur (section 7) | serveur seul |
+| Événements produit, journaux opérationnels | télémétrie et journaux ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)) | équipe, accès tracés |
+| Secrets du serveur, de la base et de la CI | Secret Manager | serveur et CI |
+| Propositions brutes de fusion | **nulle part** | — |
+
+Le stockage des assets ne contient donc que des faits `relu` et publiés. Rien de ce qui est affirmé dans le jeu n'échappe au circuit de l'[ADR 0005](adr/0005-pipeline-de-contenu.md).
+
+### Chemins en hash de contenu
+
+- Chaque manifeste et chaque ressource est rangé sous l'empreinte **SHA-256** de son contenu, comme les médias de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md). Le chemin ne contient ni identifiant ni graphie.
+- Un fichier publié **ne change jamais**. Le client et le CDN le gardent en cache sans limite. Une unité reprise comme ingrédient par un fascicule suivant garde le même fichier : les deux manifestes pointent vers le même chemin.
+- L'**index global** est le seul fichier modifiable, à chemin fixe. Il tient le rôle du manifeste public de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md). Le client le revalide à chaque lancement ; l'API le relit au plus toutes les 60 s.
+- Le conteneur est **public en lecture et sans listage** : on ne peut lire un fichier qu'en connaissant son chemin.
+
+### Index global
+
+| Champ | Contenu |
+|---|---|
+| `version` | Identifiant de la publication, qui associe version linguistique et version ludique ([ADR 0009](adr/0009-contenu-et-equilibrage.md)). |
+| `langues`, `systemes_ecriture`, `conventions` | Référentiels communs et leurs libellés par locale. Une langue indique le fascicule qui l'a introduite ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
+| `fascicules` | Pour chaque fascicule paru : `numero`, `parution` (date et heure), `manifeste` (chemin haché). |
+
+Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de compteur ([ADR 0014](adr/0014-sources-et-fascicules.md)).
+
+### Manifeste de fascicule
+
+| Champ | Contenu |
+|---|---|
+| `numero`, `parution` | Numéro et date de parution. |
+| `jaquette` | Chemin haché de l'asset de la jaquette ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
+| `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
+| `pli` | Briques tirables (ses briques nouvelles et reprises), poids des raretés et des types, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
+| `cartes` | Pour chaque unité déclarée (`fascicule_unite`) : identifiant opaque, rôle (`resultat` ou `ingredient`), chemin haché de sa carte, chemin de sa silhouette. |
+| `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
+| `exclusions` | Chemin haché du fichier d'exclusions. |
+| `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
+
+### Ressources
+
+| Ressource | Contenu |
+|---|---|
+| **Carte** d'une brique ou d'un mot | L'unité, ses formes et translittérations, ses sens, ses relations et étymons (forme, langue, glose), et pour un mot ses compositions, parties, segments et transformations. Les libellés de chaque locale, la confiance, la `note_simplification` et les sources de chaque fait. Pour une brique, sa forme affichée, son sens affiché et sa rareté. |
+| **Recette** | Identifiant, mot résultat, composition jouée, emplacements ordonnés et briques acceptées, préconditions, déblocages. |
+| **Exclusions** | Pour chaque combinaison écartée : suite ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
+| **Asset** | Jaquette, silhouettes et images des cartes ([ADR 0023](adr/0023-textures-des-cartes.md)). |
+
+Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
+
+La carte d'une langue n'est pas un fichier : le client la construit à partir de l'index et des cartes déjà découvertes.
+
+### Parution d'un fascicule
+
+1. Le compilateur produit les ressources et le manifeste, puis vérifie chaque empreinte.
+2. La CI du dépôt privé dépose les fichiers **à l'avance** et inscrit la date d'effet dans le manifeste serveur daté. Aucun chemin n'est encore publié, et l'empreinte d'un contenu inconnu ne se devine pas.
+3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API, qui suit sa propre horloge, accepte les commandes du fascicule dès cette date.
+4. Le client voit le nouveau fascicule à sa prochaine lecture de l'index.
+
+Une correction produit une ressource au nouveau hash, donc un nouveau manifeste et une nouvelle version de l'index. L'ancienne version reste lisible pour les parties qui l'utilisent encore.
+
+### Les recettes sont publiques, le serveur fait foi
+
+Une fois le fascicule paru, ses recettes et ses légendaires sont lisibles dans ses fichiers. Le secret des légendaires tient à l'interface : pas de silhouette, pas de compteur ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)).
+
+En ligne, le client peut résoudre une fusion localement pour répondre tout de suite ; hors connexion, la tentative attend le réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). Ce n'est qu'une prévisualisation : le **serveur fait foi**. Il lit les mêmes fichiers, valide la recette et ses préconditions, vérifie la réserve, consomme les exemplaires et met à jour le codex, dans une seule transaction. Il en va de même pour l'énergie, les plis, l'encre, les sabliers, les indices et les jalons ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)).
+
+## 7. Données du joueur
+
+La progression vit dans les tables relationnelles PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)). Cette section en donne le schéma logique et le complète par l'historique des plis, les indices, les jalons atteints et les migrations ([ADR 0027](adr/0027-catalogue-statique-et-donnees-joueur.md)).
+
+Ces tables désignent le catalogue par ses identifiants opaques (`brique_id`, `mot_id`, `recette_id`, `fascicule_id`), jamais par une graphie, et n'en copient aucun texte. Le catalogue, lui, ne les référence jamais.
+
+```mermaid
+erDiagram
+    JOUEUR ||--o{ EXEMPLAIRE : "possède"
+    JOUEUR ||--o{ DECOUVERTE : "a découvert"
+    JOUEUR ||--|| ENERGIE : "recharge"
+    JOUEUR ||--|| ENCRE : "détient"
+    JOUEUR ||--|| SABLIER : "détient"
+    JOUEUR ||--o{ COMPTEUR_PLI : "suit"
+    JOUEUR ||--o{ OUVERTURE_PLI : "a ouvert"
+    JOUEUR ||--o{ INDICE : "a obtenu"
+    JOUEUR ||--o{ JALON_ATTEINT : "a atteint"
+    JOUEUR ||--o{ REGLAGE : "choisit"
+    JOUEUR ||--o{ COMMANDE : "envoie"
+    JOUEUR ||--o{ MOUVEMENT : "cumule"
+    JOUEUR ||--o{ MIGRATION : "a suivi"
+
+    JOUEUR {
+        id id PK "aléatoire, sans donnée personnelle"
+        texte empreinte_secret "jamais le secret lui-même"
+        entier version_etat "incrémentée à chaque commande"
+        texte version_catalogue "version active du joueur"
+        instant cree_le
+        instant derniere_activite
+    }
+    EXEMPLAIRE {
+        id joueur_id PK, FK
+        id brique_id PK "catalogue"
+        entier nombre "0 à 5, 0 = épuisée"
+        instant connue_le
+    }
+    DECOUVERTE {
+        id joueur_id PK, FK
+        id mot_id PK "catalogue"
+        id recette_id "catalogue"
+        entier numero "rang de la découverte"
+        instant decouverte_le
+    }
+    ENERGIE {
+        id joueur_id PK, FK
+        entier charges "0 à 2"
+        instant prochaine_charge "nulle si 2 charges"
+    }
+    ENCRE {
+        id joueur_id PK, FK
+        entier gouttes "positif ou nul"
+    }
+    SABLIER {
+        id joueur_id PK, FK
+        entier detenus "0 à 36"
+    }
+    COMPTEUR_PLI {
+        id joueur_id PK, FK
+        id fascicule_id PK "catalogue"
+        entier plis_sans_nouveaute "garantie au 6e"
+        entier plis_sans_utilite "filet au 5e"
+    }
+    OUVERTURE_PLI {
+        id id PK
+        id joueur_id FK
+        id fascicule_id "catalogue"
+        enum origine "energie ou jalon"
+        id brique_id "catalogue"
+        enum resultat "nouvelle, doublon, reserve_pleine"
+        enum regle "tirage, garantie, filet, deterministe"
+        texte version_equilibrage
+        instant ouvert_le
+    }
+    INDICE {
+        id joueur_id PK, FK
+        id recette_id PK "catalogue"
+        entier niveau PK "1 à 5"
+        instant obtenu_le
+    }
+    JALON_ATTEINT {
+        id joueur_id PK, FK
+        id jalon_id PK "catalogue"
+        instant atteint_le
+    }
+    REGLAGE {
+        id joueur_id PK, FK
+        texte cle PK "thème, locale, mouvement réduit"
+        texte valeur "valeur énumérée"
+    }
+    COMMANDE {
+        id joueur_id PK, FK
+        id id PK "clé d'idempotence du client"
+        enum type "fusion, ouvrir_pli, sablier, indice..."
+        enum statut "acceptee, refusee, conflit"
+        texte reponse "rejouée à l'identique"
+        instant recue_le "purgée après 30 jours"
+    }
+    MOUVEMENT {
+        id id PK
+        id joueur_id FK
+        id commande_id "trace, sans clé étrangère"
+        enum ressource "exemplaire, encre, sablier, charge"
+        id brique_id "si exemplaire, nullable"
+        entier delta "+1, -1, +2..."
+        enum motif "decouverte, pli, doublon, sablier, indice, jalon, depart"
+        instant le
+    }
+    MIGRATION {
+        id joueur_id PK, FK
+        texte version_depart PK
+        texte version_arrivee
+        instant appliquee_le
+    }
+```
+
+| Table | Rôle | Remarques |
+|---|---|---|
+| `joueur` | Profil invité. | Un identifiant aléatoire et l'empreinte d'un secret de 256 bits. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). |
+| `exemplaire` | La réserve : briques connues et leurs exemplaires. | Une ligne par brique connue, créée à sa première obtention. La connaissance est permanente : une brique à 0 exemplaire reste, marquée épuisée ([ADR 0012](adr/0012-briques-rationnees.md)). Les exemplaires réservés sur la table ne sont jamais stockés ici : ils restent locaux. |
+| `decouverte` | Le codex du joueur. | Une ligne par mot découvert. Les cartes de brique viennent de `exemplaire` ; les cartes de langue sont dérivées des deux. |
+| `energie` | Charges de pli. | 2 charges au plus, une toutes les 12 h ; `prochaine_charge` est nulle quand l'énergie est pleine : le temps s'arrête ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). Un sablier avance cet instant d'une heure. |
+| `encre`, `sablier` | Soldes. | Encre jamais négative, 36 sabliers détenus au plus ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). |
+| `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
+| `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
+| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois. |
+| `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois ; sa récompense passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
+| `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
+| `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
+| `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. Le plafond de 12 sabliers par 24 h glissantes se vérifie à partir d'eux. |
+| `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
+
+**Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
+
+### Exemple : une découverte
+
+Le joueur pose *géo-* et *-logie*. En ligne, le client lit la recette dans le catalogue public et prévisualise la découverte. Il envoie la commande `fusion` avec sa clé d'idempotence et sa `version_etat`. Dans une seule transaction, le serveur :
+
+1. vérifie que la commande n'a pas déjà été traitée, sinon renvoie la réponse enregistrée ;
+2. vérifie la `version_etat`, sinon renvoie `409` ;
+3. vérifie que la recette appartient à un fascicule paru de la version active, que l'ordre est bon et que les préconditions sont remplies ;
+4. vérifie qu'il reste au moins un exemplaire de *géo-* et de *-logie*, et que *géologie* n'est pas déjà découvert ;
+5. écrit deux `mouvement` à −1, décrémente `exemplaire`, ajoute la ligne `decouverte` et les récompenses éventuelles ;
+6. enregistre la `commande` et sa réponse, puis renvoie le nouvel état confirmé.
+
+Si le mot est déjà découvert, la réponse est `known` et rien n'est consommé. Si la réserve ne suffit pas, la commande est refusée : le client affiche la réponse du serveur, jamais sa propre prévisualisation.
+
+### Stockage local du client
+
+Le client garde, pour la réactivité et le jeu hors ligne ([ADR 0001](adr/0001-pwa-responsive.md), [ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)) :
+
+- dans le cache du service worker : l'index global et les fichiers du catalogue déjà lus ;
+- dans IndexedDB : la projection de l'état confirmé, la file des commandes en attente avec leur clé d'idempotence, et une copie des réglages ;
+- en mémoire : l'état visuel de la table, dont les exemplaires réservés.
+
+Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la file puis renvoie l'état confirmé.
+
+### Contraintes d'intégrité des données du joueur
+
+- `exemplaire.nombre` est compris entre 0 et 5 ; un exemplaire reçu au-delà devient de l'encre.
+- `energie.charges` est compris entre 0 et 2 ; `prochaine_charge` est nulle si et seulement si les charges valent 2.
+- `encre.gouttes` n'est jamais négatif ; `sablier.detenus` ne dépasse pas 36.
+- Au plus 12 sabliers utilisés par joueur sur 24 h glissantes, et seulement si l'énergie est sous 2.
+- Une `decouverte` par (joueur, mot) ; son `recette_id` produit bien ce mot dans la version active.
+- Une `commande` par (joueur, clé d'idempotence). Tous les effets d'une commande réussissent ou échouent ensemble.
+- Pour chaque ressource, la somme des `mouvement` égale le solde correspondant.
+- Tout identifiant du catalogue référencé existe dans la version du joueur et appartient à un fascicule paru.
+- Aucune colonne ne contient de texte libre saisi par le joueur.
+
 ## Contraintes d'intégrité
 
 Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit par le stockage, soit par le validateur de publication ([ADR 0005](adr/0005-pipeline-de-contenu.md)).
@@ -410,7 +684,7 @@ Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit p
 
 ## Versionnage
 
-Chaque publication est un **instantané immuable** de toutes les tables ([ADR 0002](adr/0002-graphe-linguistique-editorial.md)). Le schéma ne porte donc pas de colonnes temporelles : les identifiants restent stables d'une version à l'autre, et un manifeste associe une version linguistique et une version ludique ([ADR 0009](adr/0009-contenu-et-equilibrage.md)). Supprimer un objet publié, ou changer la nature d'une unité, passe par une migration explicite.
+Chaque publication est un **instantané immuable** de toutes les tables ([ADR 0002](adr/0002-graphe-linguistique-editorial.md)). Le schéma ne porte donc pas de colonnes temporelles : les identifiants restent stables d'une version à l'autre, et un manifeste associe une version linguistique et une version ludique ([ADR 0009](adr/0009-contenu-et-equilibrage.md)). Supprimer un objet publié, ou changer la nature d'une unité, passe par une migration explicite. Physiquement, une version est un index global qui pointe vers des manifestes et des ressources à hash de contenu (section 6) : une correction change quelques chemins, jamais un fichier déjà publié.
 
 ## Exemples travaillés
 
@@ -499,6 +773,7 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 - **Trois langues, sans variété** dans le MVP : grec ancien, latin, français.
 - **Pas de carte pour les étymons.** Une unité a une carte si elle est une brique ou le résultat d'une recette.
 - **Homographes : deux cartes**, distinguées par leur glose et leur étymon, sans numéro.
+- **Catalogue statique, serveur qui fait foi.** Le catalogue est publié en fichiers publics à hash de contenu, fascicule par fascicule ; les données du joueur restent dans une base privée que seul le serveur modifie (ADR 0027).
 
 ## Questions ouvertes
 
@@ -507,3 +782,5 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 - **Retour d'une exclusion.** Que dit le jeu quand le joueur tente une combinaison attestée mais écartée ?
 - **Traductions.** Les gloses et définitions ne seront d'abord rédigées qu'en français : faut-il imposer une locale de référence unique ?
 - **Homographes sur la table.** Quand le joueur pose le mauvais homographe, faut-il un indice « même forme, autre sens » plutôt qu'un échec neutre ?
+- **Conservation des profils.** Combien de temps garder un profil invité inactif, et que dire au joueur avant de le supprimer ?
+- **Anciennes versions.** Combien de temps garder lisibles les manifestes et ressources d'une version remplacée ?

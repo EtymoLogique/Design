@@ -16,7 +16,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 |---|---|---|
 | [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté |
 | [0002](0002-graphe-linguistique-editorial.md) | Graphe linguistique éditorial et versionné | Accepté |
-| [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté |
+| [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté, secret des recettes verrouillées remplacé par 0027 |
 | [0004](0004-progression-atteignable.md) | Progression pilotée par un graphe d'obtention vérifiable | Accepté |
 | [0005](0005-pipeline-de-contenu.md) | Pipeline de contenu validé avant publication | Accepté |
 | [0006](0006-architecture-multilingue.md) | Architecture multilingue indépendante du lancement | Accepté |
@@ -28,7 +28,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019 |
 | [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé |
 | [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022 |
-| [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté |
+| [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface) |
 | [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
 | [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020 |
@@ -37,9 +37,10 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026 |
-| [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté |
-| [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027 |
+| [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027 |
+| [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
+| [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé |
 
 ## Page HTML
 
