@@ -16,7 +16,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 |---|---|---|
 | [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté |
 | [0002](0002-graphe-linguistique-editorial.md) | Graphe linguistique éditorial et versionné | Accepté |
-| [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté, secret des recettes verrouillées remplacé par 0027 |
+| [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté, secret des recettes verrouillées remplacé par 0027, nombre d'emplacements par 0032 |
 | [0004](0004-progression-atteignable.md) | Progression pilotée par un graphe d'obtention vérifiable | Accepté |
 | [0005](0005-pipeline-de-contenu.md) | Pipeline de contenu validé avant publication | Accepté |
 | [0006](0006-architecture-multilingue.md) | Architecture multilingue indépendante du lancement | Accepté |
@@ -27,7 +27,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020 |
 | [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019 |
 | [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé |
-| [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022 |
+| [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022, fermeture limitée aux paires par 0032 |
 | [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface) |
 | [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
@@ -43,6 +43,9 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé |
+| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
+| [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
+| [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté |
 
 ## Page HTML
 

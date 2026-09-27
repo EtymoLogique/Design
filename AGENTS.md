@@ -41,6 +41,7 @@ Si deux sources se contredisent, signalez l'écart au lieu de choisir en silence
 
 ## Règles essentielles
 
+- **D’abord un logiciel qui marche, ensuite les tests.** Faire fonctionner l’application comme elle a été conçue prime sur l’écriture de tests : livrez d’abord une fonctionnalité qui marche de bout en bout, puis ajoutez les tests qui la protègent.
 - **Se tromper ne coûte rien, réussir consomme** : une découverte consomme un exemplaire de chaque brique utilisée ; un échec, un « presque » ou une recette déjà connue ne consomment rien.
 - **Aucune impasse** : aucune brique impossible à obtenir, plafond de 5 exemplaires par brique, filet d'utilité, garantie de nouveauté au 6ᵉ pli.
 - **Pas de paiement dans le MVP.** Le niveau de confiance éditoriale n'est jamais une rareté ludique.

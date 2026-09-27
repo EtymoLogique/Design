@@ -329,7 +329,7 @@ erDiagram
     }
     EMPLACEMENT {
         id recette_id PK, FK
-        entier rang PK
+        entier rang PK "1 ou 2"
     }
     FASCICULE {
         id id PK
@@ -344,14 +344,14 @@ erDiagram
     EXCLUSION {
         id id PK
         id fascicule_id FK
-        texte combinaison "suite ordonnée de briques"
+        texte combinaison "paire ordonnée de briques"
         enum raison "archaique, rare, offensant, analyse_non_etablie"
     }
 ```
 
 - Une **brique** pointe vers une unité lexicale : mot, préfixe ou suffixe. Aucune langue ne peut donc être posée sur la table.
 - **Une brique par unité**, et une unité a au plus une brique. Un allomorphe n'est jamais une brique à part : la recette qui l'emploie le déclare comme transformation (ADR 0003). La réserve, le tirage des plis et la carte du codex restent donc uniques pour *philo-*, qu'il s'écrive *philo* ou *phil*.
-- Une **recette** s'appuie sur une composition validée. Elle ne peut pas inventer un fait (ADR 0009). Ses emplacements acceptent une ou plusieurs briques (variantes admises, ADR 0003).
+- Une **recette** s'appuie sur une composition validée. Elle ne peut pas inventer un fait (ADR 0009). Elle a **exactement deux emplacements**, rangs 1 et 2 : la table de fusion n'en accepte jamais davantage ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Chaque emplacement accepte une ou plusieurs briques (variantes admises, ADR 0003). Une composition de trois parties ou plus n'est donc pas jouable telle quelle.
 - Les **cartes du codex** sont dérivées. Une unité a sa propre carte **si et seulement si** elle est référencée par une brique ou par le résultat d'une recette :
   - carte de mot ou de brique : l'unité, ses formes, ses sens et les compositions où elle apparaît ;
   - carte de langue : les unités de cette langue.
@@ -361,7 +361,7 @@ erDiagram
   - `resultat` : les mots qu'il publie. Un mot est le résultat d'**un seul** fascicule ;
   - `ingredient` : les préfixes, suffixes et mots qui servent à ses recettes. Une unité déjà publiée peut être reprise comme ingrédient par plusieurs fascicules.
 - Une **exclusion** enregistre une combinaison attestée volontairement non publiée, avec sa raison.
-- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique.
+- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique. Les graines sont déclarées par le fascicule ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)).
 - Les **familles** sont hors du périmètre de ce document.
 
 ## 6. Où vivent les données
@@ -437,7 +437,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 
 | Champ | Contenu |
 |---|---|
-| `numero`, `parution` | Numéro et date de parution. |
+| `id`, `numero`, `parution` | Identifiant opaque du fascicule, par lequel les données du joueur le désignent ; numéro et date de parution. |
 | `jaquette` | Chemin haché de l'asset de la jaquette ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
 | `pli` | Briques tirables (ses briques nouvelles et reprises), poids des raretés et des types, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
@@ -446,6 +446,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
 | `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
+| `graines` | Réserve de départ du fascicule : pour chaque brique semée, `brique_id` et `exemplaires`, de 1 à 5 ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). |
 
 ### Ressources
 
@@ -453,7 +454,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 |---|---|
 | **Carte** d'une brique ou d'un mot | L'unité, ses formes et translittérations, ses sens, ses relations et étymons (forme, langue, glose), et pour un mot ses compositions, parties, segments et transformations. Les libellés de chaque locale, la confiance, la `note_simplification` et les sources de chaque fait. Pour une brique, sa forme affichée, son sens affiché et sa rareté. |
 | **Recette** | Identifiant, mot résultat, composition jouée, emplacements ordonnés et briques acceptées, préconditions, déblocages. |
-| **Exclusions** | Pour chaque combinaison écartée : suite ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
+| **Exclusions** | Pour chaque combinaison écartée : paire ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
 | **Asset** | Jaquette, silhouettes des cartes et des langues ([ADR 0023](adr/0023-textures-des-cartes.md)), en SVG servi en `image/svg+xml`, sous `a/‹sha256›.svg`. |
 
 Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
@@ -496,6 +497,7 @@ erDiagram
     JOUEUR ||--o{ COMMANDE : "envoie"
     JOUEUR ||--o{ MOUVEMENT : "cumule"
     JOUEUR ||--o{ MIGRATION : "a suivi"
+    JOUEUR ||--o{ GRAINE_ACCORDEE : "a reçu"
 
     JOUEUR {
         id id PK "aléatoire, sans donnée personnelle"
@@ -582,6 +584,11 @@ erDiagram
         enum motif "decouverte, pli, doublon, sablier, indice, jalon, depart"
         instant le
     }
+    GRAINE_ACCORDEE {
+        id joueur_id PK, FK
+        id fascicule_id PK "catalogue"
+        instant accordee_le
+    }
     MIGRATION {
         id joueur_id PK, FK
         texte version_depart PK
@@ -605,6 +612,7 @@ erDiagram
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
 | `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. Le plafond de 12 sabliers par 24 h glissantes se vérifie à partir d'eux. |
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
+| `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
 
 **Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
 
@@ -685,7 +693,7 @@ Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit p
 
 - **Unicité** : un mot n'a qu'une ligne `resultat`, tous fascicules confondus.
 - **Autonomie** : chaque partie d'une recette d'un fascicule est une unité publiée dans ce fascicule ou dans un précédent, et figure dans ses lignes `ingredient`.
-- **Fermeture** : pour toute suite ordonnée de briques publiées dans les fascicules 1 à N, jusqu'au nombre maximal de briques sur la table, un mot attesté par une source de référence est publié ou fait l'objet d'une exclusion relue.
+- **Fermeture** : pour toute paire ordonnée de briques publiées dans les fascicules 1 à N, un mot attesté par une source de référence est publié ou fait l'objet d'une exclusion relue.
 
 ## Versionnage
 
@@ -775,6 +783,7 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 ## Décisions prises
 
 - **Une brique par unité.** Un allomorphe est une transformation, jamais une brique.
+- **Deux briques par recette.** Une recette a exactement deux emplacements ; un mot plus long passe, plus tard, par un mot découvert devenu brique (*biologie* + *-iste*).
 - **Trois langues, sans variété** dans le MVP : grec ancien, latin, français.
 - **Pas de carte pour les étymons.** Une unité a une carte si elle est une brique ou le résultat d'une recette.
 - **Homographes : deux cartes**, distinguées par leur glose et leur étymon, sans numéro.

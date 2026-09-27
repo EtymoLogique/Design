@@ -1,6 +1,6 @@
 # ADR 0003 — Recettes explicites et transformations expliquées
 
-- **Statut** : Accepté, secret des recettes verrouillées remplacé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md)
+- **Statut** : Accepté, secret des recettes verrouillées remplacé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) ; nombre d'emplacements fixé à deux par l'[ADR 0032](0032-fusion-de-deux-briques.md). Le reste de la recette (variantes, transformations, résultats de tentative) reste en vigueur.
 
 ## Contexte
 
