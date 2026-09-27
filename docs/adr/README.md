@@ -43,6 +43,8 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé |
+| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
+| [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
 
 ## Page HTML
 

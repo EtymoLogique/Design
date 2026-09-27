@@ -361,7 +361,7 @@ erDiagram
   - `resultat` : les mots qu'il publie. Un mot est le résultat d'**un seul** fascicule ;
   - `ingredient` : les préfixes, suffixes et mots qui servent à ses recettes. Une unité déjà publiée peut être reprise comme ingrédient par plusieurs fascicules.
 - Une **exclusion** enregistre une combinaison attestée volontairement non publiée, avec sa raison.
-- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique.
+- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique. Les graines sont déclarées par le fascicule ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)).
 - Les **familles** sont hors du périmètre de ce document.
 
 ## 6. Où vivent les données
@@ -437,7 +437,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 
 | Champ | Contenu |
 |---|---|
-| `numero`, `parution` | Numéro et date de parution. |
+| `id`, `numero`, `parution` | Identifiant opaque du fascicule, par lequel les données du joueur le désignent ; numéro et date de parution. |
 | `jaquette` | Chemin haché de l'asset de la jaquette ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
 | `pli` | Briques tirables (ses briques nouvelles et reprises), poids des raretés et des types, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
@@ -446,6 +446,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
 | `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
+| `graines` | Réserve de départ du fascicule : pour chaque brique semée, `brique_id` et `exemplaires`, de 1 à 5 ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). |
 
 ### Ressources
 
@@ -496,6 +497,7 @@ erDiagram
     JOUEUR ||--o{ COMMANDE : "envoie"
     JOUEUR ||--o{ MOUVEMENT : "cumule"
     JOUEUR ||--o{ MIGRATION : "a suivi"
+    JOUEUR ||--o{ GRAINE_ACCORDEE : "a reçu"
 
     JOUEUR {
         id id PK "aléatoire, sans donnée personnelle"
@@ -582,6 +584,11 @@ erDiagram
         enum motif "decouverte, pli, doublon, sablier, indice, jalon, depart"
         instant le
     }
+    GRAINE_ACCORDEE {
+        id joueur_id PK, FK
+        id fascicule_id PK "catalogue"
+        instant accordee_le
+    }
     MIGRATION {
         id joueur_id PK, FK
         texte version_depart PK
@@ -605,6 +612,7 @@ erDiagram
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
 | `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. Le plafond de 12 sabliers par 24 h glissantes se vérifie à partir d'eux. |
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
+| `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
 
 **Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
 
