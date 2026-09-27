@@ -26,6 +26,7 @@ python3 .agents/skills/visual-identity-check/check_identity.py docs/plis.html  #
 | `degrade-mixte` | erreur | Supprimer le dégradé. Utiliser une surface unie ou un filet neutre de 3 px. |
 | `texte-sur-vif` | erreur | Texte en `var(--fixed-ink)` sur une couleur vive. |
 | `encre-variable` | avertissement | `var(--ink)` s'inverse en nocturne : sur une couleur vive, utiliser `var(--fixed-ink)`. |
+| `bande-laterale` | erreur | Bordure de 3 px ou plus sur un seul côté (`border-left`, `border-inline-start`…) ; un filet séparateur de 1 à 2 px reste permis : contour égal sur les quatre côtés, couleur portée par le bandeau, une barre ou une pastille. |
 | `ombre-coloree` | avertissement | Ombre dure en Encre (`var(--pop-shadow)`). Exceptions admises : la carte vitrine Corail de l'accueil et les halos Ambre du rituel des plis, **à justifier**. |
 
 - Les anneaux (`0 0 0 Npx`, pour le focus, une pulsation ou un projecteur) ne sont pas comptés comme des ombres.
@@ -68,6 +69,7 @@ Pour chaque composant ajouté ou modifié :
 - [ ] Polices par variable : `--serif` pour les mots, `--sans` pour l'interface, `--mono` pour les métadonnées. Cursive réservée au rituel d'écriture.
 - [ ] Animations courtes, avec les easings `--ease-out` et `--ease-spring`, et désactivées sous `prefers-reduced-motion`.
 - [ ] Mode nocturne : les neutres s'inversent, les couleurs de ressource ne changent pas. Le composant reste lisible dans les deux thèmes.
+- [ ] Aucune bande de couleur ou d'épaisseur sur un seul côté d'une carte, d'un panneau ou d'une ligne de liste (effet « généré ») : contour égal sur les quatre côtés.
 - [ ] Rien de ce que la boussole met « à éviter » : parchemins et plumes, dégradés violets, ombres molles, cartes trop arrondies, drapeaux pour les langues, codes de langue.
 
 ## 3. Revue visuelle

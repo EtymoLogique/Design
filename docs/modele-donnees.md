@@ -335,6 +335,7 @@ erDiagram
     FASCICULE {
         id id PK
         entier numero UK "1, 2, 3..."
+        texte nom "Rosette, Argile… : celui de sa jaquette"
         date publication
     }
     FASCICULE_UNITE {

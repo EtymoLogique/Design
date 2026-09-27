@@ -286,7 +286,7 @@ body.nocturne .mq-lang { color: var(--c-lang); }
 .mq-counts span { display: grid; min-width: 52px; padding: 6px 8px; border: 1.5px solid var(--line-strong); border-radius: 10px; }
 .mq-counts b { font-family: var(--serif); font-size: 18px; line-height: 1; }
 .mq-counts small { color: var(--ink-3); font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.06em; text-transform: uppercase; }
-.mq-fam { display: grid; gap: 7px; padding: 10px; border: 1.5px solid var(--line-strong); border-left: 6px solid var(--c-family); border-radius: 12px; background: var(--cream); }
+.mq-fam { display: grid; gap: 7px; padding: 10px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--cream); }
 .mq-reward { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border: 1px solid var(--line-strong); border-radius: 999px; font-family: var(--mono); font-size: 8px; }
 .mq-check { display: grid; place-items: center; width: 16px; height: 16px; flex: none; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 9px; font-weight: 700; }
 .mq-check.no { border: 1.5px dashed var(--line-strong); background: transparent; }

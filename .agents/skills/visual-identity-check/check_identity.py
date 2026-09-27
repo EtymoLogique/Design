@@ -133,6 +133,10 @@ def check_text(text: str, allowed: set, family: dict):
             resources = families_in(value, family) - {"action"}
             if len(resources) >= 2:
                 yield offset, "erreur", "degrade-mixte", f"dégradé entre ressources ({', '.join(sorted(resources))})"
+        # Bande d'accent : un seul côté de 3 px ou plus. Un filet séparateur (1 à 2 px) reste permis.
+        epaisseur = re.search(r"(\d+(?:\.\d+)?)px", value)
+        if re.fullmatch(r"border-(left|right|inline-start|inline-end)(-width)?", prop) and epaisseur and float(epaisseur.group(1)) >= 3:
+            yield offset, "erreur", "bande-laterale", f"{prop} : jamais de bande sur un seul côté, contour égal sur les quatre côtés"
         if prop in ("box-shadow", "text-shadow") or "drop-shadow" in value:
             tinted = set().union(*(families_in(layer, family) for layer in shadow_layers(value) if not is_ring(layer)))
             if tinted:
