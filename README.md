@@ -34,7 +34,7 @@ Les piliers du jeu :
 | [docs/jeu.html](docs/jeu.html), [plis.html](docs/plis.html), [codex.html](docs/codex.html) | Démonstrations jouables : table de fusion, plis, codex |
 | [docs/boussole.html](docs/boussole.html) | Piliers, ce qu'il faut cultiver, ce qu'il faut éviter |
 
-Le dossier `docs/` est publié sur [GitHub Pages](https://lunik.github.io/EtymoLogique/) à chaque push sur `master`. Chaque autre branche est publiée sous `/branches/<nom>/`.
+Le dossier `docs/` est publié sur [GitHub Pages](https://lunik.github.io/EtymoLogique/) à chaque push sur `master`. Les autres branches ne sont pas publiées.
 
 ## Prévisualiser en local
 

@@ -46,4 +46,4 @@ Si les outils de navigateur ne sont pas disponibles, donnez à l'utilisateur l'U
 - Montrez les captures pertinentes, en indiquant la page, la largeur et le thème. Listez les anomalies trouvées.
 - Arrêtez le serveur à la fin (`stop_bash` sur son shellId), sauf si l'utilisateur veut le garder ouvert. Dans ce cas, donnez-lui l'URL.
 - Remettez `localStorage` dans l'état initial si vous l'avez modifié.
-- Après publication, la branche est aussi visible sur GitHub Pages sous `/branches/<nom-de-branche>/`. Le workflow tourne à chaque push sur `master` et toutes les heures.
+- Seule `master` est publiée sur GitHub Pages, à chaque push. Une autre branche ne se prévisualise qu'en local.

@@ -25,7 +25,7 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `docs/assets/etymo.js` | Démo partagée (réserve, découvertes, plis) stockée dans `localStorage` (`etymologique.demo.v1`, thème `etymologique.theme`). |
 | `docs/assets/logo.svg` | Icône des pages : le sceau ÉL (ADR 0021). |
 | `docs/assets/site-nav.js` / `.css` | Navigation commune : liste unique des pages (`GROUPS`). |
-| `.github/workflows/pages.yml` | Publie `docs/` de `master` sur GitHub Pages, et chaque autre branche sous `/branches/<nom>/`. |
+| `.github/workflows/pages.yml` | Publie `docs/` de `master` sur GitHub Pages. Les autres branches ne sont pas publiées. |
 | `.agents/skills/` | Skills des agents (`.github/skills` est un lien symbolique vers ce dossier). |
 
 ## Sources de vérité
