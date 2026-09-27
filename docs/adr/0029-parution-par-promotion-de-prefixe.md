@@ -25,7 +25,7 @@ Chez Scaleway, une politique de bucket au format `2023-04-17` ne contient que de
 | `staging/` | Les mêmes fichiers, pour les fascicules **à venir**, et le calendrier des parutions | Jamais |
 
 - Les chemins sous chaque préfixe gardent la forme de l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : `index.json`, puis manifestes et ressources en hash de contenu.
-- Le **calendrier des parutions**, `staging/parutions.json`, liste les fascicules en attente, leur date d'effet en UTC et le chemin de leur manifeste. Il remplace le manifeste serveur daté de l'[ADR 0025](0025-medias-statiques-et-publication-programmee.md), qui n'a plus de place dans un artefact unique.
+- Le **calendrier des parutions**, `staging/parutions.json`, liste les fascicules en attente, leur date d'effet en UTC et le chemin de leur manifeste. Comme l'index, il ne cite que des manifestes : seul le manifeste cite les ressources de son fascicule (cartes, recettes, exclusions, médias). Il remplace le manifeste serveur daté de l'[ADR 0025](0025-medias-statiques-et-publication-programmee.md), qui n'a plus de place dans un artefact unique.
 
 ### Une liste blanche, fixée par l'infrastructure
 
@@ -47,7 +47,7 @@ La politique du bucket est écrite et appliquée par le dépôt d'infrastructure
 À chaque date d'effet, la tâche planifiée de l'[ADR 0025](0025-medias-statiques-et-publication-programmee.md) :
 
 1. lit le calendrier et retient les fascicules dont la date est passée ;
-2. copie chaque fichier du fascicule de `staging/` vers `public/`, sous le même chemin relatif. Un fichier déjà présent dans `public/`, par exemple une brique reprise, n'est pas recopié : son contenu est identique ;
+2. lit le manifeste de chaque fascicule dans `staging/` et copie vers `public/`, sous le même chemin relatif, les ressources qu'il cite, puis le manifeste lui-même. Un fichier déjà présent dans `public/`, par exemple une brique reprise, n'est pas recopié : son contenu est identique ;
 3. applique les migrations de progression ;
 4. écrit en dernier le nouveau `public/index.json`.
 
