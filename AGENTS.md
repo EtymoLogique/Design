@@ -11,6 +11,7 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `README.md` | Présentation du projet, prévisualisation, contribution, licences. |
 | `LICENSE`, `LICENSE-CONTENT` | Code sous AGPL 3.0 ou ultérieure, contenu sous CC BY-SA 4.0 ; nom et logo réservés (ADR 0017). |
 | `docs/game-design.md` | Vision du jeu : piliers, vocabulaire, boucle, règles de jeu, identité, périmètre du MVP. |
+| `docs/etude-de-marche.md`, `docs/plan-financier.md` | Étude de marché et plan financier sur 18 mois (développement, lancement, MCO et fascicules). Les tableaux du plan sont générés par `docs/scripts/plan_financier.py` (entre `<!-- PLAN:START -->` et `<!-- PLAN:END -->`) : ne pas les éditer à la main. |
 | `docs/adr/*.md` | Architecture Decision Records, numérotés `NNNN-titre.md`, indexés dans `docs/adr/README.md`. |
 | `docs/adr.html` | Page générée à partir des ADR (entre `<!-- ADR:START -->` et `<!-- ADR:END -->`) : ne pas éditer à la main. |
 | `docs/scripts/build_adr.py` | Génère `adr.html` ; contient aussi `XREFS`, les renvois de chaque ADR vers les pages. |
@@ -63,6 +64,7 @@ Si deux sources se contredisent, signalez l'écart au lieu de choisir en silence
 
 ```sh
 python3 docs/scripts/build_adr.py                                     # régénérer adr.html
+python3 docs/scripts/plan_financier.py                                # recalculer les tableaux du plan financier
 python3 -m http.server 8000 --directory docs                          # prévisualiser (voir le skill doc-preview)
 python3 .agents/skills/visual-identity-check/check_identity.py        # contrôler l'identité visuelle
 python3 .agents/skills/visual-identity-check/check_identity.py --base master  # seulement les lignes modifiées
