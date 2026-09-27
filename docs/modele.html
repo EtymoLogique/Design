@@ -476,7 +476,8 @@
               <li><code>jaquette</code><a class="dm-k fk" href="#f-asset">asset</a></li>
               <li><code>compteurs</code><small>mots, préfixes, suffixes, langues ; légendaires exclues</small></li>
               <li><code>pli</code><small>briques tirables, raretés, poids, encre</small></li>
-              <li><code>cartes</code><a class="dm-k fk" href="#f-carte">carte</a><small>rôle résultat ou ingrédient</small></li>
+              <li><code>cartes</code><a class="dm-k fk" href="#f-carte">carte</a><small>rôle résultat ou ingrédient, silhouette</small></li>
+              <li><code>langues</code><a class="dm-k fk" href="#f-asset">asset</a><small>silhouette de chaque langue citée</small></li>
               <li><code>recettes</code><a class="dm-k fk" href="#f-recette">recette</a></li>
               <li><code>exclusions</code><small>combinaisons écartées et leur raison</small></li>
               <li><code>jalons</code><small>conditions et récompenses</small></li>
@@ -505,7 +506,7 @@
           </article>
           <article class="dm-table" id="f-asset">
             <h4>asset</h4>
-            <p><code>a/‹sha256›.‹ext›</code> : jaquette, silhouettes et images des cartes.</p>
+            <p><code>a/‹sha256›.svg</code> : jaquette, silhouettes des cartes et des langues.</p>
           </article>
           <article class="dm-table is-derived">
             <h4>carte de langue</h4>

@@ -19,6 +19,7 @@ Dix langages graphiques ont été comparés sur la même carte, « biologie », 
 - Une carte **inconnue** garde ses hachures, son « ? » et sa piste, sans aucune texture : l'image trahirait le sens. Les légendaires inconnues restent absentes du codex ([ADR 0015](0015-codex-fascicules-et-legendaires.md)).
 - La silhouette figure au **recto**, en grille et en carte agrandie. Le verso, dense en listes, reste sans texture.
 - Elle suit la carte partout où celle-ci apparaît : codex, maquettes, exemples de la charte et du design système. Une fiche de découverte (table de fusion, accueil) n'est pas une carte et reste sans texture.
+- **Une silhouette par sens, partagée entre les langues** : en règle générale, une silhouette n'appartient qu'à une carte, et deux cartes proches par le sens (*géo-*, *géographie*, *géologie*) prennent des sujets distincts. Exception : plusieurs cartes peuvent porter la même silhouette quand elles sont le même mot dans plusieurs langues, c'est-à-dire des unités reliées par un emprunt ou un héritage et qui gardent le même sens (*philosophie*, *philosophia*, *φιλοσοφία*). Le dessin ne dit rien de la langue : c'est la carte de langue qui porte l'objet de sa culture.
 
 ### Style : l'aplat découpé (piste 02)
 
@@ -59,6 +60,7 @@ Filigrane, gravure, trame, macro, contours, constellation, pochoir, demi-teinte 
 - Chaque carte devient un objet reconnaissable, qu'on a envie de collectionner.
 - La texture renforce le sens du mot sans rien dire de la mécanique : la couleur garde son rôle.
 - Le rendu est vectoriel et monochrome : il s'adapte à toutes les tailles et au mode nocturne sans second jeu de fichiers.
+- Un même mot dans plusieurs langues partage sa silhouette : le joueur reconnaît la parenté, et un dessin sert plusieurs cartes.
 
 ### Négatives
 

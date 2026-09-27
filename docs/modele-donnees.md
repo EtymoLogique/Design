@@ -429,6 +429,8 @@ Le stockage des assets ne contient donc que des faits `relu` et publiés. Rien d
 | `langues`, `systemes_ecriture`, `conventions` | Référentiels communs et leurs libellés par locale. Une langue indique le fascicule qui l'a introduite ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
 | `fascicules` | Pour chaque fascicule paru : `numero`, `parution` (date et heure), `manifeste` (chemin haché). |
 
+L'index ne cite que des manifestes, jamais une ressource : c'est le manifeste qui mène à ses cartes, recettes, exclusions et médias. Le calendrier `staging/parutions.json` suit la même règle pour les fascicules à venir ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
+
 Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de compteur ([ADR 0014](adr/0014-sources-et-fascicules.md)).
 
 ### Manifeste de fascicule
@@ -440,6 +442,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
 | `pli` | Briques tirables (ses briques nouvelles et reprises), poids des raretés et des types, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
 | `cartes` | Pour chaque unité déclarée (`fascicule_unite`) : identifiant opaque, rôle (`resultat` ou `ingredient`), chemin haché de sa carte, chemin de sa silhouette. |
+| `langues` | Pour chaque langue citée par ses cartes (langue d'une unité ou d'un étymon) : identifiant et chemin haché de sa silhouette ([ADR 0023](adr/0023-textures-des-cartes.md)). Comme l'index ne cite que des manifestes, c'est le manifeste qui mène aux silhouettes des langues et la tâche de parution les promeut avec le fascicule. |
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
 | `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
@@ -451,7 +454,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | **Carte** d'une brique ou d'un mot | L'unité, ses formes et translittérations, ses sens, ses relations et étymons (forme, langue, glose), et pour un mot ses compositions, parties, segments et transformations. Les libellés de chaque locale, la confiance, la `note_simplification` et les sources de chaque fait. Pour une brique, sa forme affichée, son sens affiché et sa rareté. |
 | **Recette** | Identifiant, mot résultat, composition jouée, emplacements ordonnés et briques acceptées, préconditions, déblocages. |
 | **Exclusions** | Pour chaque combinaison écartée : suite ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
-| **Asset** | Jaquette, silhouettes et images des cartes ([ADR 0023](adr/0023-textures-des-cartes.md)). |
+| **Asset** | Jaquette, silhouettes des cartes et des langues ([ADR 0023](adr/0023-textures-des-cartes.md)), en SVG servi en `image/svg+xml`, sous `a/‹sha256›.svg`. |
 
 Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
 
@@ -461,7 +464,7 @@ La carte d'une langue n'est pas un fichier : le client la construit à partir de
 
 1. Le compilateur produit les ressources et le manifeste, puis vérifie chaque empreinte.
 2. La CI du dépôt privé dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
-3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) copie les fichiers du fascicule vers `public/`, applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API accepte les commandes du fascicule dès qu'elle lit le nouvel index.
+3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) lit le manifeste du fascicule dans `staging/`, copie vers `public/` les ressources qu'il cite puis le manifeste, applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API accepte les commandes du fascicule dès qu'elle lit le nouvel index.
 4. Le client voit le nouveau fascicule à sa prochaine lecture de l'index.
 
 Une correction produit une ressource au nouveau hash, donc un nouveau manifeste et une nouvelle version de l'index. L'ancienne version reste lisible pour les parties qui l'utilisent encore.
