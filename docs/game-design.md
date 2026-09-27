@@ -101,13 +101,13 @@ Le lot initial doit offrir :
 
 ### Interaction
 
-- Glisser-déposer sur grand écran, toucher puis « Ajouter à la table » sur mobile.
+- Glisser-déposer, ou un toucher (un clic) sur la brique pour la poser dans la première case libre, sur mobile comme sur ordinateur ([ADR 0033](adr/0033-gestes-de-la-table-de-fusion.md)).
 - Réorganisation explicite des briques, car l'ordre fait partie de l'hypothèse.
 - Bouton **Fusionner** disponible dès que les deux emplacements sont remplis.
 - Bouton **Vider** qui remet les briques dans la réserve sans conséquence.
 - Chaque brique posée réserve un exemplaire. Une brique dont tous les exemplaires sont posés, ou qui est épuisée, ne peut pas être ajoutée ; un message explique pourquoi.
 - Accès au codex sans fermer ni perdre la proposition en cours.
-- **Deux emplacements exactement** : une fusion réunit toujours deux briques, jamais trois ni davantage ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Une troisième brique ne s'ajoute pas : elle remplace celle de l'emplacement visé, qui revient à la réserve sans rien consommer.
+- **Deux emplacements exactement** : une fusion réunit toujours deux briques, jamais trois ni davantage ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Table pleine, une troisième brique ne s'ajoute pas et ne remplace rien ; seul un dépôt sur une case pleine la remplace. Chaque brique garde sa case : en retirer une ne déplace pas l'autre ([ADR 0033](adr/0033-gestes-de-la-table-de-fusion.md)).
 - Un mot formé de trois éléments ou plus n'a pas de recette dans le MVP. Plus tard, il pourra se former en cascade, deux par deux, quand un mot découvert redeviendra une brique (voir le [potentiel d'évolution](potentiel-evolution.md)).
 
 ### Représentation des briques
@@ -402,7 +402,7 @@ Le [design système](design-system.html) la prolonge en système complet : princ
 | Mot | Encre `#0F1F19` sur Crème `#FFFBF3` | Cartes de mots : neutres, pour laisser parler les briques |
 | Famille | Rosée `#F59AC1` | Cartes et progression de famille |
 | Pli et énergie | Ambre `#F4B740` | Plis, sceau, énergie, recharge, rituel d'ouverture, formes de rareté (triangle, carré, pentagone, diamant ; remplies d'Ambre, cernées d'Encre, ou de la teinte profonde du bandeau d'une carte, sans contour, jamais posées sur une brique), gouttes d'encre |
-| Action et marque | Corail `#FF6B4A` (survol `#FF8667`, pression `#E24E2D`) | Bouton principal, focus, nouveauté, marque |
+| Action et marque | Corail `#FF6B4A` (survol `#FF8667`, pression `#E24E2D`) | Bouton principal, nouveauté, marque |
 | Danger | Corail profond `#C23D1F` (texte Crème, 5,1:1) | Bouton qui confirme une action irréversible (effacer, réinitialiser), avec l'icône octogone et toujours après une confirmation. Variante discrète en contour. Jamais pour un échec de jeu, qui reste en Gris encre. |
 
 Règles complémentaires :
@@ -441,7 +441,7 @@ Règles complémentaires :
 - **Interactions** :
   - survol : l'élément se soulève de 2 px et son ombre passe à 6 px ;
   - pression : il s'enfonce de 2 px et son ombre passe à 1 px ;
-  - focus : anneau Corail de 2 px ;
+  - focus : anneau Encre de 2 px, décalé de 3 px ;
   - désactivé : opacité 40 % ;
   - sélectionné : fond Encre.
 - **Tailles** : cible tactile d'au moins 44 px, boutons de 48 px de haut, briques d'au moins 96 × 52 px.

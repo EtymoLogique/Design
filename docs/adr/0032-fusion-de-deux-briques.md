@@ -1,6 +1,6 @@
 # ADR 0032 — Une fusion réunit exactement deux briques
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0033](0033-gestes-de-la-table-de-fusion.md) : table pleine, une troisième brique ne remplace plus rien ; seul un dépôt sur une case pleine la remplace
 - **Remplace partiellement** : [ADR 0003](0003-recettes-de-fusion.md), pour le nombre d'emplacements d'une recette ; [ADR 0014](0014-sources-et-fascicules.md), pour le périmètre de la règle de fermeture
 - **Complète** : [ADR 0013](0013-schema-des-briques.md) (tables `recette` et `emplacement`)
 

@@ -1,6 +1,6 @@
 # ADR 0001 — PWA responsive comme plateforme MVP
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0033](0033-gestes-de-la-table-de-fusion.md) : un toucher sur une brique la pose directement, sans sélection ni « Ajouter à la table »
 - **Portée** : MVP
 
 ## Contexte

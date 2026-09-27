@@ -56,6 +56,7 @@ erDiagram
         entier periode_debut "année, nullable"
         entier periode_fin "année, nullable"
         id systeme_ecriture_defaut_id FK
+        texte glyphe "lettre emblème de la carte, nullable"
     }
     LANGUE_LIBELLE {
         id langue_id PK, FK
@@ -77,7 +78,7 @@ erDiagram
 
 | Table | Rôle | Remarques |
 |---|---|---|
-| `langue` | Langue affichée dans le codex. | Le MVP compte **trois langues, sans variété** : grec ancien, latin, français. Une forme médiévale ou tardive reste rattachée à sa langue ; si la précision compte, elle va dans l'explication ou la `note_simplification`. `langue_parente_id` décrit la généalogie des langues, pas les emprunts : un emprunt se déclare entre unités. |
+| `langue` | Langue affichée dans le codex. | Le MVP compte **trois langues, sans variété** : grec ancien, latin, français. Une forme médiévale ou tardive reste rattachée à sa langue ; si la précision compte, elle va dans l'explication ou la `note_simplification`. `langue_parente_id` décrit la généalogie des langues, pas les emprunts : un emprunt se déclare entre unités. `glyphe` est la lettre emblème de la carte de langue du codex (É, Æ, Ω) ; sans glyphe, la carte prend l'initiale du nom. |
 | `langue_libelle` | Nom affiché dans chaque locale. | Le joueur voit toujours le nom complet (ADR 0006). `code_interne` reste strictement technique. |
 | `systeme_ecriture` | Alphabet grec, latin, cyrillique… | Porte la direction d'écriture, utile au rendu fragment par fragment. |
 
@@ -703,11 +704,11 @@ Chaque publication est un **instantané immuable** de toutes les tables ([ADR 00
 
 ### Langues
 
-| `langue` | `code_interne` | `langue_parente_id` | nom (`fr`) |
-|---|---|---|---|
-| `lng_01` | `grc` | — | grec ancien |
-| `lng_02` | `la` | — | latin |
-| `lng_03` | `fr` | `lng_02` | français |
+| `langue` | `code_interne` | `langue_parente_id` | `glyphe` | nom (`fr`) |
+|---|---|---|---|---|
+| `lng_01` | `grc` | — | Ω | grec ancien |
+| `lng_02` | `la` | — | Æ | latin |
+| `lng_03` | `fr` | `lng_02` | É | français |
 
 La filiation `lng_03` → `lng_02` est simplifiée (le français descend du latin parlé) : `note_simplification` le signale.
 

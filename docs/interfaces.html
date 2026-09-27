@@ -34,7 +34,7 @@
       </div>
       <div class="pillars">
         <article class="pillar" data-reveal style="--d:0ms"><span>Règle 01</span><h3>Quatre destinations</h3><p>Table, Codex, Plis, Réglages, dans cet ordre. Barre d’onglets en bas sur mobile, rail vertical à gauche au-delà de 1 100 px. Changer d’onglet conserve l’état de chaque écran.</p><p class="xrefs"><span></span><a class="xref" href="design-system.html#ds-4-1">Navigation principale</a></p></article>
-        <article class="pillar" data-reveal style="--d:60ms"><span>Règle 02</span><h3>Un geste, deux voies</h3><p>Glisser-déposer au pointeur ; toucher puis « Ajouter à la table » au doigt. Tout se fait aussi au clavier.</p><p class="xrefs"><span></span><a class="xref" href="design-system.html#ds-4-4">Gestes</a><a class="xref" href="design-system.html#ds-4-5">Clavier</a></p></article>
+        <article class="pillar" data-reveal style="--d:60ms"><span>Règle 02</span><h3>Un geste, deux voies</h3><p>Glisser-déposer, ou un toucher sur la brique pour la poser. Tout se fait aussi au clavier.</p><p class="xrefs"><span></span><a class="xref" href="design-system.html#ds-4-4">Gestes</a><a class="xref" href="design-system.html#ds-4-5">Clavier</a></p></article>
         <article class="pillar" data-reveal style="--d:120ms"><span>Règle 03</span><h3>Côte à côte ou empilé</h3><p>Sur ordinateur, les panneaux liés se montrent ensemble (réserve et table, grille et carte). Sur mobile, ils s’empilent ou passent dans une feuille.</p><p class="xrefs"><span></span><a class="xref" href="design-system.html#ds-2-7">Superpositions</a></p></article>
         <article class="pillar" data-reveal style="--d:180ms"><span>Règle 04</span><h3>Une superposition à la fois</h3><p>Toujours la plus légère qui convient : message en ligne, toast, feuille (mobile) ou menu (ordinateur), dialogue pour l’irréversible seulement. Jamais de dialogue au lancement.</p><p class="xrefs"><span></span><a class="xref" href="design-system.html#ds-4-7">Le bon niveau</a></p></article>
         <article class="pillar" data-reveal style="--d:240ms"><span>Règle 05</span><h3>Hors connexion honnête</h3><p>Codex et préparation d’une fusion restent disponibles. Plis, énergie, découvertes et synchronisation attendent le serveur : aucune découverte n’est annoncée avant validation.</p><p class="xrefs"><span></span><a class="xref" href="adr.html#adr-0001" data-kind="adr">ADR 0001</a><a class="xref" href="adr.html#adr-0007" data-kind="adr">ADR 0007</a></p></article>
@@ -125,7 +125,7 @@
             <div class="if-head"><span class="if-num">I-09</span><span class="if-status is-demo">Démo</span></div>
             <h4>Table de fusion</h4>
             <p>Réserve filtrable avec pastilles « ×n » et briques épuisées, rail ordonné de deux cases exactement (jamais trois briques), boutons Fusionner et Vider. Le codex reste accessible sans perdre la proposition.</p>
-            <dl class="if-facts"><dt>Mobile</dt><dd>Table en haut, réserve dessous ; toucher puis « Ajouter à la table ».</dd><dt>Ordinateur</dt><dd>Réserve et table côte à côte ; glisser-déposer et réorganisation au pointeur.</dd></dl>
+            <dl class="if-facts"><dt>Mobile</dt><dd>Table en haut, réserve dessous ; un toucher pose la brique.</dd><dt>Ordinateur</dt><dd>Réserve et table côte à côte ; glisser-déposer et réorganisation au pointeur.</dd></dl>
             <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-09">Maquette</a><a class="xref" href="jeu.html#table">Essayer</a><a class="xref" href="design-system.html#ds-3-3">Composant</a><a class="xref" href="adr.html#adr-0012" data-kind="adr">ADR 0012</a></p>
           </article>
           <article class="if-card" id="i-10">
@@ -165,14 +165,14 @@
           <article class="if-card" id="i-14">
             <div class="if-head"><span class="if-num">I-14</span><span class="if-status is-demo">Démo</span></div>
             <h4>Vue globale</h4>
-            <p>Grille de petites cartes, vues (récentes, mots, briques, langues, familles), filtres, tri, fascicules et leur complétude, silhouettes. La rareté d’une brique se lit en haut à droite du bandeau. Les légendaires trouvées s’affichent à part.</p>
+            <p>Grille de petites cartes, vues (récentes, mots, briques, langues, familles), filtres, tri, fascicules avec leur jaquette et leur complétude, silhouettes. La rareté d’une brique se lit en haut à droite du bandeau ; une carte de mot n’en porte pas. Une carte de langue montre sa lettre emblème et son nom. Les légendaires trouvées s’affichent à part. Filtres, tri et carte ouverte se lisent dans l’adresse (ADR 0034).</p>
             <dl class="if-facts"><dt>Mobile</dt><dd>Grille de trois colonnes, filtres en puces défilantes, tri dans une feuille.</dd><dt>Ordinateur</dt><dd>Grille large, fascicules et filtres visibles en permanence.</dd></dl>
             <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-14">Maquette</a><a class="xref" href="codex.html#codex">Le codex</a><a class="xref" href="design-system.html#ds-3-5">Cartes</a><a class="xref" href="adr.html#adr-0015" data-kind="adr">ADR 0015</a></p>
           </article>
           <article class="if-card" id="i-15">
             <div class="if-head"><span class="if-num">I-15</span><span class="if-status is-demo">Démo</span></div>
             <h4>Carte agrandie</h4>
-            <p>Recto (mot, langue, définition, sens littéral, confiance) et verso (formes par langue, composants, mots formés). Carte précédente ou suivante, liens entre cartes et fil d’Ariane.</p>
+            <p>Recto (mot, langue, définition, sens littéral, confiance) et verso (formes par langue, composants, mots formés). Carte précédente ou suivante, liens entre cartes et fil d’Ariane : seulement vers une carte déjà découverte ; ce qui reste à découvrir n’a ni lien ni animation.</p>
             <dl class="if-facts"><dt>Mobile</dt><dd>Plein écran ; balayer pour changer de carte.</dd><dt>Ordinateur</dt><dd>Carte centrée au-dessus de la grille, flèches et clavier.</dd></dl>
             <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-15">Maquette</a><a class="xref" href="codex.html#filiation">La filiation</a><a class="xref" href="adr.html#adr-0002" data-kind="adr">ADR 0002</a></p>
           </article>

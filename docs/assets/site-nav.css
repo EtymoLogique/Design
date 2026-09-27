@@ -69,7 +69,7 @@ body.nocturne .sn-seal { box-shadow: 3px 3px 0 var(--dark-shadow, rgba(243, 238,
 }
 .sn-sub a:hover { border-color: var(--ink, #0f1f19); }
 .sn-sub a[aria-current="page"] { border-color: var(--ink, #0f1f19); background: var(--cream, #fffbf3); box-shadow: 2px 2px 0 var(--pop-shadow, #0f1f19); }
-.site-nav a:focus-visible, .site-nav button:focus-visible, .site-pager a:focus-visible, .xref:focus-visible { outline: 2px solid var(--c-action, #ff6b4a); outline-offset: 3px; }
+.site-nav a:focus-visible, .site-nav button:focus-visible, .site-pager a:focus-visible, .xref:focus-visible { outline: 2px solid var(--ink, #0f1f19); outline-offset: 3px; }
 
 /* Pagination entre les pages */
 .site-pager {

@@ -38,7 +38,7 @@ python3 .agents/skills/visual-identity-check/check_identity.py docs/plis.html  #
 Pour chaque composant ajouté ou modifié :
 
 **Sens des couleurs** : une couleur désigne un seul type de chose.
-- [ ] Préfixe = Étincelle, suffixe = Glose, **toutes** les langues = Palimpseste, famille = Rosée, pli / énergie / rareté / encre = Ambre, action / focus / nouveauté / marque = Corail, danger irréversible = Corail profond (après confirmation, avec l'icône octogone). Cartes de mot neutres : Encre sur Crème.
+- [ ] Préfixe = Étincelle, suffixe = Glose, **toutes** les langues = Palimpseste, famille = Rosée, pli / énergie / rareté / encre = Ambre, action / nouveauté / marque = Corail, focus = Encre, danger irréversible = Corail profond (après confirmation, avec l'icône octogone). Cartes de mot neutres : Encre sur Crème.
 - [ ] Aucune couleur de ressource n'est détournée pour un autre usage (décoration, succès, alerte). Un échec de jeu reste en Gris encre, jamais en rouge.
 
 **Règles élémentaires** (numérotées comme dans `identite.html`) :
@@ -60,7 +60,7 @@ Pour chaque composant ajouté ou modifié :
 
 **Formes et interactions** :
 - [ ] Brique : rayon 10, ombre dure 4, au moins 96 × 52 px. Petite brique : rayon 6. Carte : 3:4 avec bandeau. Pastille : rayon 999. Pointillé : ce qui manque, inconnu ou épuisé.
-- [ ] Survol : −2 px et ombre 6 px. Pression : +2 px et ombre 1 px. Focus : anneau Corail 2 px. Désactivé : 40 %. Sélectionné : fond Encre.
+- [ ] Survol : −2 px et ombre 6 px. Pression : +2 px et ombre 1 px. Focus : anneau Encre 2 px décalé de 3 px. Désactivé : 40 %. Sélectionné : fond Encre.
 - [ ] Cibles tactiles ≥ 44 px, boutons de 48 px de haut.
 - [ ] Préfixes et suffixes affichés sous forme de brique, jamais en texte brut.
 

@@ -14,7 +14,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 
 | ADR | Décision | Statut |
 |---|---|---|
-| [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté |
+| [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté, sélection puis « Ajouter à la table » remplacée par 0033 |
 | [0002](0002-graphe-linguistique-editorial.md) | Graphe linguistique éditorial et versionné | Accepté |
 | [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté, secret des recettes verrouillées remplacé par 0027, nombre d'emplacements par 0032 |
 | [0004](0004-progression-atteignable.md) | Progression pilotée par un graphe d'obtention vérifiable | Accepté |
@@ -45,7 +45,9 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé |
 | [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
 | [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
-| [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté |
+| [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté, troisième brique remplacée par 0033 |
+| [0033](0033-gestes-de-la-table-de-fusion.md) | Gestes de la table de fusion : un toucher pose, chaque brique garde sa case | Accepté |
+| [0034](0034-ecran-dans-l-adresse.md) | L'écran de la PWA se lit dans son adresse | Accepté |
 
 ## Page HTML
 
