@@ -42,7 +42,7 @@ Le corpus publiable écarte les mots archaïques, trop techniques ou trop rares,
 - **Les racines et les compositions savantes** : au-delà des préfixes et suffixes, des milliers de compositions (*photo-* + *-graphie*) donnent des mots aux histoires riches.
 - **D'autres langues de jeu** : l'architecture est multilingue dès le départ ([ADR 0006](adr/0006-architecture-multilingue.md)). Chaque langue de jeu ouvre son propre corpus, et les langues d'origine communes créent des ponts.
 - **Les légendaires** : des mots rares ou surprenants, hors des compteurs, qui enrichissent un fascicule sans alourdir sa complétude ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)).
-- **Des recettes plus longues** : trois briques ou plus, si les tests montrent qu'elles restent lisibles (question ouverte de la [vision du jeu](game-design.md#questions-encore-ouvertes)).
+- **Des mots plus longs, deux par deux** : la table de fusion n'accepte jamais que deux briques ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Un mot de trois éléments ou plus se forme en cascade, quand un mot découvert redevient une brique (*biologie*, puis *biologie* + *-iste*).
 
 ## Piste : les fascicules spéciaux
 

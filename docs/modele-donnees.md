@@ -329,7 +329,7 @@ erDiagram
     }
     EMPLACEMENT {
         id recette_id PK, FK
-        entier rang PK
+        entier rang PK "1 ou 2"
     }
     FASCICULE {
         id id PK
@@ -344,14 +344,14 @@ erDiagram
     EXCLUSION {
         id id PK
         id fascicule_id FK
-        texte combinaison "suite ordonnée de briques"
+        texte combinaison "paire ordonnée de briques"
         enum raison "archaique, rare, offensant, analyse_non_etablie"
     }
 ```
 
 - Une **brique** pointe vers une unité lexicale : mot, préfixe ou suffixe. Aucune langue ne peut donc être posée sur la table.
 - **Une brique par unité**, et une unité a au plus une brique. Un allomorphe n'est jamais une brique à part : la recette qui l'emploie le déclare comme transformation (ADR 0003). La réserve, le tirage des plis et la carte du codex restent donc uniques pour *philo-*, qu'il s'écrive *philo* ou *phil*.
-- Une **recette** s'appuie sur une composition validée. Elle ne peut pas inventer un fait (ADR 0009). Ses emplacements acceptent une ou plusieurs briques (variantes admises, ADR 0003).
+- Une **recette** s'appuie sur une composition validée. Elle ne peut pas inventer un fait (ADR 0009). Elle a **exactement deux emplacements**, rangs 1 et 2 : la table de fusion n'en accepte jamais davantage ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Chaque emplacement accepte une ou plusieurs briques (variantes admises, ADR 0003). Une composition de trois parties ou plus n'est donc pas jouable telle quelle.
 - Les **cartes du codex** sont dérivées. Une unité a sa propre carte **si et seulement si** elle est référencée par une brique ou par le résultat d'une recette :
   - carte de mot ou de brique : l'unité, ses formes, ses sens et les compositions où elle apparaît ;
   - carte de langue : les unités de cette langue.
@@ -454,7 +454,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 |---|---|
 | **Carte** d'une brique ou d'un mot | L'unité, ses formes et translittérations, ses sens, ses relations et étymons (forme, langue, glose), et pour un mot ses compositions, parties, segments et transformations. Les libellés de chaque locale, la confiance, la `note_simplification` et les sources de chaque fait. Pour une brique, sa forme affichée, son sens affiché et sa rareté. |
 | **Recette** | Identifiant, mot résultat, composition jouée, emplacements ordonnés et briques acceptées, préconditions, déblocages. |
-| **Exclusions** | Pour chaque combinaison écartée : suite ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
+| **Exclusions** | Pour chaque combinaison écartée : paire ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
 | **Asset** | Jaquette, silhouettes des cartes et des langues ([ADR 0023](adr/0023-textures-des-cartes.md)), en SVG servi en `image/svg+xml`, sous `a/‹sha256›.svg`. |
 
 Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
@@ -693,7 +693,7 @@ Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit p
 
 - **Unicité** : un mot n'a qu'une ligne `resultat`, tous fascicules confondus.
 - **Autonomie** : chaque partie d'une recette d'un fascicule est une unité publiée dans ce fascicule ou dans un précédent, et figure dans ses lignes `ingredient`.
-- **Fermeture** : pour toute suite ordonnée de briques publiées dans les fascicules 1 à N, jusqu'au nombre maximal de briques sur la table, un mot attesté par une source de référence est publié ou fait l'objet d'une exclusion relue.
+- **Fermeture** : pour toute paire ordonnée de briques publiées dans les fascicules 1 à N, un mot attesté par une source de référence est publié ou fait l'objet d'une exclusion relue.
 
 ## Versionnage
 
@@ -783,6 +783,7 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 ## Décisions prises
 
 - **Une brique par unité.** Un allomorphe est une transformation, jamais une brique.
+- **Deux briques par recette.** Une recette a exactement deux emplacements ; un mot plus long passe, plus tard, par un mot découvert devenu brique (*biologie* + *-iste*).
 - **Trois langues, sans variété** dans le MVP : grec ancien, latin, français.
 - **Pas de carte pour les étymons.** Une unité a une carte si elle est une brique ou le résultat d'une recette.
 - **Homographes : deux cartes**, distinguées par leur glose et leur étymon, sans numéro.

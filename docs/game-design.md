@@ -41,7 +41,7 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Découverte** | Entrée de codex nouvellement obtenue. Elle peut ajouter de nouvelles briques au catalogue des plis, mais ne donne jamais d'exemplaire directement. |
 | **Exemplaire** | Unité d'une brique. Une découverte consomme un exemplaire de chaque brique utilisée. |
 | **Réserve** | Ensemble des exemplaires possédés, 5 au plus par brique. Une brique à zéro exemplaire est **épuisée** mais reste dans le codex. |
-| **Recette** | Combinaison ordonnée d'ingrédients et de transformations produisant une découverte. |
+| **Recette** | Combinaison ordonnée de **deux** ingrédients et de transformations produisant une découverte. |
 | **Transformation** | Changement documenté entre les ingrédients et la forme résultante : adaptation phonétique, voyelle de liaison, suffixation, emprunt, etc. |
 | **Codex** | Collection de langues, mots, morphèmes, familles et relations déjà découverts. |
 | **Graine** | Brique de la réserve de départ, accordée avec quelques exemplaires pour amorcer le graphe. Ensuite, les jalons offrent des plis au contenu déterministe. |
@@ -55,11 +55,11 @@ Le terme « Pokédex » décrit bien l'intention de collection, mais le produit 
 
 1. Le joueur ouvre son codex.
 2. Il filtre ou recherche des briques par langue, famille, fonction ou découverte récente.
-3. Il envoie une ou plusieurs briques sur la table de fusion. Chaque brique posée réserve un exemplaire.
+3. Il envoie deux briques sur la table de fusion, qui n'en accepte jamais davantage. Chaque brique posée réserve un exemplaire.
 4. Il les ordonne et les superpose ou active le bouton de fusion.
 5. Le moteur compare la proposition aux recettes accessibles :
    - **succès** : animation courte, révélation du mot, explication et nouveaux déblocages ; un exemplaire de chaque brique utilisée est consommé ;
-   - **presque** : indice sobre si les ingrédients sont pertinents mais incomplets ou mal ordonnés ;
+   - **presque** : indice sobre si les deux ingrédients sont pertinents mais mal ordonnés, ou si l'un des deux seulement est juste ;
    - **échec** : retour immédiat, sans perte d'exemplaire.
 6. Le joueur consulte les nouvelles branches ouvertes dans le codex.
 7. Il recommence ou poursuit une famille. Quand sa réserve ne suffit plus, il ouvre le prochain pli gratuit pour la remplir.
@@ -93,7 +93,7 @@ Le lot initial doit offrir :
 
 - au moins trois recettes immédiatement réalisables, avec assez d'exemplaires pour les réaliser toutes sans pli ;
 - au moins deux familles distinctes ;
-- au moins une recette à deux ingrédients et une avec transformation visible ;
+- au moins une recette sans transformation et une avec transformation visible ;
 - plusieurs chemins vers le prochain jalon ;
 - aucune brique indispensable disponible uniquement par hasard.
 
@@ -103,11 +103,12 @@ Le lot initial doit offrir :
 
 - Glisser-déposer sur grand écran, toucher puis « Ajouter à la table » sur mobile.
 - Réorganisation explicite des briques, car l'ordre fait partie de l'hypothèse.
-- Bouton **Fusionner** toujours disponible lorsque la proposition est syntaxiquement valide.
+- Bouton **Fusionner** disponible dès que les deux emplacements sont remplis.
 - Bouton **Vider** qui remet les briques dans la réserve sans conséquence.
 - Chaque brique posée réserve un exemplaire. Une brique dont tous les exemplaires sont posés, ou qui est épuisée, ne peut pas être ajoutée ; un message explique pourquoi.
 - Accès au codex sans fermer ni perdre la proposition en cours.
-- Zone d'essai limitée à un petit nombre de briques dans le MVP afin de préserver la lisibilité.
+- **Deux emplacements exactement** : une fusion réunit toujours deux briques, jamais trois ni davantage ([ADR 0032](adr/0032-fusion-de-deux-briques.md)). Une troisième brique ne s'ajoute pas : elle remplace celle de l'emplacement visé, qui revient à la réserve sans rien consommer.
+- Un mot formé de trois éléments ou plus n'a pas de recette dans le MVP. Plus tard, il pourra se former en cascade, deux par deux, quand un mot découvert redeviendra une brique (voir le [potentiel d'évolution](potentiel-evolution.md)).
 
 ### Représentation des briques
 
@@ -256,7 +257,7 @@ Voir l'[ADR 0014](adr/0014-sources-et-fascicules.md), l'[ADR 0022](adr/0022-fasc
 - **un fascicule ne dévoile pas son contenu** : son annonce et sa présentation n'affichent que des nombres (mots, préfixes, suffixes, langues), légendaires exclues. Avant sa parution, même ces nombres restent cachés. Dans le codex, les silhouettes gardent leur piste de sens ;
 - un mot n'appartient qu'à un seul fascicule ; une brique peut être reprise d'un fascicule à l'autre ;
 - chaque fascicule a sa jaquette et son pli : dès sa publication, le joueur peut ouvrir ses plis, qui ne tirent que parmi ses briques, et revenir à tout moment aux plis d'un ancien fascicule. Les fusions entre fascicules sont permises ;
-- **fermeture** : si des briques publiées, de n'importe quels fascicules, forment un mot attesté par une source de référence, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
+- **fermeture** : si deux briques publiées, de n'importe quels fascicules, forment un mot attesté par une source de référence, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
 - une combinaison attestée ne peut être écartée que par une exclusion déclarée et justifiée (mot archaïque, rare, offensant ou analyse non établie) ;
 - **pourquoi 30 mots au plus** : il faut environ 2 plis par mot découvert, et un joueur assidu ouvre 70 à 80 plis par mois. Au-delà de 30 mots, il ne complète plus un fascicule avant le suivant ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)).
 
@@ -267,7 +268,7 @@ Le corpus disponible, le nombre de fascicules possibles et la piste des fascicul
 Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (30 gouttes l'indice ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
 
 1. famille ou langue du résultat ;
-2. nombre d'ingrédients ;
+2. nature des deux briques (préfixe, suffixe ou mot) ;
 3. présence d'une transformation ;
 4. emplacement d'une brique connue ;
 5. solution, en dernier recours, sans punir durablement la progression.
@@ -542,7 +543,7 @@ Ces événements doivent être agrégés avec des identifiants techniques pseudo
 | Le joueur essaie au hasard | Objectifs de famille, silhouettes, indices graduels et coût nul des essais. |
 | Le pli devient frustrant | Doublons utiles (un exemplaire de plus et de l'encre à chaque fois), garantie de nouveauté au 6ᵉ pli, chances affichées, chemin critique jamais dépendant d'un pli. |
 | La réserve s'épuise et le joueur décroche | Réserve de départ suffisante pour trois découvertes, essais ratés gratuits, filet d'utilité au 5ᵉ pli, compteurs visibles. |
-| L'interface est trop dense sur mobile | Limite de briques sur la table, gestes alternatifs et révélation progressive. |
+| L'interface est trop dense sur mobile | Deux briques au plus sur la table, gestes alternatifs et révélation progressive. |
 | L'ambition multilingue explose le coût éditorial | Architecture générique, mais lots de contenu petits et cohérents. |
 | Le jeu est perçu comme un cours | Révélations courtes ; détails et sources à la demande. |
 
@@ -577,7 +578,6 @@ Comparer une révélation instantanée à une révélation en trois temps :
 - Quelles langues et familles donnent le meilleur premier lot de contenu ?
 - Quel nom original donner au codex ?
 - Le plafond de 5 exemplaires, la réserve de départ et le filet au 5ᵉ pli sont-ils ressentis comme justes ? Faut-il plusieurs briques par pli sur un grand catalogue ?
-- Combien de briques une recette peut-elle utiliser sans devenir illisible ?
 - Quand un indice « presque » aide-t-il sans transformer le jeu en recherche exhaustive ?
 - Une découverte doit-elle débloquer toutes ses briques immédiatement ou certaines via des mini-objectifs ?
 - Quel volume de contenu permet de tester la rétention sans surinvestir dans l'éditorial ? Hypothèse : des fascicules de 20 à 30 mots tous les 30 jours ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)).
