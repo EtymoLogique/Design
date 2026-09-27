@@ -37,10 +37,11 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027 |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027 |
 | [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé |
+| [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 
 ## Page HTML
 
