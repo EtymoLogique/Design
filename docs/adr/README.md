@@ -50,6 +50,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0034](0034-ecran-dans-l-adresse.md) | L'écran de la PWA se lit dans son adresse | Accepté |
 | [0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) | Plis d’affixes, pondérés par la seule rareté | Accepté |
 | [0036](0036-chances-des-legendaires-toujours-affichees.md) | La chance des légendaires est toujours affichée | Accepté |
+| [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
 
 ## Page HTML
 
