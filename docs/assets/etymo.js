@@ -1712,14 +1712,6 @@
     let cbSort = "n";
     let visibleIds = [];
 
-    function newDot() {
-      const dot = mk("span", "new-dot");
-      dot.title = "Nouvelle carte";
-      dot.setAttribute("role", "img");
-      dot.setAttribute("aria-label", "Nouvelle carte");
-      return dot;
-    }
-
     function buildMini(e) {
       const card = mk("button", "mini");
       card.type = "button";
@@ -1733,8 +1725,8 @@
       // La rareté se pose dans le bandeau, en haut à droite, jamais sur une brique.
       if (e.rar) { const r = rarityEl(e.rar, true); r.classList.add("m-rar"); side.append(r); }
       const num = mk("span", null, `N°\u00a0${pad(e.n)}`);
-      // Nouvelle carte : pastille Corail dans le bandeau, jusqu’à sa première consultation.
-      if (e.fresh && !e.locked) { num.append(newDot()); card.classList.add("is-new"); }
+      // Nouvelle carte : halo Corail diffus, jusqu’à sa première consultation.
+      if (e.fresh && !e.locked) card.classList.add("is-new");
       top.append(num, side);
       card.append(top);
       if (isLegend(e)) card.classList.add("is-legend");
@@ -1902,9 +1894,7 @@
 
     function faceTop(e, right) {
       const top = mk("div", "bf-top");
-      const num = mk("span", null, `N° ${pad(e.n)}`);
-      if (e.fresh && !e.locked) num.append(newDot());
-      top.append(num, mk("span", "bf-type", right));
+      top.append(mk("span", null, `N° ${pad(e.n)}`),mk("span", "bf-type", right));
       return top;
     }
     function flipButton(label, icon) {
@@ -2051,7 +2041,6 @@
         e.fresh = false;
         const mini = miniById.get(e.id);
         mini.classList.remove("is-new");
-        $(".new-dot", mini)?.remove();
         mini.setAttribute("aria-label", mini.getAttribute("aria-label").replace(/^Nouvelle carte : /, ""));
       }
       $("#vTitle").textContent = e.locked ? `Carte ${e.n}, à découvrir` : `${e.word}, ${TYPES[e.type].label.toLowerCase()}`;

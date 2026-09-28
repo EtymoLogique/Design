@@ -416,7 +416,6 @@ table.t { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 1
 .mcard .f { display: flex; justify-content: space-between; color: var(--ink-2); font-family: var(--mono); font-size: 9px; }
 .mcard.locked { background: repeating-linear-gradient(-45deg, var(--paper) 0 8px, var(--paper-2) 8px 16px); }
 .mcard.locked .q { color: var(--ink-3); font-family: var(--serif); font-size: 44px; font-style: italic; text-align: center; }
-.new-dot { display: inline-block; flex: none; width: 8px; height: 8px; margin-left: 6px; border: 1.5px solid var(--fixed-ink); border-radius: 50%; background: var(--c-action); vertical-align: 0; }
 .mcard.new { box-shadow: 0 0 30px 8px color-mix(in srgb, var(--c-action) 60%, transparent); }
 /* Texture de carte (ADR 0023) : silhouettes générées par cardArt (assets/etymo.js), copiées ici car cette page est autonome. */
 .mcard, .ds-bigcard { isolation: isolate; }
@@ -426,8 +425,6 @@ table.t { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 1
 .mini-grid .mcard .card-art { inset: 17px 0 0; }
 .ds-bigcard .card-art { inset: 0; color: #0f1f19; opacity: 0.085; --art-bg: #fffbf3; }
 .mini-grid .mcard.new { box-shadow: 0 0 14px 3px color-mix(in srgb, var(--c-action) 60%, transparent); }
-.new-dot.lg { width: 12px; height: 12px; margin-left: 0; }
-.mini-grid .mcard .new-dot { width: 6px; height: 6px; margin-left: 4px; border-width: 1px; }
 .anat { position: relative; display: inline-block; }
 .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; }
 .anat-list { display: grid; gap: 6px; counter-reset: a; padding: 0; list-style: none; font-size: 13px; }
@@ -847,7 +844,7 @@ html { scroll-padding-top: 96px; }
         <h3 class="block-title" id="ds-2-5"><small>2.5</small>Badges, indicateurs et info-bulles</h3>
         <div class="grid g4">
           <div class="card"><span class="k">Compteur</span><div class="demo center"><span class="count">4</span><span class="count">18</span></div><p class="spec">Encre, texte Papier. Nombre exact jusqu’à 99, puis « 99+ ».</p></div>
-          <div class="card"><span class="k">Nouveauté</span><div class="demo center"><span class="new-dot lg" role="img" aria-label="Nouvelle carte"></span><span class="badge-new">Nouveau</span></div><p class="spec">Carte : pastille Corail cernée d’Encre, dans le bandeau après le N°, et halo Corail diffus, jusqu’à la première consultation. Fascicule paru : badge Corail, texte Encre.</p></div>
+          <div class="card"><span class="k">Nouveauté</span><div class="demo center"><span class="badge-new">Nouveau</span></div><p class="spec">Carte : halo Corail diffus, jusqu’à la première consultation, sans pastille. Fascicule paru : badge Corail, texte Encre.</p></div>
           <div class="card"><span class="k">Rareté</span><div class="demo center"><div class="rar-scale"><span><svg class="rar" aria-hidden="true"><use href="#rar-commune"/></svg>Commune<small>triangle</small></span><span><svg class="rar" aria-hidden="true"><use href="#rar-peu"/></svg>Peu commune<small>carré</small></span><span><svg class="rar" aria-hidden="true"><use href="#rar-rare"/></svg>Rare<small>pentagone</small></span><span><svg class="rar" aria-hidden="true"><use href="#rar-legendaire"/></svg>Légendaire<small>diamant</small></span></div></div><p class="spec">4 niveaux, 1 forme chacun : plus de côtés = plus rare pour les trois premiers, le diamant des légendaires est à part. Ambre cerné d’Encre 1,5 px sur fond neutre, + libellé ou <code>aria-label</code>. Dans le bandeau d’une carte : teinte profonde du bandeau, sans contour, jamais d’Ambre sur une couleur vive. Diamant : losange étiré, nettement plus haut que large, distinct du cercle des états. Jamais sur une brique. Tailles 12 · 16 · 22.</p></div>
           <div class="card"><span class="k">Confiance</span><div class="demo center" style="flex-direction:column;gap:6px"><span class="conf"><i></i><i></i><i></i><b>Établie</b></span><span class="conf p2"><i></i><i></i><i></i><b>Probable</b></span><span class="conf p1"><i></i><i></i><i></i><b>Discutée</b></span></div><p class="spec">Traits Encre, jamais de couleur ni de forme géométrique (réservées à la rareté).</p></div>
           <div class="card"><span class="k">Langue</span><div class="demo center"><span class="pill"><i></i>Grec ancien</span></div><p class="spec">Point Palimpseste + nom complet. Jamais d’abréviation.</p></div>
@@ -1039,10 +1036,10 @@ html { scroll-padding-top: 96px; }
           <path d="M168 196C160 244 182 294 216 304C252 300 274 266 276 224C252 238 212 236 168 196Z" fill="currentColor"></path>
           <path d="M238 118C256 116 272 128 276 146M252 156C266 158 278 170 280 186M226 104C236 94 252 92 264 98" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path>
           <path d="M186 164L200 162M186 214C200 226 214 230 232 228M190 244C204 262 222 272 244 270" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path>
-          <path d="M130 372C170 352 212 360 246 396M190 334C232 344 268 376 290 430M262 332C286 346 316 362 340 368" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path></g></svg></span><span class="top"><span>N° 010<span class="new-dot" title="Nouvelle carte"></span><span class="sr-only">, nouvelle carte</span></span><span>Mot</span></span><span class="w">philosophie</span><span class="lit">« amour de la sagesse »</span><span class="f"><span>● Français</span><span>●●○</span></span></span>
+          <path d="M130 372C170 352 212 360 246 396M190 334C232 344 268 376 290 430M262 332C286 346 316 362 340 368" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path></g></svg></span><span class="top"><span>N° 010<span class="sr-only">, nouvelle carte</span></span><span>Mot</span></span><span class="w">philosophie</span><span class="lit">« amour de la sagesse »</span><span class="f"><span>● Français</span><span>●●○</span></span></span>
               <span class="mcard locked" style="--band:#0f1f19;--tt:#f3eee3"><span class="top"><span>N° 017</span><span>Mot</span></span><span class="q">?</span><span class="f"><span>Piste : « loi des astres »</span></span></span>
             </div>
-            <p class="spec">Format 3:4, bandeau de 24 px de la couleur du type (Encre pour les mots). Rareté en haut à droite du bandeau, dans la teinte profonde du bandeau et sans contour, à égale distance du haut et du bord. Pastilles de formes trouvées. Nouvelle : pastille Corail cernée d’Encre dans le bandeau, après le N°, et halo Corail diffus autour de la carte, jusqu’à la première consultation ; la carte garde sa structure et son contour. Inconnue : hachures, « ? » et piste. Découverte : silhouette de son sens en fond, aplat d’Encre à 10 %, recadré par le bord, jamais sous le bandeau (<a href="identite.html#textures">textures de carte</a>, <a href="adr.html#adr-0023">ADR 0023</a>).</p>
+            <p class="spec">Format 3:4, bandeau de 24 px de la couleur du type (Encre pour les mots). Rareté en haut à droite du bandeau, dans la teinte profonde du bandeau et sans contour, à égale distance du haut et du bord. Pastilles de formes trouvées. Nouvelle : halo Corail diffus autour de la carte, jusqu’à la première consultation ; la carte garde sa structure et son contour. Inconnue : hachures, « ? » et piste. Découverte : silhouette de son sens en fond, aplat d’Encre à 10 %, recadré par le bord, jamais sous le bandeau (<a href="identite.html#textures">textures de carte</a>, <a href="adr.html#adr-0023">ADR 0023</a>).</p>
           </div>
           <div class="card">
             <span class="k">Carte agrandie</span>
@@ -1226,7 +1223,7 @@ html { scroll-padding-top: 96px; }
           <path d="M168 196C160 244 182 294 216 304C252 300 274 266 276 224C252 238 212 236 168 196Z" fill="currentColor"></path>
           <path d="M238 118C256 116 272 128 276 146M252 156C266 158 278 170 280 186M226 104C236 94 252 92 264 98" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path>
           <path d="M186 164L200 162M186 214C200 226 214 230 232 228M190 244C204 262 222 272 244 270" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path>
-          <path d="M130 372C170 352 212 360 246 396M190 334C232 344 268 376 290 430M262 332C286 346 316 362 340 368" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path></g></svg></span><span class="top"><span>010<span class="new-dot" title="Nouvelle carte"></span><span class="sr-only">, nouvelle carte</span></span></span><span class="w">philosophie</span></span>
+          <path d="M130 372C170 352 212 360 246 396M190 334C232 344 268 376 290 430M262 332C286 346 316 362 340 368" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--art-bg)"></path></g></svg></span><span class="top"><span>010<span class="sr-only">, nouvelle carte</span></span></span><span class="w">philosophie</span></span>
               <span class="mcard locked" style="--band:#0f1f19;--tt:#f3eee3"><span class="top"><span>017</span></span><span class="q">?</span></span>
             </div>
           </div>
