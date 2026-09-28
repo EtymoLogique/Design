@@ -430,6 +430,8 @@ Règles complémentaires :
   - pentagone : rare ;
   - diamant (losange étiré, nettement plus haut que large, bien distinct du cercle des états) : légendaire.
 
+  Un mot porte la plus haute rareté des briques qu’exige sa recette la moins rare ; sa première découverte rapporte de l’encre selon cette rareté ([ADR 0040](adr/0040-rarete-des-mots.md)).
+
   Sur fond neutre, la forme est remplie d'Ambre et cernée d'Encre 1,5 px ; dans le bandeau d'une carte, elle prend la teinte profonde du bandeau, sans contour. Elle est toujours accompagnée de son libellé ou d'un nom accessible, et n'est jamais posée sur une brique. Tailles : 12 px en liste, 16 px dans les chances, 22 px à la révélation.
 - **Confiance éditoriale** : trois traits Encre, jamais de couleur ni de forme géométrique, pour ne pas ressembler à une rareté.
 - **Formes** :

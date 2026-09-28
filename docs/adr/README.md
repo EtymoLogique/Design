@@ -52,6 +52,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0036](0036-chances-des-legendaires-toujours-affichees.md) | La chance des légendaires est toujours affichée | Accepté |
 | [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté |
+| [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé |
 
 ## Page HTML
 
