@@ -24,12 +24,12 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0008](0008-energie-et-plis.md) | Énergie et plis gratuits, paiements hors MVP | Accepté, contenu des plis remplacé par 0011, capacité d'énergie et avance de la recharge par 0020 |
 | [0009](0009-contenu-et-equilibrage.md) | Séparation des faits linguistiques et de l'équilibrage | Accepté |
 | [0010](0010-observabilite-et-vie-privee.md) | Observabilité minimale et respectueuse de la vie privée | Accepté |
-| [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020 |
+| [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020, poids du type par 0035 |
 | [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019 |
 | [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé |
 | [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022, fermeture limitée aux paires par 0032 |
 | [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface) |
-| [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté |
+| [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035 |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
 | [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020 |
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
@@ -48,6 +48,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté, troisième brique remplacée par 0033 |
 | [0033](0033-gestes-de-la-table-de-fusion.md) | Gestes de la table de fusion : un toucher pose, chaque brique garde sa case | Accepté |
 | [0034](0034-ecran-dans-l-adresse.md) | L'écran de la PWA se lit dans son adresse | Accepté |
+| [0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) | Plis d’affixes, pondérés par la seule rareté | Accepté |
 
 ## Page HTML
 

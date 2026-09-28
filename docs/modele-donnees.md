@@ -442,7 +442,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `id`, `numero`, `parution` | Identifiant opaque du fascicule, par lequel les données du joueur le désignent ; numéro et date de parution. |
 | `jaquette` | Chemin haché de l'asset de la jaquette ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
-| `pli` | Briques tirables (ses briques nouvelles et reprises), poids des raretés et des types, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
+| `pli` | Briques tirables (ses préfixes et suffixes, nouveaux ou repris ; jamais un mot, [ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)), poids des raretés, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
 | `cartes` | Pour chaque unité déclarée (`fascicule_unite`) : identifiant opaque, rôle (`resultat` ou `ingredient`), chemin haché de sa carte, chemin de sa silhouette. |
 | `langues` | Pour chaque langue citée par ses cartes (langue d'une unité ou d'un étymon) : identifiant et chemin haché de sa silhouette ([ADR 0023](adr/0023-textures-des-cartes.md)). Comme l'index ne cite que des manifestes, c'est le manifeste qui mène aux silhouettes des langues et la tâche de parution les promeut avec le fascicule. |
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
