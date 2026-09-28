@@ -47,6 +47,7 @@ XREFS = {
     "0032": [("jeu.html#table", "Deux cases sur la table"), ("maquettes.html#m-09", "La table de fusion, mobile et ordinateur"), ("maquettes.html#m-12", "L’indice « nature des deux briques »")],
     "0013": [("modele.html", "Le modèle de données"), ("modele.html#decisions", "Quatre cas, quatre règles"), ("codex.html#filiation", "Formes et filiation dans le codex")],
     "0035": [("plis.html#chances", "Les chances du pli"), ("maquettes.html#m-20", "L’atelier du pli")],
+    "0036": [("plis.html#chances", "Les chances du pli"), ("interfaces.html#i-20", "L’atelier du pli")],
 }
 
 

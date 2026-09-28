@@ -11,6 +11,7 @@ Un rechargement de la PWA ramenait toujours à la table : l'onglet, les filtres 
 
 - L'écran courant est tenu dans le **fragment** de l'adresse : `#/table`, `#/codex`, `#/plis`, `#/reglages`.
 - Dans le codex, le fragment porte aussi la **carte agrandie**, par son identifiant opaque, et la vue : filtre par type, tri et fascicule (`#/codex/unt_…?type=mot&tri=az&fascicule=0`).
+- Précisé à l'usage : la vue du codex (`vue=recentes`, `familles`, `objectifs`), le sens du tri (`sens=inverse`) et la section « En savoir plus » dépliée (`plus=1`, seulement avec une carte ouverte) y figurent aussi. L'atelier du pli d'un fascicule se lit dans `#/plis/fsc_…`. Le texte d'une recherche n'y figure jamais.
 - **Changer d'onglet ou ouvrir une carte** ajoute une étape à l'historique ; changer un filtre ou le tri la remplace.
 - Une adresse inconnue ou forgée retombe sur la table ; un identifiant de carte invalide est ignoré. L'adresse ne porte jamais de texte du catalogue.
 - La table en cours, la réserve confirmée et les réglages restent gardés sur l'appareil ([ADR 0007](0007-etat-et-economie-autoritaires.md)) : l'adresse ne décrit que ce qu'on regarde.
