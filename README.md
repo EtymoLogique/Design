@@ -29,6 +29,7 @@ Les piliers du jeu :
 | [docs/game-design.md](docs/game-design.md) | Vision, vocabulaire, boucle et règles de jeu, périmètre du MVP |
 | [docs/adr/](docs/adr/README.md) | Architecture Decision Records, aussi présentés dans [adr.html](docs/adr.html) |
 | [docs/modele-donnees.md](docs/modele-donnees.md) | Modèle de données du catalogue |
+| [docs/etude-de-marche.md](docs/etude-de-marche.md), [plan-financier.md](docs/plan-financier.md) | Étude de marché et plan financier sur 18 mois |
 | [docs/identite.html](docs/identite.html), [design-system.html](docs/design-system.html) | Identité visuelle et design système |
 | [docs/interfaces.html](docs/interfaces.html), [maquettes.html](docs/maquettes.html) | Inventaire des interfaces de la PWA et leurs maquettes, mobile et ordinateur |
 | [docs/jeu.html](docs/jeu.html), [plis.html](docs/plis.html), [codex.html](docs/codex.html) | Démonstrations jouables : table de fusion, plis, codex |
