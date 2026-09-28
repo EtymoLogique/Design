@@ -171,7 +171,7 @@ Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éd
 - Filtres par type et par fascicule avec compteurs, et tri par numéro de découverte, par ordre alphabétique, par type ou par fascicule. Les cartes se réorganisent avec une animation.
 - Chaque fascicule affiche sa complétude (« 10 / 11 cartes ») avec une barre de progression. Toucher un fascicule n'affiche que ses cartes.
 - Les cartes encore inconnues restent visibles en silhouette, avec une piste de sens, sans révéler la réponse.
-- Une carte nouvelle se signale par une pastille Corail dans son bandeau, après son numéro, et par un halo Corail diffus, qui disparaissent à sa première consultation. La carte garde sa structure et son contour.
+- Une carte nouvelle se signale par un halo Corail diffus, qui disparaît à sa première consultation. La carte garde sa structure et son contour.
 - **Exception : les légendaires** (diamant). Une légendaire inconnue, et tout mot qui en dépend, n'a ni silhouette ni place dans les compteurs. Une légendaire trouvée a sa carte, mais s'affiche à part (« 1 légendaire trouvée ») et n'entre jamais dans les totaux, pour garder le suspense sur leur nombre ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)).
 - Toucher une petite carte l'agrandit au centre de l'écran, depuis sa position dans la grille. On peut passer à la carte précédente ou suivante sans revenir à la grille.
 - **Recto** : mot, langue, définition actuelle, sens littéral et niveau de confiance.

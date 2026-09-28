@@ -165,7 +165,6 @@ body.nocturne .mq-btn.txt { border-color: transparent; }
 .mq-card.locked { background: repeating-linear-gradient(-45deg, var(--paper) 0 7px, var(--paper-2) 7px 14px); }
 .mq-card.locked .w { color: var(--ink-3); font-style: italic; }
 .mq-card.new { box-shadow: 0 0 12px 3px color-mix(in srgb, var(--c-action) 60%, transparent); }
-.mq-card .mq-new-dot { display: inline-block; width: 6px; height: 6px; margin-left: 4px; border: 1px solid var(--fixed-ink); border-radius: 50%; background: var(--c-action); vertical-align: 0; }
 .mq-card.legend { border-color: var(--c-pli-deep); }
 
 .mq-bigcard { width: 100%; overflow: hidden; border: 2px solid var(--fixed-ink); border-radius: 18px; background: #fffbf3; color: var(--fixed-ink); box-shadow: 6px 6px 0 var(--pop-shadow); }
