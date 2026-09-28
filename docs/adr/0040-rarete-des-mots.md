@@ -23,7 +23,8 @@ Depuis l’ADR 0035, un pli ne tire jamais un mot : la rareté d’un mot ne peu
 ### Elle se voit
 
 - La carte d’un mot au codex, et sa silhouette, portent la forme de sa rareté, comme celle d’un affixe.
-- La fiche de découverte affiche la forme et son libellé. L’annonce grandit avec la rareté, comme à l’ouverture d’un pli : « Rare ! », « Légendaire ! », avec l’éclat Ambre de la forme.
+- La forme d’un mot n’est **jamais Ambre** : l’Ambre reste la couleur des plis et des briques qu’ils donnent. Dans le bandeau Encre d’une carte de mot, elle prend la couleur de texte du bandeau, sans contour ; sur fond neutre, elle est pleine d’Encre.
+- La fiche de découverte affiche la forme et son libellé. L’annonce grandit avec la rareté, comme à l’ouverture d’un pli : « Rare ! », « Légendaire ! », et la forme tourne en apparaissant, sans halo.
 
 ### Elle rapporte de l’encre
 
