@@ -53,6 +53,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039 |
 | [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté |
+| [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé |
 
 ## Page HTML
 
