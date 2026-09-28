@@ -227,7 +227,7 @@
   const STARTER = { bio: 2, geo: 2, logie: 2, graphie: 2 };
   const CAP = 5;
   const STORE_KEY = "etymologique.demo.v1";
-  const freshStore = () => ({ owned: Object.keys(STARTER), copies: { ...STARTER }, found: [], ink: 0, packCount: 0, byFasc: {}, nextPackAt: 0, energy: 2, history: [], hint: null, sand: 3, sandLog: [] });
+  const freshStore = () => ({ owned: Object.keys(STARTER), copies: { ...STARTER }, found: [], ink: 0, packCount: 0, byFasc: {}, nextPackAt: 0, energy: 2, history: [], hint: null, sand: 3 });
   function loadStore() {
     try {
       const saved = JSON.parse(localStorage.getItem(STORE_KEY));
@@ -946,13 +946,9 @@
     // Chaque pli rapporte une base d'encre, plus le bonus d'un doublon (ADR 0019, 0020).
     const BASE_INK = 2;
     const drops_ = (n) => `${n} goutte${n > 1 ? "s" : ""}`;
-    // Sabliers (ADR 0018, gratuits dans le MVP depuis l’ADR 0020) : 1 h de recharge chacun, 12 par 24 h glissantes, 36 détenus au plus.
+    // Sabliers (ADR 0018, gratuits dans le MVP depuis l’ADR 0020) : 1 h de recharge chacun, sans plafond de détention ni d’échange : l’encre en achète autant qu’elle le permet (ADR 0039).
     const HOUR_MS = RECHARGE_MS / 12;
-    const DAY_MS = RECHARGE_MS * 2;
-    const SAND_DAILY = 12;
-    const SAND_CAP = 36;
-    const SAND_INK = 1;
-    const sandToday = () => store.sandLog.filter((t) => Date.now() - t < DAY_MS).length;
+    const SAND_INK = 10;
 
     const pause = (ms) => (skipPack || reduce ? Promise.resolve() : new Promise((resolve) => setTimeout(resolve, ms)));
 
@@ -973,22 +969,16 @@
     function paintSand() {
       const useBtn = $("#useSand");
       if (!useBtn) return;
-      const used = sandToday();
       const remaining = store.nextPackAt - Date.now();
-      const lost = Math.ceil(((HOUR_MS - remaining) / HOUR_MS) * 60);
       $("#sandValue").textContent = String(store.sand);
-      useBtn.disabled = store.sand < 1 || energy >= ENERGY_MAX || packBusy || used >= SAND_DAILY;
+      useBtn.disabled = store.sand < 1 || energy >= ENERGY_MAX || packBusy;
       useBtn.textContent = store.sand < 1 ? "Aucun sablier"
         : energy >= ENERGY_MAX ? "Énergie pleine : rien à avancer"
-        : used >= SAND_DAILY ? "Plafond du jour atteint"
-        : energy === ENERGY_MAX - 1 && remaining < HOUR_MS ? `Terminer · ${lost} min perdue${lost > 1 ? "s" : ""}`
+        : energy === ENERGY_MAX - 1 && remaining < HOUR_MS ? "Terminer la recharge"
         : "Utiliser un sablier · −1 h";
-      $("#sandDaily").textContent = used >= SAND_DAILY
-        ? "Plafond du jour atteint : 12 h avancées sur 12 h. Le prochain pli arrive à son heure."
-        : `Aujourd’hui : ${used} h avancée${used > 1 ? "s" : ""} sur ${SAND_DAILY} h.`;
       const inkBtn = $("#inkSand");
-      inkBtn.disabled = ink < SAND_INK || store.sand >= SAND_CAP;
-      inkBtn.textContent = store.sand >= SAND_CAP ? "Réserve de sabliers pleine" : `Sablier · ${drops_(SAND_INK)}`;
+      inkBtn.disabled = ink < SAND_INK;
+      inkBtn.textContent = `Sablier · ${drops_(SAND_INK)}`;
     }
 
     // Poids d'une brique : le poids de sa seule rareté (ADR 0035).
@@ -1469,9 +1459,8 @@
     });
 
     $("#useSand").addEventListener("click", () => {
-      if (store.sand < 1 || energy >= ENERGY_MAX || packBusy || sandToday() >= SAND_DAILY) return;
+      if (store.sand < 1 || energy >= ENERGY_MAX || packBusy) return;
       store.sand -= 1;
-      store.sandLog = [...store.sandLog.filter((t) => Date.now() - t < DAY_MS), Date.now()];
       store.nextPackAt -= HOUR_MS;
       recharge();
       persist();
@@ -1480,7 +1469,7 @@
     });
 
     $("#inkSand").addEventListener("click", () => {
-      if (ink < SAND_INK || store.sand >= SAND_CAP) return;
+      if (ink < SAND_INK) return;
       ink -= SAND_INK;
       store.sand += 1;
       persist();
