@@ -209,7 +209,6 @@
     legendaire: { label: "Légendaire", shape: "diamant", weight: 2, dupInk: 10, ink: 20 },
   };
   // Les suffixes sortent un peu plus souvent que les préfixes.
-  const TYPE_WEIGHT = { "préfixe": 1, suffixe: 1.25 };
   const RECIPES = {
     "bio+logie": { word: "biologie", lit: "étude de la vie", def: "Science qui étudie les êtres vivants et les phénomènes de la vie.", note: "Grec ancien bíos « vie » + -logía « étude, discours ».", tr: "" },
     "geo+logie": { word: "géologie", lit: "étude de la terre", def: "Science qui étudie la Terre : ses roches, sa structure et son histoire.", note: "Grec ancien gê « terre » + -logía « étude ».", tr: { brick: "geo", text: "forme de composition de gê." } },
@@ -991,11 +990,9 @@
       inkBtn.textContent = store.sand >= SAND_CAP ? "Réserve de sabliers pleine" : `Sablier · ${drops_(SAND_INK)}`;
     }
 
-    // Poids d'une brique : poids de sa rareté × poids de son type, partagé entre les briques de même rareté et de même type.
+    // Poids d'une brique : le poids de sa seule rareté (ADR 0035).
     function brickWeight(id) {
-      const b = BRICKS[id];
-      const siblings = POOL().filter((x) => BRICKS[x].rarity === b.rarity && BRICKS[x].kind === b.kind).length;
-      return (RARITY[b.rarity].weight * TYPE_WEIGHT[b.kind]) / siblings;
+      return RARITY[BRICKS[id].rarity].weight;
     }
     function odds(ids) {
       const total = ids.reduce((sum, id) => sum + brickWeight(id), 0);

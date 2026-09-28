@@ -345,8 +345,8 @@ Une brique déjà connue suit le même rituel. La révélation affiche alors « 
 
 Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-briques-rationnees.md) et l'[ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md). En résumé :
 
-- chaque pli tire une brique parmi les briques de son fascicule, nouvelles ou reprises : **les doublons font partie du jeu** ;
-- les chances dépendent de la **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire) et du **type** (les suffixes sortent un peu plus souvent) ;
+- chaque pli tire une brique parmi les préfixes et suffixes de son fascicule, nouveaux ou repris : **les doublons font partie du jeu** ;
+- le pli ne tire que des **préfixes et des suffixes**, jamais un mot ; la chance d’une brique dépend de sa seule **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire), et deux briques de même rareté ont la même chance ([ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)) ;
 - un doublon ajoute **un exemplaire** à la réserve, jusqu'à 5 par brique, et rapporte d'autant plus de **gouttes d'encre** que la brique est rare ;
 - chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (1 goutte) ou des indices (30 gouttes) ;
 - une brique nouvelle est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
