@@ -300,7 +300,7 @@ Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **c
 
 - l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2 ;
 - les sabliers disponibles, l'échange contre de l'encre et le plafond du jour ;
-- les chances du fascicule choisi par rareté et par type, et les chances exactes de chaque brique (les briques inconnues restent en silhouette). Les légendaires inconnues sont regroupées en une seule ligne, avec la somme exacte de leurs chances mais sans leur nombre ;
+- les chances du fascicule choisi par rareté (les quatre, légendaire comprise, même à 0 % : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique (les briques inconnues restent en silhouette). Les légendaires inconnues sont regroupées en une seule ligne, avec la somme exacte de leurs chances mais sans leur nombre ;
 - la garantie de nouveauté et le filet d'utilité, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
 - l'encre disponible et l'échange contre un indice (30 gouttes) ;
