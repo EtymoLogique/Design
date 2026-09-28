@@ -47,7 +47,7 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Graine** | Brique de la réserve de départ, accordée avec quelques exemplaires pour amorcer le graphe. Ensuite, les jalons offrent des plis au contenu déterministe. |
 | **Pli** | Pli scellé, gratuit, seule source d'exemplaires après la réserve de départ. On dit « ouvrir un pli », « l'atelier des plis ». Le mot anglais « pack » n'est jamais employé. |
 | **Fascicule** | Nouvel ensemble de 20 à 30 mots, avec leurs briques et leurs langues, publié environ tous les 30 jours. Il a sa jaquette et son pli, que le joueur peut ouvrir à tout moment. On ne dit ni « pack », ni « extension », ni « saison ». |
-| **Sablier** | Objet qui fait avancer d'une heure la recharge d'énergie, jamais un tirage. Il coûte 1 goutte d'encre ou se gagne par un jalon (ADR 0020) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
+| **Sablier** | Objet qui fait avancer d'une heure la recharge d'énergie, jamais un tirage. Il s'échange contre 10 gouttes d'encre ou se gagne par un jalon (ADR 0020, 0039) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
 
 Le terme « Pokédex » décrit bien l'intention de collection, mais le produit utilisera **codex** tant qu'aucun nom propre original n'aura été choisi.
 
@@ -81,7 +81,7 @@ Une session courte doit permettre au minimum une hypothèse, une fusion et une d
 1. Une entrée thématique telle que **étymologie** est déjà visible, mais son histoire reste masquée.
 2. Le jeu révèle progressivement quelques briques validées par l'équipe éditoriale.
 3. Une première fusion guidée montre l'ordre des composants.
-4. La révélation explique la transformation en une phrase, avec un bouton « En savoir plus ».
+4. La révélation explique la transformation en une phrase ; « Voir au codex » mène à la carte et à sa section « En savoir plus ».
 5. La découverte débloque une langue, une famille et de nouvelles briques dans le catalogue des plis.
 6. Le joueur reçoit ensuite sa réserve de départ (démonstration : quatre briques en deux exemplaires), qui crée plusieurs recettes possibles, pas une seule route obligatoire.
 
@@ -265,7 +265,7 @@ Le corpus disponible, le nombre de fascicules possibles et la piste des fascicul
 
 ### Indices
 
-Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (30 gouttes l'indice ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
+Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (5, 10, 20, 40 puis 80 gouttes du premier niveau à la solution, [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md) ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
 
 1. famille ou langue du résultat ;
 2. nature des deux briques (préfixe, suffixe ou mot) ;
@@ -288,7 +288,7 @@ Les indices peuvent être débloqués par l'expérimentation, le temps, des obje
 
 - Une charge d'énergie permet d'ouvrir un pli gratuit. L'énergie compte **2 charges au plus** : deux plis peuvent attendre le joueur ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)).
 - Une charge revient toutes les **douze heures**, durée configurable. Quand les deux charges sont prêtes, le temps s'arrête ; ouvrir un pli relance la recharge. Un joueur qui vient une fois par jour ne perd donc rien.
-- Des **sabliers**, à 1 goutte d'encre chacun, avancent la recharge d'une heure (voir plus bas).
+- Des **sabliers**, à 10 gouttes d'encre chacun, avancent la recharge d'une heure (voir plus bas).
 - Le serveur calcule la disponibilité afin d'éviter la manipulation de l'horloge locale.
 - L'énergie limite uniquement les plis, jamais les fusions avec des briques possédées.
 - Les plis sont la seule source d'exemplaires après la réserve de départ.
@@ -299,11 +299,11 @@ Les indices peuvent être débloqués par l'expérimentation, le temps, des obje
 Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **choisit d'abord un fascicule** parmi ceux qui sont parus : chacun montre sa jaquette, ses briques connues et ses exemplaires en réserve. Il ouvre ensuite le pli de ce fascicule, et peut revenir au choix à tout moment. Sur l'écran d'ouverture, on retrouve :
 
 - l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2 ;
-- les sabliers disponibles, l'échange contre de l'encre et le plafond du jour ;
+- les sabliers disponibles et, quand le temps manque, un raccourci pour les utiliser ou pour échanger de l'encre ; l'échange lui-même vit dans la boutique ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
 - les chances du fascicule choisi par rareté (les quatre, légendaire comprise, même à 0 % : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique (les briques inconnues restent en silhouette). Les légendaires inconnues sont regroupées en une seule ligne, avec la somme exacte de leurs chances mais sans leur nombre ;
 - la garantie de nouveauté et le filet d'utilité, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
-- l'encre disponible et l'échange contre un indice (30 gouttes) ;
+- l'encre disponible et l'échange contre un niveau d'indice (5 à 80 gouttes) ;
 - l'historique des derniers tirages ;
 - les règles du pli.
 
@@ -348,7 +348,7 @@ Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-b
 - chaque pli tire une brique parmi les préfixes et suffixes de son fascicule, nouveaux ou repris : **les doublons font partie du jeu** ;
 - le pli ne tire que des **préfixes et des suffixes**, jamais un mot ; la chance d’une brique dépend de sa seule **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire), et deux briques de même rareté ont la même chance ([ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)) ;
 - un doublon ajoute **un exemplaire** à la réserve, jusqu'à 5 par brique, et rapporte d'autant plus de **gouttes d'encre** que la brique est rare ;
-- chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (1 goutte) ou des indices (30 gouttes) ;
+- chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (1 goutte) ou des indices (5 gouttes le premier niveau, le double à chaque niveau suivant) ;
 - une brique nouvelle est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
 - si la réserve ne permet plus aucune découverte, une brique utile de ce fascicule est **garantie au plus tard au 5ᵉ pli** du même fascicule. Si aucune de ses briques ne peut aider, l'écran invite à choisir un autre fascicule ;
 - objectif de rythme : le codex ne doit pas se remplir trop vite. Sur le catalogue de démonstration (9 mots, réserve de départ 4 × 2), il faut 22 plis en médiane pour tout découvrir, soit environ onze jours, et jamais plus de 30 plis dans la simulation (ADR 0012). Avec deux fascicules et les sabliers, la simulation de l'ADR 0020 donne 20 plis et 7,5 jours en médiane. Ce rythme, calculé sur un catalogue unique, est à recalculer par fascicule.
@@ -359,15 +359,15 @@ Les poids, les raretés et la garantie relèvent de l'équilibrage. Ils doivent 
 
 Dans le MVP ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) :
 
-- un **sablier** fait avancer d'une heure la recharge en cours. Il ne s'utilise que si l'énergie est sous 2 ; le temps en trop passe à la charge suivante, et il n'est perdu que si l'énergie atteint 2, ce que l'interface annonce avant de confirmer ;
-- il coûte **1 goutte d'encre** : une goutte, une heure. Certains jalons en donnent aussi ;
+- un **sablier** fait avancer d'une heure la recharge en cours. Il ne s'utilise que si l'énergie est sous 2 ; le temps en trop passe à la charge suivante. La feuille propose, et permet au plus, le nombre de sabliers qui remplit l'énergie ; seul le dernier peut n'avancer qu'une partie de son heure ;
+- il s'**échange contre 10 gouttes d'encre**, dans un geste distinct de son usage ; seuls les sabliers détenus s'utilisent. Certains jalons en donnent aussi ;
 - il achète du temps, jamais un tirage : chances, garantie, filet et contenu du pli ne changent pas ;
-- au plus **12 sabliers par 24 h**, soit au plus un pli de plus par jour ; au plus 36 sabliers détenus ;
-- **pli offert garanti** : un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit 12 sabliers, soit un pli de plus tous les 3 jours. Sur la démo, changer toute son encre en sabliers fait passer le temps pour tout découvrir de 10 à 7,5 jours en médiane.
+- au plus **12 sabliers achetés en encre par 24 h**, soit au plus un pli de plus par jour ; les sabliers détenus s'utilisent sans limite, et leur nombre n'est pas plafonné ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
+- **pli offert garanti** : un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit un sablier ; à 10 gouttes le sablier, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
 
 Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
 
-- les plafonds ci-dessus comptent aussi les sabliers achetés ;
+- les plafonds ci-dessus s'appliquent aussi aux sabliers achetés en euros ;
 - la boutique vend des lots en euros, sans monnaie intermédiaire, avec le prix par sablier affiché, sans offre limitée ni relance ; lot sans sablier utilisé remboursable pendant 14 jours ;
 - revue juridique et boutique désactivable par territoire, contrôle parental, achats validés par le serveur.
 

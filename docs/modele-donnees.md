@@ -447,7 +447,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `langues` | Pour chaque langue citée par ses cartes (langue d'une unité ou d'un étymon) : identifiant et chemin haché de sa silhouette ([ADR 0023](adr/0023-textures-des-cartes.md)). Comme l'index ne cite que des manifestes, c'est le manifeste qui mène aux silhouettes des langues et la tâche de parution les promeut avec le fascicule. |
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
-| `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
+| `jalons` | Jalons du fascicule : `id`, nombre de `decouvertes` qui l'atteint, briques du `pli` déterministe et `sabliers` donnés ([ADR 0012](adr/0012-briques-rationnees.md), [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `graines` | Réserve de départ du fascicule : pour chaque brique semée, `brique_id` et `exemplaires`, de 1 à 5 ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). |
 
 ### Ressources
@@ -605,14 +605,14 @@ erDiagram
 | `exemplaire` | La réserve : briques connues et leurs exemplaires. | Une ligne par brique connue, créée à sa première obtention. La connaissance est permanente : une brique à 0 exemplaire reste, marquée épuisée ([ADR 0012](adr/0012-briques-rationnees.md)). Les exemplaires réservés sur la table ne sont jamais stockés ici : ils restent locaux. |
 | `decouverte` | Le codex du joueur. | Une ligne par mot découvert. Les cartes de brique viennent de `exemplaire` ; les cartes de langue sont dérivées des deux. |
 | `energie` | Charges de pli. | 2 charges au plus, une toutes les 12 h ; `prochaine_charge` est nulle quand l'énergie est pleine : le temps s'arrête ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). Un sablier avance cet instant d'une heure. |
-| `encre`, `sablier` | Soldes. | Encre jamais négative, 36 sabliers détenus au plus ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). |
+| `encre`, `sablier` | Soldes. | Encre jamais négative, sabliers détenus jamais négatifs et sans plafond ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)). |
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
-| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois. |
+| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois ; sa récompense passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
 | `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
-| `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. Le plafond de 12 sabliers par 24 h glissantes se vérifie à partir d'eux. |
+| `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. Le plafond de 12 sabliers achetés par 24 h glissantes se vérifie à partir d'eux (lignes `sablier` de motif `sablier` et de delta positif). |
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
 | `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
 
@@ -645,7 +645,7 @@ Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la
 
 - `exemplaire.nombre` est compris entre 0 et 5 ; un exemplaire reçu au-delà devient de l'encre.
 - `energie.charges` est compris entre 0 et 2 ; `prochaine_charge` est nulle si et seulement si les charges valent 2.
-- `encre.gouttes` n'est jamais négatif ; `sablier.detenus` ne dépasse pas 36.
+- `encre.gouttes` n'est jamais négatif ; `sablier.detenus` n'est jamais négatif.
 - Au plus 12 sabliers utilisés par joueur sur 24 h glissantes, et seulement si l'énergie est sous 2.
 - Une `decouverte` par (joueur, mot) ; son `recette_id` produit bien ce mot dans la version active.
 - Une `commande` par (joueur, clé d'idempotence). Tous les effets d'une commande réussissent ou échouent ensemble.
