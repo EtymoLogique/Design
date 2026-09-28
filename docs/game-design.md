@@ -265,7 +265,7 @@ Le corpus disponible, le nombre de fascicules possibles et la piste des fascicul
 
 ### Indices
 
-Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (30 gouttes l'indice ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
+Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (5, 10, 20, 40 puis 80 gouttes du premier niveau à la solution, [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md) ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
 
 1. famille ou langue du résultat ;
 2. nature des deux briques (préfixe, suffixe ou mot) ;
@@ -303,7 +303,7 @@ Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **c
 - les chances du fascicule choisi par rareté (les quatre, légendaire comprise, même à 0 % : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique (les briques inconnues restent en silhouette). Les légendaires inconnues sont regroupées en une seule ligne, avec la somme exacte de leurs chances mais sans leur nombre ;
 - la garantie de nouveauté et le filet d'utilité, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
-- l'encre disponible et l'échange contre un indice (30 gouttes) ;
+- l'encre disponible et l'échange contre un niveau d'indice (5 à 80 gouttes) ;
 - l'historique des derniers tirages ;
 - les règles du pli.
 
@@ -348,7 +348,7 @@ Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-b
 - chaque pli tire une brique parmi les préfixes et suffixes de son fascicule, nouveaux ou repris : **les doublons font partie du jeu** ;
 - le pli ne tire que des **préfixes et des suffixes**, jamais un mot ; la chance d’une brique dépend de sa seule **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire), et deux briques de même rareté ont la même chance ([ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)) ;
 - un doublon ajoute **un exemplaire** à la réserve, jusqu'à 5 par brique, et rapporte d'autant plus de **gouttes d'encre** que la brique est rare ;
-- chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (1 goutte) ou des indices (30 gouttes) ;
+- chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (1 goutte) ou des indices (5 gouttes le premier niveau, le double à chaque niveau suivant) ;
 - une brique nouvelle est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
 - si la réserve ne permet plus aucune découverte, une brique utile de ce fascicule est **garantie au plus tard au 5ᵉ pli** du même fascicule. Si aucune de ses briques ne peut aider, l'écran invite à choisir un autre fascicule ;
 - objectif de rythme : le codex ne doit pas se remplir trop vite. Sur le catalogue de démonstration (9 mots, réserve de départ 4 × 2), il faut 22 plis en médiane pour tout découvrir, soit environ onze jours, et jamais plus de 30 plis dans la simulation (ADR 0012). Avec deux fascicules et les sabliers, la simulation de l'ADR 0020 donne 20 plis et 7,5 jours en médiane. Ce rythme, calculé sur un catalogue unique, est à recalculer par fascicule.

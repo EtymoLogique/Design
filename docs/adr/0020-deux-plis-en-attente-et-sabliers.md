@@ -1,6 +1,6 @@
 # ADR 0020 — Deux plis en attente, sabliers gagnés par l'encre
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) : le prix de l’indice croît avec son niveau (5, 10, 20, 40 et 80 gouttes). Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** :
   - [ADR 0008](0008-energie-et-plis.md), pour la capacité d'énergie (une charge) et pour l'interdiction d'avancer la recharge, qui ne vaut plus que pour les paiements ;
   - [ADR 0011](0011-plis-raretes-et-doublons.md), pour l'usage de l'encre (indices seulement) et le prix de l'indice ;

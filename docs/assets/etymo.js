@@ -941,11 +941,12 @@
     const NET = 5;
     let blockedPacks = 0;
     const canDiscover = (extra) => RECIPE_KEYS.some((k) => !found.has(k) && k.split("+").every((id) => (copies[id] || 0) + (id === extra ? 1 : 0) >= 1));
-    const HINT_COST = 30;
+    // Premier niveau d’indice ; le prix double à chaque niveau suivant (ADR 0038).
+    const HINT_COST = 5;
     // Chaque pli rapporte une base d'encre, plus le bonus d'un doublon (ADR 0019, 0020).
     const BASE_INK = 2;
     const drops_ = (n) => `${n} goutte${n > 1 ? "s" : ""}`;
-    // Sabliers (ADR 0018, après le MVP) : 1 h de recharge chacun, 12 par 24 h glissantes, 36 détenus au plus.
+    // Sabliers (ADR 0018, gratuits dans le MVP depuis l’ADR 0020) : 1 h de recharge chacun, 12 par 24 h glissantes, 36 détenus au plus.
     const HOUR_MS = RECHARGE_MS / 12;
     const DAY_MS = RECHARGE_MS * 2;
     const SAND_DAILY = 12;

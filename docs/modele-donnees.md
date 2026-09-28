@@ -447,7 +447,7 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `langues` | Pour chaque langue citée par ses cartes (langue d'une unité ou d'un étymon) : identifiant et chemin haché de sa silhouette ([ADR 0023](adr/0023-textures-des-cartes.md)). Comme l'index ne cite que des manifestes, c'est le manifeste qui mène aux silhouettes des langues et la tâche de parution les promeut avec le fascicule. |
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
-| `jalons` | Jalons du fascicule, leurs conditions et leurs récompenses déterministes ([ADR 0012](adr/0012-briques-rationnees.md)). |
+| `jalons` | Jalons du fascicule : `id`, nombre de `decouvertes` qui l'atteint, briques du `pli` déterministe et `sabliers` donnés ([ADR 0012](adr/0012-briques-rationnees.md), [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `graines` | Réserve de départ du fascicule : pour chaque brique semée, `brique_id` et `exemplaires`, de 1 à 5 ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). |
 
 ### Ressources
@@ -608,7 +608,7 @@ erDiagram
 | `encre`, `sablier` | Soldes. | Encre jamais négative, 36 sabliers détenus au plus ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). |
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
-| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois. |
+| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois ; sa récompense passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
 | `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
