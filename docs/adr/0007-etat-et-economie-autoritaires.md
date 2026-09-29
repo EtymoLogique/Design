@@ -1,6 +1,6 @@
 # ADR 0007 — État persistant et économie sous autorité serveur
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0041](0041-hors-connexion-consultation-seule.md) : plus d'opérations en attente rejouables, hors connexion la PWA ne fait que consulter
 
 ## Contexte
 
@@ -22,7 +22,6 @@ Le client conserve un cache local pour :
 - une projection de la progression confirmée ;
 - l'état visuel de la table ;
 - les préférences non sensibles ;
-- les opérations en attente qui peuvent être rejouées sans ambiguïté.
 
 Toute commande serveur contient un identifiant d'idempotence généré par le client. Le serveur valide le schéma, l'identité technique, la version du catalogue, les préconditions et les droits avant une mutation. Une réponse en conflit provoque une resynchronisation explicite ; le client ne transforme pas un échec en succès local.
 

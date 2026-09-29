@@ -476,7 +476,7 @@ Une correction produit une ressource au nouveau hash, donc un nouveau manifeste 
 
 Une fois le fascicule paru, ses recettes et ses légendaires sont lisibles dans ses fichiers. Le secret des légendaires tient à l'interface : pas de silhouette, pas de compteur ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)).
 
-En ligne, le client peut résoudre une fusion localement pour répondre tout de suite ; hors connexion, la tentative attend le réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). Ce n'est qu'une prévisualisation : le **serveur fait foi**. Il lit les mêmes fichiers, valide la recette et ses préconditions, vérifie la réserve, consomme les exemplaires et met à jour le codex, dans une seule transaction. Il en va de même pour l'énergie, les plis, l'encre, les sabliers, les indices et les jalons ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)).
+En ligne, le client peut résoudre une fusion localement pour répondre tout de suite ; hors connexion, aucune fusion n'est possible ([ADR 0041](adr/0041-hors-connexion-consultation-seule.md)). Ce n'est qu'une prévisualisation : le **serveur fait foi**. Il lit les mêmes fichiers, valide la recette et ses préconditions, vérifie la réserve, consomme les exemplaires et met à jour le codex, dans une seule transaction. Il en va de même pour l'énergie, les plis, l'encre, les sabliers, les indices et les jalons ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)).
 
 ## 7. Données du joueur
 

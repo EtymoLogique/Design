@@ -14,13 +14,13 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 
 | ADR | Décision | Statut |
 |---|---|---|
-| [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté, sélection puis « Ajouter à la table » remplacée par 0033 |
+| [0001](0001-pwa-responsive.md) | PWA responsive comme plateforme MVP | Accepté, sélection puis « Ajouter à la table » remplacée par 0033, préparation hors connexion par 0041 |
 | [0002](0002-graphe-linguistique-editorial.md) | Graphe linguistique éditorial et versionné | Accepté |
 | [0003](0003-recettes-de-fusion.md) | Recettes explicites et transformations expliquées | Accepté, secret des recettes verrouillées remplacé par 0027, nombre d'emplacements par 0032 |
 | [0004](0004-progression-atteignable.md) | Progression pilotée par un graphe d'obtention vérifiable | Accepté |
 | [0005](0005-pipeline-de-contenu.md) | Pipeline de contenu validé avant publication | Accepté |
 | [0006](0006-architecture-multilingue.md) | Architecture multilingue indépendante du lancement | Accepté |
-| [0007](0007-etat-et-economie-autoritaires.md) | État persistant et économie sous autorité serveur | Accepté |
+| [0007](0007-etat-et-economie-autoritaires.md) | État persistant et économie sous autorité serveur | Accepté, file d'opérations rejouables remplacée par 0041 |
 | [0008](0008-energie-et-plis.md) | Énergie et plis gratuits, paiements hors MVP | Accepté, contenu des plis remplacé par 0011, capacité d'énergie et avance de la recharge par 0020 |
 | [0009](0009-contenu-et-equilibrage.md) | Séparation des faits linguistiques et de l'équilibrage | Accepté |
 | [0010](0010-observabilite-et-vie-privee.md) | Observabilité minimale et respectueuse de la vie privée | Accepté |
@@ -37,7 +37,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028 |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027, fichiers à venir et bascule par l'horloge de l'API par 0029 |
 | [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
@@ -54,6 +54,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039 |
 | [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté |
 | [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé |
+| [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
 
 ## Page HTML
 
@@ -72,4 +73,3 @@ Chaque ADR contient :
 3. les options envisagées ;
 4. les conséquences positives et négatives ;
 5. les critères de réévaluation.
-
