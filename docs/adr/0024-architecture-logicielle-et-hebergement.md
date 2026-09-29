@@ -1,6 +1,6 @@
 # ADR 0024 — Architecture serverless chez Scaleway, backend Rust, état relationnel
 
-- **Statut** : Accepté, partiellement remplacé par l’[ADR 0025](0025-medias-statiques-et-publication-programmee.md) : la publication d’un fascicule est programmée par un manifeste serveur daté, et le manifeste public ne désigne que la version active. Partiellement remplacé aussi par l’[ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md) : le dépôt privé ne contient que des données et la CI qui les publie, jamais d’artefact compilé ni de logique. Partiellement remplacé enfin par l’[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : un seul artefact public, recettes comprises, sans bucket privé ni projection du contenu ; le serveur fait toujours foi. Partiellement remplacé encore par l’[ADR 0028](0028-gitflow-des-depots.md) : seul le dossier de conception publie une préversion par branche ; l’application et l’infrastructure ne déploient que `develop` (hors-prod) et `master` (prod). Le reste de la décision reste en vigueur.
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0025](0025-medias-statiques-et-publication-programmee.md) : la publication d’un fascicule est programmée par un manifeste serveur daté, et le manifeste public ne désigne que la version active. Partiellement remplacé aussi par l’[ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md) : le dépôt privé ne contient que des données et la CI qui les publie, jamais d’artefact compilé ni de logique. Partiellement remplacé enfin par l’[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : un seul artefact public, recettes comprises, sans bucket privé ni projection du contenu ; le serveur fait toujours foi. Partiellement remplacé encore par l’[ADR 0028](0028-gitflow-des-depots.md) : seul le dossier de conception publie une préversion par branche ; l’application et l’infrastructure ne déploient que `develop` (hors-prod) et `master` (prod). Partiellement remplacé enfin par l’[ADR 0041](0041-hors-connexion-consultation-seule.md) : hors connexion, consultation seule, sans préparation de table. Le reste de la décision reste en vigueur.
 - **Portée** : application du MVP (PWA, API, bases, hébergement), hors dossier de conception
 - **Complète** : [ADR 0001](0001-pwa-responsive.md) (hors connexion), [ADR 0005](0005-pipeline-de-contenu.md) (artefact publié), [ADR 0007](0007-etat-et-economie-autoritaires.md) (autorité serveur), [ADR 0010](0010-observabilite-et-vie-privee.md) (journaux et télémétrie)
 
@@ -70,7 +70,7 @@ Ainsi, aucun mot à venir ni aucune légendaire ne se lit dans le code ou le sto
 
 - **Un seul service**, sans état, écrit en **Rust**, livré dans une image de conteneur minimale. Pile de référence : `tokio`, `axum` et `sqlx` (requêtes vérifiées à la compilation).
 - Des commandes, pas un CRUD : fusion, ouverture de pli, sablier, indice, synchronisation, télémétrie. Chaque commande porte un identifiant d’idempotence, la version du catalogue et la version d’état connue du client. La réponse renvoie le nouvel état confirmé. Un conflit renvoie `409` et déclenche une resynchronisation explicite.
-- **Toute fusion est résolue par le serveur**, parce que le client n’a pas les recettes : succès, recette déjà connue, « presque », piste pas encore autorisée ou échec ([game-design](../game-design.md)). Hors connexion, la table se prépare, et la tentative attend le réseau sans afficher de résultat ([ADR 0001](0001-pwa-responsive.md)).
+- **Toute fusion est résolue par le serveur**, parce que le client n’a pas les recettes : succès, recette déjà connue, « presque », piste pas encore autorisée ou échec ([game-design](../game-design.md)). Hors connexion, aucune commande n’est possible ([ADR 0041](0041-hors-connexion-consultation-seule.md)).
 - Les tirages de plis utilisent un générateur aléatoire cryptographique côté serveur, sauf les plis de jalon, dont le contenu est déterministe ([ADR 0012](0012-briques-rationnees.md)). L’horloge du serveur seule fait foi pour l’énergie et les sabliers.
 - Les types des commandes et de l’artefact sont décrits par un schéma unique, dont on génère les types TypeScript du front.
 
@@ -148,7 +148,7 @@ Plus de pièces à déployer, de démarrages à froid et de code dupliqué pour 
 ### Négatives
 
 - Démarrage à froid possible au premier appel après une période creuse.
-- Aucune fusion n’est résolue hors connexion : le joueur prépare, puis attend le réseau.
+- Aucune fusion n’est résolue hors connexion : le joueur consulte seulement ([ADR 0041](0041-hors-connexion-consultation-seule.md)).
 - Le codex et la réserve dépendent d’une projection serveur : un premier lancement exige le réseau.
 - Deux dépôts à tenir, le code public et le contenu privé.
 - Rust demande plus de temps de développement, et le partage de code avec le front se limite aux types générés.

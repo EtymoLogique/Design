@@ -1,6 +1,6 @@
 # ADR 0001 — PWA responsive comme plateforme MVP
 
-- **Statut** : Accepté, partiellement remplacé par l'[ADR 0033](0033-gestes-de-la-table-de-fusion.md) : un toucher sur une brique la pose directement, sans sélection ni « Ajouter à la table »
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0033](0033-gestes-de-la-table-de-fusion.md) : un toucher sur une brique la pose directement, sans sélection ni « Ajouter à la table ». Partiellement remplacé aussi par l'[ADR 0041](0041-hors-connexion-consultation-seule.md) : hors connexion, consultation seule, sans préparation de fusion ni tentative conservée
 - **Portée** : MVP
 
 ## Contexte
@@ -18,9 +18,9 @@ L'interface partagera le même modèle d'interaction sur mobile et ordinateur, a
 - confirmation explicite de la fusion ;
 - mise en page adaptée plutôt que réduction uniforme de l'écran desktop.
 
-Le shell de l'application et le dernier catalogue publié pourront être mis en cache. La consultation du codex et la préparation d'une fusion pourront fonctionner hors connexion. Les opérations modifiant l'état autoritaire — ouverture de pli, consommation d'énergie, attribution d'une découverte et synchronisation — nécessiteront une validation serveur.
+Le shell de l'application et le dernier catalogue publié pourront être mis en cache. La consultation du codex pourra fonctionner hors connexion. Les opérations modifiant l'état autoritaire — ouverture de pli, consommation d'énergie, attribution d'une découverte et synchronisation — nécessiteront une validation serveur.
 
-Une tentative préparée hors connexion peut être conservée localement, mais elle ne doit pas afficher un succès définitif avant validation si le client ne possède pas une version de contenu autorisée pour ce calcul.
+Hors connexion, aucune tentative n'est préparée ni conservée ([ADR 0041](0041-hors-connexion-consultation-seule.md)).
 
 ## Options envisagées
 
