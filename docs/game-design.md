@@ -384,7 +384,7 @@ Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
 
 ## Interfaces
 
-L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs et jalons y forment un onglet du codex. Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html).
+L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs (familles, langues) y forment un onglet du codex ; les jalons ont leur page, « Quêtes », où le joueur récupère leurs récompenses ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)). Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html).
 
 ## Identité visuelle
 
