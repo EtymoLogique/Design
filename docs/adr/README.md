@@ -51,10 +51,11 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) | Plis d’affixes, pondérés par la seule rareté | Accepté |
 | [0036](0036-chances-des-legendaires-toujours-affichees.md) | La chance des légendaires est toujours affichée | Accepté |
 | [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
-| [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039 |
+| [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039, octroi et affichage des jalons remplacés par 0042 |
 | [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté |
 | [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé |
 | [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
+| [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé |
 
 ## Page HTML
 

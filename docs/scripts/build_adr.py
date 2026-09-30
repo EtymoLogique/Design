@@ -50,6 +50,7 @@ XREFS = {
     "0038": [("interfaces.html#i-12", "Les indices"), ("interfaces.html#i-18", "Objectifs et jalons"), ("maquettes.html#m-12", "La feuille des indices")],
     "0039": [("plis.html#sablier", "Le sablier dans l’atelier des plis"), ("interfaces.html#i-22", "Échanges d’encre")],
     "0036": [("plis.html#chances", "Les chances du pli"), ("interfaces.html#i-20", "L’atelier du pli")],
+    "0042": [("interfaces.html#i-18", "Objectifs et jalons"), ("interfaces.html#i-01", "Navigation principale")],
 }
 
 

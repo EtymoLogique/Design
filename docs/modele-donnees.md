@@ -609,7 +609,7 @@ erDiagram
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
 | `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
-| `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois ; sa récompense passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
+| `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois. `recupere_le` reste vide tant que le joueur n'a pas récupéré sa récompense ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)) ; la récupération passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
 | `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
 | `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. |
