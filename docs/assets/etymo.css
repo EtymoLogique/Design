@@ -41,6 +41,15 @@
   --radius: 14px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+  /* Ressort amorti (raideur 170, amortissement 14) : un dépassement, puis un léger rebond, sans bibliothèque. */
+  --ease-ressort: linear(0, 0.22 4%, 0.62 10%, 0.96 18%, 1.1 26%, 1.08 34%, 0.98 46%, 0.99 58%, 1.01 70%, 1);
+  /* Cinq durées (design-system.html, 1.6 Mouvement). */
+  --dur-instant: 120ms;
+  --dur-rapide: 240ms;
+  --dur-base: 360ms;
+  --dur-lent: 480ms;
+  --dur-rituel: 1.8s;
 }
 
 body.nocturne {
@@ -1076,8 +1085,6 @@ button.disc:hover { transform: translateY(-3px); }
 .pk-stage.pk-writing .pk-seal { animation: sealCharge 1.4s ease-in forwards; }
 @keyframes sealCharge { to { transform: scale(1.3); box-shadow: 0 0 0 22px rgba(244, 183, 64, 0.2), 0 0 90px var(--c-pli); } }
 .pk-stage.pk-burst .pk-pack { animation: none; pointer-events: none; }
-.pk-stage.pk-burst .pk-half.top { transform: translate(-40px, -190px) rotate(-22deg); opacity: 0; }
-.pk-stage.pk-burst .pk-half.bottom { transform: translate(40px, 190px) rotate(18deg); opacity: 0; }
 .pk-stage.pk-burst .pk-seal { transform: scale(2.6); opacity: 0; animation: none; }
 .pk-stage[data-state="recharging"] .pk-pack { opacity: 0.5; filter: grayscale(1) drop-shadow(0 26px 30px rgba(15, 31, 25, 0.15)); animation-play-state: paused; }
 .pk-stage[data-state="recharging"] .pk-seal { animation: none; box-shadow: none; }
@@ -2216,3 +2223,137 @@ body.nocturne .if-num { color: var(--c-action); }
 .art-screens span:last-child { width: 30px; height: 54px; border-radius: 8px; }
 .section.if-intro { padding-bottom: 0; }
 .art-screens.is-drawn span { background: repeating-linear-gradient(180deg, var(--cream) 0 7px, var(--paper-2) 7px 9px); }
+
+
+/* ==========================================================================
+   Animations retenues (décisions du 2026-10-01, mouvement.html#catalogue)
+   Mêmes règles que la PWA (styles.css, plis.css, codex.css du dépôt App).
+   Elles remplacent les règles plus haut quand elles touchent les mêmes classes.
+   ========================================================================== */
+/* Sceau : un coup de tampon, il s'enfonce de son ombre puis remonte. */
+.seal { transition: scale var(--dur-rapide) var(--ease-ressort), translate var(--dur-rapide) var(--ease-ressort), box-shadow var(--dur-rapide) var(--ease-out); }
+.wordmark:hover .seal { rotate: -6deg; scale: 0.94; translate: 2px 2px; box-shadow: 1px 1px 0 var(--fixed-ink); }
+/* Touche mécanique : l'appui descend de la longueur de l'ombre en 120 ms, puis le bouton remonte au ressort. */
+.btn { transition: transform var(--dur-base) var(--ease-ressort), box-shadow var(--dur-rapide) var(--ease-out), background-color var(--dur-rapide), border-color var(--dur-rapide); }
+.btn:active { transition-duration: var(--dur-instant); transition-timing-function: ease-out; }
+.btn-primary:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--pop-shadow); }
+/* Bouton prêt : une seule onde, puis l'ombre respire d'un pixel. */
+@property --souffle { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.table-panel .btn-primary { position: relative; }
+.table-panel.ready .btn-primary { box-shadow: calc(4px + var(--souffle)) calc(4px + var(--souffle)) 0 var(--pop-shadow); animation: souffle 3s ease-in-out var(--dur-lent) infinite; }
+.table-panel.ready .btn-primary:hover { box-shadow: 6px 6px 0 var(--pop-shadow); }
+.table-panel.ready .btn-primary::after { position: absolute; inset: -1.5px; border-radius: inherit; content: ""; pointer-events: none; animation: onde var(--dur-lent) var(--ease-out) both; }
+@keyframes onde { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-action) 55%, transparent); } to { box-shadow: 0 0 0 16px color-mix(in srgb, var(--c-action) 0%, transparent); } }
+@keyframes souffle { 50% { --souffle: 1px; } }
+/* Refus doux en deux forces : « échec » 500 ms, « presque » 300 ms, une oscillation qui s'amortit. */
+.shake { animation: amorti 0.5s linear; }
+.shake.legere { animation: amorti-leger 0.3s ease-out; }
+@keyframes amorti {
+  12% { transform: translateX(-8px); } 25% { transform: translateX(8px); }
+  38% { transform: translateX(-6px); } 50% { transform: translateX(6px); }
+  62% { transform: translateX(-4px); } 75% { transform: translateX(4px); }
+  88% { transform: translateX(-2px); }
+}
+@keyframes amorti-leger { 25% { transform: translateX(-3px); } 60% { transform: translateX(3px); } }
+/* Découverte : les briques s'aimantent (--fx mesuré), s'écrasent au contact, leurs étiquettes se fondent en un mot ;
+   huit traits d'encre et des lettres du mot jaillissent autour. Plus d'ondes ni de confettis carrés. */
+.fusing .slot[data-slot] { transform: none; opacity: 1; }
+.fusing .op { opacity: 0; transform: scale(0); }
+.slot[data-slot="1"] { --sens: -1; }
+.fusing .slot .brick { animation: aimante 0.3s var(--ease-in) forwards, ecrase 0.2s ease-out 0.28s, efface 0.15s 0.35s forwards; }
+.fu-eclat { position: absolute; top: 50%; left: 50%; z-index: 6; width: 0; height: 0; pointer-events: none; }
+.fu-mot {
+  position: absolute; translate: -50% -50%; padding: 6px 14px;
+  border: 1.5px solid var(--fixed-ink); border-radius: 10px; background: var(--cream); color: var(--ink);
+  box-shadow: 4px 4px 0 var(--pop-shadow); font-family: var(--serif); font-size: 26px; font-weight: 700; white-space: nowrap;
+  animation: fondu-mot 0.3s var(--ease-ressort) 0.35s both;
+}
+.fu-trait { position: absolute; width: 3px; height: 16px; margin: -8px -1.5px; border-radius: 2px; background: var(--ink); opacity: 0; animation: trait 0.3s ease-out 0.45s forwards; }
+.fu-lettre { position: absolute; translate: -50% -50%; color: var(--c); font-family: var(--serif); font-size: 17px; font-weight: 700; opacity: 0; animation: fly 0.7s var(--ease-out) 0.35s forwards; }
+@keyframes aimante { to { translate: calc(var(--sens, 1) * var(--fx, 0px)) calc(var(--sens, 1) * var(--fy, 0px)); } }
+@keyframes ecrase { 50% { scale: 0.96 1; } }
+@keyframes efface { to { opacity: 0; } }
+@keyframes fondu-mot { from { opacity: 0; scale: 0.9; } }
+@keyframes trait {
+  0% { opacity: 1; transform: rotate(var(--a)) translateY(var(--r0)) scaleY(0.2); }
+  40% { opacity: 1; transform: rotate(var(--a)) translateY(calc(var(--r0) - 14px)) scaleY(1); }
+  100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--r0) - 30px)) scaleY(0.1); }
+}
+@keyframes fly { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--r)); } }
+/* « −1 » : il monte et se dissout comme de l'encre qui sèche. */
+.b-minus { animation: seche 0.9s var(--ease-out) forwards; }
+@keyframes seche {
+  0% { opacity: 0; transform: translate(-50%, 6px) scale(0.6); filter: blur(0); }
+  20% { opacity: 1; transform: translate(-50%, -6px) scale(1.1); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 0; transform: translate(-50%, -22px); filter: blur(2px); }
+}
+/* Codex : survols ramenés à trois gestes (soulever, souligner, teinter), une durée, une courbe. */
+.mini { transition: transform var(--dur-rapide) var(--ease-out), box-shadow var(--dur-rapide) var(--ease-out); }
+.mini:hover, .mini:focus-visible { transform: translateY(-3px); box-shadow: 3px 4px 0 var(--pop-shadow); }
+.xref:hover { transform: none; box-shadow: none; background: var(--c-action-tint); color: var(--fixed-ink); }
+/* Retournement : le ↻ reste fixe, sans aperçu incliné de la carte ; le tour lui-même se joue en 600 ms (etymo.js). */
+.flip-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 #0f1f19; }
+.flip-btn:hover em { transform: none; }
+.big-card { transition: transform var(--dur-rapide) var(--ease-ressort); }
+/* Plis : le paquet posé (plus de flottement), entré d'un geste, cacheté ; le sceau ne pulse qu'après 3 s. */
+.pk-pack { animation: pose 0.3s var(--ease-out) both; }
+.pk-pack:not(:disabled):hover { animation-play-state: running; }
+.pk-seal { animation: cachet 0.22s ease-in 0.35s both, sealPulse 2.4s ease-in-out 3.6s infinite; }
+.pk-stage.pk-charging .pk-seal { animation: cire 1.3s ease-in forwards; }
+@keyframes pose { from { opacity: 0; translate: 0 -12px; } }
+@keyframes cachet { from { opacity: 0; scale: 1.2; } }
+@keyframes cire { to { scale: 1.3; border-radius: 46% 54% 52% 48% / 56% 44% 56% 44%; box-shadow: 0 0 0 14px rgba(244, 183, 64, 0.2), 0 0 48px rgba(244, 183, 64, 0.6); } }
+/* Rayons écrits : un rayon sur deux est une ligne de texte qui part du centre. */
+.pk-rays { background: repeating-conic-gradient(rgba(244, 183, 64, 0.3) 0deg 7deg, transparent 7deg 36deg); }
+.pk-rays span {
+  position: absolute; top: 50%; left: 50%; padding-left: 64px; opacity: 0.16;
+  transform-origin: 0 50%; transform: translateY(-50%) rotate(calc(var(--a) - 90deg));
+  color: var(--c-pli-deep); font-family: var(--serif); font-size: 28px; font-weight: 600; letter-spacing: 0.06em; white-space: nowrap;
+}
+/* Anticipation : une rare ou une légendaire teinte les rayons et la plume dès l'écriture. */
+.pk-stage.pk-anticipe .pk-rays { background: repeating-conic-gradient(rgba(143, 123, 240, 0.4) 0deg 7deg, transparent 7deg 36deg); opacity: 0.5; }
+.pk-stage.pk-anticipe .pk-rays span { color: var(--c-lang-deep); }
+.pk-stage.pk-anticipe.pk-writing .pk-scribe { animation-name: scribeChargeRare; }
+@keyframes scribeChargeRare { to { box-shadow: 0 0 0 7px rgba(255, 251, 243, 0.8), 0 0 70px var(--c-lang); } }
+/* Retournement : le paquet passe sur la tranche (.pk-flip), puis la révélation se retourne à sa place (`retourne`). */
+.pk-stage.pk-flip .pk-pack, .pk-stage.pk-burst .pk-pack { scale: 1.14; animation: none; pointer-events: none; transform: perspective(900px) rotateY(90deg); transition: transform 0.42s cubic-bezier(0.45, 0, 0.75, 0.5); }
+.pk-stage.pk-flip .pk-seal { opacity: 0; animation: none; }
+.pk-stage.pk-flip .pk-scribe { opacity: 0; transition-duration: 0.12s; }
+.pk-stage.pk-flip .pk-tagline { opacity: 0; animation: none; }
+.pk-reveal { animation: retourne 0.52s cubic-bezier(0.2, 0.8, 0.3, 1) both; }
+@keyframes retourne { from { opacity: 0; transform: perspective(900px) rotateY(-90deg) scale(0.96); } 35% { opacity: 1; } }
+/* Paquet en attente d'ouverture : halo jaune qui respire derrière, léger zoom au survol. */
+.pk-pack::before { content: ""; position: absolute; z-index: -1; inset: -70px; border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity 0.6s var(--ease-out); background: radial-gradient(closest-side, rgba(255, 226, 150, 0.7), rgba(244, 183, 64, 0.38) 38%, rgba(244, 183, 64, 0.12) 68%, transparent); }
+.pk-stage[data-state="ready"] .pk-pack::before { opacity: 1; animation: halo 4.5s ease-in-out infinite; }
+@keyframes halo { 50% { opacity: 0.6; scale: 0.94; } }
+.pk-stage[data-state="ready"] .pk-pack:not(:disabled):hover { scale: 1.04; }
+/* Écriture : rature tracée à la main au lieu d'un trait ; curseur qui clignote doucement. */
+.sc-line::after { display: none; }
+.sc-rature { position: absolute; top: 0; left: -6px; width: calc(100% + 12px); height: 100%; overflow: visible; pointer-events: none; }
+.sc-rature path { fill: none; stroke: var(--c-action); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; animation: trace 0.2s ease-out both; }
+.sc-caret { animation: clignote 1s ease-in-out infinite; }
+@keyframes trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes clignote { 50% { opacity: 0.2; } }
+/* Atterrissage au tampon : grande ombre qui se resserre, impression avec un écrasement. */
+.pk-brick { animation: imprime 0.5s var(--ease-out) both; }
+@keyframes imprime {
+  0% { opacity: 0; transform: translateY(-34px) scale(1.18); box-shadow: 20px 30px 0 rgba(15, 31, 25, 0.22); }
+  55% { opacity: 1; transform: none; box-shadow: 6px 6px 0 #0f1f19; }
+  72% { transform: scaleY(0.92) translateY(2px); }
+  100% { transform: rotate(-2deg); box-shadow: 6px 6px 0 #0f1f19; }
+}
+/* États d'attente : « Touchez pour passer » n'apparaît qu'après 600 ms ; la phrase d'attente ne respire plus, ses points s'écrivent. */
+.pk-stage[data-state="opening"] .pk-status { animation: eqFade 0.4s ease-out 0.6s both; }
+.pk-tagline { animation: none; }
+.pk-tagline .dt { display: inline-block; animation: point 2.4s steps(1, end) infinite; animation-delay: calc(var(--i) * 400ms); }
+@keyframes point { 0% { opacity: 0; } 10%, 85% { opacity: 1; } 100% { opacity: 0; } }
+/* Historique : seule la nouvelle ligne entre. Inconnues : une seule scintille à la fois. */
+.pk-hist-item { animation: none; }
+.pk-hist-item:first-child { animation: eqIn 0.4s var(--ease-spring) both; }
+.pk-pool .bchip.missing { animation: scintille 3s infinite; animation-delay: calc(var(--i, 0) * 0.5s); }
+.pk-pool .bchip.missing:nth-child(2n) { animation-delay: calc(var(--i, 0) * 0.5s); }
+@keyframes scintille { 0%, 14% { border-color: var(--c-pli-deep); color: var(--c-pli-deep); } 20%, 100% { border-color: var(--ink-3); } }
+@media (prefers-reduced-motion: reduce) {
+  .fu-eclat { display: none; }
+}

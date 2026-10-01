@@ -613,27 +613,50 @@
       });
     });
 
-    function shake() {
-      slotsBox.classList.remove("shake");
+    // Refus doux en deux forces : « presque » léger (300 ms), échec franc (500 ms).
+    function shake(legere = false) {
+      slotsBox.classList.remove("shake", "legere");
       void slotsBox.offsetWidth;
       slotsBox.classList.add("shake");
+      slotsBox.classList.toggle("legere", legere);
     }
 
-    function confetti() {
+    // Emboîtement en un mot : les briques s'aimantent, puis le mot formé, huit traits d'encre et des lettres du mot.
+    function eclat(word, kinds) {
       if (reduce) return;
-      const colors = ["var(--c-prefix)", "var(--c-action)", "var(--c-suffix)", "#fffbf3"];
-      for (let i = 0; i < 22; i++) {
-        const c = document.createElement("span");
-        c.className = "confetti";
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 90 + Math.random() * 150;
-        c.style.setProperty("--c", colors[i % colors.length]);
-        c.style.setProperty("--dx", `${Math.cos(angle) * dist}px`);
-        c.style.setProperty("--dy", `${Math.sin(angle) * dist}px`);
-        c.style.setProperty("--r", `${Math.random() * 720 - 360}deg`);
-        slotsBox.append(c);
-        setTimeout(() => c.remove(), 1100);
+      const a = $('[data-slot="0"] .brick', slotsBox)?.getBoundingClientRect();
+      const b = $('[data-slot="1"] .brick', slotsBox)?.getBoundingClientRect();
+      if (a && b) {
+        const inLine = b.left >= a.right - 1;
+        slotsBox.style.setProperty("--fx", `${inLine ? (b.left - a.right) / 2 : 0}px`);
+        slotsBox.style.setProperty("--fy", `${inLine ? 0 : (b.top - a.bottom) / 2}px`);
       }
+      const deep = { "préfixe": "var(--c-prefix-deep)", "suffixe": "var(--c-suffix-deep)" };
+      const colors = [...new Set(kinds.map((k) => deep[k] || "var(--ink)")), "var(--ink)", "var(--c-action-deep)"];
+      const letters = [...word.replace(/[\s-]/g, ""), ..."γλφψαωΣΩ"];
+      const box = mk("span", "fu-eclat");
+      box.setAttribute("aria-hidden", "true");
+      const rx = Math.min(160, [...word].length * 7 + 26), ry = 30;
+      for (let i = 0; i < 8; i++) {
+        const t = mk("i", "fu-trait");
+        const ang = (i * Math.PI) / 4;
+        t.style.setProperty("--a", `${i * 45}deg`);
+        t.style.setProperty("--r0", `${-Math.round((rx * ry) / Math.hypot(ry * Math.sin(ang), rx * Math.cos(ang)))}px`);
+        box.append(t);
+      }
+      for (let i = 0; i < 20; i++) {
+        const l = mk("i", "fu-lettre", letters[(i * 7) % letters.length]);
+        const ang = (i / 20) * Math.PI * 2 + (i % 3) * 0.2;
+        const dist = 90 + ((i * 37) % 120);
+        l.style.setProperty("--c", colors[i % colors.length]);
+        l.style.setProperty("--dx", `${Math.round(Math.cos(ang) * dist * 1.4)}px`);
+        l.style.setProperty("--dy", `${Math.round(Math.sin(ang) * dist * 0.6)}px`);
+        l.style.setProperty("--r", `${((i * 97) % 720) - 360}deg`);
+        box.append(l);
+      }
+      box.append(mk("b", "fu-mot", word));
+      slotsBox.append(box);
+      setTimeout(() => box.remove(), 1100);
     }
 
     function showResult(key, known) {
@@ -724,8 +747,8 @@
         if (found.has(key)) { say(`${RECIPES[key].word} est déjà dans votre codex. Aucun exemplaire utilisé.`, "known"); showResult(key, true); return; }
         const used = [...slots];
         busy = true;
+        eclat(RECIPES[key].word, used.map((id) => BRICKS[id]?.kind));
         table.classList.add("fusing");
-        setTimeout(confetti, reduce ? 0 : 320);
         setTimeout(() => {
           found.add(key);
           used.forEach((id) => { copies[id] -= 1; });
@@ -743,7 +766,7 @@
         }, reduce ? 0 : 700);
       } else if (RECIPES[reversed]) {
         say("Bonnes briques… mais l’ordre compte. Inversez-les.", "hint");
-        shake();
+        shake(true);
       } else {
         say("Aucune recette connue. Rien n’est perdu : vos exemplaires restent dans la réserve.", "fail");
         shake();
@@ -1047,6 +1070,8 @@
       });
       if (hiddenLegends.length) rows.push(legendRow());
       list.replaceChildren(...rows);
+      // Inconnues : une seule scintille à la fois, chacune à son tour (etymo.css, scintille).
+      $$(".bchip.missing", list).forEach((chip, i) => chip.style.setProperty("--i", i));
       const left = PITY - 1 - sinceNew;
       const unknownLeft = POOL().some((id) => !owned.includes(id));
       $("#pkPity").textContent = unknownLeft
@@ -1207,9 +1232,14 @@
       delete pkStage.dataset.rarity;
       applyJacket(jacketOf(fasc()));
       pkStage.classList.add("pk-no-trans");
-      pkStage.classList.remove("pk-charging", "pk-writing", "pk-burst", "pk-revealed");
+      pkStage.classList.remove("pk-charging", "pk-writing", "pk-flip", "pk-anticipe", "pk-burst", "pk-revealed");
       pkReveal.hidden = true;
-      pkTagline.textContent = state === "ready" ? "une racine attend d’être écrite…" : "l’encre sèche…";
+      // Les points de suspension s'écrivent l'un après l'autre (etymo.css, .dt).
+      pkTagline.replaceChildren(state === "ready" ? "une racine attend d’être écrite" : "l’encre sèche", ...[0, 1, 2].map((i) => {
+        const dot = mk("span", "dt", ".");
+        dot.style.setProperty("--i", i);
+        return dot;
+      }));
       pkScribe.replaceChildren();
       setPackNumber();
       pkStage.dataset.state = state;
@@ -1281,53 +1311,16 @@
       return line;
     }
 
-    function glyphBurst() {
-      if (reduce) return;
-      const colors = ["var(--c-pli)", "var(--c-pli-deep)", "var(--c-action)", "var(--ink)"];
-      const letters = `${INVENT}αβγδλμπσωΩΛ`;
-      for (let i = 0; i < 26; i++) {
-        const g = document.createElement("span");
-        g.className = "pk-glyph";
-        g.textContent = randomOf([...letters]);
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 140 + Math.random() * 220;
-        g.style.setProperty("--c", colors[i % colors.length]);
-        g.style.setProperty("--s", `${16 + Math.random() * 22}px`);
-        g.style.setProperty("--dx", `${Math.cos(angle) * dist}px`);
-        g.style.setProperty("--dy", `${Math.sin(angle) * dist}px`);
-        g.style.setProperty("--r", `${Math.random() * 540 - 270}deg`);
-        pkStage.append(g);
-        setTimeout(() => g.remove(), 1300);
-      }
-    }
-
     function buildReveal(id, isNew, gained, back, full) {
       const data = BRICKS[id];
-      const r = RARITY[data.rarity];
       const kicker = document.createElement("p");
       kicker.className = "pk-kicker";
       kicker.textContent = isNew ? (data.rarity === "legendaire" ? "Légendaire !" : data.rarity === "rare" ? "Rare !" : "Nouvelle brique !")
-        : full ? `Réserve pleine · ×${CAP}` : back ? "De retour !" : `+1 exemplaire · ×${copies[id]}`;
+        : full ? `Réserve pleine · ×${CAP}` : back ? "De retour !" : "+1 exemplaire";
       const brick = brickEl("div", data.label, data.kind, data.gloss);
       brick.classList.add("pk-brick");
       if (!isNew) brick.classList.add("is-dup");
-      const rarity = document.createElement("p");
-      rarity.className = "pk-rarity";
-      const stars = rarityEl(data.rarity, false);
-      rarity.append(stars, r.label);
-      const nodes = [kicker, brick, rarity];
-      if (isNew) {
-        const origin = document.createElement("p");
-        origin.className = "pk-origin";
-        origin.textContent = nbsp(PACK_ORIGIN[id]);
-        const drops = Object.assign(document.createElement("p"), { className: "pk-ink", textContent: `+${drops_(gained)} d’encre` });
-        nodes.push(origin, drops);
-      } else {
-        const drops = document.createElement("p");
-        drops.className = "pk-ink";
-        drops.textContent = full ? `+${drops_(gained)} d’encre` : `Réserve : ×${copies[id]} / ${CAP} · +${drops_(gained)}`;
-        nodes.push(drops);
-      }
+      const nodes = [kicker, brick];
       const actions = document.createElement("div");
       actions.className = "pk-actions";
       const toTable = document.createElement("a");
@@ -1398,21 +1391,26 @@
       pkStage.classList.add("pk-charging");
       await pause(260);
       pkStage.classList.replace("pk-charging", "pk-writing");
+      // Anticipation : une rare ou une légendaire teinte les rayons et la plume dès l'écriture.
+      pkStage.classList.toggle("pk-anticipe", rarityKey === "rare" || rarityKey === "legendaire");
       pkScribe.replaceChildren();
       const drafts = [noise(4), ...PACK_DRAFTS[id]];
       for (const draft of drafts) {
         const line = await writeLine(draft, false);
         await pause(60);
-        line.classList.add("struck");
-        await pause(110);
+        // Rature tracée à la main : deux traits qui se dessinent.
+        line.insertAdjacentHTML("beforeend", '<svg class="sc-rature" viewBox="0 0 100 20" preserveAspectRatio="none"><path pathLength="100" d="M0 14 L100 5 M4 7 L96 15"/></svg>');
+        await pause(170);
       }
       const finalLine = await writeLine(BRICKS[id].label, true, BRICKS[id].kind);
       finalLine.classList.add("inked");
       await pause(130);
 
-      pkStage.classList.replace("pk-writing", "pk-burst");
-      glyphBurst();
-      await pause(260);
+      // Le paquet se retourne : il passe sur la tranche, puis la révélation prend sa place en se retournant.
+      pkStage.classList.replace("pk-writing", "pk-flip");
+      await pause(420);
+      pkStage.classList.remove("pk-flip", "pk-anticipe");
+      pkStage.classList.add("pk-burst");
       packCount += 1;
       let gained = BASE_INK;
       let full = false;
@@ -2008,6 +2006,15 @@
     }
 
     function setFlipped(on, focus = false) {
+      // Retournement physique : la carte se soulève pendant le tour (600 ms) ; à 90°, on la voit par la tranche.
+      if (!reduce && on !== bigCard.classList.contains("flipped")) {
+        const from = on ? 0 : 180;
+        bigCard.animate([
+          { transform: `rotateY(${from}deg)` },
+          { transform: `translateZ(40px) rotateY(${from + 90}deg)`, offset: 0.5 },
+          { transform: `rotateY(${from + 180}deg)` },
+        ], { duration: 600, easing: "ease-in-out" });
+      }
       bigCard.classList.toggle("flipped", on);
       bigFront.inert = on;
       bigBack.inert = !on;
