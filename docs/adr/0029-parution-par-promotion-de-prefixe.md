@@ -1,6 +1,6 @@
 # ADR 0029 — Parution par promotion de préfixe, dans un seul bucket
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0049](0049-date-du-prochain-fascicule-publique.md) : l’index publie la date du prochain fascicule, et rien d’autre de lui. Le reste du présent ADR reste en vigueur.
 - **Portée** : stockage du catalogue publié, droits sur l'Object Storage et tâche de parution
 - **Remplace partiellement** :
   - [ADR 0025](0025-medias-statiques-et-publication-programmee.md), pour les fichiers d'un fascicule à venir, déposés à l'avance dans le stockage public, et pour l'horloge de l'API qui décide seule de la bascule ;

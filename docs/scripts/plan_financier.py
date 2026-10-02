@@ -18,7 +18,9 @@ MOIS = [
     "oct. 2027", "nov. 2027", "déc. 2027", "janv. 2028", "févr. 2028", "mars 2028",
 ]
 N = len(MOIS)
-LANCEMENT = 4          # M4 : première mise en production, fascicule 1
+LANCEMENT = 4          # M4 : bêta ouverte en production, avec les fascicules 1 et 2 (ADR 0048)
+FASCICULES_A_LA_BETA = 2  # deux fascicules paraissent dès l'ouverture de la bêta, puis un par mois
+OUVERTURE = 6          # M6 : ouverture officielle à quatre fascicules, Semaine de la langue française (ADR 0048)
 BOUTIQUE = 7           # M7 : ouverture de la boutique de sabliers (ADR 0018, à accepter)
 
 # --- Équipe (€ HT ou chargés, par mois) --------------------------------------------------
@@ -48,14 +50,16 @@ JURIDIQUE = {1: 1400, 3: 2500, 6: 4000}                   # SAS et marque INPI ;
 # (achat média, relations presse et influence, contenus et outils)
 MARKETING = {
     1: (0, 0, 1500), 2: (0, 0, 1500), 3: (0, 1500, 3000),
-    4: (6000, 4000, 2000), 5: (3500, 1500, 1000), 6: (4500, 2500, 1000),
+    # La bêta ouvre sans achat média ; le budget de lancement passe à l'ouverture officielle, en mars (ADR 0048).
+    4: (0, 0, 2000), 5: (3500, 1500, 1000), 6: (10500, 6500, 1000),
     7: (2000, 1000, 800), 8: (2000, 1000, 800), 9: (2000, 1000, 800),
     10: (1500, 500, 800), 11: (1500, 500, 800), 12: (3500, 1500, 1000),
     13: (2500, 1000, 800), 14: (2500, 1000, 800), 15: (4000, 1500, 1000),
     16: (3000, 1000, 800), 17: (2500, 1000, 800), 18: (4500, 2500, 1000),
 }
 # Joueurs apportés par la presse, la liste d'attente et les temps forts, hors bouche-à-oreille.
-TEMPS_FORTS = {4: 3500, 5: 800, 6: 2000, 12: 1000, 15: 800, 18: 2000}
+# M4 : la liste d'attente rejoint la bêta ; M6 : presse de l'ouverture officielle (2 000) et Semaine de la langue française (2 000).
+TEMPS_FORTS = {4: 1500, 5: 800, 6: 4000, 12: 1000, 15: 800, 18: 2000}
 
 # --- Rétention mensuelle d'une cohorte : part encore active k mois après son arrivée -----
 RETENTION = [1.0, 0.30, 0.20, 0.16, 0.14, 0.12, 0.11, 0.10]
@@ -191,7 +195,7 @@ def tableau_audience(lignes, a, b) -> str:
     out = ["| Mois | Fascicules parus | Nouveaux joueurs | Joueurs actifs du mois (MAU) | Payeurs | CA TTC |",
            "|---|---|---|---|---|---|"]
     for l in rows:
-        parus = max(0, l["m"] - LANCEMENT + 1)
+        parus = max(0, l["m"] - LANCEMENT + FASCICULES_A_LA_BETA) if l["m"] >= LANCEMENT else 0
         out.append(f"| M{l['m']} {l['mois']} | {parus} | {nb(l['nouveaux'])} | {nb(l['mau'])} | "
                    f"{nb(l['payeurs'])} | {eur(l['ca_ttc'])} |")
     return "\n".join(out)
@@ -248,7 +252,7 @@ def main() -> None:
         synthese(res),
         "\n\n### Phase 1 : développement, de M1 à M3 (scénario central)\n",
         tableau_mensuel(central, 1, 3),
-        "\n\n### Phase 2 : lancement et trois premiers mois, de M4 à M6 (scénario central)\n",
+        "\n\n### Phase 2 : bêta ouverte et ouverture officielle, de M4 à M6 (scénario central)\n",
         tableau_mensuel(central, 4, 6),
         "\n\n### Audience des six premiers mois (scénario central)\n",
         tableau_audience(central, 4, 6),

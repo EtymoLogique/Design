@@ -24,12 +24,12 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0008](0008-energie-et-plis.md) | Énergie et plis gratuits, paiements hors MVP | Accepté, contenu des plis remplacé par 0011, capacité d'énergie et avance de la recharge par 0020 |
 | [0009](0009-contenu-et-equilibrage.md) | Séparation des faits linguistiques et de l'équilibrage | Accepté |
 | [0010](0010-observabilite-et-vie-privee.md) | Observabilité minimale et respectueuse de la vie privée | Accepté |
-| [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020, poids du type par 0035 |
-| [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019 |
+| [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020, poids du type par 0035, garantie de nouveauté et chances des légendaires par 0043 |
+| [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019, filet sans légendaire par 0043 |
 | [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé |
 | [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022, fermeture limitée aux paires par 0032 |
-| [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface), chance des légendaires toujours affichée par 0036 |
-| [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035 |
+| [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface), chance des légendaires toujours affichée par 0036, ligne de chance d’une légendaire trouvée, silhouette des mots légendaires et compte des légendaires trouvées par 0043 |
+| [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035, garantie et filet hors légendaires par 0043 |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
 | [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020, plafond quotidien remplacé par 0039 |
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
@@ -42,20 +42,28 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
-| [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé |
+| [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé, date du prochain fascicule publiée par 0049 |
 | [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
 | [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
 | [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté, troisième brique remplacée par 0033 |
 | [0033](0033-gestes-de-la-table-de-fusion.md) | Gestes de la table de fusion : un toucher pose, chaque brique garde sa case | Accepté |
 | [0034](0034-ecran-dans-l-adresse.md) | L'écran de la PWA se lit dans son adresse | Accepté |
-| [0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) | Plis d’affixes, pondérés par la seule rareté | Accepté |
+| [0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) | Plis d’affixes, pondérés par la seule rareté | Accepté, poids des légendaires remplacé par 0043 |
 | [0036](0036-chances-des-legendaires-toujours-affichees.md) | La chance des légendaires est toujours affichée | Accepté |
 | [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039, octroi et affichage des jalons remplacés par 0042 |
-| [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté |
-| [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé |
+| [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté, encre gagnée aussi par les quêtes depuis 0045 et 0046 |
+| [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé, mot légendaire inconnu sans silhouette ni rareté depuis 0043 |
 | [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
-| [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé |
+| [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
+| [0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) | Légendaires : une chance fixe, hors des garanties, toujours secrètes | Proposé |
+| [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé |
+| [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
+| [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
+| [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé |
+| [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé |
+| [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
+| [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
 
 ## Page HTML
 

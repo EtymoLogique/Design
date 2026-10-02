@@ -585,6 +585,7 @@
               <li><code>fascicule_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-fascicule">fascicule</a></li>
               <li><code>plis_sans_nouveaute</code><small>garantie au 6ᵉ pli</small></li>
               <li><code>plis_sans_utilite</code><small>filet au 5ᵉ pli</small></li>
+              <li><code>plis_sans_legendaire</code><small>légendaire garantie au 100ᵉ pli</small></li>
             </ul>
           </article>
           <article class="dm-table" id="t-ouverture_pli">
@@ -594,12 +595,25 @@
               <li><code>fascicule_id</code><a class="dm-k fk" href="#t-fascicule">fascicule</a></li>
               <li><code>brique_id</code><a class="dm-k fk" href="#t-brique">brique</a></li>
               <li><code>resultat</code><small>nouvelle, doublon, réserve pleine</small></li>
-              <li><code>regle</code><small>tirage, garantie, filet, déterministe</small></li>
+              <li><code>regle</code><small>tirage, garantie, filet, garantie des légendaires, déterministe</small></li>
             </ul>
           </article>
           <article class="dm-table" id="t-indice">
             <h4>indice · jalon_atteint · reglage · migration</h4>
             <p>Un niveau d’indice par recette, un jalon atteint, une préférence énumérée ou une migration de version par ligne.</p>
+          </article>
+          <article class="dm-table" id="t-quetes">
+            <h4>quete_du_jour · carte_lecteur · palier_atteint · quete_initiale</h4>
+            <p>Les trois quêtes du jour, les tampons de la carte de lecteur (un par jour au plus, 7 par carte), les paliers des quêtes au long cours et le cadeau de bienvenue avec les quêtes initiales. Chaque récompense se récupère une fois et n’expire jamais.</p>
+          </article>
+          <article class="dm-table" id="t-ricochet">
+            <h4>ricochet</h4>
+            <ul>
+              <li><code>joueur_id</code><span class="dm-k pk">PK</span><a class="dm-k fk" href="#t-joueur">joueur</a></li>
+              <li><code>unite_id</code><span class="dm-k pk">PK</span><small>une carte trouvée</small></li>
+              <li><code>niveau</code><small>0 à 3 ; au niveau 3, la carte est maîtrisée</small></li>
+              <li><code>prochaine_revision</code><small>dans 1, 3, puis 7 jours</small></li>
+            </ul>
           </article>
           <article class="dm-table" id="t-commande">
             <h4>commande</h4>

@@ -66,6 +66,18 @@ Ce qu'un futur ADR devra trancher :
 - **Travail éditorial** : un grand volume se prépare sur plusieurs mois, en parallèle des fascicules mensuels.
 - **Présentation** : comment le distinguer dans le codex et sur l'écran des plis (nom, jaquette), sans vocabulaire interdit (« pack », « extension », « saison ») ?
 
+## Piste : la carte des routes des mots, avec la vue Filiation
+
+> Piste ouverte, non décidée. Elle demandera un ADR avant toute mise en œuvre.
+
+Une carte des routes des mots montrerait les langues reliées par les mots que le joueur a trouvés, et grandirait avec son codex. Envisagée pour les statistiques du joueur, elle en a été sortie ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)) : elle rejoindra une évolution dédiée, avec la vue Filiation du codex ([codex](codex.html#filiation)) et la vue Relations, qui montrent déjà le chemin d’un mot d’une forme à l’autre.
+
+Ce que cette évolution devra trancher :
+
+- **Une vue ou deux** : la filiation d’un mot et la carte de tous les mots trouvés partagent-elles le même dessin ?
+- **Ce qui reste caché** : rien ne doit trahir une carte inconnue ni un mot légendaire ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
+- **Le dessin** : des routes entre langues, sans drapeau ni carte géographique en trompe-l’œil (voir la [boussole](boussole.html)).
+
 ## Prochaines étapes
 
 - Décompter exactement le corpus à partir de l'export kaikki.org : mots distincts, mots formés d'un préfixe et d'un suffixe, mots formables à partir d'un premier jeu de briques.

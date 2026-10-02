@@ -13,7 +13,7 @@
     {
       label: "Jeu",
       pages: [
-        { file: "interfaces.html", title: "Interfaces", desc: "Les vingt-cinq écrans de la PWA, sur mobile et sur ordinateur." },
+        { file: "interfaces.html", title: "Interfaces", desc: "Les trente écrans de la PWA, sur mobile et sur ordinateur." },
         { file: "maquettes.html", title: "Maquettes", desc: "Chaque interface dessinée sur mobile puis sur ordinateur." },
         { file: "jeu.html", title: "Table de fusion", desc: "Fusionner des briques rationnées pour découvrir des mots." },
         { file: "plis.html", title: "Plis", desc: "Le rituel d’ouverture, les chances, la réserve et l’encre." },

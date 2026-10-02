@@ -1,6 +1,6 @@
 # ADR 0040 — Rareté des mots, dérivée de leurs briques
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) : un mot légendaire n’a ni silhouette ni forme de rareté avant d’être trouvé. Le reste du présent ADR reste en vigueur.
 - **Complète** : [ADR 0011](0011-plis-raretes-et-doublons.md) (raretés), [ADR 0015](0015-codex-fascicules-et-legendaires.md) (légendaires secrètes), [ADR 0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) (plis d’affixes)
 - **Remplace partiellement** : la règle du codex selon laquelle une carte de mot ne porte jamais de rareté ([codex.html](../codex.html))
 

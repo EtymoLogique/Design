@@ -200,6 +200,7 @@
     sophie: { label: "-sophie", gloss: "sagesse", kind: "suffixe", rarity: "rare" },
     nomie: { label: "-nomie", gloss: "loi", kind: "suffixe", rarity: "rare" },
     etymo: { label: "étymo-", gloss: "vrai", kind: "préfixe", rarity: "legendaire" },
+    theo: { label: "théo-", gloss: "dieu", kind: "préfixe", rarity: "legendaire" },
   };
   // Raretés : poids de tirage ; gouttes d'encre d'un doublon, sous le plafond (dupInk) et réserve pleine (ink) (ADR 0019).
   const RARITY = {
@@ -218,9 +219,15 @@
     "philo+logie": { word: "philologie", lit: "amour des mots", def: "Étude des langues à travers leurs textes, en particulier les textes anciens.", note: "Grec ancien phílos « ami » + -logía « parole, discours ».", tr: "" },
     "astro+logie": { word: "astrologie", lit: "discours sur les astres", def: "Pratique divinatoire qui prétend lire l’influence des astres sur les vies humaines.", note: "Grec ancien ástron « astre » + -logía « discours ».", tr: { brick: "astro", text: "forme de composition de ástron." } },
     "etymo+logie": { word: "étymologie", lit: "étude du sens vrai", def: "Étude de l’origine et de l’histoire des mots.", note: "Grec ancien étumon « sens vrai » + -logía « étude ».", tr: { brick: "etymo", text: "forme de composition de étumon." } },
+    "theo+logie": { word: "théologie", lit: "discours sur les dieux", def: "Étude des questions religieuses et de ce qui touche au divin, à partir des textes et des traditions.", note: "Grec ancien theós « dieu » + -logía « discours ».", tr: "Composé déjà formé en grec : theología." },
     "astro+nomie": { word: "astronomie", lit: "loi des astres", def: "Science qui étudie les astres et l’Univers.", note: "Grec ancien ástron « astre » + -nomía « loi, règle ».", tr: { brick: "astro", text: "forme de composition de ástron." } },
   };
   const RECIPE_KEYS = Object.keys(RECIPES);
+  // Mot légendaire : sa recette exige une brique légendaire. Inconnu, il ne se montre nulle part ; trouvé, il ne compte dans aucune jauge,
+  // et ni indice, ni filet, ni garantie ne le visent (ADR 0043).
+  const isLegendRecipe = (k) => k.split("+").some((id) => BRICKS[id].rarity === "legendaire");
+  const COUNTED_KEYS = RECIPE_KEYS.filter((k) => !isLegendRecipe(k));
+  const countedFound = (has) => COUNTED_KEYS.filter((k) => has(k)).length;
 
   /* ---------- Réserve partagée entre les pages (démo, stockage local) ---------- */
   // Briques rationnées : réserve de départ, puis seuls les plis donnent des exemplaires.
@@ -248,7 +255,7 @@
   if (demoStatus) {
     const total = Object.values(store.copies).reduce((sum, n) => sum + n, 0);
     const fill = (label, value) => { const item = document.createElement("span"); item.append(`${label} `, Object.assign(document.createElement("b"), { textContent: value })); return item; };
-    demoStatus.replaceChildren(fill("Démo · réserve", `${total} exemplaires`), fill("Découvertes", `${store.found.length} / ${RECIPE_KEYS.length}`), fill("Plis ouverts", String(store.packCount)));
+    demoStatus.replaceChildren(fill("Démo · réserve", `${total} exemplaires`), fill("Découvertes", `${countedFound((k) => store.found.includes(k))} / ${COUNTED_KEYS.length}`), fill("Plis ouverts", String(store.packCount)));
   }
   // Action irréversible : un premier appui arme le bouton (fond Danger), un second confirme.
   $$("[data-reset-demo]").forEach((btn) => {
@@ -430,7 +437,8 @@
       def: "Langue de la Rome antique ; elle a transmis au français l’essentiel de son vocabulaire." },
     { id: "grec", n: 4, fasc: 1, type: "langue", key: "grc", word: "Grec ancien", glyph: "Ω", conf: "Établie",
       def: "Langue de la Grèce antique, écrite en alphabet grec ; source de nombreux mots savants." },
-    { id: "etymologie", n: 5, fasc: 1, type: "mot", lang: "fr", word: "étymologie", def: "Étude de l’origine et de l’histoire des mots.", lit: "étude du sens vrai", parts: [{ label: "étymo-", kind: "préfixe", gloss: "vrai" }, { label: "-logie", kind: "suffixe", gloss: "étude" }], conf: "Établie",
+    // Mot légendaire : sa recette exige étymo-, légendaire. Trouvé, il se montre, mais ne compte dans aucune jauge (ADR 0043).
+    { id: "etymologie", n: 5, fasc: 1, leg: true, type: "mot", lang: "fr", word: "étymologie", def: "Étude de l’origine et de l’histoire des mots.", lit: "étude du sens vrai", parts: [{ label: "étymo-", kind: "préfixe", gloss: "vrai" }, { label: "-logie", kind: "suffixe", gloss: "étude" }], conf: "Établie",
       forms: [fm("fr", "étymologie"), fm("la", "etymologia"), fm("grc", "ἐτυμολογία", true, "etumología")],
       links: { label: "Composants", items: [["étymo-", true], ["-logie", true]] } },
     { id: "logie", n: 6, fasc: 1, rar: "commune", type: "suffixe", lang: "fr", word: "-logie", gloss: "étude", def: "Suffixe des sciences et des discours : « étude de… ».", lit: "« parole, discours, étude »", conf: "Établie",
@@ -450,7 +458,7 @@
       links: { label: "Composants", items: [["philo-", true], ["-sophie", true]] } },
     { id: "sophie", n: 11, fasc: 2, rar: "rare", type: "suffixe", lang: "fr", word: "-sophie", gloss: "sagesse", def: "Élément savant qui signifie « sagesse, savoir ».", conf: "Établie",
       forms: [fm("fr", "-sophie"), fm("grc", "σοφία", false, "sophía")],
-      links: { label: "Mots formés", items: [["philosophie", true], ["théosophie", false]] } },
+      links: { label: "Mots formés", items: [["philosophie", true]] } },
     { id: "geo", n: 12, fasc: 1, rar: "commune", type: "prefixe", lang: "fr", word: "géo-", gloss: "terre", def: "Élément savant qui signifie « terre ».", note: "Forme de composition du grec gê « terre ».", conf: "Établie",
       forms: [fm("fr", "géo-"), fm("grc", "γεω-", true, "geō-")],
       links: { label: "Mots formés", items: [["géographie", true], ["géologie", true]] } },
@@ -483,10 +491,11 @@
   // Chaque fascicule a sa jaquette et son catalogue de plis : ses briques nouvelles et celles qu'il reprend.
   const FASCICULES = [
     { n: 1, label: "Fascicule n° 01", when: "Jour 1", jacket: "rosette", pool: ["bio", "geo", "logie", "etymo"] },
-    { n: 2, label: "Fascicule n° 02", when: "Jour 30", jacket: "argile", pool: ["philo", "sophie", "graphie", "astro", "nomie", "logie", "geo", "bio"] },
+    { n: 2, label: "Fascicule n° 02", when: "Jour 30", jacket: "argile", pool: ["philo", "sophie", "graphie", "astro", "nomie", "logie", "geo", "bio", "theo"] },
   ];
   const NEXT_FASCICULE = { n: 3, label: "Fascicule n° 03", when: "Jour 60" };
-  const isLegend = (e) => e.rar === "legendaire";
+  // Légendaire : une brique de rareté légendaire, ou un mot qui en exige une (ADR 0040, 0043).
+  const isLegend = (e) => e.rar === "legendaire" || e.leg === true;
   // Une légendaire inconnue, ou un mot qui en dépend, reste secret : aucune trace dans le codex.
   const isSecret = (e) => e.locked && (isLegend(e) || (e.needs || []).some((id) => { const dep = byId.get(id); return dep && dep.locked && isLegend(dep); }));
   const isCounted = (e) => !isLegend(e) && !isSecret(e);
@@ -663,7 +672,7 @@
       const r = RECIPES[key];
       const [a, b] = key.split("+");
       const parts = [a, b].map((id) => BRICKS[id]);
-      $("#rKicker").textContent = known ? "Déjà dans le codex" : `Découverte ${found.size} / ${RECIPE_KEYS.length}`;
+      $("#rKicker").textContent = known ? "Déjà dans le codex" : isLegendRecipe(key) ? "Mot légendaire !" : `Découverte ${countedFound((k) => found.has(k))} / ${COUNTED_KEYS.length}`;
       const codexLink = $("#rCodex");
       const cardId = byWord.get(r.word);
       codexLink.hidden = !cardId;
@@ -708,6 +717,7 @@
         const r = RECIPES[key];
         const [a, b] = key.split("+");
         const isFound = found.has(key);
+        if (!isFound && isLegendRecipe(key)) return;
         const tile = document.createElement(isFound ? "button" : "div");
         tile.className = `disc${isFound ? " found" : ""}${key === justFound ? " just" : ""}`;
         const word = document.createElement("span");
@@ -734,8 +744,9 @@
         }
         grid.append(tile);
       });
-      $("#discCount").textContent = `${found.size} / ${RECIPE_KEYS.length}`;
-      $("#discBar").style.width = `${(found.size / RECIPE_KEYS.length) * 100}%`;
+      const got = countedFound((k) => found.has(k));
+      $("#discCount").textContent = `${got} / ${COUNTED_KEYS.length}`;
+      $("#discBar").style.width = `${(got / COUNTED_KEYS.length) * 100}%`;
     }
 
     function fuse() {
@@ -760,7 +771,7 @@
           saveStore();
           renderDiscoveries(key);
           showResult(key, false);
-          const complete = found.size === RECIPE_KEYS.length;
+          const complete = COUNTED_KEYS.every((k) => found.has(k));
           say(complete ? "Codex de démo complet. Bravo !" : `Nouvelle découverte : ${RECIPES[key].word} !`, "win");
           busy = false;
         }, reduce ? 0 : 700);
@@ -918,6 +929,7 @@
       astro: ["ἄστρον", "astron"],
       sophie: ["σοφία", "sofia"],
       nomie: ["νόμος", "nomia"],
+      theo: ["θεός", "theos"],
     };
     const PACK_ORIGIN = {
       bio: "du grec ancien βίος « vie »",
@@ -929,6 +941,7 @@
       astro: "du grec ancien ἄστρον « astre »",
       sophie: "du grec ancien σοφία « sagesse »",
       nomie: "du grec ancien νόμος « loi »",
+      theo: "du grec ancien θεός « dieu »",
     };
     const INVENT = "ꜳꝏƺȣǂꞷʘƨƾȹꭥꝭꜧƕξψϡϟϠѦ";
     const randomOf = (list) => list[Math.floor(Math.random() * list.length)];
@@ -942,8 +955,9 @@
     let fascN = null;
     const fasc = () => FASCICULES.find((f) => f.n === fascN);
     const POOL = () => fasc().pool;
-    const fstate = (n) => (store.byFasc[n] ||= { sinceNew: 0, blocked: 0 });
+    const fstate = (n) => (store.byFasc[n] ||= { sinceNew: 0, blocked: 0, sinceLegend: 0 });
     let sinceNew = 0;
+    let sinceLegend = 0;
     // Deux plis au plus en attente (ADR 0020) : une charge toutes les 12 h, le temps s'arrête à 2 / 2.
     const ENERGY_MAX = 2;
     let energy = store.energy ?? 0;
@@ -955,15 +969,18 @@
     }
     accrue();
     const persist = () => {
-      if (fascN) Object.assign(fstate(fascN), { sinceNew, blocked: blockedPacks });
+      if (fascN) Object.assign(fstate(fascN), { sinceNew, blocked: blockedPacks, sinceLegend });
       Object.assign(store, { packCount, ink, energy });
       saveStore();
     };
     const PITY = 6;
+    // Légendaires : 3 % par pli, partagés, et une légendaire au plus tard au 100ᵉ pli d’affilée sans légendaire (ADR 0043).
+    const LEGEND_CHANCE = 0.03;
+    const LEGEND_PITY = 100;
     // Filet : si la réserve ne permet plus aucune découverte, le 5ᵉ pli d'affilée donne une brique utile.
     const NET = 5;
     let blockedPacks = 0;
-    const canDiscover = (extra) => RECIPE_KEYS.some((k) => !found.has(k) && k.split("+").every((id) => (copies[id] || 0) + (id === extra ? 1 : 0) >= 1));
+    const canDiscover = (extra) => COUNTED_KEYS.some((k) => !found.has(k) && k.split("+").every((id) => (copies[id] || 0) + (id === extra ? 1 : 0) >= 1));
     // Premier niveau d’indice ; le prix double à chaque niveau suivant (ADR 0038).
     const HINT_COST = 5;
     // Chaque pli rapporte une base d'encre, plus le bonus d'un doublon (ADR 0019, 0020).
@@ -1008,17 +1025,30 @@
     function brickWeight(id) {
       return RARITY[BRICKS[id].rarity].weight;
     }
+    // Les légendaires se partagent une chance fixe, quel que soit leur nombre ; les autres briques, le reste selon leur rareté (ADR 0043).
+    const isLegendBrick = (id) => BRICKS[id].rarity === "legendaire";
     function odds(ids) {
-      const total = ids.reduce((sum, id) => sum + brickWeight(id), 0);
-      return Object.fromEntries(ids.map((id) => [id, brickWeight(id) / total]));
+      const legends = ids.filter(isLegendBrick);
+      const others = ids.filter((id) => !isLegendBrick(id));
+      const legendShare = !legends.length ? 0 : others.length ? LEGEND_CHANCE : 1;
+      const total = others.reduce((sum, id) => sum + brickWeight(id), 0);
+      const p = {};
+      others.forEach((id) => { p[id] = (brickWeight(id) / total) * (1 - legendShare); });
+      legends.forEach((id) => { p[id] = legendShare / legends.length; });
+      return p;
     }
     function drawBrick() {
+      // Garantie de nouveauté et filet : jamais une légendaire. Garantie lointaine : une légendaire, connue ou non, au 100ᵉ pli sans légendaire (ADR 0043).
+      const counted = POOL().filter((id) => !isLegendBrick(id));
+      const legends = POOL().filter(isLegendBrick);
       const guaranteed = sinceNew >= PITY - 1;
-      const unknown = POOL().filter((id) => !owned.includes(id));
-      let pool = guaranteed && unknown.length ? unknown : POOL();
+      const unknown = counted.filter((id) => !owned.includes(id));
+      let pool = POOL();
+      if (legends.length && sinceLegend >= LEGEND_PITY - 1) pool = legends;
+      else if (guaranteed && unknown.length) pool = unknown;
       if (!canDiscover() && blockedPacks >= NET - 1) {
-        const useful = POOL().filter((id) => canDiscover(id));
-        const missing = POOL().filter((id) => !copies[id] && RECIPE_KEYS.some((k) => !found.has(k) && k.split("+").includes(id)));
+        const useful = counted.filter((id) => canDiscover(id));
+        const missing = counted.filter((id) => !copies[id] && COUNTED_KEYS.some((k) => !found.has(k) && k.split("+").includes(id)));
         pool = useful.length ? useful : missing.length ? missing : pool;
       }
       const p = odds(pool);
@@ -1039,21 +1069,22 @@
         return row;
       }));
       const byType = $("#pkType");
+      // Les chances par type se calculent sans les légendaires, qui ne trahissent ainsi pas leur type (ADR 0043).
       byType.replaceChildren(...["préfixe", "suffixe"].map((kind) => {
         const row = document.createElement("div");
         row.className = "pk-odd";
-        const total = POOL().filter((id) => BRICKS[id].kind === kind).reduce((sum, id) => sum + p[id], 0);
+        const total = POOL().filter((id) => BRICKS[id].kind === kind && !isLegendBrick(id)).reduce((sum, id) => sum + p[id], 0);
         row.append(chipEl(kind === "préfixe" ? "Préfixes" : "Suffixes", kind), Object.assign(document.createElement("b"), { textContent: pct(total) }));
         return row;
       }));
       const list = $("#pkPool");
-      // Les légendaires inconnues se regroupent en une ligne, sans nombre : le suspense reste entier (ADR 0015).
-      const hiddenLegends = POOL().filter((id) => BRICKS[id].rarity === "legendaire" && !owned.includes(id));
+      // Toutes les légendaires, connues ou non, forment une seule ligne, sans leur nombre : le suspense reste entier (ADR 0043).
+      const hiddenLegends = POOL().filter(isLegendBrick);
       const legendRow = () => {
         const item = document.createElement("div");
         item.className = "pk-brickodd";
         const count = document.createElement("small");
-        count.textContent = "légendaires inconnues";
+        count.textContent = "légendaires, nombre secret";
         item.append(chipEl("?", "mot", true), rarityEl("legendaire", true), count, Object.assign(document.createElement("b"), { textContent: pct(hiddenLegends.reduce((sum, id) => sum + p[id], 0)) }));
         return item;
       };
@@ -1073,11 +1104,16 @@
       // Inconnues : une seule scintille à la fois, chacune à son tour (etymo.css, scintille).
       $$(".bchip.missing", list).forEach((chip, i) => chip.style.setProperty("--i", i));
       const left = PITY - 1 - sinceNew;
-      const unknownLeft = POOL().some((id) => !owned.includes(id));
+      const unknownLeft = POOL().some((id) => !isLegendBrick(id) && !owned.includes(id));
       $("#pkPity").textContent = unknownLeft
         ? (left <= 0 ? "Le prochain pli contient une brique nouvelle, garanti." : `Brique nouvelle garantie dans ${left + 1} plis au plus.`)
-        : "Toutes les briques de ce fascicule sont connues : chaque pli remplit votre réserve.";
-      const blocked = !canDiscover() && found.size < RECIPE_KEYS.length;
+        : "Vous connaissez toutes les briques de ce fascicule, hors légendaires : chaque pli remplit votre réserve.";
+      const legendLeft = LEGEND_PITY - sinceLegend;
+      const legendBox = $("#pkLegend");
+      if (legendBox) legendBox.textContent = !POOL().some(isLegendBrick) ? ""
+        : legendLeft <= 1 ? "Le prochain pli contient une légendaire, garanti."
+        : `Légendaire garantie dans ${legendLeft} plis au plus.`;
+      const blocked = !canDiscover() && COUNTED_KEYS.some((k) => !found.has(k));
       const netLeft = Math.max(1, NET - blockedPacks);
       const canHelp = POOL().some((id) => canDiscover(id));
       $("#pkNet").textContent = blocked && !canHelp
@@ -1103,9 +1139,9 @@
     const current = $("#pkCurrent");
     function selectFascicule(n) {
       if (packBusy) return;
-      if (fascN) Object.assign(fstate(fascN), { sinceNew, blocked: blockedPacks });
+      if (fascN) Object.assign(fstate(fascN), { sinceNew, blocked: blockedPacks, sinceLegend });
       fascN = n;
-      ({ sinceNew, blocked: blockedPacks } = fstate(n));
+      ({ sinceNew, blocked: blockedPacks, sinceLegend = 0 } = fstate(n));
       chooser.hidden = true;
       layout.hidden = false;
       layout.classList.add("in");
@@ -1132,10 +1168,13 @@
       const list = $("#pkFascList");
       list.replaceChildren(...FASCICULES.map((f) => {
         const jk = jacketOf(f);
-        // Les légendaires inconnues ne comptent pas : leur nombre reste secret (ADR 0015).
+        // Les légendaires ne comptent pas : leur nombre reste secret (ADR 0015, 0043).
         const counted = f.pool.filter((id) => BRICKS[id].rarity !== "legendaire");
         const known = counted.filter((id) => owned.includes(id)).length;
-        const legends = f.pool.filter((id) => BRICKS[id].rarity === "legendaire" && owned.includes(id)).length;
+        // Légendaires trouvées : briques du fascicule et mots qui en exigent une, toujours affichées, même à 0 (ADR 0043).
+        const legendBricks = f.pool.filter((id) => BRICKS[id].rarity === "legendaire" && owned.includes(id)).length;
+        const legendWords = RECIPE_KEYS.filter((k) => found.has(k) && k.split("+").some((id) => f.pool.includes(id) && BRICKS[id].rarity === "legendaire")).length;
+        const legends = legendBricks + legendWords;
         const reserve = f.pool.reduce((sum, id) => sum + (copies[id] || 0), 0);
         const btn = document.createElement("button");
         btn.type = "button";
@@ -1153,15 +1192,14 @@
           Object.assign(document.createElement("b"), { textContent: f.label }),
           Object.assign(document.createElement("span"), { textContent: `${known} / ${counted.length} briques connues · ${reserve} exemplaires en réserve` }),
         );
-        if (legends) {
-          const note = document.createElement("span");
-          note.className = "cb-legend";
-          note.append(rarityEl("legendaire"), `${legends}\u00a0légendaire${legends > 1 ? "s" : ""} trouvée${legends > 1 ? "s" : ""}`);
-          info.append(note);
-        }
+        const note = document.createElement("span");
+        note.className = "cb-legend";
+        note.append(rarityEl("legendaire"), `${legends}\u00a0légendaire${legends > 1 ? "s" : ""} trouvée${legends > 1 ? "s" : ""}`);
+        note.title = `${legendBricks}\u00a0brique${legendBricks > 1 ? "s" : ""}, ${legendWords}\u00a0mot${legendWords > 1 ? "s" : ""}`;
+        info.append(note);
         info.append(Object.assign(document.createElement("span"), { className: "pk-fasc-go", textContent: "Ouvrir un pli de ce fascicule →" }));
         btn.append(mini, info);
-        btn.setAttribute("aria-label", `${f.label}, jaquette ${jk.name} : ${known} briques connues sur ${counted.length}. Ouvrir un pli de ce fascicule`);
+        btn.setAttribute("aria-label", `${f.label}, jaquette ${jk.name} : ${known} briques connues sur ${counted.length}, ${legends} légendaire${legends > 1 ? "s" : ""} trouvée${legends > 1 ? "s" : ""}. Ouvrir un pli de ce fascicule`);
         btn.addEventListener("click", () => selectFascicule(f.n));
         return btn;
       }), (() => {
@@ -1171,7 +1209,7 @@
         next.lastChild.append(
           Object.assign(document.createElement("span"), { className: "pk-fasc-k", textContent: `${NEXT_FASCICULE.when} · à paraître` }),
           Object.assign(document.createElement("b"), { textContent: NEXT_FASCICULE.label }),
-          Object.assign(document.createElement("span"), { textContent: "Son contenu ne sera révélé qu’à sa parution." }),
+          Object.assign(document.createElement("span"), { textContent: "Seule sa date est connue : son contenu ne se dévoile qu’à sa parution." }),
         );
         return next;
       })());
@@ -1414,15 +1452,16 @@
       packCount += 1;
       let gained = BASE_INK;
       let full = false;
+      // La garantie de nouveauté ne compte que les briques non légendaires ; la garantie lointaine, les plis sans légendaire.
+      if (isNew && !isLegendBrick(id)) sinceNew = 0; else sinceNew += 1;
+      sinceLegend = isLegendBrick(id) ? 0 : sinceLegend + 1;
       if (isNew) {
         owned.push(id);
         copies[id] = 1;
-        sinceNew = 0;
       } else {
         full = copies[id] >= CAP;
         gained += full ? RARITY[rarityKey].ink : RARITY[rarityKey].dupInk;
         if (!full) copies[id] += 1;
-        sinceNew += 1;
       }
       ink += gained;
       if (canDiscover()) blockedPacks = 0;
@@ -1446,7 +1485,7 @@
 
     $("#buyHint").addEventListener("click", () => {
       if (ink < HINT_COST) return;
-      const next = RECIPE_KEYS.find((k) => !found.has(k) && k.split("+").every((id) => copies[id] > 0));
+      const next = COUNTED_KEYS.find((k) => !found.has(k) && k.split("+").every((id) => copies[id] > 0));
       if (!next) { showToast("Aucun indice possible avec votre réserve : ouvrez d’autres plis"); return; }
       ink -= HINT_COST;
       store.hint = next.split("+");
@@ -1760,11 +1799,15 @@
     const fascHeads = new Map();
     const progressOf = (list) => {
       const counted = list.filter(isCounted);
-      return { got: counted.filter((e) => !e.locked).length, total: counted.length, legends: list.filter((e) => isLegend(e) && !e.locked).length };
+      const trouvees = list.filter((e) => isLegend(e) && !e.locked);
+      return { got: counted.filter((e) => !e.locked).length, total: counted.length, legends: trouvees.length, legendWords: trouvees.filter((e) => e.type === "mot").length };
     };
-    const legendNote = (n) => {
+    // Compte des légendaires trouvées, briques et mots : toujours affiché, même à 0, jamais un total (ADR 0043).
+    const legendNote = (n, words = 0) => {
       const note = mk("span", "cb-legend");
       note.append(rarityEl("legendaire"), `${n}\u00a0légendaire${n > 1 ? "s" : ""} trouvée${n > 1 ? "s" : ""}`);
+      const bricks = n - words;
+      note.title = `${bricks}\u00a0brique${bricks > 1 ? "s" : ""}, ${words}\u00a0mot${words > 1 ? "s" : ""}`;
       return note;
     };
     FASCICULES.forEach((f) => {
@@ -1793,7 +1836,7 @@
     });
     function paintFascicules() {
       fascBtns.forEach(([f, btn]) => {
-        const { got, total, legends } = progressOf(SHOWN.filter((e) => e.fasc === f.n));
+        const { got, total, legends, legendWords } = progressOf(SHOWN.filter((e) => e.fasc === f.n));
         const bar = mk("span", "cb-fasc-bar");
         const fill = mk("i");
         fill.style.width = `${total ? (got / total) * 100 : 0}%`;
@@ -1804,9 +1847,9 @@
         count.append(mk("b", null, `${got} / ${total}`), " cartes");
         if (got === total) count.append(" · complet");
         btn.replaceChildren(head, bar, count);
-        if (legends) btn.append(legendNote(legends));
+        btn.append(legendNote(legends, legendWords));
         btn.setAttribute("aria-pressed", String(cbFasc === f.n));
-        btn.setAttribute("aria-label", `${f.label} : ${got} cartes découvertes sur ${total}${legends ? `, et ${legends} légendaire trouvée` : ""}. ${cbFasc === f.n ? "Afficher tous les fascicules" : "Afficher ce fascicule seulement"}`);
+        btn.setAttribute("aria-label", `${f.label} : ${got} cartes découvertes sur ${total}, et ${legends} légendaire${legends > 1 ? "s" : ""} trouvée${legends > 1 ? "s" : ""}. ${cbFasc === f.n ? "Afficher tous les fascicules" : "Afficher ce fascicule seulement"}`);
         const gh = fascHeads.get(f.n);
         gh.replaceChildren(mk("b", null, f.label), mk("span", null, `${got} / ${total} cartes`));
       });
@@ -1864,7 +1907,7 @@
       const all = progressOf(SHOWN);
       const countEl = $("#cbCount");
       countEl.replaceChildren(`${all.got} / ${all.total} cartes découvertes`);
-      if (all.legends) countEl.append(" · ", legendNote(all.legends));
+      countEl.append(" · ", legendNote(all.legends, all.legendWords));
     }
     renderCodex(false);
 
@@ -1980,16 +2023,18 @@
       if (e.links) {
         body.append(mk("p", "bb-links-title", e.links.label));
         // Famille d’une brique : combien de mots formés sont déjà trouvés.
-        if (e.links.label === "Mots formés") {
-          const done = e.links.items.filter(([, ok]) => ok).length;
+        // Les mots légendaires ne comptent jamais dans la famille d’une brique (ADR 0043).
+        const famille = e.links.items.filter(([text]) => { const id = byWord.get(text); return !(id && isLegend(byId.get(id))); });
+        if (e.links.label === "Mots formés" && famille.length) {
+          const done = famille.filter(([, ok]) => ok).length;
           const progress = mk("div", "bb-progress");
           const bar = mk("span", "bb-bar");
           const fill = mk("i");
           fill.style.width = "0%";
-          fill.dataset.w = `${(done / e.links.items.length) * 100}%`;
+          fill.dataset.w = `${(done / famille.length) * 100}%`;
           bar.append(fill);
-          progress.append(bar, mk("span", null, `${done} / ${e.links.items.length} mots`));
-          progress.setAttribute("aria-label", `Famille : ${done} mots formés trouvés sur ${e.links.items.length}`);
+          progress.append(bar, mk("span", null, `${done} / ${famille.length} mots`));
+          progress.setAttribute("aria-label", `Famille : ${done} mots formés trouvés sur ${famille.length}`);
           body.append(progress);
         }
         const links = mk("div", "bb-links");
