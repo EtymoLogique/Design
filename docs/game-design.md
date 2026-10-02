@@ -255,7 +255,7 @@ Le contenu forme un graphe plutôt qu'une suite linéaire :
 - Le tutoriel et le chemin critique ne dépendent pas d'un tirage aléatoire.
 - Un pli peut donner un doublon ; chaque doublon ajoute un exemplaire (5 au plus) et de l'encre, et une brique nouvelle, hors légendaires, est garantie au plus tard au 6ᵉ pli.
 - **Filet d'utilité** : si la réserve ne permet plus aucune découverte, le 5ᵉ pli consécutif dans cet état donne forcément une brique qui en rend une possible, jamais une légendaire.
-- **Légendaires** : une chance fixe de 3 % par pli, et une légendaire, connue ou non, garantie au plus tard au 100ᵉ pli d'affilée sans légendaire ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
+- **Légendaires** : une chance fixe de 1,2 % par pli, et une légendaire, connue ou non, garantie au plus tard au 100ᵉ pli d'affilée sans légendaire ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
 - La validation d'atteignabilité simule aussi les quantités : un joueur qui ouvre des plis peut toujours finir par découvrir chaque mot publié.
 - Un contenu cyclique n'est publiable que si au moins un point d'entrée externe existe.
 - Toute version du catalogue passe une validation d'atteignabilité avant publication.
@@ -321,7 +321,7 @@ Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **c
 
 - l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2, avec l'heure du prochain pli en clair (« Prochain pli vers 21 h ») ;
 - les sabliers disponibles et, quand le temps manque, un raccourci pour les utiliser ou pour échanger de l'encre ; l'échange lui-même vit dans la boutique ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
-- les chances du fascicule choisi par rareté (les quatre, légendaire comprise : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique non légendaire (les briques inconnues restent en silhouette). Toutes les légendaires du fascicule, connues ou non, forment une seule ligne à 3 %, sans leur nombre, et les chances par type se calculent sans elles ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
+- les chances du fascicule choisi par rareté (les quatre, légendaire comprise : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique non légendaire (les briques inconnues restent en silhouette). Toutes les légendaires du fascicule, connues ou non, forment une seule ligne à 1,2 %, sans leur nombre, et les chances par type se calculent sans elles ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
 - la garantie de nouveauté, le filet d'utilité et la garantie des légendaires, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
 - l'encre disponible et l'échange contre un niveau d'indice (5 à 80 gouttes) ;
@@ -368,7 +368,7 @@ Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-b
 
 - chaque pli tire une brique parmi les préfixes et suffixes de son fascicule, nouveaux ou repris : **les doublons font partie du jeu** ;
 - le pli ne tire que des **préfixes et des suffixes**, jamais un mot ; la chance d’une brique dépend de sa seule **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire), et deux briques de même rareté ont la même chance ([ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)) ;
-- les **légendaires** se partagent une chance fixe de **3 %** par pli, la même dans tous les fascicules, quel que soit leur nombre ; les autres briques se partagent le reste selon leur rareté ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
+- les **légendaires** se partagent une chance fixe de **1,2 %** par pli, la même dans tous les fascicules, quel que soit leur nombre ; les autres briques se partagent le reste selon leur rareté ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
 - un doublon ajoute **un exemplaire** à la réserve, jusqu'à 5 par brique, et rapporte d'autant plus de **gouttes d'encre** que la brique est rare ;
 - chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (10 gouttes, [ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ou des indices (5 gouttes le premier niveau, le double à chaque niveau suivant) ;
 - une brique nouvelle, hors légendaires, est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
@@ -579,7 +579,7 @@ La bêta est ouverte à tous et tourne en production ; ses joueurs gardent leur 
 | L'ambition multilingue explose le coût éditorial | Architecture générique, mais lots de contenu petits et cohérents. |
 | Le jeu est perçu comme un cours | Révélations courtes ; détails et sources à la demande ; ricochets courts et facultatifs, sans note ni chronomètre. |
 | Le joueur n'a rien à faire certains jours | Trois quêtes du jour et carte de lecteur, sans série à entretenir ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
-| Le joueur assidu décroche une fois son fascicule complet | Chasse aux légendaires à 3 % par pli, quêtes au long cours, maîtrise par les ricochets et date du prochain fascicule ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md), [ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). |
+| Le joueur assidu décroche une fois son fascicule complet | Chasse aux légendaires à 1,2 % par pli, quêtes au long cours, maîtrise par les ricochets et date du prochain fascicule ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md), [ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). |
 | Le nouveau joueur décroche la première semaine | Cadeau de bienvenue et quêtes initiales, sans changer la recharge ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)) ; au moins 3 fascicules à l'ouverture officielle ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)). |
 | Un fascicule est trop facile ou trop difficile | Un tiers de mots faciles, un tiers moyens, un tiers difficiles ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)). |
 
