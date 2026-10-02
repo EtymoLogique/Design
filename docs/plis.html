@@ -76,21 +76,23 @@
             <div class="pk-pity"><i id="pkPityBar"></i></div>
             <p class="pk-note" id="pkPity"></p>
             <p class="pk-note" id="pkNet"></p>
+            <p class="pk-note" id="pkLegend"></p>
           </div>
           <div class="pk-card">
             <p class="pk-label">Règles du pli</p>
             <ul class="pk-rules">
               <li>Gratuit, et seule source d’exemplaires après les briques de départ.</li>
               <li>Doublons possibles : chacun ajoute un exemplaire à votre réserve, 5 au plus par brique. Chaque pli rapporte de l’encre, davantage pour un doublon.</li>
-              <li>Chances affichées pour chaque rareté, chaque type et chaque brique. Les légendaires inconnues forment une seule ligne : leur nombre reste secret.</li>
-              <li>Une brique nouvelle garantie au moins tous les 6 plis.</li>
+              <li>Chances affichées pour chaque rareté, chaque type et chaque brique. Les légendaires se partagent 3 % par pli, sur une seule ligne : leur nombre reste secret.</li>
+              <li>Une brique nouvelle, hors légendaires, garantie au moins tous les 6 plis.</li>
+              <li>Une légendaire, connue ou non, garantie au plus tard au 100ᵉ pli sans légendaire.</li>
               <li>Réserve bloquée : une brique utile garantie au plus tard au 5ᵉ pli.</li>
               <li>Les briques de départ permettent les premières découvertes sans pli.</li>
-              <li>Deux plis au plus en attente, un toutes les 12 h. Le temps de recharge est toujours affiché.</li>
+              <li>Deux plis au plus en attente, un toutes les 12 h. Le temps de recharge et l’heure du prochain pli sont toujours affichés.</li>
               <li><span>Vous choisissez le <a href="#fascicules">fascicule</a> du pli : il porte sa jaquette et ne tire que parmi ses briques, nouvelles ou reprises.</span></li>
               <li>La garantie de nouveauté et le filet se comptent par fascicule.</li>
             </ul>
-            <p class="xrefs"><span>Décisions</span><a class="xref" href="adr.html#adr-0008" data-kind="adr">ADR 0008</a><a class="xref" href="adr.html#adr-0011" data-kind="adr">ADR 0011</a><a class="xref" href="adr.html#adr-0012" data-kind="adr">ADR 0012</a><a class="xref" href="adr.html#adr-0014" data-kind="adr">ADR 0014</a><a class="xref" href="adr.html#adr-0015" data-kind="adr">ADR 0015</a><a class="xref" href="adr.html#adr-0016" data-kind="adr">ADR 0016</a></p>
+            <p class="xrefs"><span>Décisions</span><a class="xref" href="adr.html#adr-0008" data-kind="adr">ADR 0008</a><a class="xref" href="adr.html#adr-0011" data-kind="adr">ADR 0011</a><a class="xref" href="adr.html#adr-0012" data-kind="adr">ADR 0012</a><a class="xref" href="adr.html#adr-0014" data-kind="adr">ADR 0014</a><a class="xref" href="adr.html#adr-0015" data-kind="adr">ADR 0015</a><a class="xref" href="adr.html#adr-0016" data-kind="adr">ADR 0016</a><a class="xref" href="adr.html#adr-0043" data-kind="adr">ADR 0043</a></p>
           </div>
         </aside>
 
@@ -155,16 +157,19 @@
               <li><b>Sans faux échec.</b> Si des briques publiées forment un vrai mot, ce mot est dans le jeu.</li>
               <li><b>Son pli, à tout moment.</b> Chaque fascicule garde son pli : ouvrez celui d’un ancien fascicule pour refaire votre réserve de ses briques.</li>
               <li><b>Rien ne se perd.</b> Votre réserve, votre encre et vos découvertes restent intactes d’un fascicule à l’autre.</li>
+              <li><b>Un tiers facile.</b> Chaque fascicule compte un tiers de mots faciles, un tiers de moyens et un tiers de difficiles.</li>
+              <li><b>Au moins une légendaire.</b> Chaque fascicule en cache au moins une, sans jamais dire combien.</li>
+              <li><b>Sa date à l’avance.</b> La date du prochain fascicule est affichée, et rien d’autre de lui.</li>
             </ul>
-            <p class="xrefs"><span>Décisions</span><a class="xref" href="adr.html#adr-0014" data-kind="adr">ADR 0014 : fascicules</a><a class="xref" href="modele.html#sources">Sources et fascicules</a></p>
+            <p class="xrefs"><span>Décisions</span><a class="xref" href="adr.html#adr-0014" data-kind="adr">ADR 0014 : fascicules</a><a class="xref" href="adr.html#adr-0047" data-kind="adr">ADR 0047 : un tiers facile</a><a class="xref" href="adr.html#adr-0048" data-kind="adr">ADR 0048 : bêta et ouverture</a><a class="xref" href="adr.html#adr-0049" data-kind="adr">ADR 0049 : date du prochain</a><a class="xref" href="modele.html#sources">Sources et fascicules</a></p>
           </div>
         </div>
 
         <ol class="fs-timeline">
           <li class="fs-item">
             <div class="fs-head"><span class="fs-num">Fascicule n° 01</span><span class="fs-when">Jour 1 · Rosette</span></div>
-            <p class="fs-count"><b>11</b> éléments à découvrir</p>
-            <dl class="fs-counts"><div><dt><i style="--c:var(--ink)"></i>Mots</dt><dd>4</dd></div><div><dt><i style="--c:var(--c-prefix)"></i>Préfixes</dt><dd>2</dd></div><div><dt><i style="--c:var(--c-suffix)"></i>Suffixes</dt><dd>2</dd></div><div><dt><i style="--c:var(--c-lang)"></i>Langues</dt><dd>3</dd></div></dl>
+            <p class="fs-count"><b>10</b> éléments à découvrir</p>
+            <dl class="fs-counts"><div><dt><i style="--c:var(--ink)"></i>Mots</dt><dd>3</dd></div><div><dt><i style="--c:var(--c-prefix)"></i>Préfixes</dt><dd>2</dd></div><div><dt><i style="--c:var(--c-suffix)"></i>Suffixes</dt><dd>2</dd></div><div><dt><i style="--c:var(--c-lang)"></i>Langues</dt><dd>3</dd></div></dl>
           </li>
           <li class="fs-item is-current">
             <div class="fs-head"><span class="fs-num">Fascicule n° 02</span><span class="fs-when">Jour 30 · Argile</span></div>
@@ -175,7 +180,7 @@
           <li class="fs-item is-next">
             <div class="fs-head"><span class="fs-num">Fascicule n° 03</span><span class="fs-when">Jour 60 · à paraître</span></div>
             <p class="fs-count">À paraître</p>
-            <p class="fs-note">Ses nombres d’éléments seront annoncés à sa parution.</p>
+            <p class="fs-note">Seule sa date est connue à l’avance. Ses nombres d’éléments seront annoncés à sa parution.</p>
           </li>
         </ol>
 

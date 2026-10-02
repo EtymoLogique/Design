@@ -48,6 +48,10 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Pli** | Pli scellé, gratuit, seule source d'exemplaires après la réserve de départ. On dit « ouvrir un pli », « l'atelier des plis ». Le mot anglais « pack » n'est jamais employé. |
 | **Fascicule** | Nouvel ensemble de 20 à 30 mots, avec leurs briques et leurs langues, publié environ tous les 30 jours. Il a sa jaquette et son pli, que le joueur peut ouvrir à tout moment. On ne dit ni « pack », ni « extension », ni « saison ». |
 | **Sablier** | Objet qui fait avancer d'une heure la recharge d'énergie, jamais un tirage. Il s'échange contre 10 gouttes d'encre ou se gagne par un jalon (ADR 0020, 0039) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
+| **Légendaire** | Brique ou mot le plus rare, marqué d’un diamant. Leur nombre reste secret ; celles que le joueur trouve se comptent à part, à côté de chaque jauge ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)). |
+| **Ricochets** | Courtes questions sur les cartes déjà trouvées. Elles ne consomment rien, et trois bonnes réponses sur trois jours différents rendent une carte **maîtrisée** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). On ne dit ni « révision », ni « quiz ». |
+| **Quête** | Objectif de la page Quêtes : trois quêtes du jour, renouvelées à minuit GMT, des quêtes au long cours à paliers, et les jalons de chaque fascicule ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
+| **Carte de lecteur** | Carte qui reçoit un **tampon** chaque jour où les trois quêtes du jour sont faites, un par jour au plus, sans obligation de jours consécutifs. Au 7ᵉ tampon, une récompense ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). On ne dit ni « série », ni « flamme ». |
 
 Le terme « Pokédex » décrit bien l'intention de collection, mais le produit utilisera **codex** tant qu'aucun nom propre original n'aura été choisi.
 
@@ -63,6 +67,7 @@ Le terme « Pokédex » décrit bien l'intention de collection, mais le produit 
    - **échec** : retour immédiat, sans perte d'exemplaire.
 6. Le joueur consulte les nouvelles branches ouvertes dans le codex.
 7. Il recommence ou poursuit une famille. Quand sa réserve ne suffit plus, il ouvre le prochain pli gratuit pour la remplir.
+8. Entre deux plis, il fait ses trois quêtes du jour et des ricochets sur les cartes qu’il a trouvées, qui ne consomment rien ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)).
 
 Une session courte doit permettre au minimum une hypothèse, une fusion et une décision sur la prochaine piste.
 
@@ -84,6 +89,7 @@ Une session courte doit permettre au minimum une hypothèse, une fusion et une d
 4. La révélation explique la transformation en une phrase ; « Voir au codex » mène à la carte et à sa section « En savoir plus ».
 5. La découverte débloque une langue, une famille et de nouvelles briques dans le catalogue des plis.
 6. Le joueur reçoit ensuite sa réserve de départ (démonstration : quatre briques en deux exemplaires), qui crée plusieurs recettes possibles, pas une seule route obligatoire.
+7. Il récupère son **cadeau de bienvenue** dans la page Quêtes : 3 plis de bienvenue au contenu fixé, 12 sabliers et 40 gouttes d’encre. Des **quêtes initiales**, généreuses puis de moins en moins, accompagnent sa première semaine. La recharge ne change pas : seul le cadeau s’épuise, et le ralentissement qui suit vient de lui-même, jamais pour pousser à l’achat ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
 
 « Étymologie » est un excellent candidat narratif, mais sa décomposition exacte et ses formes grecques, latines et françaises devront être vérifiées et sourcées avant publication. Les exemples du prototype ne doivent pas devenir des faits de production par simple répétition.
 
@@ -95,7 +101,8 @@ Le lot initial doit offrir :
 - au moins deux familles distinctes ;
 - au moins une recette sans transformation et une avec transformation visible ;
 - plusieurs chemins vers le prochain jalon ;
-- aucune brique indispensable disponible uniquement par hasard.
+- aucune brique indispensable disponible uniquement par hasard ;
+- aucune légendaire dans le tutoriel, les graines ni le cadeau de bienvenue : si *étymologie* ouvre le jeu, la brique *étymo-* n’est pas légendaire ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
 
 ## Table de fusion
 
@@ -162,6 +169,7 @@ Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éd
 - **Langues** : progression par langue et liens historiques déjà rencontrés.
 - **Familles** : branches découvertes, silhouettes restantes et objectifs.
 - **Relations** : vue avancée du chemin entre les formes, après validation de son intérêt UX.
+- **Votre cabinet** : les nombres du joueur, jamais comparés à ceux des autres : jours de jeu, mots trouvés, langues rencontrées, mot au plus long voyage, cartes maîtrisées, légendaires trouvées, cartes de lecteur remplies ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
 
 ### Vue globale
 
@@ -169,13 +177,15 @@ Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éd
 - Au milieu de chaque petite carte découverte, sous le mot, une ligne discrète donne son sens : le sens littéral d'un mot (*géographie* « description de la terre »), la glose d'une brique (*géo-* « terre »). Une carte de langue y porte son nom.
 - Chaque carte découverte porte en fond une silhouette simple de son sens (une hélice pour *biologie*, une amphore pour le grec ancien), en aplat monochrome. Une carte inconnue n'en a pas, pour ne rien révéler ([ADR 0023](adr/0023-textures-des-cartes.md)).
 - Filtres par type et par fascicule avec compteurs, et tri par numéro de découverte, par ordre alphabétique, par type ou par fascicule. Les cartes se réorganisent avec une animation.
-- Chaque fascicule affiche sa complétude (« 10 / 11 cartes ») avec une barre de progression. Toucher un fascicule n'affiche que ses cartes.
+- Chaque fascicule affiche sa complétude (« 10 / 11 cartes ») avec une barre de progression, et sa maîtrise (« 6 / 11 maîtrisées », [ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). Toucher un fascicule n'affiche que ses cartes.
+- La date du prochain fascicule s’affiche en tête du codex (« Prochain fascicule : 1ᵉʳ novembre »), et rien d’autre de lui ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)).
 - Les cartes encore inconnues restent visibles en silhouette, avec une piste de sens, sans révéler la réponse.
 - Une carte nouvelle se signale par un halo Corail diffus, qui disparaît à sa première consultation. La carte garde sa structure et son contour.
-- **Exception : les légendaires** (diamant). Une légendaire inconnue, et tout mot qui en dépend, n'a ni silhouette ni place dans les compteurs. Une légendaire trouvée a sa carte, mais s'affiche à part (« 1 légendaire trouvée ») et n'entre jamais dans les totaux, pour garder le suspense sur leur nombre ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)).
+- **Exception : les légendaires** (diamant). Une légendaire inconnue n'a ni silhouette ni place dans les compteurs. Un mot légendaire, celui dont la recette la moins rare exige une légendaire, reste invisible tant qu'il n'est pas trouvé, même quand sa légendaire l'est déjà : ni silhouette, ni piste, ni place dans la liste des mots formés d'une brique. Trouvées, briques et mots légendaires ont leur carte, s'affichent à part et n'entrent jamais dans aucune jauge, pour garder le suspense sur leur nombre ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md), [ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
+- Un compteur, le diamant suivi du nombre (« ◆ 2 »), accompagne chaque jauge de complétude, même à 0 : il compte les briques et les mots légendaires trouvés, jamais ce qui reste. Le toucher n'affiche que les légendaires trouvées ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
 - Toucher une petite carte l'agrandit au centre de l'écran, depuis sa position dans la grille. On peut passer à la carte précédente ou suivante sans revenir à la grille.
 - **Recto** : mot, langue, définition actuelle, sens littéral et niveau de confiance.
-- **Verso** (en touchant la carte) : les formes trouvées dans chaque langue, avec leur progression (par exemple 2 sur 3). Les formes manquantes restent en silhouette. Il affiche aussi les composants ou les mots formés ; pour une brique, la progression de sa famille (par exemple 4 mots formés sur 5).
+- **Verso** (en touchant la carte) : les formes trouvées dans chaque langue, avec leur progression (par exemple 2 sur 3). Les formes manquantes restent en silhouette. Il affiche aussi les composants ou les mots formés ; pour une brique, la progression de sa famille (par exemple 4 mots formés sur 5), mots légendaires exclus.
 - Le verso d'une carte de langue regroupe automatiquement toutes les formes découvertes dans cette langue.
 - **Navigation entre les cartes** : tout ce qui correspond à une carte déjà découverte est cliquable.
   - Au recto : chaque brique de la composition, chaque morceau coloré du mot, la langue.
@@ -243,8 +253,9 @@ Le contenu forme un graphe plutôt qu'une suite linéaire :
 
 - Chaque brique requise possède au moins un chemin d'obtention démontrable.
 - Le tutoriel et le chemin critique ne dépendent pas d'un tirage aléatoire.
-- Un pli peut donner un doublon ; chaque doublon ajoute un exemplaire (5 au plus) et de l'encre, et une brique nouvelle est garantie au plus tard au 6ᵉ pli.
-- **Filet d'utilité** : si la réserve ne permet plus aucune découverte, le 5ᵉ pli consécutif dans cet état donne forcément une brique qui en rend une possible.
+- Un pli peut donner un doublon ; chaque doublon ajoute un exemplaire (5 au plus) et de l'encre, et une brique nouvelle, hors légendaires, est garantie au plus tard au 6ᵉ pli.
+- **Filet d'utilité** : si la réserve ne permet plus aucune découverte, le 5ᵉ pli consécutif dans cet état donne forcément une brique qui en rend une possible, jamais une légendaire.
+- **Légendaires** : une chance fixe de 3 % par pli, et une légendaire, connue ou non, garantie au plus tard au 100ᵉ pli d'affilée sans légendaire ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
 - La validation d'atteignabilité simule aussi les quantités : un joueur qui ouvre des plis peut toujours finir par découvrir chaque mot publié.
 - Un contenu cyclique n'est publiable que si au moins un point d'entrée externe existe.
 - Toute version du catalogue passe une validation d'atteignabilité avant publication.
@@ -254,12 +265,17 @@ Le contenu forme un graphe plutôt qu'une suite linéaire :
 Voir l'[ADR 0014](adr/0014-sources-et-fascicules.md), l'[ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md) et la [page des plis](plis.html#fascicules). Le contenu arrive par fascicules, environ tous les 30 jours :
 
 - un fascicule publie 20 à 30 mots, et déclare tous les préfixes, suffixes et mots qui servent à les former ;
-- **un fascicule ne dévoile pas son contenu** : son annonce et sa présentation n'affichent que des nombres (mots, préfixes, suffixes, langues), légendaires exclues. Avant sa parution, même ces nombres restent cachés. Dans le codex, les silhouettes gardent leur piste de sens ;
+- **un fascicule ne dévoile pas son contenu** : son annonce et sa présentation n'affichent que des nombres (mots, préfixes, suffixes, langues), légendaires exclues. Avant sa parution, même ces nombres restent cachés : seule sa date est publique ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). Dans le codex, les silhouettes gardent leur piste de sens ;
 - un mot n'appartient qu'à un seul fascicule ; une brique peut être reprise d'un fascicule à l'autre ;
 - chaque fascicule a sa jaquette et son pli : dès sa publication, le joueur peut ouvrir ses plis, qui ne tirent que parmi ses briques, et revenir à tout moment aux plis d'un ancien fascicule. Les fusions entre fascicules sont permises ;
 - **fermeture** : si deux briques publiées, de n'importe quels fascicules, forment un mot attesté par une source de référence, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
 - une combinaison attestée ne peut être écartée que par une exclusion déclarée et justifiée (mot archaïque, rare, offensant ou analyse non établie) ;
-- **pourquoi 30 mots au plus** : il faut environ 2 plis par mot découvert, et un joueur assidu ouvre 70 à 80 plis par mois. Au-delà de 30 mots, il ne complète plus un fascicule avant le suivant ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)).
+- **pourquoi 30 mots au plus** : il faut environ 2 plis par mot découvert, et un joueur assidu ouvre 70 à 80 plis par mois. Au-delà de 30 mots, il ne complète plus un fascicule avant le suivant ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) ;
+- **un tiers facile, un tiers moyen, un tiers difficile** : facile quand le sens actuel est proche du sens littéral et que la recette n'a aucune transformation, moyen pour un seul de ces écarts, difficile pour les deux. La difficulté n'est jamais affichée ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)) ;
+- **au moins une légendaire** par fascicule, employée par au moins une recette ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
+- **sa date à l'avance** : la date du prochain fascicule est publique, et rien d'autre de lui ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)).
+
+Pendant la bêta, ouverte à tous, les fascicules paraissent au rythme habituel. L'ouverture officielle attend au moins 3 fascicules, 4 visés, pour qu'un nouveau joueur assidu ne puisse pas épuiser le catalogue en un mois : bêta en janvier 2027 avec les fascicules 1 et 2, ouverture en mars pendant la Semaine de la langue française ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)).
 
 Le corpus disponible, le nombre de fascicules possibles et la piste des fascicules spéciaux sont décrits dans le [potentiel d'évolution](potentiel-evolution.md).
 
@@ -273,14 +289,19 @@ Les indices peuvent être débloqués par l'expérimentation, le temps, des obje
 4. emplacement d'une brique connue ;
 5. solution, en dernier recours, sans punir durablement la progression.
 
-### Objectifs possibles
+### Quêtes et ricochets
 
-- compléter une famille ;
-- découvrir un certain type de transformation ;
-- relier deux langues dans le graphe ;
-- résoudre une recette sans indice ;
-- retrouver plusieurs descendants d'une même forme ;
-- défi quotidien construit uniquement à partir des briques possédées.
+La page Quêtes ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)) a trois onglets ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)) :
+
+- **Journalières** : chaque jour, trois quêtes, une à la table de fusion, une de mémoire et une d'adresse, renouvelées à minuit GMT. Le serveur ne tire que des quêtes que l'état du joueur rend faisables, sans dépendre de l'énergie ni du hasard. Chacune demande un acte de réflexion, jamais un simple geste. Le défi quotidien devient la quête de table : une recette que la réserve permet, donnée par sa seule piste de sens (« Trouvez le mot qui veut dire “peur de l'eau” »).
+  - **La carte de lecteur** reçoit un tampon chaque jour où les trois quêtes sont faites, sans obligation de jours consécutifs. Au 7ᵉ tampon : 20 gouttes, un sablier et un pli de lecteur, tiré parmi les peu communes et les rares du fascicule choisi. Aucune flamme, aucun rappel.
+  - Pendant la première semaine, les quêtes initiales s'affichent en tête de l'onglet ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
+- **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)).
+- **Au long cours** : des quêtes à paliers qui traversent les fascicules, sur les langues, les familles, les transformations, la maîtrise et les cartes de lecteur. Aucune ne compte les légendaires, sauf la première trouvée.
+
+Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot, relier des paires. Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents.
+
+Toutes les récompenses sont affichées d'avance et attendent d'être récupérées ; aucune n'expire.
 
 ## Énergie et plis
 
@@ -298,10 +319,10 @@ Les indices peuvent être débloqués par l'expérimentation, le temps, des obje
 
 Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **choisit d'abord un fascicule** parmi ceux qui sont parus : chacun montre sa jaquette, ses briques connues et ses exemplaires en réserve. Il ouvre ensuite le pli de ce fascicule, et peut revenir au choix à tout moment. Sur l'écran d'ouverture, on retrouve :
 
-- l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2 ;
+- l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2, avec l'heure du prochain pli en clair (« Prochain pli vers 21 h ») ;
 - les sabliers disponibles et, quand le temps manque, un raccourci pour les utiliser ou pour échanger de l'encre ; l'échange lui-même vit dans la boutique ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
-- les chances du fascicule choisi par rareté (les quatre, légendaire comprise, même à 0 % : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique (les briques inconnues restent en silhouette). Les légendaires inconnues sont regroupées en une seule ligne, avec la somme exacte de leurs chances mais sans leur nombre ;
-- la garantie de nouveauté et le filet d'utilité, avec leurs compteurs ;
+- les chances du fascicule choisi par rareté (les quatre, légendaire comprise : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique non légendaire (les briques inconnues restent en silhouette). Toutes les légendaires du fascicule, connues ou non, forment une seule ligne à 3 %, sans leur nombre, et les chances par type se calculent sans elles ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
+- la garantie de nouveauté, le filet d'utilité et la garantie des légendaires, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
 - l'encre disponible et l'échange contre un niveau d'indice (5 à 80 gouttes) ;
 - l'historique des derniers tirages ;
@@ -343,14 +364,16 @@ Une brique déjà connue suit le même rituel. La révélation affiche alors « 
 
 ### Contenu d'un pli
 
-Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-briques-rationnees.md) et l'[ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md). En résumé :
+Voir l'[ADR 0011](adr/0011-plis-raretes-et-doublons.md), l'[ADR 0012](adr/0012-briques-rationnees.md), l'[ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md) et l’[ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md). En résumé :
 
 - chaque pli tire une brique parmi les préfixes et suffixes de son fascicule, nouveaux ou repris : **les doublons font partie du jeu** ;
 - le pli ne tire que des **préfixes et des suffixes**, jamais un mot ; la chance d’une brique dépend de sa seule **rareté** (quatre niveaux : triangle commune, carré peu commune, pentagone rare, diamant légendaire), et deux briques de même rareté ont la même chance ([ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)) ;
+- les **légendaires** se partagent une chance fixe de **3 %** par pli, la même dans tous les fascicules, quel que soit leur nombre ; les autres briques se partagent le reste selon leur rareté ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
 - un doublon ajoute **un exemplaire** à la réserve, jusqu'à 5 par brique, et rapporte d'autant plus de **gouttes d'encre** que la brique est rare ;
 - chaque pli rapporte **2 gouttes**, plus, pour un doublon, 1, 2, 4 ou 10 gouttes selon la rareté, le double quand la réserve est pleine ([ADR 0019](adr/0019-encre-a-chaque-doublon.md), [ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) ; l'encre s'échange contre des sabliers (10 gouttes, [ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ou des indices (5 gouttes le premier niveau, le double à chaque niveau suivant) ;
-- une brique nouvelle est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
-- si la réserve ne permet plus aucune découverte, une brique utile de ce fascicule est **garantie au plus tard au 5ᵉ pli** du même fascicule. Si aucune de ses briques ne peut aider, l'écran invite à choisir un autre fascicule ;
+- une brique nouvelle, hors légendaires, est **garantie au plus tard au 6ᵉ pli** du même fascicule après sa dernière nouveauté ;
+- si la réserve ne permet plus aucune découverte, une brique utile de ce fascicule, jamais une légendaire, est **garantie au plus tard au 5ᵉ pli** du même fascicule. Si aucune de ses briques ne peut aider, l'écran invite à choisir un autre fascicule ;
+- une légendaire, connue ou non, est **garantie au plus tard au 100ᵉ pli** d’affilée sans légendaire dans le même fascicule. Seuls les plis ouverts avec l’énergie comptent pour ces trois garanties ;
 - objectif de rythme : le codex ne doit pas se remplir trop vite. Sur le catalogue de démonstration (9 mots, réserve de départ 4 × 2), il faut 22 plis en médiane pour tout découvrir, soit environ onze jours, et jamais plus de 30 plis dans la simulation (ADR 0012). Avec deux fascicules et les sabliers, la simulation de l'ADR 0020 donne 20 plis et 7,5 jours en médiane. Ce rythme, calculé sur un catalogue unique, est à recalculer par fascicule.
 
 Les poids, les raretés et la garantie relèvent de l'équilibrage. Ils doivent être observables et modifiables sans changer les données linguistiques.
@@ -362,7 +385,7 @@ Dans le MVP ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) :
 - un **sablier** fait avancer d'une heure la recharge en cours. Il ne s'utilise que si l'énergie est sous 2 ; le temps en trop passe à la charge suivante. La feuille propose, et permet au plus, le nombre de sabliers qui remplit l'énergie ; seul le dernier peut n'avancer qu'une partie de son heure ;
 - il s'**échange contre 10 gouttes d'encre**, dans un geste distinct de son usage ; seuls les sabliers détenus s'utilisent. Certains jalons en donnent aussi ;
 - il achète du temps, jamais un tirage : chances, garantie, filet et contenu du pli ne changent pas ;
-- **aucun plafond** : ni sur l'échange contre de l'encre, ni sur l'usage, ni sur le nombre de sabliers détenus ; l'encre, gagnée seulement en ouvrant des plis, borne à elle seule le rythme ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
+- **aucun plafond** : ni sur l'échange contre de l'encre, ni sur l'usage, ni sur le nombre de sabliers détenus ; l'encre, gagnée en ouvrant des plis et, en quantité bornée, par les quêtes et le cadeau de bienvenue ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)), borne à elle seule le rythme ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
 - un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit un sablier ; à 10 gouttes le sablier, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
 
 Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
@@ -379,12 +402,13 @@ Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
 - ne jamais faire payer une erreur : seuls les succès consomment des exemplaires ;
 - borner l'attente quand la réserve ne permet plus aucune découverte (filet au 5ᵉ pli) ;
 - ne pas préparer des mécanismes trompeurs sous prétexte d'une monétisation future ;
+- régler la générosité du départ et le ralentissement qui suit sur la rétention, jamais sur les achats : aucune frustration dosée pour pousser à l'achat ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)) ;
 - ne jamais vendre un tirage, une brique ou une chance : une future boutique ne vend que du temps, plafonné (ADR 0018) ;
 - soumettre toute future boutique à une décision séparée.
 
 ## Interfaces
 
-L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs (familles, langues) y forment un onglet du codex ; les jalons ont leur page, « Quêtes », où le joueur récupère leurs récompenses ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)). Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html).
+L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs (familles, langues) y forment un onglet du codex ; les jalons ont leur page, « Quêtes », où le joueur récupère leurs récompenses ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)). Cette page compte trois onglets : quêtes du jour et carte de lecteur, jalons des fascicules, quêtes au long cours ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). Les ricochets s'ouvrent depuis le codex et depuis les quêtes ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html), sauf les écrans des quêtes, des ricochets, du cadeau de bienvenue et de « Votre cabinet », qui restent à dessiner.
 
 ## Identité visuelle
 
@@ -531,9 +555,15 @@ Le prototype doit répondre aux questions suivantes :
 - utilisation graduelle des indices ;
 - retour après disponibilité d'un pli ;
 - durée passée avec une réserve qui ne permet aucune découverte ;
-- familles commencées et complétées.
+- familles commencées et complétées ;
+- retour au 1ᵉʳ, au 7ᵉ et au 30ᵉ jour, rétention mensuelle par cohorte et passage d'un mois au suivant ;
+- jours joués par mois, quêtes du jour terminées, tampons par semaine et séances de ricochets.
 
-Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle.
+Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle. Les cohortes se calculent sans identifiant durable : des tâches planifiées comptent les joueurs par mois d'arrivée, et l'identifiant de la télémétrie se renouvelle au début de chaque mois civil ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
+
+### Bêta ouverte
+
+La bêta est ouverte à tous et tourne en production ; ses joueurs gardent leur progression à l'ouverture officielle. Celle-ci attend une taille critique de contenu, au moins 3 fascicules et 4 visés, et les seuils de la bêta, fixés avant son ouverture. Valeurs proposées : au moins 80 % de tutoriels terminés, au moins 25 % de joueurs revenus au 7ᵉ jour, et moins de 10 % de joueurs actifs restés plus de deux jours sans découverte possible ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)).
 
 ## Risques et réponses
 
@@ -542,12 +572,34 @@ Ces événements doivent être agrégés avec des identifiants techniques pseudo
 | Les recettes semblent arbitraires | Explication systématique, indices cohérents et tests utilisateurs. |
 | Le contenu contient des erreurs | Sources, relecture, niveau de confiance, versions et corrections traçables. |
 | Une branche devient impossible | Validation d'atteignabilité à chaque publication. |
-| Le joueur essaie au hasard | Objectifs de famille, silhouettes, indices graduels et coût nul des essais. |
+| Le joueur essaie au hasard | Objectifs de famille, silhouettes, indices graduels, coût nul des essais, et quête de table du jour donnée par sa seule piste de sens. |
 | Le pli devient frustrant | Doublons utiles (un exemplaire de plus et de l'encre à chaque fois), garantie de nouveauté au 6ᵉ pli, chances affichées, chemin critique jamais dépendant d'un pli. |
-| La réserve s'épuise et le joueur décroche | Réserve de départ suffisante pour trois découvertes, essais ratés gratuits, filet d'utilité au 5ᵉ pli, compteurs visibles. |
+| La réserve s'épuise et le joueur décroche | Réserve de départ suffisante pour trois découvertes, essais ratés gratuits, filet d'utilité au 5ᵉ pli, compteurs visibles, et ricochets et quêtes du jour, qui ne consomment rien. |
 | L'interface est trop dense sur mobile | Deux briques au plus sur la table, gestes alternatifs et révélation progressive. |
 | L'ambition multilingue explose le coût éditorial | Architecture générique, mais lots de contenu petits et cohérents. |
-| Le jeu est perçu comme un cours | Révélations courtes ; détails et sources à la demande. |
+| Le jeu est perçu comme un cours | Révélations courtes ; détails et sources à la demande ; ricochets courts et facultatifs, sans note ni chronomètre. |
+| Le joueur n'a rien à faire certains jours | Trois quêtes du jour et carte de lecteur, sans série à entretenir ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
+| Le joueur assidu décroche une fois son fascicule complet | Chasse aux légendaires à 3 % par pli, quêtes au long cours, maîtrise par les ricochets et date du prochain fascicule ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md), [ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). |
+| Le nouveau joueur décroche la première semaine | Cadeau de bienvenue et quêtes initiales, sans changer la recharge ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)) ; au moins 3 fascicules à l'ouverture officielle ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)). |
+| Un fascicule est trop facile ou trop difficile | Un tiers de mots faciles, un tiers moyens, un tiers difficiles ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)). |
+
+### Pistes de rétention écartées
+
+Ces pistes ont été examinées en octobre 2026, puis écartées. Elles ne reviennent qu'avec un ADR :
+
+- proposer à nouveau l'installation de la PWA, au-delà de l'écran prévu (I-05) ;
+- des notifications de plis prêts ou de parution ;
+- un écran « Depuis votre dernière visite », ou la mise en avant du retour après une absence ;
+- la reliure d'un fascicule complet, et des cosmétiques payés en encre ;
+- l'annonce des familles qu'un fascicule prolonge, et sa jaquette en avant-première ;
+- des plis plus généreux pour les anciens fascicules, et le prochain jalon mis en avant à la place de la complétude ;
+- un mot découvert qui deviendrait une brique sans compteur d'exemplaires ;
+- une difficulté croissante d'un fascicule à l'autre ;
+- des titres, des statistiques collectives et le partage d'énigmes ;
+- la copie d'une brique contre de l'encre ;
+- une recharge plus rapide la première semaine ;
+- des quêtes faites de simples gestes, et une série de jours consécutifs ;
+- une frustration dosée pour pousser à l'achat.
 
 ## Expérimentations UX prioritaires
 
@@ -582,5 +634,5 @@ Comparer une révélation instantanée à une révélation en trois temps :
 - Le plafond de 5 exemplaires, la réserve de départ et le filet au 5ᵉ pli sont-ils ressentis comme justes ? Faut-il plusieurs briques par pli sur un grand catalogue ?
 - Quand un indice « presque » aide-t-il sans transformer le jeu en recherche exhaustive ?
 - Une découverte doit-elle débloquer toutes ses briques immédiatement ou certaines via des mini-objectifs ?
-- Quel volume de contenu permet de tester la rétention sans surinvestir dans l'éditorial ? Hypothèse : des fascicules de 20 à 30 mots tous les 30 jours ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)).
+- Quel volume de contenu permet de tester la rétention sans surinvestir dans l'éditorial ? Hypothèse : des fascicules de 20 à 30 mots tous les 30 jours ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)), et au moins 3 fascicules, 4 visés, à l'ouverture officielle ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)).
 - Le compte utilisateur est-il obligatoire, facultatif ou différé jusqu'à la synchronisation multi-appareil ?

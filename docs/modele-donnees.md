@@ -342,6 +342,7 @@ erDiagram
         id fascicule_id PK, FK
         id unite_id PK, FK
         enum role "resultat ou ingredient"
+        enum difficulte "facile, moyen, difficile ; résultats seulement"
     }
     EXCLUSION {
         id id PK
@@ -363,7 +364,9 @@ erDiagram
   - `resultat` : les mots qu'il publie. Un mot est le résultat d'**un seul** fascicule ;
   - `ingredient` : les préfixes, suffixes et mots qui servent à ses recettes. Une unité déjà publiée peut être reprise comme ingrédient par plusieurs fascicules.
 - Une **exclusion** enregistre une combinaison attestée volontairement non publiée, avec sa raison.
-- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique. Les graines sont déclarées par le fascicule ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)).
+- Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique. Les graines sont déclarées par le fascicule ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Les légendaires d’un fascicule se partagent une chance fixe par pli, sans poids propre ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
+- La **difficulté** d’un mot (facile, moyen ou difficile) se saisit avec son rôle de résultat. Chaque fascicule en compte un tiers de chaque, à un mot près ; elle n’est jamais affichée au joueur ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)).
+- La couche ludique commune à tous les fascicules, c’est-à-dire le cadeau de bienvenue, les quêtes initiales, les quêtes du jour, la récompense de la carte de lecteur et les quêtes au long cours, est déclarée dans l’index global ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
 - Les **familles** sont hors du périmètre de ce document.
 
 ## 6. Où vivent les données
@@ -430,10 +433,12 @@ Le stockage des assets ne contient donc que des faits `relu` et publiés. Rien d
 | `version` | Identifiant de la publication, qui associe version linguistique et version ludique ([ADR 0009](adr/0009-contenu-et-equilibrage.md)). |
 | `langues`, `systemes_ecriture`, `conventions` | Référentiels communs et leurs libellés par locale. Une langue indique le fascicule qui l'a introduite ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
 | `fascicules` | Pour chaque fascicule paru : `numero`, `parution` (date et heure), `manifeste` (chemin haché). |
+| `prochaine_parution` | Date et heure, en UTC, du prochain fascicule du calendrier, et rien d’autre de lui ; absent si le calendrier est vide ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). |
+| `quetes` | Couche ludique commune : cadeau de bienvenue (briques de ses plis, sabliers, encre), quêtes initiales, quêtes du jour et leurs conditions, récompense de la carte de lecteur, quêtes au long cours et leurs paliers ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)). Ses conditions forment une liste fermée. |
 
 L'index ne cite que des manifestes, jamais une ressource : c'est le manifeste qui mène à ses cartes, recettes, exclusions et médias. Le calendrier `staging/parutions.json` suit la même règle pour les fascicules à venir ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
 
-Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de compteur ([ADR 0014](adr/0014-sources-et-fascicules.md)).
+Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de compteur ([ADR 0014](adr/0014-sources-et-fascicules.md)). Seule sa date y figure, dans `prochaine_parution` ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)).
 
 ### Manifeste de fascicule
 
@@ -442,12 +447,12 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | `id`, `numero`, `parution` | Identifiant opaque du fascicule, par lequel les données du joueur le désignent ; numéro et date de parution. |
 | `jaquette` | Chemin haché de l'asset de la jaquette ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `compteurs` | Mots, préfixes, suffixes et langues, **légendaires exclues**, ainsi que les mots qui en dépendent ([ADR 0015](adr/0015-codex-fascicules-et-legendaires.md)). |
-| `pli` | Briques tirables (ses préfixes et suffixes, nouveaux ou repris ; jamais un mot, [ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)), poids des raretés, base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
-| `cartes` | Pour chaque unité déclarée (`fascicule_unite`) : identifiant opaque, rôle (`resultat` ou `ingredient`), chemin haché de sa carte, chemin de sa silhouette. |
+| `pli` | Briques tirables (ses préfixes et suffixes, nouveaux ou repris ; jamais un mot, [ADR 0035](adr/0035-plis-d-affixes-ponderes-par-la-rarete.md)), poids des raretés non légendaires, chance fixe des légendaires (`chance_legendaire`, 3 %) et seuil de leur garantie (100 plis, [ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)), base d'encre, barèmes des doublons : les paramètres d'équilibrage de ce fascicule. |
+| `cartes` | Pour chaque unité déclarée (`fascicule_unite`) : identifiant opaque, rôle (`resultat` ou `ingredient`), chemin haché de sa carte, chemin de sa silhouette ; pour un résultat, sa `difficulte` ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)). |
 | `langues` | Pour chaque langue citée par ses cartes (langue d'une unité ou d'un étymon) : identifiant et chemin haché de sa silhouette ([ADR 0023](adr/0023-textures-des-cartes.md)). Comme l'index ne cite que des manifestes, c'est le manifeste qui mène aux silhouettes des langues et la tâche de parution les promeut avec le fascicule. |
 | `recettes` | Identifiant opaque et chemin haché de chaque recette du fascicule. |
 | `exclusions` | Chemin haché du fichier d'exclusions. |
-| `jalons` | Jalons du fascicule : `id`, nombre de `decouvertes` qui l'atteint, briques du `pli` déterministe et `sabliers` donnés ([ADR 0012](adr/0012-briques-rationnees.md), [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
+| `jalons` | Jalons du fascicule : `id`, nombre de `decouvertes` qui l'atteint, briques du `pli` déterministe, jamais une légendaire, et `sabliers` donnés ([ADR 0012](adr/0012-briques-rationnees.md), [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md), [ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)). |
 | `graines` | Réserve de départ du fascicule : pour chaque brique semée, `brique_id` et `exemplaires`, de 1 à 5 ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). |
 
 ### Ressources
@@ -480,7 +485,7 @@ En ligne, le client peut résoudre une fusion localement pour répondre tout de 
 
 ## 7. Données du joueur
 
-La progression vit dans les tables relationnelles PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)). Cette section en donne le schéma logique et le complète par l'historique des plis, les indices, les jalons atteints et les migrations ([ADR 0027](adr/0027-catalogue-statique-et-donnees-joueur.md)).
+La progression vit dans les tables relationnelles PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)). Cette section en donne le schéma logique et le complète par l'historique des plis, les indices, les jalons atteints et les migrations ([ADR 0027](adr/0027-catalogue-statique-et-donnees-joueur.md)), puis par les quêtes, la carte de lecteur et les ricochets ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
 
 Ces tables désignent le catalogue par ses identifiants opaques (`brique_id`, `mot_id`, `recette_id`, `fascicule_id`), jamais par une graphie, et n'en copient aucun texte. Le catalogue, lui, ne les référence jamais.
 
@@ -500,6 +505,11 @@ erDiagram
     JOUEUR ||--o{ MOUVEMENT : "cumule"
     JOUEUR ||--o{ MIGRATION : "a suivi"
     JOUEUR ||--o{ GRAINE_ACCORDEE : "a reçu"
+    JOUEUR ||--o{ QUETE_DU_JOUR : "a reçu"
+    JOUEUR ||--o{ CARTE_LECTEUR : "remplit"
+    JOUEUR ||--o{ RICOCHET : "révise"
+    JOUEUR ||--o{ PALIER_ATTEINT : "a atteint"
+    JOUEUR ||--o{ QUETE_INITIALE : "a reçu"
 
     JOUEUR {
         id id PK "aléatoire, sans donnée personnelle"
@@ -508,6 +518,8 @@ erDiagram
         texte version_catalogue "version active du joueur"
         instant cree_le
         instant derniere_activite
+        mois mois_activite_precedente "cohortes, ADR 0050"
+        entier jours_de_jeu "jours distincts de visite"
     }
     EXEMPLAIRE {
         id joueur_id PK, FK
@@ -540,15 +552,16 @@ erDiagram
         id fascicule_id PK "catalogue"
         entier plis_sans_nouveaute "garantie au 6e"
         entier plis_sans_utilite "filet au 5e"
+        entier plis_sans_legendaire "garantie au 100e"
     }
     OUVERTURE_PLI {
         id id PK
         id joueur_id FK
         id fascicule_id "catalogue"
-        enum origine "energie ou jalon"
+        enum origine "energie, jalon, bienvenue, offert, lecteur"
         id brique_id "catalogue"
         enum resultat "nouvelle, doublon, reserve_pleine"
-        enum regle "tirage, garantie, filet, deterministe"
+        enum regle "tirage, garantie, filet, garantie_legendaire, deterministe"
         texte version_equilibrage
         instant ouvert_le
     }
@@ -583,13 +596,48 @@ erDiagram
         enum ressource "exemplaire, encre, sablier, charge"
         id brique_id "si exemplaire, nullable"
         entier delta "+1, -1, +2..."
-        enum motif "decouverte, pli, doublon, sablier, indice, jalon, depart"
+        enum motif "decouverte, pli, doublon, sablier, indice, jalon, depart, quete, lecteur, palier, bienvenue"
         instant le
     }
     GRAINE_ACCORDEE {
         id joueur_id PK, FK
         id fascicule_id PK "catalogue"
         instant accordee_le
+    }
+    QUETE_DU_JOUR {
+        id joueur_id PK, FK
+        date jour PK "UTC, renouvelé à minuit GMT"
+        entier rang PK "1 à 3 : table, mémoire, adresse"
+        id quete_id "catalogue"
+        id cible_id "catalogue, nullable"
+        instant faite_le "nullable"
+    }
+    CARTE_LECTEUR {
+        id joueur_id PK, FK
+        entier numero PK "1, 2, 3..."
+        entier tampons "0 à 7"
+        date dernier_tampon "un tampon par jour au plus"
+        instant recuperee_le "nullable, jamais expirée"
+    }
+    RICOCHET {
+        id joueur_id PK, FK
+        id unite_id PK "catalogue : une carte trouvée"
+        entier niveau "0 à 3"
+        date prochaine_revision
+        instant maitrisee_le "nullable, définitive"
+    }
+    PALIER_ATTEINT {
+        id joueur_id PK, FK
+        id quete_id PK "catalogue : quête au long cours"
+        entier palier PK
+        instant atteint_le
+        instant recupere_le "nullable"
+    }
+    QUETE_INITIALE {
+        id joueur_id PK, FK
+        id quete_id PK "catalogue ; le cadeau de bienvenue en est une"
+        instant atteinte_le
+        instant recuperee_le "nullable"
     }
     MIGRATION {
         id joueur_id PK, FK
@@ -614,6 +662,11 @@ erDiagram
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
 | `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. |
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
+| `quete_du_jour` | Les trois quêtes du jour. | Tirées à la première visite après minuit GMT, seulement parmi les quêtes faisables ; jamais sur un mot légendaire ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
+| `carte_lecteur` | Cartes de lecteur et leurs tampons. | Un tampon par jour où les trois quêtes sont faites ; au 7ᵉ, la récompense attend d’être récupérée et une nouvelle carte commence. |
+| `ricochet` | Niveau de chaque carte trouvée. | Seule une bonne réponse à une carte à revoir fait monter son niveau ; au niveau 3, la carte est maîtrisée, définitivement ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). |
+| `palier_atteint` | Paliers des quêtes au long cours. | Comme `jalon_atteint` : marqué quand il est atteint, récupéré une seule fois. |
+| `quete_initiale` | Cadeau de bienvenue et quêtes initiales. | Une ligne par quête faite ; le cadeau est atteint à la fin du tutoriel ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)). |
 | `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
 
 **Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
@@ -652,6 +705,10 @@ Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la
 - Pour chaque ressource, la somme des `mouvement` égale le solde correspondant.
 - Tout identifiant du catalogue référencé existe dans la version du joueur et appartient à un fascicule paru.
 - Aucune colonne ne contient de texte libre saisi par le joueur.
+- Un tampon par (joueur, jour) au plus ; `carte_lecteur.tampons` est compris entre 0 et 7.
+- `ricochet.niveau` est compris entre 0 et 3 ; `maitrisee_le`, une fois rempli, ne s’efface plus.
+- Une récompense de tampon, de palier ou de quête initiale ne se récupère qu’une fois, et n’expire jamais.
+- Les cohortes de rétention ne sont que des agrégats, calculés par des tâches planifiées à partir de `cree_le`, `derniere_activite` et `mois_activite_precedente` ; aucun agrégat de moins de 50 joueurs n’est affiché ni exporté ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
 
 ## Contraintes d'intégrité
 
