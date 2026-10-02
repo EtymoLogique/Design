@@ -1,6 +1,6 @@
 # ADR 0035 — Plis d’affixes, pondérés par la seule rareté
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) : les légendaires n’ont plus de poids ; elles se partagent une chance fixe de 3 % par pli. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0011](0011-plis-raretes-et-doublons.md), pour le poids du type et la répartition du poids entre les briques d’une même classe ; [ADR 0016](0016-plis-et-jaquettes-par-fascicule.md), pour les briques que tire le pli d’un fascicule
 
 ## Contexte

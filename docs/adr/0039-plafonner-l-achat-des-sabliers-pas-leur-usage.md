@@ -1,6 +1,6 @@
 # ADR 0039 — Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) et l’[ADR 0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) : l’encre ne s’obtient plus seulement en ouvrant des plis ; les quêtes, la carte de lecteur et le cadeau de bienvenue en donnent aussi, en quantité bornée, et le rythme reste borné. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0020](0020-deux-plis-en-attente-et-sabliers.md) et [ADR 0018](0018-sabliers-et-boutique.md), pour le prix du sablier (1 goutte), son achat implicite au moment de l'usage, le plafond de 12 sabliers par 24 h glissantes, sur l'usage comme sur l'échange, le plafond de 36 sabliers détenus et l'annonce du temps perdu avant de confirmer ; [ADR 0038](0038-indices-a-prix-croissant-et-format-des-jalons.md), pour les sabliers de jalon perdus au-delà de 36 détenus. Le reste de ces ADR reste en vigueur
 
 ## Contexte

@@ -1,6 +1,6 @@
 # ADR 0042 — Page Quêtes et récompenses de jalon à récupérer
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) : l’onglet « Journalières » reçoit les quêtes du jour et la carte de lecteur, et un troisième onglet, « Au long cours », s’ajoute. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0038](0038-indices-a-prix-croissant-et-format-des-jalons.md), pour le moment où le serveur accorde un jalon et pour l’endroit où ses récompenses s’affichent ; le format des jalons et le prix des indices restent en vigueur
 - **Complète** : [ADR 0007](0007-etat-et-economie-autoritaires.md), pour la commande de récupération ; [ADR 0034](0034-ecran-dans-l-adresse.md), pour l’adresse de la nouvelle destination
 

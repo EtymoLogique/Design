@@ -51,6 +51,14 @@ XREFS = {
     "0039": [("plis.html#sablier", "Le sablier dans l’atelier des plis"), ("interfaces.html#i-22", "Échanges d’encre")],
     "0036": [("plis.html#chances", "Les chances du pli"), ("interfaces.html#i-20", "L’atelier du pli")],
     "0042": [("interfaces.html#i-18", "Objectifs et jalons"), ("interfaces.html#i-01", "Navigation principale")],
+    "0043": [("plis.html#chances", "Les chances du pli"), ("codex.html#codex", "Complétude et légendaires trouvées")],
+    "0044": [("interfaces.html#i-26", "Les ricochets")],
+    "0045": [("interfaces.html#i-27", "Quêtes du jour et carte de lecteur"), ("interfaces.html#i-28", "Quêtes au long cours")],
+    "0046": [("interfaces.html#i-29", "Cadeau de bienvenue et quêtes initiales")],
+    "0047": [("plis.html#fascicules", "Les fascicules côté joueur")],
+    "0048": [("plis.html#fascicules", "Un fascicule tous les 30 jours")],
+    "0049": [("interfaces.html#i-19", "Choix du fascicule"), ("interfaces.html#i-23", "Nouveau fascicule")],
+    "0050": [("interfaces.html#i-30", "Votre cabinet")],
 }
 
 

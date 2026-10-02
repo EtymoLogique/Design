@@ -1,6 +1,6 @@
 # ADR 0015 — Codex par fascicule et légendaires secrètes
 
-- **Statut** : Accepté, précisé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : le secret tient à l'interface, pas aux fichiers publiés. Partiellement remplacé par l'[ADR 0036](0036-chances-des-legendaires-toujours-affichees.md) : la chance des légendaires est toujours affichée, même nulle ; le secret porte sur leur nombre et leur nature
+- **Statut** : Accepté, précisé par l'[ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) : le secret tient à l'interface, pas aux fichiers publiés. Partiellement remplacé par l'[ADR 0036](0036-chances-des-legendaires-toujours-affichees.md) : la chance des légendaires est toujours affichée, même nulle ; le secret porte sur leur nombre et leur nature. Partiellement remplacé aussi par l’[ADR 0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) : une légendaire trouvée n’a plus sa propre ligne de chance, un mot légendaire reste sans silhouette même quand sa légendaire est trouvée, et le compte des légendaires trouvées, briques et mots, s’affiche toujours, même à 0
 - **Remplace partiellement** : [ADR 0011](0011-plis-raretes-et-doublons.md), pour l'affichage des chances des briques légendaires inconnues
 - **Complète** : [ADR 0014](0014-sources-et-fascicules.md) (fascicules dans le codex)
 

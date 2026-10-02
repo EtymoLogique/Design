@@ -1,6 +1,6 @@
 # ADR 0016 — Un pli et une jaquette par fascicule
 
-- **Statut** : Accepté, partiellement remplacé par l'[ADR 0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) : le pli d'un fascicule ne tire que ses préfixes et ses suffixes, jamais un mot. Le reste du présent ADR reste en vigueur.
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0035](0035-plis-d-affixes-ponderes-par-la-rarete.md) : le pli d'un fascicule ne tire que ses préfixes et ses suffixes, jamais un mot. Partiellement remplacé aussi par l’[ADR 0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) : la garantie de nouveauté et le filet ne portent que sur les briques non légendaires du fascicule. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0011](0011-plis-raretes-et-doublons.md), pour le catalogue du tirage et le compteur de la garantie ; [ADR 0012](0012-briques-rationnees.md), pour le compteur du filet d'utilité
 - **Complète** : [ADR 0014](0014-sources-et-fascicules.md) (fascicules), [ADR 0015](0015-codex-fascicules-et-legendaires.md) (légendaires secrètes)
 
