@@ -169,7 +169,7 @@ Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éd
 - **Langues** : progression par langue et liens historiques déjà rencontrés.
 - **Familles** : branches découvertes, silhouettes restantes et objectifs.
 - **Relations** : vue avancée du chemin entre les formes, après validation de son intérêt UX.
-- **Votre cabinet** : les nombres du joueur, jamais comparés à ceux des autres : jours de jeu, mots trouvés, langues rencontrées, mot au plus long voyage, cartes maîtrisées, légendaires trouvées, cartes de lecteur remplies ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
+- **Cabinet** (onglet du codex, fusionné avec les objectifs) : les nombres du joueur, jamais comparés à ceux des autres : jours de jeu, mots trouvés, langues rencontrées, mot au plus long voyage, cartes maîtrisées, légendaires trouvées, cartes de lecteur remplies ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
 
 ### Vue globale
 
@@ -408,7 +408,7 @@ Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
 
 ## Interfaces
 
-L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs (familles, langues) y forment un onglet du codex ; les jalons ont leur page, « Quêtes », où le joueur récupère leurs récompenses ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)). Cette page compte trois onglets : quêtes du jour et carte de lecteur, jalons des fascicules, quêtes au long cours ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). Les ricochets s'ouvrent depuis le codex et depuis les quêtes ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html), sauf les écrans des quêtes, des ricochets, du cadeau de bienvenue et de « Votre cabinet », qui restent à dessiner.
+L'inventaire des interfaces de la PWA (coque, première session, table de fusion, codex, plis, réglages et erreurs), avec leur forme sur mobile et sur ordinateur, est tenu dans la [page des interfaces](interfaces.html). Les objectifs (familles, langues) y forment un onglet du codex ; les jalons ont leur page, « Quêtes », où le joueur récupère leurs récompenses ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)). Cette page compte trois onglets : quêtes du jour et carte de lecteur, jalons des fascicules, quêtes au long cours ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). Les ricochets s'ouvrent depuis le codex et depuis les quêtes ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). Chaque interface est dessinée sur mobile et sur ordinateur dans les [maquettes](maquettes.html), sauf les écrans des quêtes au long cours et du cadeau de bienvenue, qui restent à dessiner.
 
 ## Identité visuelle
 

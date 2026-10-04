@@ -27,13 +27,14 @@ Il faut donc une activité qui se joue sans énergie ni exemplaire, sur ce que l
 | Sens d’une brique | *géo-* veut-il dire « terre », « vie », « peur » ou « étude » ? | gloses des briques |
 | Brique d’un sens | Quelle brique veut dire « peur » ? | gloses des briques |
 | Mot d’un sens littéral | Quel mot veut dire « description de la terre » ? | sens littéraux |
-| Littéral ou actuel | Pour *géographie*, « description de la terre » est-il le sens littéral ou le sens actuel ? | sens littéral et définition actuelle |
-| Découper | Touchez l’endroit où *géographie* se coupe : les couleurs du préfixe et du suffixe apparaissent. | segments de la composition |
+| Littéral ou actuel | Pour *géographie*, lequel est le sens littéral : « description de la terre » ou « science qui décrit la surface de la Terre » ? | sens littéral et définition actuelle, seulement s’ils diffèrent nettement |
+| Découper | Où *géographie* se coupe-t-il : *géo · graphie*, *géog · raphie*, *gé · ographie* ou *géogra · phie* ? Au verdict, les couleurs du préfixe et du suffixe apparaissent. | segments de la composition |
 | Paires | Reliez quatre briques à leurs quatre sens. | gloses des briques |
 
 - Réponses et leurres viennent des cartes trouvées et des briques connues du joueur : jamais d’une carte inconnue, qui serait dévoilée, jamais d’un mot inventé. Avec moins de quatre cartes disponibles, une question propose deux ou trois choix.
-- Pas de chronomètre. Une brique s’affiche toujours comme une brique, jamais en texte brut. Une mauvaise réponse s’affiche en Gris encre, comme un échec à la table, jamais en rouge.
+- Pas de chronomètre. Un toucher sur un choix répond, sans bouton « Valider ». Une brique s’affiche toujours comme une brique, jamais en texte brut, et sans sa glose quand la glose est la réponse. Une mauvaise réponse s’affiche en Gris encre, comme un échec à la table, jamais en rouge.
 - Une mauvaise réponse ne coûte rien : la carte revient simplement plus tôt.
+- Le codex n’affiche pas de nombre de cartes à revoir : un tas qui grossit se vit comme un devoir. Le bouton « Faire des ricochets » suffit.
 
 ### La maîtrise
 
@@ -46,11 +47,12 @@ Il faut donc une activité qui se joue sans énergie ni exemplaire, sur ce que l
 ### Autorité serveur
 
 - Niveaux et prochaines révisions sont des données du joueur. Le serveur vérifie chaque réponse, puisque les ricochets font avancer les quêtes ([ADR 0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). La commande `ricochet` est idempotente, comme les autres ([ADR 0007](0007-etat-et-economie-autoritaires.md)).
+- Le verdict s’affiche dès la réponse : le client le calcule à partir du catalogue, qui est public. Attendre le serveur ne protégerait donc aucune réponse, et ralentirait chaque question. La commande part en même temps, et le serveur fait foi pour le niveau, la maîtrise et les quêtes. Le récapitulatif de fin de séance, lui, affiche les retours confirmés par le serveur.
 - Hors connexion, les ricochets ne se jouent pas, comme toute commande ([ADR 0041](0041-hors-connexion-consultation-seule.md)).
 
 ### Le nom
 
-« Ricochets » : chaque bonne réponse renvoie la carte plus loin, comme un galet qui rebondit de plus en plus loin. Le nom se décline : « Faites des ricochets », « Cinq ricochets sans faute », « Encore un ricochet et la carte *géologie* sera maîtrisée ».
+« Ricochets » : chaque bonne réponse renvoie la carte plus loin, comme un galet qui rebondit de plus en plus loin. Le nom se décline : « Faites des ricochets », « Cinq ricochets sans faute », « Dans 7 jours, un ricochet juste et la carte *géologie* sera maîtrisée ».
 
 ## Options envisagées
 
@@ -65,6 +67,18 @@ Il faut donc une activité qui se joue sans énergie ni exemplaire, sur ce que l
 ### Un chronomètre
 
 Écarté : il presse le joueur et pénalise ceux qui lisent ou répondent plus lentement.
+
+### Attendre le serveur avant le verdict
+
+Écarté : le catalogue public donne déjà toutes les réponses au client, l’attente n’empêcherait aucune triche et coûterait un aller-retour réseau par question.
+
+### Découper en touchant le mot
+
+Écarté : sur mobile, les lettres sont trop étroites pour une cible de 44 px, et un mot en trois parties a plusieurs coupes justes.
+
+### Littéral ou actuel sur un seul sens
+
+Écarté : une question à deux réponses, sur un sens montré seul, se gagne une fois sur deux au hasard, et devient ambiguë quand le sens littéral et la définition actuelle se ressemblent.
 
 ### D’autres noms
 

@@ -298,3 +298,76 @@ body.nocturne .mq-lang { color: var(--c-lang); }
 .mq-phone .mq-list > span { min-height: 34px; padding: 4px 0; }
 .mq-list > span > .mq-row:first-child { display: flex; flex-wrap: nowrap; }
 .mq-fasc .mq-jk.aleph::before { top: 8%; font-size: 30px; }
+
+/* ---------- I-27 : quêtes du jour et carte de lecteur ---------- */
+.mq-tabs.five { grid-template-columns: repeat(5, 1fr); }
+.mq-views .mq-badge.in { position: static; display: inline-grid; margin-left: 4px; padding: 0 4px; color: var(--fixed-ink); vertical-align: 1px; }
+.mq-stamps { display: grid; grid-template-columns: repeat(7, 34px); justify-content: space-between; align-items: start; }
+.mq-stamps i { display: grid; place-items: center; aspect-ratio: 1; border: 1.5px dashed var(--line-strong); border-radius: 10px; color: var(--ink-3); font-family: var(--mono); font-size: 9px; font-style: normal; }
+.mq-stamps i.on { display: grid; align-self: start; align-content: start; justify-items: center; aspect-ratio: auto; gap: 5px; border: 0; color: var(--ink); }
+.mq-stamps i.on b { display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid var(--fixed-ink); border-radius: 10px; background: var(--c-action); box-shadow: 3px 3px 0 var(--pop-shadow); color: var(--fixed-ink); font-family: var(--serif); font-size: 13px; font-weight: 700; line-height: 1; rotate: -6deg; }
+.mq-stamps i.on small { font-family: var(--mono); font-size: 6.5px; font-weight: 700; line-height: 1; white-space: nowrap; }
+.mq-stamps i.gift { border-style: solid; border-color: var(--ink); color: var(--ink); }
+.mq-quests { display: grid; gap: 6px; }
+.mq-quest { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 10px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--cream); font-size: 10.5px; }
+.mq-quest.done { border-color: var(--line); background: transparent; color: var(--ink-2); }
+.mq-quest .mq-row { flex-wrap: nowrap; }
+
+/* ---------- I-26 : ricochets ---------- */
+.mq-dots { display: flex; justify-content: center; gap: 8px; }
+.mq-dots i { width: 9px; height: 9px; border: 1.5px solid var(--ink); border-radius: 50%; }
+.mq-dots i.on { background: var(--ink); }
+.mq-dots i.cur { box-shadow: 0 0 0 2.5px var(--paper), 0 0 0 4px var(--ink); }
+.mq-choices { display: grid; gap: 8px; }
+.mq-choice { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--cream); font-family: var(--serif); font-size: 15px; font-weight: 600; }
+.mq-choice .t { flex: 1; }
+.mq-choice small { color: var(--ink-2); font-family: var(--mono); font-size: 8px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; }
+.mq-cm { display: grid; place-items: center; width: 18px; height: 18px; flex: none; border: 1.5px solid var(--line-strong); border-radius: 50%; font-family: var(--mono); font-size: 9px; font-weight: 700; }
+.mq-choice.sel { border-color: var(--ink); outline: 2px solid var(--c-action); outline-offset: 2px; }
+.mq-choice.sel .mq-cm { background: var(--ink); color: var(--paper); }
+.mq-choice.ok { border: 2px solid var(--ink); background: var(--paper-2); box-shadow: 3px 3px 0 var(--pop-shadow); }
+.mq-choice.ok .mq-cm { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.mq-choice.ko { border-style: dashed; background: var(--paper-2); color: var(--ink-2); }
+.mq-choice.ko .mq-cm { border-style: dashed; }
+.mq-badges { display: inline-flex; align-items: center; gap: 4px; }
+.mq-mast { width: 11px; height: 11px; flex: none; fill: currentColor; stroke: none; vertical-align: -1px; }
+.mq-mast.big { width: 22px; height: 22px; }
+.mq-mast.xl { width: 72px; height: 72px; }
+.mq-card .top .mq-mast { color: var(--tt, #0f1f19); }
+.mq-qcard { align-items: center; justify-content: center; border-style: dashed; border-width: 2px; background: transparent; }
+.mq-qcard::before { display: none; }
+.mq-qm { color: var(--ink-3); font-family: var(--serif); font-size: 34px; font-style: italic; }
+.mq-rico { position: absolute; z-index: 5; top: 50%; left: 50%; display: grid; gap: 12px; width: 640px; padding: 16px 18px 18px; border: 2px solid var(--fixed-ink); border-radius: 20px; background: var(--cream); box-shadow: 8px 8px 0 var(--pop-shadow); transform: translate(-50%, -46%); }
+.mq-rico-h { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.mq-rico-b { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: start; }
+.mq-rico-b .mq-card { width: 120px; }
+.mq-rico-b .mq-card .w { font-size: 13px; }
+.mq-rico-b .mq-quest { min-height: 34px; padding: 4px 10px; }
+.mq-rico-p { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.mq-pairs { display: grid; gap: 8px; align-content: start; }
+.mq-pr { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
+.mq-pn { display: grid; place-items: center; width: 20px; height: 20px; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10px; }
+.mq-rico-entry .mq-btn { margin-top: 2px; }
+.mq-sign { display: grid; grid-template-columns: auto 1fr; gap: 18px 28px; align-items: center; margin-top: 18px; padding: 18px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--cream); }
+.mq-sign-fig { display: grid; justify-items: center; gap: 8px; color: var(--ink); }
+.mq-sign-on { display: flex; gap: 10px; }
+.mq-sign-on .mq-card { width: 96px; }
+.mq-sign-vs { grid-column: 1 / -1; display: grid; gap: 8px; }
+.mq-vs { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1.5px solid var(--line-strong); border-radius: 10px; font-size: 10px; font-weight: 700; }
+.mq-vs.on { border-color: var(--ink); background: var(--paper-2); }
+.mq-vs .mq-rar { width: 16px; height: 16px; fill: var(--ink); }
+.mq-dotc { width: 14px; height: 14px; border: 1.5px solid var(--ink); border-radius: 50%; }
+.mq-tr { width: 3px; height: 14px; border-radius: 2px; background: var(--ink); }
+
+/* ---------- I-30 : badges de famille ---------- */
+.mq-fams { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; }
+.mq-badge-fam { display: grid; justify-items: center; gap: 3px; text-align: center; }
+.mq-fring { position: relative; display: grid; place-items: center; width: 60px; height: 60px; }
+.mq-fring svg { position: absolute; inset: 0; width: 100%; height: 100%; rotate: -90deg; fill: none; stroke-width: 4.5; }
+.mq-fring circle { stroke: var(--paper-2); }
+.mq-fring circle.on { stroke: var(--c-family); }
+.mq-fring b { font-family: var(--mono); font-size: 9px; }
+.mq-t.s { font-size: 11px; }
+.mq-phone .mq-stamps { grid-template-columns: repeat(7, 28px); }
+.mq-phone .mq-stamps i.on b { width: 28px; height: 28px; border-radius: 8px; box-shadow: 2px 2px 0 var(--pop-shadow); font-size: 11px; }
+.mq-phone .mq-stamps i { border-radius: 8px; }

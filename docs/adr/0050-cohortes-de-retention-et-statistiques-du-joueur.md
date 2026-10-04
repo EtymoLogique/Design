@@ -31,7 +31,7 @@ Indicateurs suivis, chacun justifié comme le demande l’ADR 0010 :
 
 ### Les statistiques du joueur
 
-- Une vue **« Votre cabinet »**, ouverte depuis le codex, montre au joueur ses propres nombres, jamais comparés à ceux des autres :
+- Un onglet **« Cabinet »** du codex, fusionné avec les objectifs (familles), montre en tête au joueur ses propres nombres, jamais comparés à ceux des autres :
   - jours de jeu ;
   - mots trouvés ;
   - langues rencontrées ;
