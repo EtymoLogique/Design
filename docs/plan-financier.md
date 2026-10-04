@@ -1,6 +1,6 @@
 # ÉtymoLogique — Plan financier sur 18 mois
 
-> Plan du 27 septembre 2026, fondé sur l’[étude de marché](etude-de-marche.md). Montants en euros hors taxes, arrondis à la centaine (à la dizaine sous 1 000 €). Les tableaux sont calculés par `docs/scripts/plan_financier.py` : pour changer une hypothèse, modifiez le script puis relancez-le, ne retouchez pas les tableaux à la main.
+> Plan du 27 septembre 2026, fondé sur l’[étude de marché](etude-de-marche.md). Montants en euros hors taxes, arrondis à la centaine (à la dizaine sous 1 000 €). Les tableaux sont calculés par `outils/src/bin/plan_financier.rs` : pour changer une hypothèse, modifiez ce fichier puis relancez l’outil, ne retouchez pas les tableaux à la main.
 
 ## Résumé
 
@@ -307,7 +307,7 @@ Chaque levier ci-dessous change une décision ou en crée une : il demande un AD
 ## 8. Mettre à jour le plan
 
 ```sh
-python3 docs/scripts/plan_financier.py   # recalcule les tableaux du § 4
+cargo run -q --manifest-path outils/Cargo.toml --bin plan_financier   # recalcule les tableaux du § 4
 ```
 
-Toutes les hypothèses sont regroupées en tête du script (tarifs, jours, coût d’un fascicule, marketing mois par mois, rétention, scénarios). Remplacez les hypothèses par les mesures réelles dès la bêta : rétention mensuelle par cohorte, mesurée comme le prévoit l’[ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md), part de payeurs, panier moyen, coût par joueur actif au 2ᵉ mois.
+Toutes les hypothèses sont regroupées en tête de `outils/src/bin/plan_financier.rs` (tarifs, jours, coût d’un fascicule, marketing mois par mois, rétention, scénarios). Remplacez les hypothèses par les mesures réelles dès la bêta : rétention mensuelle par cohorte, mesurée comme le prévoit l’[ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md), part de payeurs, panier moyen, coût par joueur actif au 2ᵉ mois.

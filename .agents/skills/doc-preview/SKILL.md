@@ -9,7 +9,7 @@ Les pages de `docs/` sont statiques. Servez-les en HTTP plutôt qu'en `file://`,
 
 ## 1. Préparer
 
-- Si un ADR a changé, régénérez d'abord : `python3 docs/scripts/build_adr.py`.
+- Si un ADR a changé, régénérez d'abord : `cargo run -q --manifest-path outils/Cargo.toml --bin build_adr`.
 - Repérez les pages touchées : `git status --short docs/` et `git diff --name-only master -- docs/`. Une modification de `docs/assets/etymo.css`, `etymo.js` ou `site-nav.*` touche **toutes** les pages : prévisualisez au moins `index.html`, `identite.html`, `jeu.html` et `plis.html`.
 
 ## 2. Lancer le serveur

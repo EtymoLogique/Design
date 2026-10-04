@@ -1,6 +1,6 @@
 # AGENTS.md — ÉtymoLogique
 
-ÉtymoLogique est un jeu de logique, de découverte et de collection : le joueur assemble des briques linguistiques (préfixes, suffixes, racines) pour retrouver des mots et explorer leur histoire. Le dépôt contient pour l'instant **le dossier de conception** : vision du jeu, décisions (ADR), identité visuelle, design système et démonstrations interactives en HTML statique. Il n'y a encore ni application ni dépendance à installer.
+ÉtymoLogique est un jeu de logique, de découverte et de collection : le joueur assemble des briques linguistiques (préfixes, suffixes, racines) pour retrouver des mots et explorer leur histoire. Le dépôt contient pour l'instant **le dossier de conception** : vision du jeu, décisions (ADR), identité visuelle, design système et démonstrations interactives en HTML statique. Il n'y a pas d'application ; seuls les outils de génération et de contrôle (`outils/`) demandent Rust (`cargo`).
 
 Tout le contenu est **en français**. Rédigez en français (documentation, microcopie, messages de commit exceptés).
 
@@ -11,10 +11,10 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `README.md` | Présentation du projet, prévisualisation, contribution, licences. |
 | `LICENSE`, `LICENSE-CONTENT` | Code sous AGPL 3.0 ou ultérieure, contenu sous CC BY-SA 4.0 ; nom et logo réservés (ADR 0017). |
 | `docs/game-design.md` | Vision du jeu : piliers, vocabulaire, boucle, règles de jeu, identité, périmètre du MVP. |
-| `docs/etude-de-marche.md`, `docs/plan-financier.md` | Étude de marché et plan financier sur 18 mois (développement, lancement, MCO et fascicules). Les tableaux du plan sont générés par `docs/scripts/plan_financier.py` (entre `<!-- PLAN:START -->` et `<!-- PLAN:END -->`) : ne pas les éditer à la main. |
+| `docs/etude-de-marche.md`, `docs/plan-financier.md` | Étude de marché et plan financier sur 18 mois (développement, lancement, MCO et fascicules). Les tableaux du plan sont générés par `outils/src/bin/plan_financier.rs` (entre `<!-- PLAN:START -->` et `<!-- PLAN:END -->`) : ne pas les éditer à la main. |
 | `docs/adr/*.md` | Architecture Decision Records, numérotés `NNNN-titre.md`, indexés dans `docs/adr/README.md`. |
 | `docs/adr.html` | Page générée à partir des ADR (entre `<!-- ADR:START -->` et `<!-- ADR:END -->`) : ne pas éditer à la main. |
-| `docs/scripts/build_adr.py` | Génère `adr.html` ; contient aussi `XREFS`, les renvois de chaque ADR vers les pages. |
+| `outils/` | Outils en Rust, un binaire par commande : `build_adr` génère `adr.html` et contient aussi `XREFS`, les renvois de chaque ADR vers les pages ; `plan_financier` calcule les tableaux du plan financier ; `check_identity` contrôle l'identité visuelle. |
 | `docs/index.html` | Accueil du dossier de direction. |
 | `docs/identite.html`, `design-system.html`, `typographie.html`, `mouvement.html` | Identité visuelle et design système. |
 | `docs/interfaces.html`, `maquettes.html` | Inventaire des 30 interfaces de la PWA et les maquettes statiques de 27 d’entre elles et de I-30, mobile et ordinateur (styles dans `docs/assets/maquettes.css`, préfixe `mq-`). |
@@ -54,7 +54,7 @@ Si deux sources se contredisent, signalez l'écart au lieu de choisir en silence
 ## Modifier la documentation
 
 - **Changer une décision** : nouvel ADR, qui déclare ce qu'il remplace ; l'ancien reste, avec un statut mis à jour. Les corrections factuelles peuvent modifier l'ADR existant. Voir le skill `adr`.
-- **Après toute modification d'un ADR** : `python3 docs/scripts/build_adr.py`, puis committez `adr.html`.
+- **Après toute modification d'un ADR** : `cargo run -q --manifest-path outils/Cargo.toml --bin build_adr`, puis committez `adr.html`.
 - **Renvois croisés** : les pages se renvoient les unes aux autres (`<p class="xrefs">`, liens `#ancre`). Gardez-les à jour quand vous renommez une ancre ou une page.
 - **Nouvelle page** : ajoutez-la à `GROUPS` dans `docs/assets/site-nav.js` et reprenez l'en-tête commun (`site-nav.css`, `etymo.css`, `lang="fr"`, lien d'évitement).
 - **Pas de lien symbolique dans `docs/`** : la publication Pages échoue.
@@ -63,11 +63,11 @@ Si deux sources se contredisent, signalez l'écart au lieu de choisir en silence
 ## Commandes
 
 ```sh
-python3 docs/scripts/build_adr.py                                     # régénérer adr.html
-python3 docs/scripts/plan_financier.py                                # recalculer les tableaux du plan financier
+cargo run -q --manifest-path outils/Cargo.toml --bin build_adr            # régénérer adr.html
+cargo run -q --manifest-path outils/Cargo.toml --bin plan_financier       # recalculer les tableaux du plan financier
 python3 -m http.server 8000 --directory docs                          # prévisualiser (voir le skill doc-preview)
-python3 .agents/skills/visual-identity-check/check_identity.py        # contrôler l'identité visuelle
-python3 .agents/skills/visual-identity-check/check_identity.py --base master  # seulement les lignes modifiées
+cargo run -q --manifest-path outils/Cargo.toml --bin check_identity --    # contrôler l'identité visuelle
+cargo run -q --manifest-path outils/Cargo.toml --bin check_identity -- --base master  # seulement les lignes modifiées
 ```
 
 ## Skills

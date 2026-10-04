@@ -10,7 +10,7 @@ Ce n'est ni un dictionnaire ni un simulateur de concaténation : les recettes re
 
 ## État du projet
 
-Le dépôt contient pour l'instant le **dossier de conception** : vision du jeu, décisions d'architecture (ADR), identité visuelle, design système et démonstrations jouables en HTML statique. Il n'y a encore ni application ni dépendance à installer.
+Le dépôt contient pour l'instant le **dossier de conception** : vision du jeu, décisions d'architecture (ADR), identité visuelle, design système et démonstrations jouables en HTML statique. Il n'y a pas encore d'application ; seuls les outils de génération et de contrôle (`outils/`) demandent Rust (`cargo`).
 
 Les piliers du jeu :
 
@@ -52,8 +52,8 @@ La démo garde la réserve, les découvertes et les plis d'une page à l'autre, 
 Tout le contenu est rédigé **en français**, avec la typographie française (« guillemets », espaces insécables, apostrophe ’).
 
 - **Changer une décision** : rédigez un nouvel ADR, qui déclare ce qu'il remplace. L'ancien est conservé.
-- **Après toute modification d'un ADR**, régénérez la page : `python3 docs/scripts/build_adr.py`.
-- **Modification visuelle** : contrôlez l'identité avec `python3 .agents/skills/visual-identity-check/check_identity.py --base master`.
+- **Après toute modification d'un ADR**, régénérez la page : `cargo run -q --manifest-path outils/Cargo.toml --bin build_adr`.
+- **Modification visuelle** : contrôlez l'identité avec `cargo run -q --manifest-path outils/Cargo.toml --bin check_identity -- --base master`.
 - Respectez le vocabulaire du jeu : « pli » (jamais « pack »), « codex », « exemplaire », « réserve », « brique ».
 
 Le catalogue du jeu (recettes, mots, silhouettes des fascicules) est édité dans un dépôt privé, pour ne rien dévoiler avant la parution. Il ne contient que des données : tout le code, compilateur et validations compris, reste ici ([ADR 0026](docs/adr/0026-depot-prive-du-catalogue-sans-logique.md)).

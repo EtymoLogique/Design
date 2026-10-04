@@ -1,6 +1,6 @@
 ---
 name: visual-identity-check
-description: Vérifier qu'une modification de docs/ (CSS, HTML, JS, SVG) respecte l'identité visuelle d'ÉtymoLogique (« une couleur, un seul sens ») : script automatique sur la palette, le blanc pur, les ombres colorées, les dégradés et le texte sur couleur vive, puis checklist des règles de couleur, formes, états, rareté, tailles et accessibilité, et revue visuelle. À utiliser pour toute modification d'apparence ou nouveau composant.
+description: Vérifier qu'une modification de docs/ (CSS, HTML, JS, SVG) respecte l'identité visuelle d'ÉtymoLogique (« une couleur, un seul sens ») : outil automatique (`check_identity`) sur la palette, le blanc pur, les ombres colorées, les dégradés et le texte sur couleur vive, puis checklist des règles de couleur, formes, états, rareté, tailles et accessibilité, et revue visuelle. À utiliser pour toute modification d'apparence ou nouveau composant.
 ---
 
 # Skill visual-identity-check
@@ -14,9 +14,9 @@ Références (à relire en cas de doute, elles priment sur ce résumé) :
 ## 1. Contrôle automatique
 
 ```sh
-python3 .agents/skills/visual-identity-check/check_identity.py --base master   # lignes modifiées seulement
-python3 .agents/skills/visual-identity-check/check_identity.py                 # tout docs/ (état des lieux)
-python3 .agents/skills/visual-identity-check/check_identity.py docs/plis.html  # fichiers précis
+cargo run -q --manifest-path outils/Cargo.toml --bin check_identity -- --base master   # lignes modifiées seulement
+cargo run -q --manifest-path outils/Cargo.toml --bin check_identity --                 # tout docs/ (état des lieux)
+cargo run -q --manifest-path outils/Cargo.toml --bin check_identity -- docs/plis.html  # fichiers précis
 ```
 
 | Règle | Sévérité | Correction attendue |
@@ -32,7 +32,7 @@ python3 .agents/skills/visual-identity-check/check_identity.py docs/plis.html  #
 - Les anneaux (`0 0 0 Npx`, pour le focus, une pulsation ou un projecteur) ne sont pas comptés comme des ombres.
 - Une exception assumée se marque en fin de ligne par le commentaire `/* identite: ok — raison */`. Les contre-exemples `class="rule-demo bad"` d'`identite.html` sont ignorés.
 - Avec `--base`, **aucune nouvelle erreur** n'est acceptable. Les écarts préexistants (lancement sans `--base`) se signalent à l'utilisateur, mais ne se corrigent pas sans son accord.
-- Le script ne voit ni le contexte de rendu ni les couleurs calculées en JavaScript : la checklist reste obligatoire.
+- L'outil ne voit ni le contexte de rendu ni les couleurs calculées en JavaScript : la checklist reste obligatoire.
 
 ## 2. Checklist de revue
 
@@ -79,7 +79,7 @@ Lancez le skill `doc-preview` sur les pages touchées : desktop et mobile, ateli
 ## 4. Rapport
 
 Rendez un rapport court :
-- le résultat du script (erreurs et avertissements nouveaux) ;
+- le résultat de l'outil (erreurs et avertissements nouveaux) ;
 - les points de la checklist en écart, avec `fichier:ligne`, la règle enfreinte et la correction proposée ;
 - les exceptions assumées et leur justification ;
 - les captures utiles.

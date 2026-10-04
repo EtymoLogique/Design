@@ -70,7 +70,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 Les ADR sont aussi présentés dans [adr.html](../adr.html), avec des renvois vers les pages qui illustrent chaque décision. Après toute modification d'un ADR, régénérez la page :
 
 ```sh
-python3 docs/scripts/build_adr.py
+cargo run -q --manifest-path outils/Cargo.toml --bin build_adr
 ```
 
 ## Format

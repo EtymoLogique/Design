@@ -29,20 +29,20 @@ En cas de doute entre modifier et remplacer, demandez à l'utilisateur.
    - une décision vérifiable, chiffrée quand c'est possible (plafonds, taux, garanties) ;
    - aucune contradiction non déclarée avec un ADR accepté : lancez le skill `rule-verification` ;
    - le vocabulaire du jeu (pli, codex, exemplaire, réserve, brique) et la typographie française (« », espaces insécables, ’, virgule décimale) ;
-   - le sous-ensemble Markdown que gère `build_adr.py` : titres, paragraphes, listes (imbriquées sur 2 espaces), tableaux, citations `>`, `**gras**`, `*italique*`, `` `code` ``, liens. Pas de HTML, d'image ni de bloc de code.
+   - le sous-ensemble Markdown que gère `outils/src/bin/build_adr.rs` : titres, paragraphes, listes (imbriquées sur 2 espaces), tableaux, citations `>`, `**gras**`, `*italique*`, `` `code` ``, liens. Pas de HTML, d'image ni de bloc de code.
    - liens relatifs : `[ADR 0004](0004-progression-atteignable.md)` vers un autre ADR, `../game-design.md` ou `../plis.html#chances` vers le reste de la doc.
 
 ## 3. Propager
 
 - **ADR remplacé** : mettez à jour sa ligne `Statut` (remplacé, ou partiellement remplacé, avec le lien et le périmètre). Le reste de son texte ne change pas.
 - **`docs/adr/README.md`** : ajoutez la ligne dans la table d'index et mettez à jour le statut des ADR remplacés (par exemple « Accepté, contenu des plis remplacé par 0011 »).
-- **`docs/scripts/build_adr.py`** : ajoutez une entrée `XREFS["NNNN"]` avec 1 à 3 renvois `(page.html#ancre, "Libellé")` vers les pages qui illustrent la décision. Vérifiez que les ancres existent (`grep -n 'id="ancre"' docs/page.html`).
+- **`outils/src/bin/build_adr.rs`** : ajoutez à `XREFS` une entrée `("NNNN", &[("page.html#ancre", "Libellé"), …])` avec 1 à 3 renvois vers les pages qui illustrent la décision. Vérifiez que les ancres existent (`grep -n 'id="ancre"' docs/page.html`).
 - **`docs/game-design.md`** et les pages HTML : alignez les règles décrites sur la nouvelle décision. Dans `docs/boussole.html`, les renvois « ADR NNNN » doivent pointer vers le bon ADR.
 
 ## 4. Générer et vérifier
 
 ```sh
-python3 docs/scripts/build_adr.py      # doit afficher « N ADR écrits dans docs/adr.html »
+cargo run -q --manifest-path outils/Cargo.toml --bin build_adr      # doit afficher « N ADR écrits dans docs/adr.html »
 ```
 
 - Le nombre d'ADR affiché correspond au nombre de fichiers.
