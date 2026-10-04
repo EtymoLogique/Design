@@ -64,7 +64,7 @@ Conséquences pour l'édition :
 
 - Un nouvel affixe peut créer des **mots croisés** avec les briques des anciens fascicules. Ils appartiennent au nouveau fascicule et comptent dans ses 20 à 40 mots. On choisit donc les affixes d'un fascicule en tenant compte de ce qu'ils ouvrent.
 - La recherche des combinaisons candidates est outillée : un script parcourt les suites de briques publiées et interroge l'import du Wiktionnaire pour trouver les mots qui s'analysent ainsi. Chaque candidat est ensuite vérifié dans une source de référence. Une simple ressemblance de chaînes ne prouve jamais une combinaison ([ADR 0003](0003-recettes-de-fusion.md)).
-- **Exclusion déclarée** : une combinaison attestée peut être écartée si le mot est archaïque, trop rare, offensant, ou si son analyse n'est pas établie. L'exclusion est enregistrée avec sa raison et relue. Le joueur qui la tente reçoit un retour honnête, jamais un échec qui laisserait croire que le mot n'existe pas.
+- **Exclusion déclarée** : une combinaison attestée peut être écartée si le mot est archaïque ou offensant. L'exclusion est enregistrée avec sa raison et relue. Le joueur qui la tente reçoit un retour honnête, jamais un échec qui laisserait croire que le mot n'existe pas. Un mot rare ou technique n'est pas une raison d'exclusion, pas plus qu'un mot emprunté en bloc dont les parties sont celles des briques (grec *khronikós*, de *khrónos* et *-ikós*) : l'un et l'autre sont publiés avec leur recette. Une simple ressemblance de chaînes (*antique*, du latin *antiquus*) ne forme pas une combinaison et n'appelle ni recette ni exclusion.
 
 ### Suivi et correction
 

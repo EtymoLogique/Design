@@ -348,7 +348,7 @@ erDiagram
         id id PK
         id fascicule_id FK
         texte combinaison "paire ordonnée de briques"
-        enum raison "archaique, rare, offensant, analyse_non_etablie"
+        enum raison "archaique, offensant"
     }
 ```
 
