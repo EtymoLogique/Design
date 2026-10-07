@@ -10,12 +10,12 @@ Les cinq niveaux de l’ADR 0038 (langue, nature des briques, transformation, br
 
 ## Décision
 
-Un indice porte sur **une recette encore à découvrir**, comme avant. Les trois indices **s’achètent dans l’ordre** : définition, silhouette, puis sens littéral. Un indice n’est vendu qu’une fois le précédent obtenu, et chacun ne se paie qu’une fois par recette.
+Un indice porte sur **une recette encore à découvrir**, comme avant. Les trois indices **s’achètent dans l’ordre** : silhouette, définition, puis sens littéral. Un indice n’est vendu qu’une fois le précédent obtenu, et chacun ne se paie qu’une fois par recette.
 
 | Indice | Contenu | Prix |
 |---|---|---|
-| Définition | La définition du mot | 4 gouttes |
-| Silhouette | La silhouette de la carte, jusqu’ici cachée tant que le mot n’est pas trouvé, montrée comme une carte du codex sans texte ni bouton | 8 gouttes |
+| Silhouette | La silhouette de la carte, jusqu’ici cachée tant que le mot n’est pas trouvé, montrée comme une carte du codex sans texte ni bouton | 4 gouttes |
+| Définition | La définition du mot | 8 gouttes |
 | Sens littéral | Le sens de la composition, par exemple « étude de la vie » | 16 gouttes |
 
 La feuille liste les indices dans cet ordre, du moins cher au plus cher ; seul le suivant à obtenir est achetable. Les boutons de prix sont neutres, avec la goutte de marque : un seul bouton Corail par écran, et un Corail ne porte pas d’icône colorée.
@@ -23,7 +23,7 @@ La feuille liste les indices dans cet ordre, du moins cher au plus cher ; seul l
 - Les prix sont un paramètre d’équilibrage ([ADR 0009](0009-contenu-et-equilibrage.md)). Le prix double d’un indice à l’autre : les trois coûtent 28 gouttes ensemble.
 - Aucun niveau « solution » : le joueur trouve le mot lui-même.
 - **Le sens littéral et la définition ne s’affichent plus gratuitement** sur une carte à trouver : la « piste » du codex et la note de la feuille d’indice disparaissent. Ils ne se lisent qu’après l’achat.
-- Une recette n’offre que les indices que sa carte porte : une carte sans définition ne vend pas d’indice de définition, une carte sans silhouette passe de la définition au sens littéral.
+- Une recette n’offre que les indices que sa carte porte : une carte sans définition ne vend pas d’indice de définition, une carte sans silhouette commence à la définition.
 - Une légendaire cachée ([ADR 0015](0015-codex-fascicules-et-legendaires.md)) ne reçoit toujours aucun indice.
 - Les indices déjà achetés sous l’ancien barème sont supprimés, leur sens ayant changé, et leur prix est remboursé en encre.
 
