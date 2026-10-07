@@ -14,9 +14,11 @@ Un indice porte sur **une recette encore à découvrir**, comme avant, mais le j
 
 | Indice | Contenu | Prix |
 |---|---|---|
-| Silhouette | La silhouette de la carte, jusqu’ici cachée tant que le mot n’est pas trouvé | 4 gouttes |
-| Sens littéral | Le sens de la composition, par exemple « étude de la vie » | 8 gouttes |
 | Définition | La définition du mot | 12 gouttes |
+| Silhouette | La silhouette de la carte, jusqu’ici cachée tant que le mot n’est pas trouvé, montrée comme une carte du codex sans texte ni bouton | 4 gouttes |
+| Sens littéral | Le sens de la composition, par exemple « étude de la vie » | 8 gouttes |
+
+La feuille liste les indices dans cet ordre, quel que soit leur prix. Les boutons de prix sont neutres, avec la goutte de marque : un seul bouton Corail par écran, et un Corail ne porte pas d’icône colorée.
 
 - Les prix sont un paramètre d’équilibrage ([ADR 0009](0009-contenu-et-equilibrage.md)). Les trois indices coûtent 24 gouttes ensemble.
 - Aucun niveau « solution » : le joueur trouve le mot lui-même.
