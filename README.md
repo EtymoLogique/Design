@@ -32,7 +32,7 @@ Les piliers du jeu :
 | [docs/etude-de-marche.md](docs/etude-de-marche.md), [plan-financier.md](docs/plan-financier.md) | Étude de marché et plan financier sur 18 mois |
 | [docs/identite.html](docs/identite.html), [design-system.html](docs/design-system.html) | Identité visuelle et design système |
 | [docs/interfaces.html](docs/interfaces.html), [maquettes.html](docs/maquettes.html) | Inventaire des interfaces de la PWA et leurs maquettes, mobile et ordinateur |
-| [docs/jeu.html](docs/jeu.html), [plis.html](docs/plis.html), [codex.html](docs/codex.html) | Démonstrations jouables : table de fusion, plis, codex |
+| [docs/jeu.html](docs/jeu.html), [plis.html](docs/plis.html), [codex.html](docs/codex.html), [indices.html](docs/indices.html) | Démonstrations jouables : table de fusion, plis, codex, indices |
 | [docs/boussole.html](docs/boussole.html) | Piliers, ce qu'il faut cultiver, ce qu'il faut éviter |
 
 Le dossier `docs/` est publié sur [GitHub Pages](https://lunik.github.io/EtymoLogique/) à chaque push sur `master`. Les autres branches ne sont pas publiées.

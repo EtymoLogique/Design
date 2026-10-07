@@ -1,0 +1,106 @@
+<!doctype html><html lang="fr" data-theme="atelier"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html{color-scheme:light}</style><title>Indices Étymologique</title>
+<style>
+/* Jetons de l'identité (app/web/src/styles.css) : Papier, Crème, Encre ; Ambre = encre/gouttes, Corail = action, Citron/Turquoise = briques. */
+:root{
+  --paper:#f3eee3;--paper-2:#e8dfcc;--cream:#fffbf3;--ink:#0f1f19;--ink-2:#44564d;--ink-3:#5c6b62;
+  --line:rgba(15,31,25,.14);--line-strong:rgba(15,31,25,.9);--pop-shadow:#0f1f19;--fixed-ink:#0f1f19;
+  --c-prefix:#cdf25a;--c-suffix:#4fd1c5;--c-pli:#f4b740;--c-pli-tint:#fcecc6;--c-pli-deep:#8f6200;
+  --c-action:#ff6b4a;--c-action-hover:#ff8667;--c-action-active:#e24e2d;--c-action-deep:#c23d1f;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --sans:"Avenir Next","Segoe UI",Futura,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="atelier"]){
+  --paper:#0f1f19;--paper-2:#172a23;--cream:#182c24;--ink:#f3eee3;--ink-2:#b8c6bd;--ink-3:#809088;
+  --line:rgba(243,238,227,.14);--line-strong:rgba(243,238,227,.8);--pop-shadow:#000;color-scheme:dark}}
+:root[data-theme="nocturne"]{
+  --paper:#0f1f19;--paper-2:#172a23;--cream:#182c24;--ink:#f3eee3;--ink-2:#b8c6bd;--ink-3:#809088;
+  --line:rgba(243,238,227,.14);--line-strong:rgba(243,238,227,.8);--pop-shadow:#000;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-width:320px;padding:32px 16px;background-color:var(--paper-2);
+  background-image:radial-gradient(color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.4px);background-size:22px 22px;
+  color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,p,ul{margin:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.feuille{max-width:520px;margin:0 auto;display:grid;gap:16px;padding:20px;background:var(--cream);
+  border:1.5px solid var(--fixed-ink);border-radius:14px;box-shadow:4px 4px 0 var(--pop-shadow)}
+.entete{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.panel-k{color:var(--ink-3);font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+h1{font:700 22px/1.2 var(--serif);letter-spacing:-.02em}
+h1 small{margin-left:8px;color:var(--ink-3);font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.inkbox{display:flex;align-items:baseline;gap:8px}
+.inkbox strong{font:700 34px/1 var(--serif)}
+.drop{width:14px;height:14px;border:1.5px solid var(--fixed-ink);border-radius:50% 0 50% 50%;background:var(--c-pli);rotate:-45deg;align-self:center;flex:none}
+.drop.t{display:inline-block}
+
+.indices{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.indice{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 12px;min-height:48px;padding:8px 12px;
+  border:1.5px solid var(--line-strong);border-radius:12px;background:var(--paper)}
+.indice.is-obtenu{border-color:var(--fixed-ink);background:var(--cream)}
+.indice h2{font:700 15px/1.3 var(--sans)}
+.indice .panel-k{display:block;margin-bottom:2px}
+.contenu{grid-column:1/-1;display:grid;gap:8px;justify-items:start;padding-top:10px;border-top:1.5px solid var(--line)}
+.coche{font:700 16px var(--mono)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;
+  border:1.5px solid var(--fixed-ink);border-radius:12px;font:800 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.btn-primary{background:var(--c-action);color:var(--fixed-ink);box-shadow:4px 4px 0 var(--pop-shadow)}
+.btn-primary:not(:disabled):hover{background:var(--c-action-hover);box-shadow:6px 6px 0 var(--pop-shadow)}
+.btn-primary:not(:disabled):active{background:var(--c-action-active);box-shadow:0 0 0 var(--pop-shadow)}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-secondary:not(:disabled):hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.btn-prix{min-width:72px;min-height:44px;padding:8px 12px;gap:6px;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:15px;letter-spacing:0}
+.prix{min-width:2ch;text-align:right}
+/* Icône sur surface colorée : ton sur ton, teinte profonde du Corail. */
+.btn-prix .drop{border-color:var(--c-action-deep);background:var(--c-action-active)}
+
+.carte-art{justify-self:center;width:112px;aspect-ratio:3/4;overflow:hidden;color:var(--ink);--art-bg:var(--cream);background:var(--cream);
+  border:1.5px solid var(--fixed-ink);border-radius:10px}
+.carte-art svg{display:block;width:100%;height:100%}
+.bf-lit{padding:6px 12px;border-radius:10px;background:var(--paper-2);font:400 12px/1.5 var(--mono)}
+.bf-def{font:400 18px/1.4 var(--serif)}
+.pk-note{color:var(--ink-2);font-size:13px;line-height:1.45}
+.rangee{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.rangee .btn{min-height:44px;padding:8px 16px}
+@media (prefers-reduced-motion:no-preference){.inkbox.flash strong{animation:flash .4s}@keyframes flash{50%{color:var(--c-pli-deep)}}}
+</style>
+
+<main class="feuille">
+  <div class="entete">
+    <h1>Indice <small>N°&nbsp;001</small></h1>
+  </div>
+  <ul class="indices" id="liste"></ul>
+  <p class="pk-note">Du plus vague au plus précis. Chaque indice ne se paie qu’une fois.</p>
+  <div class="rangee">
+    <button class="btn btn-secondary" id="reset" type="button">Recommencer</button>
+    <button class="btn btn-secondary" id="recharge" type="button">+ 20 gouttes (test)</button>
+  </div>
+</main>
+
+<script>
+const SVG=`<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" focusable="false"><path d="M149.3 534.2L140.5 531M201.1 518L111.2 485.3M227.1 492.5L107.7 449M219 454.4L138.4 425.1M187.7 408L192.1 409.6M157.8 362.1L244.6 393.7M152.7 325.1L272.3 368.7M181.8 300.7L265.6 331.2M235 285L235 285M288.2 269.3L204.4 238.8M317.3 244.9L197.7 201.3M312.2 207.9L225.4 176.3M282.3 162L277.9 160.4M251 115.6L331.6 144.9M242.9 77.5L362.3 121M268.9 52L358.8 84.7M320.7 35.8L329.5 39" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M117.7 540.3L129 538.2L140.5 536.2L152 534.2L163.4 532.1L174.6 529.9L185.2 527.6L195.2 525L204.4 522.2L212.6 519L219.9 515.4L225.9 511.4L230.8 506.9L234.4 502L236.6 496.7L237.6 490.8L237.3 484.5L235.7 477.7L233 470.5L229.1 462.9L224.3 454.9L218.6 446.6L212.2 438.1L205.3 429.4L198 420.5L190.5 411.6L182.9 402.6L175.5 393.7L168.5 384.9L161.9 376.4L156 368L151 359.9L146.8 352.2L143.7 344.9L141.8 338L141.1 331.5L141.7 325.5L143.6 320L146.8 315L151.3 310.4L157.1 306.3L164 302.6L172 299.3L180.9 296.4L190.7 293.7L201.1 291.3L212.1 289.1L223.5 287L235 285L246.5 283L257.9 280.9L268.9 278.7L279.3 276.3L289.1 273.6L298 270.7L306 267.4L312.9 263.7L318.7 259.6L323.2 255L326.4 250L328.3 244.5L328.9 238.5L328.2 232L326.3 225.1L323.2 217.8L319 210.1L314 202L308.1 193.6L301.5 185.1L294.5 176.3L287.1 167.4L279.5 158.4L272 149.5L264.7 140.6L257.8 131.9L251.4 123.4L245.7 115.1L240.9 107.1L237 99.5L234.3 92.3L232.7 85.5L232.4 79.2L233.4 73.3L235.6 68L239.2 63.1L244.1 58.6L250.1 54.6L257.4 51L265.6 47.8L274.8 45L284.8 42.4L295.4 40.1L306.6 37.9L318 35.8L329.5 33.8L341 31.8L352.3 29.7M160.7 555.9L153.5 547.1L146 538.1L138.4 529.2L131 520.3L123.9 511.5L117.2 502.9L111.2 494.5L106 486.4L101.7 478.6L98.5 471.2L96.4 464.2L95.6 457.7L96 451.7L97.7 446.1L100.7 441L105 436.3L110.6 432.2L117.3 428.4L125.2 425L134 422L143.6 419.4L154 416.9L164.9 414.7L176.2 412.6L187.7 410.6L199.3 408.6L210.7 406.5L221.7 404.3L232.3 401.9L242.1 399.3L251.2 396.4L259.3 393.2L266.4 389.5L272.3 385.5L277 381L280.4 376L282.5 370.6L283.2 364.6L282.7 358.2L281 351.4L278.1 344.1L274.1 336.5L269.1 328.5L263.4 320.2L256.9 311.6L249.9 302.8L242.5 293.9L235 285L227.5 276.1L220.1 267.2L213.1 258.4L206.6 249.8L200.9 241.5L195.9 233.5L191.9 225.9L189 218.6L187.3 211.8L186.8 205.4L187.5 199.4L189.6 194L193 189L197.7 184.5L203.6 180.5L210.7 176.8L218.8 173.6L227.9 170.7L237.7 168.1L248.3 165.7L259.3 163.5L270.7 161.4L282.3 159.4L293.8 157.4L305.1 155.3L316 153.1L326.4 150.6L336 148L344.8 145L352.7 141.6L359.4 137.8L365 133.7L369.3 129L372.3 123.9L374 118.3L374.4 112.3L373.6 105.8L371.5 98.8L368.3 91.4L364 83.6L358.8 75.5L352.8 67.1L346.1 58.5L339 49.7L331.6 40.8L324 31.9L316.5 22.9L309.3 14.1" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const Q=[
+ {id:'silhouette',t:'Silhouette',p:4,html:'<span class="carte-art" aria-hidden="true">'+SVG+'</span>'},
+ {id:'lit',t:'Sens littéral',p:8,html:'<p class="bf-lit">«&nbsp;étude de la vie&nbsp;»</p>'},
+ {id:'def',t:'Définition',p:12,html:'<p class="bf-def">Science qui étudie les êtres vivants.</p>'},
+];
+let encre=30,pris=new Set();
+const $=s=>document.querySelector(s);
+function rend(){
+ 
+ $('#liste').innerHTML=Q.map(q=>{const ok=pris.has(q.id),m=encre<q.p;
+  return `<li class="indice${ok?' is-obtenu':''}"><h2>${q.t}</h2>`+
+   (ok?`<span class="coche" aria-label="Obtenu">✓</span><div class="contenu">${q.html}</div>`
+      :`<button type="button" class="btn btn-primary btn-prix" data-q="${q.id}" aria-label="${q.p} gouttes" ${m?'disabled':''}><span class="prix">${q.p}</span><span class="drop t" aria-hidden="true"></span></button>`)+`</li>`}).join('');
+}
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;
+ if(t.id==='reset'){encre=30;pris=new Set();return rend()}
+ if(t.id==='recharge'){encre+=20;return rend()}
+ const q=t.dataset.q&&Q.find(x=>x.id===t.dataset.q);
+ if(q&&encre>=q.p){encre-=q.p;pris.add(q.id);rend()}
+});
+rend();
+</script>
+</html>
