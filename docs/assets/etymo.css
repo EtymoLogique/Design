@@ -933,9 +933,10 @@ button.brick.is-out:hover, button.brick.is-spent:hover, button.brick.is-out:acti
 .seg {
   padding: 0 0.02em;
   background: linear-gradient(var(--c), var(--c)) no-repeat 0 88% / calc(100% - 3px) 32%;
-  animation: segIn 0.6s var(--ease-out) both;
+  /* `backwards` : l'état de repos reste le surlignage plein, même si le navigateur (Safari iOS) ne déroule pas l'animation. */
+  animation: segIn 0.6s var(--ease-out) backwards;
 }
-@keyframes segIn { from { background-size: 0% 32%; } }
+@keyframes segIn { from { background-size: 0% 32%; } to { background-size: calc(100% - 3px) 32%; } }
 .bf-body .r-eq { align-items: flex-start; }
 .bf-body .r-eq-row { justify-content: flex-start; }
 .bf-body .r-eq-row { flex-wrap: nowrap; gap: 8px; }
@@ -1672,6 +1673,7 @@ button.brick { position: relative; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .char { opacity: 1; transform: none; }
+  .seg { animation: none; }
   [data-reveal] { opacity: 1; transform: none; }
 }
   
