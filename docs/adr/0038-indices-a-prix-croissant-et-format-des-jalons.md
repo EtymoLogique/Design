@@ -1,6 +1,6 @@
 # ADR 0038 — Indices à prix croissant et format des jalons
 
-- **Statut** : Accepté, partiellement remplacé par l'[ADR 0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) : les sabliers de jalon s'ajoutent sans plafond de détention, aucun n'est perdu ; et par l'[ADR 0042](0042-page-quetes-et-recompenses-a-recuperer.md) : un jalon atteint n'est plus accordé d'office, sa récompense attend que le joueur la récupère dans la page Quêtes, où les jalons quittent l'onglet « Objectifs » du codex. Le reste du présent ADR reste en vigueur.
+- **Statut** : Accepté, pour sa section « Prix des indices » remplacée par l’[ADR 0051](0051-indices-a-la-carte.md) (trois indices au choix, plus de niveaux ordonnés), et partiellement remplacé par l'[ADR 0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) : les sabliers de jalon s'ajoutent sans plafond de détention, aucun n'est perdu ; et par l'[ADR 0042](0042-page-quetes-et-recompenses-a-recuperer.md) : un jalon atteint n'est plus accordé d'office, sa récompense attend que le joueur la récupère dans la page Quêtes, où les jalons quittent l'onglet « Objectifs » du codex. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0020](0020-deux-plis-en-attente-et-sabliers.md), pour le prix de l’indice ; le reste de l’ADR 0020 reste en vigueur
 - **Complète** : [ADR 0012](0012-briques-rationnees.md) et [ADR 0004](0004-progression-atteignable.md), pour le format des jalons d’un fascicule ; [ADR 0018](0018-sabliers-et-boutique.md), pour les sabliers donnés par un jalon
 
