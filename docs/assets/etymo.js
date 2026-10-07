@@ -1125,6 +1125,8 @@
       $("#inkValue").textContent = String(ink);
       const hintBtn = $("#buyHint");
       hintBtn.disabled = ink < HINT_COST;
+      // Plus aucun mot réalisable avec la réserve : l’indice n’afficherait rien, on cache le bouton.
+      hintBtn.hidden = !canDiscover();
     }
 
     // La jaquette est celle du fascicule choisi : elle ne dit rien de la brique tirée à l'ouverture.
