@@ -372,7 +372,7 @@ body.nocturne .mq-lang { color: var(--c-lang); }
 .mq-phone .mq-stamps i.on b { width: 28px; height: 28px; border-radius: 8px; box-shadow: 2px 2px 0 var(--pop-shadow); font-size: 11px; }
 .mq-phone .mq-stamps i { border-radius: 8px; }
 
-/* Découper (ADR 0052) : la lame en pointillé, la poignée de 44 px sous le mot, les boutons ‹ › et « Couper ici ». */
+/* Découper (ADR 0053) : la lame en pointillé, la poignée de 44 px sous le mot, les boutons ‹ › et « Couper ici ». */
 .mq-cutword { display: flex; justify-content: center; align-items: flex-start; padding: 22px 0 86px; }
 .mq-cutword .mq-word { font-size: 36px; }
 .mq-gap { position: relative; align-self: stretch; width: 0.4em; font-size: 36px; }

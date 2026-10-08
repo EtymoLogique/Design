@@ -1,4 +1,4 @@
-# ADR 0052 — Découper : glisser une lame, puis valider
+# ADR 0053 — Découper : glisser une lame, puis valider
 
 - **Statut** : Proposé
 - **Remplace partiellement** : [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md), pour le format Découper : quatre découpages proposés, option « Découper en touchant le mot » écartée, et « un toucher répond » appliqué à ce format
