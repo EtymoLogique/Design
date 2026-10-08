@@ -57,7 +57,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
 | [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
 | [0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) | Légendaires : une chance fixe, hors des garanties, toujours secrètes | Proposé |
-| [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé |
+| [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0052 |
 | [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
 | [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé |
@@ -65,6 +65,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
+| [0052](0052-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé |
 
 ## Page HTML
 

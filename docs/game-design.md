@@ -299,7 +299,7 @@ La page Quêtes ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md))
 - **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)).
 - **Au long cours** : des quêtes à paliers qui traversent les fascicules, sur les langues, les familles, les transformations, la maîtrise et les cartes de lecteur. Aucune ne compte les légendaires, sauf la première trouvée.
 
-Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot, relier des paires. Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents.
+Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot (le joueur glisse une lame sur le mot, pose ses coupes, puis valide : [ADR 0052](adr/0052-decouper-glisser-une-lame-puis-valider.md)), relier des paires. Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents.
 
 Toutes les récompenses sont affichées d'avance et attendent d'être récupérées ; aucune n'expire.
 
