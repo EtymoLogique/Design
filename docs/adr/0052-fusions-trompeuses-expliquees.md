@@ -83,7 +83,7 @@ Les trompe-l’œil ne sont pas des exclusions. Une exclusion ([ADR 0014](0014-s
 ### Interface
 
 - Le retour s’affiche sous la table, au même endroit que le « presque » : même gabarit, ton sobre, Encre sur le fond de la carte, jamais de rouge d’erreur. La couleur n’est pas le seul signal : un libellé précède l’explication (« Bonne forme, autre brique », « Fausse piste »).
-- Mauvais homographe : la brique visée est soulignée sur la table, et un bouton « Voir les briques *a-* » ouvre la réserve filtrée sur cette forme.
+- **Petites briques cliquables dans le message.** Les briques citées s’affichent comme des briques en ligne (couleur de leur type), chacune étant un bouton d’au moins 44 px de zone tactile qui ouvre sa carte. Dans « Bonne forme, autre brique », la brique posée et la forme (*a-*) sont cliquables ; toucher la forme ouvre la réserve filtrée sur celle-ci, où les deux *a-* se distinguent par leur glose, sans désigner la bonne. Dans « Fausse piste », les deux briques posées sont cliquables.
 - Trompe-l’œil : l’explication courte, puis « Pourquoi ? » ouvre l’explication complète si elle est lisible. Un seul bouton Corail par écran : « Pourquoi ? » est neutre.
 - Vocabulaire : « trompe-l’œil » et « fausse piste » sont réservés à ce retour ; ni « erreur », ni « invalide », ni « faux ami ».
 
