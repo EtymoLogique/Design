@@ -316,6 +316,7 @@ erDiagram
     FASCICULE ||--|{ FASCICULE_UNITE : "déclare"
     UNITE_LEXICALE ||--o{ FASCICULE_UNITE : "est publiée dans"
     FASCICULE ||--o{ EXCLUSION : "écarte"
+    FASCICULE ||--o{ TROMPE_L_OEIL : "met en garde"
 
     BRIQUE {
         id id PK
@@ -350,6 +351,14 @@ erDiagram
         texte combinaison "paire ordonnée de briques"
         enum raison "archaique, offensant"
     }
+    TROMPE_L_OEIL {
+        id id PK
+        id fascicule_id FK
+        id brique_1_id FK "paire ordonnée, UK"
+        id brique_2_id FK
+        id mot_id FK "facultatif : le mot que les lettres épellent"
+        enum motif "autre_origine, mot_simple, autre_decoupage"
+    }
 ```
 
 - Une **brique** pointe vers une unité lexicale : mot, préfixe ou suffixe. Aucune langue ne peut donc être posée sur la table.
@@ -364,6 +373,7 @@ erDiagram
   - `resultat` : les mots qu'il publie. Un mot est le résultat d'**un seul** fascicule ;
   - `ingredient` : les préfixes, suffixes et mots qui servent à ses recettes. Une unité déjà publiée peut être reprise comme ingrédient par plusieurs fascicules.
 - Une **exclusion** enregistre une combinaison attestée volontairement non publiée, avec sa raison.
+- Un **trompe-l’œil** déclare une paire ordonnée de briques qui s’écrit comme un mot sans en venir, avec deux explications rédigées par locale et un fait sourcé ([ADR 0052](adr/0052-fusions-trompeuses-expliquees.md), proposé). Sa clé est la paire d’identifiants de briques, jamais une forme : *a-* « sans » et *a-* « vers » ne partagent donc rien. Le mauvais homographe, lui, n’est pas saisi : il se calcule à partir des briques de même forme.
 - Rareté, poids de tirage, graines, jalons et visibilité restent dans la couche ludique. Les graines sont déclarées par le fascicule ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Les légendaires d’un fascicule se partagent une chance fixe par pli, sans poids propre ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)).
 - La **difficulté** d’un mot (facile, moyen ou difficile) se saisit avec son rôle de résultat. Chaque fascicule en compte un tiers de chaque, à un mot près ; elle n’est jamais affichée au joueur ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)).
 - La couche ludique commune à tous les fascicules, c’est-à-dire le cadeau de bienvenue, les quêtes initiales, les quêtes du jour, la récompense de la carte de lecteur et les quêtes au long cours, est déclarée dans l’index global ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
@@ -855,6 +865,6 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 - **Familles.** Tranché pour le MVP : une famille est dérivée des recettes, les mots formés sur une brique trouvée (codex, vues Familles et Objectifs). Un regroupement éditorial nommé (« La terre ») reste possible plus tard, dans la couche ludique.
 - **Retour d'une exclusion.** Que dit le jeu quand le joueur tente une combinaison attestée mais écartée ?
 - **Traductions.** Les gloses et définitions ne seront d'abord rédigées qu'en français : faut-il imposer une locale de référence unique ?
-- **Homographes sur la table.** Quand le joueur pose le mauvais homographe, faut-il un indice « même forme, autre sens » plutôt qu'un échec neutre ?
+- **Homographes sur la table.** Tranché par l'[ADR 0052](adr/0052-fusions-trompeuses-expliquees.md) (proposé) : « bonne forme, autre brique », calculé, sans nommer la bonne brique.
 - **Conservation des profils.** Combien de temps garder un profil invité inactif, et que dire au joueur avant de le supprimer ?
 - **Anciennes versions.** Combien de temps garder lisibles les manifestes et ressources d'une version remplacée ?

@@ -65,6 +65,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
+| [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
 
 ## Page HTML
 
