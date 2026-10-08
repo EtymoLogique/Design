@@ -52,7 +52,7 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Ricochets** | Courtes questions sur les cartes déjà trouvées. Elles ne consomment rien, et trois bonnes réponses sur trois jours différents rendent une carte **maîtrisée** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). On ne dit ni « révision », ni « quiz ». |
 | **Quête** | Objectif de la page Quêtes : trois quêtes du jour, renouvelées à minuit GMT, des quêtes au long cours à paliers, et les jalons de chaque fascicule ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
 | **Carte de lecteur** | Carte qui reçoit un **tampon** chaque jour où les trois quêtes du jour sont faites, un par jour au plus, sans obligation de jours consécutifs. Au 7ᵉ tampon, une récompense ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). On ne dit ni « série », ni « flamme ». |
-| **Trompe-l’œil** | Fausse fusion expliquée : deux briques dont les lettres forment un mot qui n'en vient pas ([ADR 0052](adr/0052-fusions-trompeuses-expliquees.md), proposé). On ne dit ni « erreur », ni « invalide », ni « faux ami ». |
+| **Trompe-l’œil** | Fausse fusion expliquée : deux briques dont les lettres forment un mot qui n'en vient pas ([ADR 0053](adr/0052-fusions-trompeuses-expliquees.md), proposé). On ne dit ni « erreur », ni « invalide », ni « faux ami ». |
 
 Le terme « Pokédex » décrit bien l'intention de collection, mais le produit utilisera **codex** tant qu'aucun nom propre original n'aura été choisi.
 
@@ -156,7 +156,7 @@ Quand il ne reste qu'un exemplaire d'une brique utile à plusieurs mots, le joue
 | Recette exacte déjà découverte | Rappel rapide de la fiche, sans récompense artificielle ; rien n'est consommé. |
 | Sous-ensemble d'une recette accessible | Indice optionnel : ingrédient manquant ou ordre à revoir. |
 | Recette réelle mais pas encore autorisée | Message honnête indiquant qu'une piste reste à découvrir, sans dévoiler la réponse. |
-| Bonne forme, mauvais homographe (*a-* « sans » posé là où il fallait *a-* « vers ») | « Bonne forme, autre brique » : la brique posée est soulignée, la bonne n'est pas nommée. Rien n'est consommé ([ADR 0052](adr/0052-fusions-trompeuses-expliquees.md), proposé). |
+| Bonne forme, mauvais homographe (*a-* « sans » posé là où il fallait *a-* « vers ») | « Bonne forme, autre brique » : la brique posée est soulignée, la bonne n'est pas nommée. Rien n'est consommé ([ADR 0053](adr/0052-fusions-trompeuses-expliquees.md), proposé). |
 | Trompe-l’œil : les lettres se suivent, le mot n'en vient pas | Une phrase qui dit pourquoi, sans nommer un mot encore à trouver ; l'explication complète se lit une fois le mot découvert (section « À ne pas confondre » de son verso). Rien n'est consommé ni récompensé. |
 | Aucune recette correspondante | Échec neutre et immédiat ; aucun exemplaire n'est consommé. |
 
@@ -302,7 +302,7 @@ La page Quêtes ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md))
 - **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)).
 - **Au long cours** : des quêtes à paliers qui traversent les fascicules, sur les langues, les familles, les transformations, la maîtrise et les cartes de lecteur. Aucune ne compte les légendaires, sauf la première trouvée.
 
-Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot, relier des paires. Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents.
+Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot (le joueur glisse une lame sur le mot, pose ses coupes, puis valide : [ADR 0053](adr/0053-decouper-glisser-une-lame-puis-valider.md)), relier des paires. Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents.
 
 Toutes les récompenses sont affichées d'avance et attendent d'être récupérées ; aucune n'expire.
 
