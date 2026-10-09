@@ -60,7 +60,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0053 |
 | [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
-| [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé |
+| [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé, fascicules de lancement remplacés par 0059 |
 | [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé |
 | [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
@@ -72,6 +72,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0056](0056-date-de-premiere-attestation.md) | Date de première attestation d’un mot | Proposé |
 | [0057](0057-themes-editoriaux-nommes.md) | Pas de thème éditorial nommé dans le MVP | Proposé |
 | [0058](0058-langues-d-emprunt.md) | Langues d’emprunt, toujours sans variété | Proposé |
+| [0059](0059-tiers-de-difficulte-hors-lancement.md) | La règle des tiers à partir du onzième fascicule | Proposé |
 
 ## Page HTML
 

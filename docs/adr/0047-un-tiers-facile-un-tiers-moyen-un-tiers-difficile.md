@@ -1,6 +1,6 @@
 # ADR 0047 — Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0059](0059-tiers-de-difficulte-hors-lancement.md) : la règle des tiers ne s’applique pas aux dix fascicules de lancement ; elle reste en vigueur à partir du onzième
 - **Complète** : [ADR 0022](0022-fascicules-de-20-a-30-mots.md) (taille d’un fascicule) ; [ADR 0009](0009-contenu-et-equilibrage.md) (équilibrage dans la couche ludique)
 
 ## Contexte
