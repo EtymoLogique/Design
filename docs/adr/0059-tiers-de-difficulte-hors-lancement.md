@@ -8,7 +8,7 @@
 
 L’[ADR 0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) demande un tiers de mots faciles, moyens et difficiles dans chaque fascicule. Un mot difficile cumule deux écarts : sa recette porte une transformation, et son sens actuel s’est éloigné du sens littéral.
 
-Les dix fascicules de lancement ([ADR 0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md)) comptent 718 mots, dont 10 difficiles. Ce n’est pas une erreur de classement : ils sont bâtis sur des composés savants transparents (*biologie*, *géographie*, *thermomètre*), dont les briques gardent leur forme. Les fascicules 1 et 2 n’ont que 7 et 2 recettes avec transformation, donc au plus 7 et 2 mots difficiles possibles, pour 17 attendus. La relecture des fascicules 1 à 4 dans le TLFi (issue Content #13) le confirme.
+Les dix fascicules de lancement ([ADR 0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md)) comptent 718 mots, dont 9 difficiles (après correction d’*épigramme*, sans transformation). Ce n’est pas une erreur de classement : ils sont bâtis sur des composés savants transparents (*biologie*, *géographie*, *thermomètre*), dont les briques gardent leur forme. Les fascicules 1 et 2 n’ont que 7 et 2 recettes avec transformation, donc au plus 7 et 2 mots difficiles possibles, pour 17 attendus. La relecture des fascicules 1 à 4 dans le TLFi (issue Content #13) le confirme.
 
 Respecter les tiers demanderait d’ajouter environ deux cents mots difficiles et de retirer autant de mots faciles, chacun avec ses faits sourcés, sa recette, sa silhouette et son explication, à quelques semaines du lancement.
 
