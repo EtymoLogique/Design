@@ -35,7 +35,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
 | [0020](0020-deux-plis-en-attente-et-sabliers.md) | Deux plis en attente, sabliers gagnés par l'encre | Accepté, prix de l'indice remplacé par 0038, prix et plafonds des sabliers par 0039 |
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
-| [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté |
+| [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté, dix premiers fascicules remplacés par 0054 |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
 | [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027, fichiers à venir et bascule par l'horloge de l'API par 0029 |
@@ -67,6 +67,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
 | [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
 | [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé |
+| [0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) | Fascicules de lancement plus gros et plus rapprochés | Proposé |
 
 ## Page HTML
 
