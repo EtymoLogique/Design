@@ -98,6 +98,8 @@ erDiagram
     CONVENTION_TRANSLITTERATION ||--o{ TRANSLITTERATION : "régit"
     UNITE_LEXICALE ||--|{ SENS : "signifie"
     SENS ||--|{ SENS_LIBELLE : "est glosé"
+    FAIT ||--o| ATTESTATION : "spécialisé en"
+    MOT ||--o| ATTESTATION : "est attesté"
 
     UNITE_LEXICALE {
         id id PK, FK "= fait.id"
@@ -144,6 +146,13 @@ erDiagram
         texte glose "courte : vie, terre"
         texte definition "sens actuel, phrase"
     }
+    ATTESTATION {
+        id id PK, FK "= fait.id"
+        id unite_id FK, UK "un mot français"
+        entier annee "jamais dans le futur"
+        enum precision "annee, vers, avant, intervalle, siecle"
+        entier annee_fin "intervalle seulement, nullable"
+    }
 ```
 
 | Table | Rôle | Remarques |
@@ -155,6 +164,7 @@ erDiagram
 | `translitteration` | Lecture d'une forme selon une convention. | Une translittération n'est pas une racine collectionnable (ADR 0006). Elle exige une convention déclarée (ADR 0005). |
 | `sens` | Acception d'une unité. | Une partie de composition désigne le sens précis qu'elle mobilise. |
 | `sens_libelle` | Glose et définition par locale. | La glose sert aux briques (« terre »). La définition actuelle est obligatoire pour un mot découvrable. |
+| `attestation` | Première attestation d’un mot français. | Au plus une par mot, quel que soit son sens ; tirée d’une source de référence, avec la précision de la source (« vers 1175 », « xiiiᵉ s. »). La date d’un emprunt est celle de l’attestation de la cible, jamais un champ de la relation ([ADR 0056](adr/0056-date-de-premiere-attestation.md)). |
 
 **Pourquoi `nature` est répétée dans `mot` et `affixe`.** C'est la technique du discriminant partagé : le sous-type référence la paire (`unite_id`, `nature`) de `unite_lexicale`, et une contrainte fixe la valeur admise dans chaque sous-type. Une unité ne peut ainsi être à la fois un mot et un affixe, et un affixe ne peut pas changer de position en silence.
 
@@ -264,7 +274,7 @@ erDiagram
 
     FAIT {
         id id PK
-        enum nature_fait "unite, forme, sens, composition, relation"
+        enum nature_fait "unite, forme, sens, attestation, composition, relation"
         enum confiance "etablie, probable, discutee, non_retenue"
         enum etat_relecture "brouillon, en_relecture, relu, rejete"
         texte note_interne "jamais publiée"
@@ -295,7 +305,7 @@ Une source a un **rôle** ([ADR 0014](adr/0014-sources-et-fascicules.md)) :
 - `reference` : dictionnaire ou ouvrage qui fait autorité (TLFi, Académie française, Gaffiot, Bailly, Chantraine…). C'est elle qui fixe le niveau de confiance ;
 - `reperage` : le Wiktionnaire et les outils d'extraction. Un fait qui n'a qu'une source de repérage reste un `brouillon` : il n'est jamais publié.
 
-`fait` est le supertype éditorial des unités, formes, sens, compositions et relations : leur identifiant **est** celui du fait. Un seul lien `fait_source` suffit donc à sourcer n'importe quelle affirmation, sans clé étrangère polymorphe.
+`fait` est le supertype éditorial des unités, formes, sens, attestations, compositions et relations : leur identifiant **est** celui du fait. Un seul lien `fait_source` suffit donc à sourcer n'importe quelle affirmation, sans clé étrangère polymorphe.
 
 - Le **niveau de confiance** ne devient jamais une rareté (ADR 0009).
 - `note_interne` reste hors de l'artefact client (ADR 0005). `note_simplification` est publiée et traduite.
@@ -862,7 +872,7 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 ## Questions ouvertes
 
 - **Segments.** Faut-il compter les segments en points de code ou en graphèmes, pour les écritures à diacritiques combinants ?
-- **Familles.** Tranché pour le MVP : une famille est dérivée des recettes, les mots formés sur une brique trouvée (codex, vues Familles et Objectifs). Un regroupement éditorial nommé (« La terre ») reste possible plus tard, dans la couche ludique.
+- **Familles.** Tranché pour le MVP : une famille est dérivée des recettes, les mots formés sur une brique trouvée (codex, vues Familles et Objectifs). Un regroupement éditorial nommé (« La terre ») n’existe pas dans le MVP ; s’il vient avec les fascicules spéciaux, il vivra dans la couche ludique, sans rien dévoiler ([ADR 0057](adr/0057-themes-editoriaux-nommes.md)).
 - **Retour d'une exclusion.** Que dit le jeu quand le joueur tente une combinaison attestée mais écartée ?
 - **Traductions.** Les gloses et définitions ne seront d'abord rédigées qu'en français : faut-il imposer une locale de référence unique ?
 - **Homographes sur la table.** Tranché par l'[ADR 0052](adr/0052-fusions-trompeuses-expliquees.md) (proposé) : « bonne forme, autre brique », calculé, sans nommer la bonne brique.
