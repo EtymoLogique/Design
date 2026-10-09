@@ -68,6 +68,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
 | [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé |
 | [0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) | Fascicules de lancement plus gros et plus rapprochés | Proposé |
+| [0055](0055-prononciation-des-mots.md) | Prononciation des mots : transcription phonétique, sans audio | Proposé |
 
 ## Page HTML
 
