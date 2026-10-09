@@ -203,7 +203,7 @@ Une fiche présente progressivement :
 
 1. la forme originale et, si nécessaire, sa translittération ; pour un mot français, sa prononciation en alphabet phonétique, sans audio ([ADR 0055](adr/0055-prononciation-des-mots.md), proposé) ;
 2. **une définition courte du mot dans son sens actuel**, affichée juste sous le mot ;
-3. la langue et le système d'écriture ;
+3. la langue et le système d'écriture ; pour un mot français, sa date de première attestation, avec la précision de sa source (« attesté vers 1175 », [ADR 0056](adr/0056-date-de-premiere-attestation.md), proposé) ;
 4. la composition et le **sens littéral** qu'elle produit (par exemple *philo- + -sophie* = « amour de la sagesse »). La composition réutilise les briques jouées, avec leur couleur et leur sens, et le mot découvert est surligné morceau par morceau avec ces mêmes couleurs ;
 5. la relation historique et les transformations visibles ;
 6. une explication courte ;

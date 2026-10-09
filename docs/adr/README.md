@@ -69,6 +69,8 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé |
 | [0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) | Fascicules de lancement plus gros et plus rapprochés | Proposé |
 | [0055](0055-prononciation-des-mots.md) | Prononciation des mots : transcription phonétique, sans audio | Proposé |
+| [0056](0056-date-de-premiere-attestation.md) | Date de première attestation d’un mot | Proposé |
+| [0057](0057-themes-editoriaux-nommes.md) | Pas de thème éditorial nommé dans le MVP | Proposé |
 
 ## Page HTML
 
