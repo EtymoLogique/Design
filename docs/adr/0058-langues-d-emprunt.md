@@ -1,6 +1,6 @@
 # ADR 0058 — Langues d’emprunt, toujours sans variété
 
-- **Statut** : Proposé
+- **Statut** : Proposé, « d’après une source de référence » remplacé par l’[ADR 0060](0060-wikidata-seule-source-de-verite.md) : la chaîne passe par une langue d’après Wikidata
 - **Remplace partiellement** : [ADR 0013](0013-schema-des-briques.md), pour le nombre de langues du MVP (trois) ; l’absence de variété reste en vigueur
 - **Complète** : [ADR 0006](0006-architecture-multilingue.md) (langues et écritures), [ADR 0023](0023-textures-des-cartes.md) (silhouette de chaque langue)
 

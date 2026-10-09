@@ -271,7 +271,7 @@ Voir l'[ADR 0014](adr/0014-sources-et-fascicules.md), l'[ADR 0022](adr/0022-fasc
 - **un fascicule ne dévoile pas son contenu** : son annonce et sa présentation n'affichent que des nombres (mots, préfixes, suffixes, langues), légendaires exclues. Avant sa parution, même ces nombres restent cachés : seule sa date est publique ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). Dans le codex, les silhouettes gardent leur piste de sens ;
 - un mot n'appartient qu'à un seul fascicule ; une brique peut être reprise d'un fascicule à l'autre ;
 - chaque fascicule a sa jaquette et son pli : dès sa publication, le joueur peut ouvrir ses plis, qui ne tirent que parmi ses briques, et revenir à tout moment aux plis d'un ancien fascicule. Les fusions entre fascicules sont permises ;
-- **fermeture** : si deux briques publiées, de n'importe quels fascicules, forment un mot attesté par une source de référence, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
+- **fermeture** : si deux briques publiées, de n'importe quels fascicules, forment un mot porté par un lexème Wikidata, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
 - une combinaison attestée ne peut être écartée que par une exclusion déclarée et justifiée (mot archaïque, rare, offensant ou analyse non établie) ;
 - **pourquoi 30 mots au plus** : il faut environ 2 plis par mot découvert, et un joueur assidu ouvre 70 à 80 plis par mois. Au-delà de 30 mots, il ne complète plus un fascicule avant le suivant ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) ;
 - **un tiers facile, un tiers moyen, un tiers difficile** : facile quand le sens actuel est proche du sens littéral et que la recette n'a aucune transformation, moyen pour un seul de ces écarts, difficile pour les deux. La difficulté n'est jamais affichée ([ADR 0047](adr/0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md)). Les dix fascicules de lancement, surtout faits de composés transparents, ne sont pas tenus aux tiers ([ADR 0059](adr/0059-tiers-de-difficulte-hors-lancement.md), proposé) ;
@@ -493,7 +493,7 @@ Le niveau de confiance ne doit pas être transformé en rareté ludique.
 
 - Distinguer composition synchronique, dérivation historique, héritage et emprunt.
 - Montrer les formes intermédiaires utiles plutôt que prétendre à un saut direct.
-- Sourcer les faits éditoriaux auprès de sources de référence (TLFi, Académie française, Gaffiot, Bailly, Chantraine…). Le Wiktionnaire aide à repérer des pistes, mais aucun de ses textes n'est repris et il ne suffit jamais à publier un fait ([ADR 0014](adr/0014-sources-et-fascicules.md)).
+- Sourcer les faits éditoriaux auprès de Wikidata seulement, seule source de vérité ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Les références savantes et le Wiktionnaire ne sont plus des sources, et aucun de leurs textes n'est repris.
 - Publier le code sous AGPL 3.0 et le contenu, catalogue compris, sous CC BY-SA 4.0 ; le nom « ÉtymoLogique » et le logo restent réservés ([ADR 0017](adr/0017-licences.md)).
 - Expliquer les simplifications nécessaires au gameplay.
 - Ne pas valider une fusion sur la seule ressemblance de deux chaînes de caractères.

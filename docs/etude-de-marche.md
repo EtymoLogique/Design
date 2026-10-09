@@ -15,7 +15,7 @@
 
 | Trait | Conséquence pour le marché |
 |---|---|
-| Contenu éditorial sourcé (TLFi, Gaffiot, Bailly…) et relu | Crédibilité auprès des enseignants, des médias culturels et des institutions de la langue française. |
+| Contenu éditorial sourcé dans Wikidata et relu | Crédibilité auprès des enseignants, des médias culturels et des institutions de la langue française. |
 | Un fascicule de 20 à 30 mots par mois ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) | Un rendez-vous mensuel qui soutient la rétention et donne un sujet de communication chaque mois. |
 | Plis et exemplaires rationnés ([ADR 0012](adr/0012-briques-rationnees.md)) | Une boucle de retour quotidienne, comparable aux jeux de collection, sans paiement obligatoire. |
 | Aucun paiement dans le MVP, puis seulement des sabliers plafonnés ([ADR 0008](adr/0008-energie-et-plis.md), [ADR 0018](adr/0018-sabliers-et-boutique.md)) | Argument de confiance fort (familles, enseignants) ; revenu par joueur faible. |

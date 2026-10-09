@@ -1,6 +1,6 @@
 # ADR 0055 — Prononciation des mots : transcription phonétique, sans audio
 
-- **Statut** : Proposé
+- **Statut** : Proposé, origine des transcriptions remplacée par l’[ADR 0060](0060-wikidata-seule-source-de-verite.md) : elles sont lues dans les formes des lexèmes Wikidata, non plus extraites de Wiktextract
 - **Portée** : modèle de données du catalogue et fiche d’une carte
 - **Complète** : [ADR 0006](0006-architecture-multilingue.md) (formes, écritures et translittérations), [ADR 0014](0014-sources-et-fascicules.md) (sources), [ADR 0025](0025-medias-statiques-et-publication-programmee.md) (médias), [ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) (artefact)
 

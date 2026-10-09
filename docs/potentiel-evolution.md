@@ -2,7 +2,7 @@
 
 Cette note estime la quantité de contenu que le jeu peut publier et décrit les pistes qui permettront de l'enrichir. Elle s'appuie sur l'[ADR 0014](adr/0014-sources-et-fascicules.md) (sources et fascicules) et l'[ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md) (fascicules de 20 à 30 mots, un par mois).
 
-> Les chiffres ci-dessous sont un ordre de grandeur, pas un décompte exact. Ils décrivent des pistes de repérage : aucun mot n'est publiable sans source de référence.
+> Les chiffres ci-dessous sont un ordre de grandeur, pas un décompte exact. Ils décrivent des pistes de repérage : aucun mot n'est publiable sans lexème Wikidata ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Le relevé du Wiktionnaire ci-dessous date d'avant cette décision : le Wiktionnaire n'est plus une source, et la couverture de Wikidata, plus étroite, est à mesurer.
 
 ## Le corpus du Wiktionnaire
 
@@ -28,7 +28,7 @@ Limites de la mesure : un mot à la fois préfixé et suffixé est compté deux 
 | Corpus brut | environ 50 000 | environ 2 000 | plus d'un siècle |
 | Corpus publiable (estimation) | 5 000 à 10 000 | 200 à 400 | 15 à 30 ans |
 
-Le corpus publiable écarte les mots archaïques, trop techniques ou trop rares, ceux dont l'analyse n'est pas établie et ceux qu'aucune source de référence n'atteste. La proportion de 10 à 20 % est une hypothèse, à mesurer sur les premiers fascicules.
+Le corpus publiable écarte les mots archaïques, trop techniques ou trop rares, ceux dont l'analyse n'est pas établie et ceux qu'aucun lexème Wikidata ne porte. La proportion de 10 à 20 % est une hypothèse, à mesurer sur les premiers fascicules.
 
 **Le corpus n'est pas la limite.** Ce qui fixe le rythme, c'est :
 
