@@ -1,6 +1,6 @@
 # ADR 0022 — Fascicules de 20 à 30 mots, un par mois
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l’[ADR 0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) : les dix premiers fascicules sont plus gros et hebdomadaires ; le reste reste en vigueur à partir du onzième
 - **Remplace partiellement** : [ADR 0014](0014-sources-et-fascicules.md), pour la taille d'un fascicule (20 à 40 mots) ; le rythme, les sources, la complétude et le reste de la publication restent en vigueur.
 - **Complète** : [ADR 0012](0012-briques-rationnees.md) et [ADR 0020](0020-deux-plis-en-attente-et-sabliers.md) (rythme de découverte)
 
