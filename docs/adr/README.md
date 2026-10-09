@@ -26,7 +26,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0010](0010-observabilite-et-vie-privee.md) | Observabilité minimale et respectueuse de la vie privée | Accepté |
 | [0011](0011-plis-raretes-et-doublons.md) | Plis à raretés, doublons convertis en encre | Accepté, valeur des doublons remplacée par 0012, légendaires inconnues par 0015, catalogue du tirage par 0016, source de l'encre par 0019, usage de l'encre et prix de l'indice par 0020, poids du type par 0035, garantie de nouveauté et chances des légendaires par 0043 |
 | [0012](0012-briques-rationnees.md) | Briques rationnées, exemplaires obtenus par les plis | Accepté, filet par fascicule remplacé par 0016, valeur des doublons par 0019, filet sans légendaire par 0043 |
-| [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé |
+| [0013](0013-schema-des-briques.md) | Schéma relationnel des langues, mots, préfixes et suffixes | Proposé, nombre de langues remplacé par 0058 |
 | [0014](0014-sources-et-fascicules.md) | Sources de référence et publication par fascicules | Proposé, taille des fascicules remplacée par 0022, fermeture limitée aux paires par 0032 |
 | [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface), chance des légendaires toujours affichée par 0036, ligne de chance d’une légendaire trouvée, silhouette des mots légendaires et compte des légendaires trouvées par 0043 |
 | [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035, garantie et filet hors légendaires par 0043 |
@@ -71,6 +71,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0055](0055-prononciation-des-mots.md) | Prononciation des mots : transcription phonétique, sans audio | Proposé |
 | [0056](0056-date-de-premiere-attestation.md) | Date de première attestation d’un mot | Proposé |
 | [0057](0057-themes-editoriaux-nommes.md) | Pas de thème éditorial nommé dans le MVP | Proposé |
+| [0058](0058-langues-d-emprunt.md) | Langues d’emprunt, toujours sans variété | Proposé |
 
 ## Page HTML
 
