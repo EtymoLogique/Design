@@ -78,7 +78,7 @@ erDiagram
 
 | Table | Rôle | Remarques |
 |---|---|---|
-| `langue` | Langue affichée dans le codex. | Le MVP compte **trois langues, sans variété** : grec ancien, latin, français. Une forme médiévale ou tardive reste rattachée à sa langue ; si la précision compte, elle va dans l'explication ou la `note_simplification`. `langue_parente_id` décrit la généalogie des langues, pas les emprunts : un emprunt se déclare entre unités. `glyphe` est la lettre emblème de la carte de langue du codex (É, Æ, Ω) ; sans glyphe, la carte prend l'initiale du nom. |
+| `langue` | Langue affichée dans le codex. | Le MVP part de **trois langues** : grec ancien, latin, français ; une langue d’emprunt (anglais, allemand, italien…) s’ajoute quand une chaîne d’un mot publié passe par elle ([ADR 0058](adr/0058-langues-d-emprunt.md)). **Aucune variété** : une forme médiévale ou tardive reste rattachée à sa langue ; si la précision compte, elle va dans l'explication ou la `note_simplification`. `langue_parente_id` décrit la généalogie des langues, pas les emprunts : un emprunt se déclare entre unités. `glyphe` est la lettre emblème de la carte de langue du codex (É, Æ, Ω) ; sans glyphe, la carte prend l'initiale du nom. |
 | `langue_libelle` | Nom affiché dans chaque locale. | Le joueur voit toujours le nom complet (ADR 0006). `code_interne` reste strictement technique. |
 | `systeme_ecriture` | Alphabet grec, latin, cyrillique… | Porte la direction d'écriture, utile au rendu fragment par fragment. |
 
@@ -864,7 +864,7 @@ Le joueur recompose *philo-* + *-sophie*, mais le mot n'a pas été formé en fr
 
 - **Une brique par unité.** Un allomorphe est une transformation, jamais une brique.
 - **Deux briques par recette.** Une recette a exactement deux emplacements ; un mot plus long passe, plus tard, par un mot découvert devenu brique (*biologie* + *-iste*).
-- **Trois langues, sans variété** dans le MVP : grec ancien, latin, français.
+- **Langues sans variété** : grec ancien, latin, français, et les langues d’emprunt qu’une chaîne de mot publié demande (ADR 0058).
 - **Pas de carte pour les étymons.** Une unité a une carte si elle est une brique ou le résultat d'une recette.
 - **Homographes : deux cartes**, distinguées par leur glose et leur étymon, sans numéro.
 - **Catalogue statique, serveur qui fait foi.** Le catalogue est publié en fichiers publics à hash de contenu, fascicule par fascicule ; les données du joueur restent dans une base privée que seul le serveur modifie (ADR 0027).

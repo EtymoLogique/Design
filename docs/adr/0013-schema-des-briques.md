@@ -1,6 +1,6 @@
 # ADR 0013 — Schéma relationnel des langues, mots, préfixes et suffixes
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0058](0058-langues-d-emprunt.md) : d’autres langues que les trois du MVP entrent quand une chaîne étymologique d’un mot publié passe par elles ; l’absence de variété reste en vigueur
 - **Complète** : [ADR 0002](0002-graphe-linguistique-editorial.md) (entités du graphe), [ADR 0006](0006-architecture-multilingue.md) (formes, écritures et translittérations), [ADR 0009](0009-contenu-et-equilibrage.md) (points d'ancrage de la couche ludique)
 
 ## Contexte
