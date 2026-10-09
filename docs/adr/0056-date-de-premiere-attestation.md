@@ -1,6 +1,6 @@
 # ADR 0056 — Date de première attestation d’un mot
 
-- **Statut** : Proposé
+- **Statut** : Proposé, source de la date remplacée par l’[ADR 0060](0060-wikidata-seule-source-de-verite.md) : elle est lue dans la déclaration « first attested from » du lexème Wikidata, non plus dans le TLFi
 - **Portée** : modèle de données du catalogue et fiche d’une carte
 - **Complète** : [ADR 0002](0002-graphe-linguistique-editorial.md) (graphe linguistique éditorial), [ADR 0013](0013-schema-des-briques.md) (schéma des briques), [ADR 0014](0014-sources-et-fascicules.md) (sources), [ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) (artefact)
 

@@ -164,7 +164,7 @@ erDiagram
 | `translitteration` | Lecture d'une forme selon une convention. | Une translittération n'est pas une racine collectionnable (ADR 0006). Elle exige une convention déclarée (ADR 0005). |
 | `sens` | Acception d'une unité. | Une partie de composition désigne le sens précis qu'elle mobilise. |
 | `sens_libelle` | Glose et définition par locale. | La glose sert aux briques (« terre »). La définition actuelle est obligatoire pour un mot découvrable. |
-| `attestation` | Première attestation d’un mot français. | Au plus une par mot, quel que soit son sens ; tirée d’une source de référence, avec la précision de la source (« vers 1175 », « xiiiᵉ s. »). La date d’un emprunt est celle de l’attestation de la cible, jamais un champ de la relation ([ADR 0056](adr/0056-date-de-premiere-attestation.md)). |
+| `attestation` | Première attestation d’un mot français. | Au plus une par mot, quel que soit son sens ; tirée de la déclaration « first attested from » du lexème Wikidata ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)), avec la précision de la source (« vers 1175 », « xiiiᵉ s. »). La date d’un emprunt est celle de l’attestation de la cible, jamais un champ de la relation ([ADR 0056](adr/0056-date-de-premiere-attestation.md)). |
 
 **Pourquoi `nature` est répétée dans `mot` et `affixe`.** C'est la technique du discriminant partagé : le sous-type référence la paire (`unite_id`, `nature`) de `unite_lexicale`, et une contrainte fixe la valeur admise dans chaque sous-type. Une unité ne peut ainsi être à la fois un mot et un affixe, et un affixe ne peut pas changer de position en silence.
 
@@ -300,10 +300,7 @@ erDiagram
     }
 ```
 
-Une source a un **rôle** ([ADR 0014](adr/0014-sources-et-fascicules.md)) :
-
-- `reference` : dictionnaire ou ouvrage qui fait autorité (TLFi, Académie française, Gaffiot, Bailly, Chantraine…). C'est elle qui fixe le niveau de confiance ;
-- `reperage` : le Wiktionnaire et les outils d'extraction. Un fait qui n'a qu'une source de repérage reste un `brouillon` : il n'est jamais publié.
+Une source désigne une **entité Wikidata** (item `Q…` ou lexème `L…`) : c'est la seule source de vérité du catalogue ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Il n'y a plus de rôle `reference` ni `reperage` ; les références savantes et le Wiktionnaire ne sont plus des sources. La `localisation` d'un lien `fait_source` est l'identifiant consulté, et l'`edition` est la date de la consultation. Un fait que Wikidata ne porte pas reste un `brouillon` : il n'est jamais publié.
 
 `fait` est le supertype éditorial des unités, formes, sens, attestations, compositions et relations : leur identifiant **est** celui du fait. Un seul lien `fait_source` suffit donc à sourcer n'importe quelle affirmation, sans clé étrangère polymorphe.
 
@@ -430,8 +427,8 @@ flowchart LR
 | `recette`, `emplacement`, préconditions, déblocages | recette | par tous, dès la parution |
 | `exclusion` relue | exclusions du fascicule | par tous, dès la parution |
 | `fait` : confiance ; `fait_libelle` : `note_simplification` ; `source` et `fait_source` des faits publiés | recopiés dans chaque carte qui les cite | par tous, dès la parution |
-| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue`, sources de repérage seules | dépôt privé du catalogue | équipe éditoriale |
-| Imports datés du Wiktionnaire, médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt privé du catalogue | équipe éditoriale |
+| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue` | dépôt privé du catalogue | équipe éditoriale |
+| Médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt privé du catalogue | équipe éditoriale |
 | Réserve, codex, énergie, encre, sabliers, plis, indices, jalons, commandes | données du joueur (section 7) | serveur seul |
 | Événements produit, journaux opérationnels | télémétrie et journaux ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)) | équipe, accès tracés |
 | Secrets du serveur, de la base et de la CI | Secret Manager | serveur et CI |
@@ -763,8 +760,8 @@ Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit p
 
 ### Éditorial et multilingue
 
-- Tout fait publié a au moins une source de rôle `reference`. Le Wiktionnaire seul ne suffit jamais.
-- `etablie` : une source de référence affirme le fait. `probable` : une source de référence le présente comme une hypothèse. `discutee` : deux sources de référence sont en désaccord.
+- Tout fait publié a au moins une source Wikidata ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Un fait que Wikidata ne porte pas n'est jamais publié.
+- `etablie` : une déclaration Wikidata affirme le fait et porte elle-même une référence. `probable` : une déclaration Wikidata l'affirme, sans référence. `discutee` : Wikidata porte deux analyses en désaccord.
 - Un fait publié est `relu`. `non_retenue` n'est jamais publié comme solution.
 - Une ligne de libellé par (objet, locale). La locale de référence est complète pour tout objet publié.
 - Une translittération a toujours une convention.
@@ -773,7 +770,7 @@ Le schéma logique ne suffit pas : ces règles doivent être vérifiées, soit p
 
 - **Unicité** : un mot n'a qu'une ligne `resultat`, tous fascicules confondus.
 - **Autonomie** : chaque partie d'une recette d'un fascicule est une unité publiée dans ce fascicule ou dans un précédent, et figure dans ses lignes `ingredient`.
-- **Fermeture** : pour toute paire ordonnée de briques publiées dans les fascicules 1 à N, un mot attesté par une source de référence est publié ou fait l'objet d'une exclusion relue.
+- **Fermeture** : pour toute paire ordonnée de briques publiées dans les fascicules 1 à N, un mot porté par un lexème Wikidata est publié ou fait l'objet d'une exclusion relue.
 
 ## Versionnage
 
