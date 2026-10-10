@@ -1,6 +1,6 @@
 # ADR 0060 — Wikidata, seule source de vérité du catalogue
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0061](0061-wikidata-fait-reference-sans-contribution.md) : l’équipe ne complète plus Wikidata, et Wikidata l’emporte en cas de désaccord ; le reste de la décision reste en vigueur
 - **Remplace partiellement** : [ADR 0014](0014-sources-et-fascicules.md), pour les sources (Wiktionnaire en repérage, références savantes qui attestent, rôles `reference` et `reperage`) ; le fascicule, la complétude et l'exclusion déclarée restent en vigueur
 - **Modifie** : [ADR 0055](0055-prononciation-des-mots.md) (origine des transcriptions), [ADR 0056](0056-date-de-premiere-attestation.md) (origine de la date), [ADR 0058](0058-langues-d-emprunt.md) (la chaîne passe par une langue « d'après Wikidata »)
 - **Complète** : [ADR 0002](0002-graphe-linguistique-editorial.md) (sources et confiance), [ADR 0017](0017-licences.md) (licences)

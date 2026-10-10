@@ -493,7 +493,7 @@ Le niveau de confiance ne doit pas être transformé en rareté ludique.
 
 - Distinguer composition synchronique, dérivation historique, héritage et emprunt.
 - Montrer les formes intermédiaires utiles plutôt que prétendre à un saut direct.
-- Sourcer les faits éditoriaux auprès de Wikidata seulement, seule source de vérité ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Les références savantes et le Wiktionnaire ne sont plus des sources, et aucun de leurs textes n'est repris.
+- Sourcer les faits éditoriaux auprès de Wikidata seulement, seule source de vérité ([ADR 0060](adr/0060-wikidata-seule-source-de-verite.md)). Les références savantes et le Wiktionnaire ne sont plus des sources, et aucun de leurs textes n'est repris. L'équipe ne contribue pas à Wikidata : un fait qu'il ne porte pas reste impubliable, et son analyse l'emporte en cas de désaccord ([ADR 0061](adr/0061-wikidata-fait-reference-sans-contribution.md)).
 - Publier le code sous AGPL 3.0 et le contenu, catalogue compris, sous CC BY-SA 4.0 ; le nom « ÉtymoLogique » et le logo restent réservés ([ADR 0017](adr/0017-licences.md)).
 - Expliquer les simplifications nécessaires au gameplay.
 - Ne pas valider une fusion sur la seule ressemblance de deux chaînes de caractères.
