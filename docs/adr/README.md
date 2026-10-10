@@ -73,7 +73,8 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0057](0057-themes-editoriaux-nommes.md) | Pas de thème éditorial nommé dans le MVP | Proposé |
 | [0058](0058-langues-d-emprunt.md) | Langues d’emprunt, toujours sans variété | Proposé, source de la chaîne remplacée par 0060 |
 | [0059](0059-tiers-de-difficulte-hors-lancement.md) | La règle des tiers à partir du onzième fascicule | Proposé |
-| [0060](0060-wikidata-seule-source-de-verite.md) | Wikidata, seule source de vérité du catalogue | Proposé |
+| [0060](0060-wikidata-seule-source-de-verite.md) | Wikidata, seule source de vérité du catalogue | Proposé, contribution à Wikidata remplacée par 0061 |
+| [0061](0061-wikidata-fait-reference-sans-contribution.md) | Wikidata fait référence, sans contribution de l’équipe | Proposé |
 
 ## Page HTML
 
