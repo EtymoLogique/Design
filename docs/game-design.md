@@ -356,12 +356,16 @@ Règles :
 
 ### Rituel d'ouverture
 
-L'ouverture dure entre 1,5 et 2 secondes. Toucher l'écran ou appuyer sur Échap permet de la passer. Si le système demande de réduire les animations, le résultat s'affiche directement.
+L'ouverture d'un pli dure entre 1,5 et 2 secondes. Toucher l'écran ou appuyer sur Échap permet de la passer. Si le système demande de réduire les animations, le résultat s'affiche directement.
 
 1. **Charge** (environ 0,3 s) : le pli se secoue et le sceau brille.
 2. **Écriture** (environ 1,2 s) : le sceau s'efface, le pli grossit et vibre, et une fenêtre d'écriture s'ouvre en son cœur. L'écriture a lieu **dans la carte, pendant qu'elle vibre** : une plume essaie d'inventer le mot. Elle écrit en cursive des brouillons qu'elle barre aussitôt : des glyphes inventés, puis la forme grecque, puis une translittération. La brique finale s'écrit ensuite directement dans un cadre de brique. On voit ainsi le chemin de la langue d'origine vers la brique, comme si l'on inventait une langue.
 3. **Explosion** (environ 0,3 s) : la fenêtre d'écriture éclate, le pli se fend en deux, un flash éclate et des glyphes sont projetés.
 4. **Révélation** : la brique atterrit avec un rebond devant des rayons de lumière, avec son origine (« du grec ancien ἄστρον « astre » »). Deux actions sont proposées : essayer la brique sur la table, ou continuer.
+
+#### Ouverture groupée
+
+Dès que deux plis sont prêts, un bouton « Ouvrir les N plis » ouvre tous les plis prêts du fascicule choisi ([ADR 0064](adr/0064-ouverture-groupee-des-plis.md)). Les plis s'affichent en grille, **chacun joue le rituel entier d'un pli seul, en canon** (départs décalés de 0,11 s), et la brique prend la place de son pli. Une rare ou une légendaire teinte sa plume et les rayons en violet dès l'écriture, écrit 0,6 s de plus et conclut le lot par son annonce. À dix plis, l'ouverture dure environ 4 secondes ; la durée de 1,5 à 2 secondes ne vaut que pour un pli seul. Chaque brique reste un bouton « Essayer sur la table », et une seule phrase résume le lot (« 5 plis ouverts : 2 nouvelles briques, +14 gouttes d'encre. »). Une rare ou une légendaire garde un contour violet et des rayons violets une fois le lot révélé. Les plis s'ouvrent un à un côté serveur : chacun a son tirage, ses garanties et son encre.
 
 Une brique déjà connue suit le même rituel. La révélation affiche alors « +1 exemplaire · ×3 · +3 gouttes », « De retour ! » si la brique était épuisée, ou « Réserve pleine » et les gouttes d'encre gagnées si elle avait déjà 5 exemplaires. L'intensité du rituel grandit avec la rareté : rayons plus rapides, flash plus long, annonce « Rare ! » ou « Légendaire ! ».
 
