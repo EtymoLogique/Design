@@ -58,7 +58,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
 | [0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) | Légendaires : une chance fixe, hors des garanties, toujours secrètes | Proposé |
 | [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0053 |
-| [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
+| [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé, récompense des quêtes du jour ajoutée par 0063 |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
 | [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé, fascicules de lancement remplacés par 0059 |
 | [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé |
@@ -76,6 +76,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0060](0060-wikidata-seule-source-de-verite.md) | Wikidata, seule source de vérité du catalogue | Proposé, contribution à Wikidata remplacée par 0061 |
 | [0061](0061-wikidata-fait-reference-sans-contribution.md) | Wikidata fait référence, sans contribution de l’équipe | Proposé |
 | [0062](0062-dix-plis-en-attente.md) | Dix plis en attente | Proposé |
+| [0063](0063-recompense-de-chaque-quete-du-jour.md) | Chaque quête du jour a sa récompense | Proposé |
 
 ## Page HTML
 

@@ -1,6 +1,6 @@
 # ADR 0045 — Quêtes du jour, carte de lecteur et quêtes au long cours
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0063](0063-recompense-de-chaque-quete-du-jour.md) : chaque quête du jour a désormais sa récompense (encre, sablier ou pli en attente de plus selon sa sorte), en plus du tampon, et la carte pleine donne un pli en attente de plus au lieu du pli de lecteur à fascicule choisi. Le reste du présent ADR reste en vigueur.
 - **Remplace partiellement** : [ADR 0042](0042-page-quetes-et-recompenses-a-recuperer.md), pour le contenu de l’onglet « Journalières », jusqu’ici annoncé « bientôt disponible », et pour le nombre d’onglets de la page Quêtes, qui passe à trois ; le reste de l’ADR 0042, dont la récupération des récompenses, reste en vigueur ; [ADR 0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md), pour la seule source d’encre : la carte de lecteur et les quêtes au long cours en donnent aussi, en quantité bornée
 - **Complète** : [ADR 0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) (d’autres conditions que le nombre de découvertes, pour les seules quêtes au long cours ; les jalons ne changent pas) ; [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) (les ricochets du jour)
 

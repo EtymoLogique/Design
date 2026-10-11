@@ -315,6 +315,10 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
     ("0059", &[("plis.html#fascicules", "Les fascicules côté joueur")]),
     ("0060", &[("modele.html#t-source", "Table des sources")]),
     ("0061", &[("modele.html#t-source", "Table des sources")]),
+    (
+        "0063",
+        &[("interfaces.html#i-27", "Quêtes du jour et carte de lecteur")],
+    ),
 ];
 
 fn re(motif: &str) -> Regex {
