@@ -75,6 +75,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0059](0059-tiers-de-difficulte-hors-lancement.md) | La règle des tiers à partir du onzième fascicule | Proposé |
 | [0060](0060-wikidata-seule-source-de-verite.md) | Wikidata, seule source de vérité du catalogue | Proposé, contribution à Wikidata remplacée par 0061 |
 | [0061](0061-wikidata-fait-reference-sans-contribution.md) | Wikidata fait référence, sans contribution de l’équipe | Proposé |
+| [0062](0062-dix-plis-en-attente.md) | Dix plis en attente | Proposé |
 
 ## Page HTML
 
