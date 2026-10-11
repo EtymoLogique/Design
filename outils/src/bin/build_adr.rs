@@ -246,6 +246,13 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0064",
+        &[
+            ("plis.html#plis", "Ouvrir un pli"),
+            ("interfaces.html#i-21", "Rituel d’ouverture"),
+        ],
+    ),
+    (
         "0043",
         &[
             ("plis.html#chances", "Les chances du pli"),
