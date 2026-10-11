@@ -26,22 +26,23 @@ Sans la garantie, une légendaire de poids 2 ne serait presque jamais tirée : e
 
 ### Une chance fixe par pli
 
-- Chaque pli a **3 % de chances** de donner une légendaire, la même dans tous les fascicules, quel que soit leur nombre. Les légendaires d’un fascicule se partagent cette chance à parts égales.
-- Les 97 % restants se répartissent entre les briques non légendaires selon le poids de leur rareté : commune 62, peu commune 26, rare 10 ([ADR 0035](0035-plis-d-affixes-ponderes-par-la-rarete.md)).
-- La chance est un paramètre d’équilibrage du pli, `chance_legendaire` ([ADR 0009](0009-contenu-et-equilibrage.md)).
+- Chaque pli a **1,2 % de chances** de donner une légendaire, la même dans tous les fascicules, quel que soit leur nombre. Les légendaires d’un fascicule se partagent cette chance à parts égales.
+- Les 98,8 % restants se répartissent entre les briques non légendaires selon le poids de leur rareté : commune 62, peu commune 26, rare 10 ([ADR 0035](0035-plis-d-affixes-ponderes-par-la-rarete.md)).
+- La chance est un paramètre d’équilibrage du pli, `chance_legendaire_pour_mille` (12 pour mille, soit 1,2 % ; [ADR 0009](0009-contenu-et-equilibrage.md)).
 
 | Chance d’une légendaire par pli | Au moins une en 25 plis (environ 10 jours) | Au moins une en 75 plis (un mois de joueur assidu) |
 |---|---|---|
 | 0,2 % (poids 2, une légendaire, sans garantie) | 5 % | 14 % |
+| **1,2 % (retenu)** | **26 %** | **60 %** |
 | 2 % | 40 % | 78 % |
-| **3 % (retenu)** | **53 %** | **90 %** |
+| 3 % | 53 % | 90 % |
 | 5 % | 72 % | 98 % |
 
 ### Ce que montre l’écran des plis
 
-- Les quatre raretés, toujours ([ADR 0036](0036-chances-des-legendaires-toujours-affichees.md)) : la ligne « Légendaire » vaut 3 % dans tous les fascicules.
-- **Une seule ligne pour toutes les légendaires du fascicule**, connues ou non : le diamant, « Légendaires » et 3 %, jamais leur nombre. Une légendaire trouvée ne retrouve pas de ligne propre : sa chance, 3 % divisés par leur nombre, le trahirait.
-- Les chances par type (préfixes, suffixes) se calculent sans les légendaires : leur somme vaut 97 %.
+- Les quatre raretés, toujours ([ADR 0036](0036-chances-des-legendaires-toujours-affichees.md)) : la ligne « Légendaire » vaut 1,2 % dans tous les fascicules.
+- **Une seule ligne pour toutes les légendaires du fascicule**, connues ou non : le diamant, « Légendaires » et 1,2 %, jamais leur nombre. Une légendaire trouvée ne retrouve pas de ligne propre : sa chance, 1,2 % divisé par leur nombre, le trahirait.
+- Les chances par type (préfixes, suffixes) se calculent sans les légendaires : leur somme vaut 98,8 %.
 - Chaque brique non légendaire garde sa chance exacte.
 
 ### Les garanties
@@ -54,7 +55,7 @@ Sans la garantie, une légendaire de poids 2 ne serait presque jamais tirée : e
 ### Au moins une légendaire par fascicule
 
 - Chaque fascicule publie au moins une brique légendaire, employée par au moins une recette. Le validateur le vérifie avant toute publication.
-- La ligne des légendaires n’affiche donc jamais 0 %, et ses 3 % ne disent rien de leur nombre.
+- La ligne des légendaires n’affiche donc jamais 0 %, et ses 1,2 % ne disent rien de leur nombre.
 
 ### Les mots légendaires
 
@@ -92,15 +93,15 @@ Sans la garantie, une légendaire de poids 2 ne serait presque jamais tirée : e
 
 ### Une ligne par légendaire connue
 
-Écartée : sa chance, 3 % divisés par le nombre de légendaires, trahirait ce nombre.
+Écartée : sa chance, 1,2 % divisé par le nombre de légendaires, trahirait ce nombre.
 
 ### Une garantie lointaine qui ne donne qu’une légendaire nouvelle
 
 Écartée : quand elle cesserait de s’appliquer, le joueur saurait qu’il ne lui en reste aucune.
 
-### Une chance de 2 % ou de 5 %
+### Une chance de 2 %, de 3 % ou de 5 %
 
-Écartées : à 2 %, un joueur assidu sur cinq ne trouve aucune légendaire dans le mois ; à 5 %, la chasse se termine trop vite. À 3 %, un joueur assidu a une chance sur deux d’en tirer une en dix jours, et neuf sur dix sur un mois.
+Écartées : à 3 %, un joueur assidu a une chance sur deux d’en tirer une en dix jours et neuf sur dix sur un mois ; à 5 %, la chasse se termine trop vite. À 1,2 %, il a environ une chance sur quatre en dix jours et six sur dix sur un mois : la légendaire reste une chasse longue, et la garantie au 100ᵉ pli la borne.
 
 ### Masquer le compte des légendaires trouvées tant qu’il vaut 0
 
@@ -119,8 +120,8 @@ Sans la garantie, une légendaire de poids 2 ne serait presque jamais tirée : e
 
 - La chance d’une légendaire connue n’est plus affichée seule : seule la chance de l’ensemble l’est. La transparence de groupe est à faire valider juridiquement, comme le prévoit déjà l’ADR 0015.
 - Chaque fascicule doit publier au moins une légendaire, et ses mots : une charge éditoriale de plus.
-- Environ 5 % des joueurs devront attendre la garantie lointaine pour obtenir une légendaire : la probabilité de n’en tirer aucune en 99 plis est de 0,97 puissance 99, soit 4,9 %.
-- 3 % des plis vont aux légendaires : le rythme des fascicules est à resimuler ([ADR 0022](0022-fascicules-de-20-a-30-mots.md)).
+- Environ 30 % des joueurs devront attendre la garantie lointaine pour obtenir une légendaire : la probabilité de n’en tirer aucune en 99 plis est de 0,988 puissance 99, soit 30 %.
+- 1,2 % des plis vont aux légendaires : le rythme des fascicules est à resimuler ([ADR 0022](0022-fascicules-de-20-a-30-mots.md)).
 - La démonstration et l’App sont à corriger. L’App compte aujourd’hui les mots légendaires au verso des affixes et dans la complétude des fascicules, et n’affiche les légendaires trouvées qu’à partir d’une, briques seulement (dépôt App : `web/src/services/codex.ts`, `web/src/composants/Codex.tsx`).
 
 ## Critères de réévaluation
