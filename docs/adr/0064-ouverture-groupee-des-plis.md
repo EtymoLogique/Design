@@ -23,9 +23,17 @@ Le rituel d’un pli (charge, écriture, explosion, révélation) est ce que le 
 - Les N plis s’affichent en grille, secoués, dès l’envoi. **Chaque pli joue le rituel entier d’un pli seul**, avec ses brouillons barrés et sa plume, et les départs sont décalés de **0,11 s**.
 - La brique prend **la place de son pli** : nouvelle brique, « +1 · ×3 » ou « pleine », avec sa forme de rareté.
 - Une rare ou une légendaire annonce son tirage dès l’écriture : plume et rayons violets, écriture plus longue de 0,6 s, anneau violet à la révélation, accord pour la légendaire. Une annonce « Rare ! » ou « Légendaire ! » conclut le lot, d’après sa meilleure rareté.
-- La plume du rituel groupé va un peu plus vite que celle d’un pli seul et saute le brouillon de translittération pour une brique ordinaire.
+- La plume du rituel groupé va un peu plus vite que celle d’un pli seul et saute le brouillon de translittération pour une brique ordinaire ; à six plis ou plus, un pli ordinaire n’écrit qu’un brouillon.
 - À dix plis, le rituel dure environ **4 secondes** (5 avec une rare et une légendaire).
 - Toucher la scène, Échap ou Espace passe l’animation, comme pour un pli seul. Si le système demande de réduire les animations, le résultat s’affiche directement.
+
+### Revue de l’animation
+
+Une relecture indépendante de l’animation (11 octobre 2026) a conduit à quelques retouches, sans changer le principe du canon :
+
+- **Retenu** : une rare ou une légendaire garde un contour violet une fois le lot révélé, et les rayons de fin restent violets, pour que le moment fort ne s’efface pas avec l’anneau. Un pli ordinaire de petite taille (six plis ou plus) n’écrit qu’un brouillon, la plume y étant illisible. L’annonce lue aux lecteurs d’écran commence par la meilleure rareté, chaque brique dit sa rareté, et le flash est coupé quand les animations sont réduites. L’écart entre les deux grands plis est élargi.
+- **Gardé tel quel** : le décalage fixe de 0,11 s entre deux plis, et l’ordre des départs, qui suit celui des tirages. Allonger le décalage avec le nombre de plis ou jouer la rare en dernier ferait monter l’attente, mais allongerait l’ouverture et ferait passer la mise en scène avant l’ordre réel des tirages.
+- **Non traité** : l’équilibrage des rangées (4-4-2, 3-3-3-1) et le coût de rendu de l’écriture lettre à lettre, qui n’a pas été mesuré.
 
 ### Résultat
 
