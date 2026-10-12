@@ -642,7 +642,7 @@ erDiagram
         entier niveau "0 à 3"
         entier bonnes_niveau_3 "0 à 3, bonnes réponses données au niveau 3"
         date prochaine_revision
-        instant maitrisee_le "nullable, définitive"
+        instant maitrisee_le "nullable, vidé à une erreur"
     }
     PALIER_ATTEINT {
         id joueur_id PK, FK
@@ -682,7 +682,7 @@ erDiagram
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
 | `quete_du_jour` | Les trois quêtes du jour. | Tirées à la première visite après minuit GMT, seulement parmi les quêtes faisables ; jamais sur un mot légendaire ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
 | `carte_lecteur` | Cartes de lecteur et leurs tampons. | Un tampon par jour où les trois quêtes sont faites ; au 7ᵉ, la récompense attend d’être récupérée et une nouvelle carte commence. |
-| `ricochet` | Niveau de chaque carte trouvée. | Seule une bonne réponse à une carte à revoir fait monter son niveau ; `bonnes_niveau_3` compte les bonnes réponses données au niveau 3 et revient à 0 après une erreur ; à la troisième, la carte est maîtrisée, définitivement ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)). |
+| `ricochet` | Niveau de chaque carte trouvée. | Seule une bonne réponse à une carte à revoir fait monter son niveau ; `bonnes_niveau_3` compte les bonnes réponses données au niveau 3 et revient à 0 après une erreur ; à la troisième, la carte est maîtrisée. Une erreur sur une carte à revoir, maîtrisée ou non, la fait descendre d’un niveau et, si elle était maîtrisée, vide `maitrisee_le` ; elle revient le lendemain ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). |
 | `palier_atteint` | Paliers des quêtes au long cours. | Comme `jalon_atteint` : marqué quand il est atteint, récupéré une seule fois. |
 | `quete_initiale` | Cadeau de bienvenue et quêtes initiales. | Une ligne par quête faite ; le cadeau est atteint à la fin du tutoriel ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)). |
 | `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
@@ -724,7 +724,7 @@ Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la
 - Tout identifiant du catalogue référencé existe dans la version du joueur et appartient à un fascicule paru.
 - Aucune colonne ne contient de texte libre saisi par le joueur.
 - Un tampon par (joueur, jour) au plus ; `carte_lecteur.tampons` est compris entre 0 et 7.
-- `ricochet.niveau` et `ricochet.bonnes_niveau_3` sont compris entre 0 et 3 ; `maitrisee_le`, une fois rempli, ne s’efface plus.
+- `ricochet.niveau` et `ricochet.bonnes_niveau_3` sont compris entre 0 et 3 ; `maitrisee_le` est rempli si et seulement si `niveau` = 3 et `bonnes_niveau_3` = 3.
 - Une récompense de tampon, de palier ou de quête initiale ne se récupère qu’une fois, et n’expire jamais.
 - Les cohortes de rétention ne sont que des agrégats, calculés par des tâches planifiées à partir de `cree_le`, `derniere_activite` et `mois_activite_precedente` ; aucun agrégat de moins de 50 joueurs n’est affiché ni exporté ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
 

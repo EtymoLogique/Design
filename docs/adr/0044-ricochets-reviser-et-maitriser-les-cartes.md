@@ -1,6 +1,6 @@
 # ADR 0044 — Ricochets : réviser les cartes trouvées et les maîtriser
 
-- **Statut** : Proposé, format Découper remplacé par l’[ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md) : le joueur glisse une lame sur le mot, puis valide. Le reste reste en vigueur.
+- **Statut** : Proposé, format Découper remplacé par l’[ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md) : le joueur glisse une lame sur le mot, puis valide. Maîtrise « définitive » remplacée par l’[ADR 0065](0065-ricochets-la-maitrise-se-perd-et-se-regagne.md) : une erreur fait perdre la maîtrise, et les cartes maîtrisées restent dans le tirage. Le reste reste en vigueur.
 - **Complète** : [ADR 0012](0012-briques-rationnees.md) (une activité qui ne consomme rien) ; [ADR 0007](0007-etat-et-economie-autoritaires.md) (une commande de plus sous autorité serveur) ; [ADR 0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) (la quête de mémoire du jour)
 
 ## Contexte
