@@ -66,7 +66,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
 | [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
-| [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé |
+| [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé, place de la lame remplacée par 0068 |
 | [0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) | Fascicules de lancement plus gros et plus rapprochés | Proposé |
 | [0055](0055-prononciation-des-mots.md) | Prononciation des mots : transcription phonétique, sans audio | Proposé, origine des transcriptions remplacée par 0060 |
 | [0056](0056-date-de-premiere-attestation.md) | Date de première attestation d’un mot | Proposé, source de la date remplacée par 0060 |
@@ -78,7 +78,8 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0064](0064-ouverture-groupee-des-plis.md) | Ouvrir tous les plis prêts d’un coup, en canon | Proposé |
 | [0065](0065-ricochets-la-maitrise-se-perd-et-se-regagne.md) | Ricochets : la maîtrise se perd sur une erreur et se regagne | Proposé |
 | [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
-| [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé |
+| [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé, étape « Valider » remplacée par 0068 |
+| [0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) | Ricochets : la lame n’attend jamais sur une coupe, et la seconde brique répond | Proposé |
 
 ## Page HTML
 

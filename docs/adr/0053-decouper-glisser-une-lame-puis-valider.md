@@ -1,6 +1,6 @@
 # ADR 0053 — Découper : glisser une lame, puis valider
 
-- **Statut** : Proposé
+- **Statut** : Proposé, place de la lame remplacée par l’[ADR 0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) : à l’arrivée et après chaque coupe, elle se pose au hasard sur une jointure qui n’est pas une coupe attendue. Le reste reste en vigueur.
 - **Remplace partiellement** : [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md), pour le format Découper : quatre découpages proposés, option « Découper en touchant le mot » écartée, et « un toucher répond » appliqué à ce format
 - **Complète** : [ADR 0007](0007-etat-et-economie-autoritaires.md) (la commande de réponse reste unique et sous autorité serveur)
 

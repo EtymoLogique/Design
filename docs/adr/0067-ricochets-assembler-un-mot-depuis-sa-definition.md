@@ -1,6 +1,6 @@
 # ADR 0067 — Ricochets : assembler un mot depuis sa définition
 
-- **Statut** : Proposé
+- **Statut** : Proposé, étape « Valider » remplacée par l’[ADR 0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) : la seconde brique posée envoie la réponse. Le reste reste en vigueur.
 - **Complète** : [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) (un format de plus, le septième ; la séance, la maîtrise et l’absence de chronomètre ne changent pas) ; [ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md) (même étape de validation) ; [ADR 0007](0007-etat-et-economie-autoritaires.md) (la commande de réponse reste unique et sous autorité serveur)
 
 ## Contexte
