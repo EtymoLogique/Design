@@ -57,7 +57,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
 | [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
 | [0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) | Légendaires : une chance fixe, hors des garanties, toujours secrètes | Proposé |
-| [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0053, maîtrise définitive remplacée par 0065 |
+| [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0053, maîtrise définitive remplacée par 0065, format Assembler ajouté par 0067 |
 | [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
 | [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé, fascicules de lancement remplacés par 0059 |
@@ -78,6 +78,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0064](0064-ouverture-groupee-des-plis.md) | Ouvrir tous les plis prêts d’un coup, en canon | Proposé |
 | [0065](0065-ricochets-la-maitrise-se-perd-et-se-regagne.md) | Ricochets : la maîtrise se perd sur une erreur et se regagne | Proposé |
 | [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
+| [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé |
 
 ## Page HTML
 
