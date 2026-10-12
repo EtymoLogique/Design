@@ -77,6 +77,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0061](0061-wikidata-fait-reference-sans-contribution.md) | Wikidata fait référence, sans contribution de l’équipe | Proposé |
 | [0064](0064-ouverture-groupee-des-plis.md) | Ouvrir tous les plis prêts d’un coup, en canon | Proposé |
 | [0065](0065-ricochets-la-maitrise-se-perd-et-se-regagne.md) | Ricochets : la maîtrise se perd sur une erreur et se regagne | Proposé |
+| [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
 
 ## Page HTML
 
