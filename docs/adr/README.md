@@ -43,7 +43,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé, date du prochain fascicule publiée par 0049 |
-| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
+| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé, moment de l’octroi des graines remplacé par 0068 |
 | [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
 | [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté, troisième brique remplacée par 0033 |
 | [0033](0033-gestes-de-la-table-de-fusion.md) | Gestes de la table de fusion : un toucher pose, chaque brique garde sa case | Accepté |
@@ -61,7 +61,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
 | [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé, fascicules de lancement remplacés par 0059 |
-| [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé |
+| [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé, estimation du premier mois remplacée par 0068 |
 | [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
@@ -80,6 +80,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
 | [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé, étape « Valider » remplacée par 0068 |
 | [0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) | Ricochets : la lame n’attend jamais sur une coupe, et la seconde brique répond | Proposé |
+| [0069](0068-deblocage-progressif-des-fascicules.md) | Déblocage progressif des fascicules, un par un, au deuxième jalon | Proposé |
 | [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé |
 
 ## Page HTML

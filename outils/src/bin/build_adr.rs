@@ -261,6 +261,13 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0069",
+        &[
+            ("interfaces.html#i-19", "Choix du fascicule"),
+            ("interfaces.html#i-18", "Quêtes des fascicules"),
+        ],
+    ),
+    (
         "0067",
         &[
             ("interfaces.html#i-26", "Les ricochets"),
