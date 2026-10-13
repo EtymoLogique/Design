@@ -34,7 +34,7 @@ Chaque fascicule déclare déjà trois jalons, à environ un quart, la moitié e
 | Pli du fascicule, pli offert, pli de lecteur | Ne s’ouvrent pas ; le serveur refuse la commande. |
 | Jalons | Ne sont pas marqués. Les mots déjà trouvés comptent dès le déblocage, qui peut atteindre aussitôt un ou plusieurs jalons, et en débloquer un autre. |
 | Quêtes du jour | La quête de table ne vise que des mots des fascicules débloqués. |
-| Codex | La jaquette porte un cadenas. On y voit les mots déjà trouvés, aucune silhouette à trouver ; le compteur dit « 2 trouvés », sans total. |
+| Codex | La jaquette porte un cadenas. On y voit les mots déjà trouvés, aucune silhouette à trouver ; le compteur dit « 2 trouvées », sans total. |
 
 Ne changent pas : le cadeau de bienvenue ([ADR 0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)), les quêtes au long cours, qui comptent toutes les découvertes, et les ricochets, qui portent déjà sur les seules cartes trouvées.
 
@@ -45,6 +45,7 @@ Des briques partagées peuvent former un mot d’un fascicule encore verrouillé
 ### Montrer et annoncer
 
 - Un fascicule paru et verrouillé reste **visible** dans le choix du pli, le codex et les quêtes : jaquette atténuée, cadenas, et sa condition, « Atteignez le 2ᵉ jalon de *Nom* ». La couleur n’est jamais le seul signal.
+- Les fascicules débloqués passent devant les verrouillés, dans le choix du pli comme dans le sélecteur du codex et des quêtes. La liste des jalons de tous les fascicules ne montre que les débloqués ; un fascicule verrouillé ne montre sa condition que filtré.
 - Sur le fascicule précédent, le deuxième jalon annonce « Ouvre le fascicule suivant ».
 - La découverte qui débloque un fascicule le dit sur la table : « Nouveau fascicule ouvert : *Nom* », avec un lien vers son pli.
 - Une **pastille Corail** « nouveau » marque la jaquette du fascicule débloqué jusqu’à sa première ouverture : le Corail garde son sens, quelque chose de nouveau attend le joueur.
