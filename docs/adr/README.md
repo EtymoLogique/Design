@@ -20,7 +20,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0004](0004-progression-atteignable.md) | Progression pilotée par un graphe d'obtention vérifiable | Accepté |
 | [0005](0005-pipeline-de-contenu.md) | Pipeline de contenu validé avant publication | Accepté |
 | [0006](0006-architecture-multilingue.md) | Architecture multilingue indépendante du lancement | Accepté |
-| [0007](0007-etat-et-economie-autoritaires.md) | État persistant et économie sous autorité serveur | Accepté, file d'opérations rejouables remplacée par 0041 |
+| [0007](0007-etat-et-economie-autoritaires.md) | État persistant et économie sous autorité serveur | Accepté, file d'opérations rejouables remplacée par 0041, compte et multi-appareil par 0070 |
 | [0008](0008-energie-et-plis.md) | Énergie et plis gratuits, paiements hors MVP | Accepté, contenu des plis remplacé par 0011, capacité d'énergie et avance de la recharge par 0020 |
 | [0009](0009-contenu-et-equilibrage.md) | Séparation des faits linguistiques et de l'équilibrage | Accepté |
 | [0010](0010-observabilite-et-vie-privee.md) | Observabilité minimale et respectueuse de la vie privée | Accepté |
@@ -37,7 +37,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté, dix premiers fascicules remplacés par 0054 |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041 |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041, profil invité par 0070 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027, fichiers à venir et bascule par l'horloge de l'API par 0029 |
 | [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
@@ -80,6 +80,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
 | [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé, étape « Valider » remplacée par 0068 |
 | [0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) | Ricochets : la lame n’attend jamais sur une coupe, et la seconde brique répond | Proposé |
+| [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé |
 
 ## Page HTML
 
