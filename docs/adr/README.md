@@ -31,7 +31,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface), chance des légendaires toujours affichée par 0036, ligne de chance d’une légendaire trouvée, silhouette des mots légendaires et compte des légendaires trouvées par 0043 |
 | [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035, garantie et filet hors légendaires par 0043 |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
-| [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020, plafond quotidien remplacé par 0039 |
+| [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020, plafond quotidien remplacé par 0039, lots de sabliers remplacés par la vente de gouttes de 0071 (proposé) |
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
 | [0020](0020-deux-plis-en-attente-et-sabliers.md) | Deux plis en attente, sabliers gagnés par l'encre | Accepté, prix de l'indice remplacé par 0038, prix et plafonds des sabliers par 0039 |
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
@@ -52,7 +52,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0036](0036-chances-des-legendaires-toujours-affichees.md) | La chance des légendaires est toujours affichée | Accepté |
 | [0037](0037-ecran-de-mise-a-jour-de-la-pwa.md) | Une nouvelle version de la PWA s’annonce par un écran de mise à jour | Accepté |
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039, octroi et affichage des jalons remplacés par 0042 |
-| [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté, encre gagnée aussi par les quêtes depuis 0045 et 0046 |
+| [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté, encre gagnée aussi par les quêtes depuis 0045 et 0046, achats en euros par 0071 (proposé) |
 | [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé, mot légendaire inconnu sans silhouette ni rareté depuis 0043 |
 | [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
 | [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
@@ -81,6 +81,8 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé, étape « Valider » remplacée par 0068 |
 | [0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) | Ricochets : la lame n’attend jamais sur une coupe, et la seconde brique répond | Proposé |
 | [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé |
+| [0071](0071-boutique-de-gouttes-en-euros.md) | Boutique en euros : seules les gouttes s’achètent | Proposé |
+| [0072](0072-prestataire-et-parcours-de-paiement.md) | Paiement par Stancer, page hébergée et crédit vérifié par le serveur | Proposé |
 
 ## Page HTML
 
