@@ -1,4 +1,4 @@
-# ADR 0068 — Déblocage progressif des fascicules
+# ADR 0069 — Déblocage progressif des fascicules
 
 - **Statut** : Proposé
 - **Portée** : données du joueur, serveur de jeu, PWA ; la publication du catalogue ne change pas
