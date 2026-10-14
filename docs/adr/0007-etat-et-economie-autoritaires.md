@@ -1,6 +1,6 @@
 # ADR 0007 — État persistant et économie sous autorité serveur
 
-- **Statut** : Accepté, partiellement remplacé par l'[ADR 0041](0041-hors-connexion-consultation-seule.md) : plus d'opérations en attente rejouables, hors connexion la PWA ne fait que consulter
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0041](0041-hors-connexion-consultation-seule.md) : plus d'opérations en attente rejouables, hors connexion la PWA ne fait que consulter. Partiellement remplacé aussi par l'[ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) : compte facultatif rattaché au profil invité, connexion par lien et code envoyés par e-mail, plusieurs appareils par joueur. Le reste de la décision reste en vigueur.
 
 ## Contexte
 

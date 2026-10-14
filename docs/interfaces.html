@@ -19,7 +19,7 @@
   <section class="section if-intro" id="interfaces">
     <div class="wrap">
       <div class="sec-head">
-        <div data-reveal><span class="sec-num">Jeu · Interfaces</span><h2>Vingt-cinq <em>interfaces</em></h2></div>
+        <div data-reveal><span class="sec-num">Jeu · Interfaces</span><h2>Trente-quatre <em>interfaces</em></h2></div>
         <div class="sec-intro" data-reveal style="--d:120ms"><p>L’inventaire des écrans et des états de la PWA, chacun avec sa maquette. Une seule application, responsive et installable : le même modèle d’interaction sur mobile et sur ordinateur, avec une mise en page adaptée plutôt qu’un écran réduit.</p><p class="xrefs"><span>Voir aussi</span><a class="xref" href="adr.html#adr-0001" data-kind="adr">ADR 0001</a><a class="xref" href="maquettes.html">Les maquettes</a><a class="xref" href="design-system.html#ecrans">Écrans types</a><a class="xref" href="game-design.md">Vision du jeu (Markdown)</a></p></div>
       </div>
       <p class="if-legend" data-reveal><span>Avancement</span><span class="if-status is-demo">Démo</span>une démonstration jouable existe <span class="if-status is-model">Maquette</span>un composant ou un écran type existe <span class="if-status is-todo">À dessiner</span>rien n’est encore dessiné</p>
@@ -247,9 +247,9 @@
           <article class="if-card" id="i-24">
             <div class="if-head"><span class="if-num">I-24</span><span class="if-status is-model">Maquette</span></div>
             <h4>Réglages</h4>
-            <p>Sons, vibrations, animations réduites, mode nocturne, translittérations, sources dans les fiches ; installation ; données collectées et leurs contrôles ; licences et crédits ; réinitialiser la progression.</p>
+            <p>Le compte en tête (I-33) ; sons, vibrations, animations réduites, mode nocturne, translittérations, sources dans les fiches ; installation ; données collectées et leurs contrôles ; licences et crédits ; réinitialiser la progression.</p>
             <dl class="if-facts"><dt>Mobile</dt><dd>Liste d’interrupteurs ; dialogue pour réinitialiser.</dd><dt>Ordinateur</dt><dd>Même liste, en colonne centrée.</dd></dl>
-            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-24">Maquette</a><a class="xref" href="design-system.html#ds-2-4">Réglages</a><a class="xref" href="adr.html#adr-0010" data-kind="adr">ADR 0010</a><a class="xref" href="adr.html#adr-0017" data-kind="adr">ADR 0017</a></p>
+            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-24">Maquette</a><a class="xref" href="#i-33">Le compte</a><a class="xref" href="design-system.html#ds-2-4">Réglages</a><a class="xref" href="adr.html#adr-0010" data-kind="adr">ADR 0010</a><a class="xref" href="adr.html#adr-0017" data-kind="adr">ADR 0017</a></p>
           </article>
           <article class="if-card" id="i-25">
             <div class="if-head"><span class="if-num">I-25</span><span class="if-status is-model">Maquette</span></div>
@@ -300,6 +300,39 @@
           </article>
         </div>
       </div>
+      <div class="dm-block" id="compte" data-reveal>
+        <div class="dm-block-head"><span>Groupe H</span><h3>Compte</h3><p>Le compte est facultatif : on joue en invité, et l’on rattache une adresse pour retrouver sa partie sur un autre appareil. Pas de mot de passe, un lien et un code par e-mail.</p></div>
+        <div class="if-grid">
+          <article class="if-card" id="i-31">
+            <div class="if-head"><span class="if-num">I-31</span><span class="if-status is-model">Maquette</span></div>
+            <h4>Connexion par e-mail</h4>
+            <p>Deux temps sur un même écran : l’adresse, puis « Vérifiez votre boîte de réception » avec le code à 6 chiffres et « Renvoyer » après 60 secondes. Le lien de l’e-mail ouvre cet écran et confirme seul. Le même écran sert à créer un compte depuis une partie invitée et à se connecter sur un autre appareil ; la réponse ne dit jamais si l’adresse a déjà un compte. Si l’appareil porte une partie invitée, un dialogue prévient qu’elle sera remplacée par celle du compte.</p>
+            <dl class="if-facts"><dt>Mobile</dt><dd>Plein écran, clavier numérique pour le code, case de saisie qui accepte le code proposé par le système.</dd><dt>Ordinateur</dt><dd>Panneau centré sur la table, l’explication à côté.</dd></dl>
+            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-31">Maquette</a><a class="xref" href="#i-34">L’e-mail</a><a class="xref" href="adr.html#adr-0070" data-kind="adr">ADR 0070</a></p>
+          </article>
+          <article class="if-card" id="i-32">
+            <div class="if-head"><span class="if-num">I-32</span><span class="if-status is-model">Maquette</span></div>
+            <h4>Relance « Sauvegardez votre progression »</h4>
+            <p>Une carte en ligne, sous la table, à la 3ᵉ découverte, à chaque jalon atteint, sinon tous les 7 jours de jeu. Elle dit ce que l’invité risque (« une partie invitée inactive 6 mois est effacée ») et ce qu’il gagne (retrouver sa partie, jouer sur plusieurs appareils). « Plus tard » la referme. Jamais de dialogue, jamais pendant une fusion ou le rituel d’un pli.</p>
+            <dl class="if-facts"><dt>Mobile</dt><dd>Carte pleine largeur au-dessus de la barre d’onglets.</dd><dt>Ordinateur</dt><dd>Carte sous la table, dans la colonne de la réserve.</dd></dl>
+            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-32">Maquette</a><a class="xref" href="adr.html#adr-0070" data-kind="adr">ADR 0070</a></p>
+          </article>
+          <article class="if-card" id="i-33">
+            <div class="if-head"><span class="if-num">I-33</span><span class="if-status is-model">Maquette</span></div>
+            <h4>Le compte dans les Réglages</h4>
+            <p>En tête des Réglages. En invité : « Sauvegarder ma progression ». Avec un compte : le pseudo, marqué « privé » tant qu’il n’est pas confirmé, « Modifier » et « Confirmer » ; « Se déconnecter » ; « Supprimer mon compte », seul bouton Danger, dans un dialogue qui demande de taper « SUPPRIMER ». L’adresse n’est jamais affichée : le serveur ne la garde pas.</p>
+            <dl class="if-facts"><dt>Mobile</dt><dd>Premier groupe de la liste des réglages ; feuille pour modifier le pseudo.</dd><dt>Ordinateur</dt><dd>Premier groupe de la colonne de gauche ; menu pour modifier le pseudo.</dd></dl>
+            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-33">Maquette</a><a class="xref" href="#i-24">Réglages</a><a class="xref" href="adr.html#adr-0070" data-kind="adr">ADR 0070</a></p>
+          </article>
+          <article class="if-card" id="i-34">
+            <div class="if-head"><span class="if-num">I-34</span><span class="if-status is-model">Maquette</span></div>
+            <h4>L’e-mail de connexion</h4>
+            <p>Un e-mail sobre, en texte et en HTML simple, sans image distante ni lien de suivi : le sceau ÉL en texte, le code en grand, un bouton « Ouvrir ÉtymoLogique », la durée de validité, et « Vous n’avez rien demandé ? Ignorez cet e-mail. » L’objet porte le code, lisible dans la notification.</p>
+            <dl class="if-facts"><dt>Mobile</dt><dd>Une colonne de 600 px au plus, lisible en mode sombre de la messagerie.</dd><dt>Ordinateur</dt><dd>Identique, centrée.</dd></dl>
+            <p class="xrefs"><span></span><a class="xref" href="maquettes.html#m-34">Maquette</a><a class="xref" href="adr.html#adr-0070" data-kind="adr">ADR 0070</a></p>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -311,7 +344,6 @@
       </div>
       <div class="if-grid" data-reveal>
         <article class="if-card is-later"><h4>Boutique de sabliers</h4><p>Achat de lots de sabliers, avec ses garde-fous.</p><p class="xrefs"><span></span><a class="xref" href="adr.html#adr-0018" data-kind="adr">ADR 0018</a></p></article>
-        <article class="if-card is-later"><h4>Compte et synchronisation</h4><p>Récupération de la progression et usage sur plusieurs appareils. Le MVP utilise un profil invité.</p><p class="xrefs"><span></span><a class="xref" href="adr.html#adr-0007" data-kind="adr">ADR 0007</a></p></article>
         <article class="if-card is-later"><h4>Vue Relations du codex</h4><p>Le chemin entre les formes, une fois son intérêt validé. Une évolution dédiée la réunira à la vue Filiation et à une carte des routes des mots.</p></article>
         <article class="if-card is-later"><h4>Notifications de pli prêt</h4><p>Non garanties sur toutes les plateformes PWA.</p><p class="xrefs"><span></span><a class="xref" href="adr.html#adr-0001" data-kind="adr">ADR 0001</a></p></article>
         <article class="if-card is-later"><h4>Fonctions sociales</h4><p>Profils publics, échanges, classements, multijoueur.</p></article>

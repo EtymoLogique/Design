@@ -246,6 +246,14 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0070",
+        &[
+            ("interfaces.html#i-31", "Connexion par e-mail"),
+            ("maquettes.html#m-31", "Maquettes du compte"),
+            ("interfaces.html#i-33", "Le compte dans les Réglages"),
+        ],
+    ),
+    (
         "0068",
         &[
             ("interfaces.html#i-26", "Les ricochets"),

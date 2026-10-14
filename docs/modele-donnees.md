@@ -527,16 +527,43 @@ erDiagram
     JOUEUR ||--o{ RICOCHET : "révise"
     JOUEUR ||--o{ PALIER_ATTEINT : "a atteint"
     JOUEUR ||--o{ QUETE_INITIALE : "a reçu"
+    JOUEUR ||--|{ APPAREIL : "joue sur"
+    JOUEUR ||--o| COMPTE : "est rattaché à"
+    APPAREIL ||--o{ DEFI_CONNEXION : "demande"
 
     JOUEUR {
         id id PK "aléatoire, sans donnée personnelle"
-        texte empreinte_secret "jamais le secret lui-même"
         entier version_etat "incrémentée à chaque commande"
         texte version_catalogue "version active du joueur"
         instant cree_le
         instant derniere_activite
         mois mois_activite_precedente "cohortes, ADR 0050"
         entier jours_de_jeu "jours distincts de visite"
+    }
+    APPAREIL {
+        id id PK "identifiant d'installation"
+        id joueur_id FK
+        texte empreinte_secret "jamais le secret lui-même"
+        instant cree_le
+        instant derniere_activite
+    }
+    COMPTE {
+        id joueur_id PK, FK
+        texte empreinte_courriel UK "HMAC de l'adresse, jamais l'adresse"
+        texte pseudo UK "3 à 24 caractères, a-z, 0-9, -"
+        booleen pseudo_confirme "privé tant que faux"
+        instant cree_le
+    }
+    DEFI_CONNEXION {
+        id id PK
+        id appareil_id FK "appareil demandeur"
+        texte intention "creation ou connexion"
+        texte empreinte_courriel "HMAC, jamais l'adresse"
+        texte empreinte_jeton "lien, 256 bits"
+        texte empreinte_code "HMAC du code à 6 chiffres"
+        entier tentatives "5 au plus"
+        instant expire_le "15 minutes"
+        instant utilise_le "nul tant qu'il sert"
     }
     EXEMPLAIRE {
         id joueur_id PK, FK
@@ -667,7 +694,10 @@ erDiagram
 
 | Table | Rôle | Remarques |
 |---|---|---|
-| `joueur` | Profil invité. | Un identifiant aléatoire et l'empreinte d'un secret de 256 bits. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). |
+| `joueur` | La partie : invitée, ou celle d'un compte. | Un identifiant aléatoire. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). Une partie invitée (sans `compte`) inactive depuis 6 mois est effacée ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
+| `appareil` | Les installations qui jouent la partie. | L'identifiant d'installation et l'empreinte de son secret de 256 bits. Un joueur en a une au départ, plusieurs avec un compte. Se déconnecter supprime la ligne ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
+| `compte` | Le compte facultatif. | Une empreinte HMAC-SHA256 de l'adresse normalisée, avec une clé secrète dédiée : l'adresse elle-même n'est jamais stockée. Le pseudo par défaut, tiré de l'adresse, reste privé tant que `pseudo_confirme` est faux ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
+| `defi_connexion` | Demandes de connexion ou de création de compte. | Le lien et le code envoyés par e-mail, en empreintes seulement ; valables 15 minutes, 5 essais, usage unique. Purgées après un jour. |
 | `exemplaire` | La réserve : briques connues et leurs exemplaires. | Une ligne par brique connue, créée à sa première obtention. La connaissance est permanente : une brique à 0 exemplaire reste, marquée épuisée ([ADR 0012](adr/0012-briques-rationnees.md)). Les exemplaires réservés sur la table ne sont jamais stockés ici : ils restent locaux. |
 | `decouverte` | Le codex du joueur. | Une ligne par mot découvert. Les cartes de brique viennent de `exemplaire` ; les cartes de langue sont dérivées des deux. |
 | `energie` | Charges de pli. | 2 charges au plus, une toutes les 12 h ; `prochaine_charge` est nulle quand l'énergie est pleine : le temps s'arrête ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). Un sablier avance cet instant d'une heure. |
@@ -722,7 +752,10 @@ Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la
 - Une `commande` par (joueur, clé d'idempotence). Tous les effets d'une commande réussissent ou échouent ensemble.
 - Pour chaque ressource, la somme des `mouvement` égale le solde correspondant.
 - Tout identifiant du catalogue référencé existe dans la version du joueur et appartient à un fascicule paru.
-- Aucune colonne ne contient de texte libre saisi par le joueur.
+- Aucune colonne ne contient de texte libre saisi par le joueur, sauf `compte.pseudo`, limité à `^[a-z0-9]+(-[a-z0-9]+)*$` et 3 à 24 caractères.
+- Un `compte` par joueur, une `empreinte_courriel` et un `pseudo` uniques ; aucune colonne ne contient une adresse électronique, un code ou un jeton en clair.
+- Un `appareil` appartient à un seul joueur ; un joueur sans compte n'a qu'un appareil.
+- Un `defi_connexion` est consommé au plus une fois, avant `expire_le` et en moins de 6 essais.
 - Un tampon par (joueur, jour) au plus ; `carte_lecteur.tampons` est compris entre 0 et 7.
 - `ricochet.niveau` et `ricochet.bonnes_niveau_3` sont compris entre 0 et 3 ; `maitrisee_le` est rempli si et seulement si `niveau` = 3 et `bonnes_niveau_3` = 3.
 - Une récompense de tampon, de palier ou de quête initiale ne se récupère qu’une fois, et n’expire jamais.

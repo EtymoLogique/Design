@@ -503,6 +503,19 @@ Le niveau de confiance ne doit pas être transformé en rareté ludique.
 - Ne pas valider une fusion sur la seule ressemblance de deux chaînes de caractères.
 - Permettre la correction et la migration d'un contenu déjà publié.
 
+## Compte et appareils
+
+Le compte est facultatif ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)) :
+
+- le premier lancement crée un profil invité, sans adresse ni nom ; on joue sans compte ;
+- « Sauvegarder ma progression » rattache une adresse électronique au profil invité, qui devient un compte sans rien perdre. Le compte permet de retrouver sa progression et de jouer sur plusieurs appareils ; il sera requis pour les achats en euros, quand ils ouvriront ([ADR 0018](adr/0018-sabliers-et-boutique.md)). Il ne donne aucun avantage de jeu ;
+- connexion sans mot de passe : un e-mail apporte un lien et un code à 6 chiffres, valables 15 minutes et à usage unique. Le code sert dans la PWA installée, où un lien ne s'ouvre pas ;
+- le serveur ne garde qu'une empreinte de l'adresse, jamais l'adresse elle-même ;
+- se connecter sur un appareil qui porte une partie invitée remplace cette partie par celle du compte, après un avertissement : les deux ne se fusionnent jamais ;
+- chaque compte a un pseudo, par défaut tiré de l'adresse (`camille-martin-4821`), qui reste privé tant que le joueur ne l'a ni confirmé ni modifié ;
+- une carte « Sauvegardez votre progression » relance l'invité à la 3ᵉ découverte, à chaque jalon atteint, sinon tous les 7 jours de jeu. Elle se referme d'un geste et n'interrompt jamais une fusion ni un pli ;
+- une partie invitée inactive depuis 6 mois est effacée ; un compte ne l'est jamais sans demande du joueur.
+
 ## Architecture technique
 
 Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](adr/0025-medias-statiques-et-publication-programmee.md), [0026](adr/0026-depot-prive-du-catalogue-sans-logique.md) [0027](adr/0027-catalogue-statique-et-donnees-joueur.md) et [0029](adr/0029-parution-par-promotion-de-prefixe.md) (proposés). En résumé :
@@ -525,7 +538,7 @@ Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](
 - table de fusion tactile et souris ;
 - recettes ordonnées et transformations expliquées ;
 - succès, échec, tentative déjà connue et indice simple ;
-- progression persistante ;
+- progression persistante, et compte facultatif pour la retrouver sur un autre appareil ;
 - graphe de contenu éditorial versionné ;
 - validation automatique de l'atteignabilité ;
 - énergie et plis gratuits ;
@@ -642,4 +655,3 @@ Comparer une révélation instantanée à une révélation en trois temps :
 - Quand un indice « presque » aide-t-il sans transformer le jeu en recherche exhaustive ?
 - Une découverte doit-elle débloquer toutes ses briques immédiatement ou certaines via des mini-objectifs ?
 - Quel volume de contenu permet de tester la rétention sans surinvestir dans l'éditorial ? Hypothèse : des fascicules de 20 à 30 mots tous les 30 jours ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)), et au moins 3 fascicules, 4 visés, à l'ouverture officielle ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)).
-- Le compte utilisateur est-il obligatoire, facultatif ou différé jusqu'à la synchronisation multi-appareil ?

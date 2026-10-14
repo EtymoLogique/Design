@@ -392,3 +392,16 @@ body.nocturne .mq-lang { color: var(--c-lang); }
 .mq-brick.ko { border-style: dashed; background: var(--paper-2); box-shadow: none; color: var(--ink-2); }
 .mq-cutbar { display: grid; grid-template-columns: 52px 1fr 52px; gap: 8px; }
 .mq-cutbar .mq-btn { min-height: 44px; }
+
+/* ---------- I-31 à I-34 : compte, connexion par e-mail ---------- */
+.mq-otp { display: flex; gap: 6px; }
+.mq-otp i { display: grid; place-items: center; width: 30px; height: 38px; border: 1.5px solid var(--line-strong); border-radius: 9px; background: var(--cream); color: var(--ink); font-family: var(--mono); font-size: 15px; font-style: normal; font-weight: 700; }
+.mq-otp i.cur { border-color: var(--ink); border-bottom: 3px solid var(--c-action); }
+.mq-desk .mq-otp i { width: 40px; height: 48px; font-size: 19px; }
+.mq-tag { display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border: 1px dashed var(--line-strong); border-radius: 999px; color: var(--ink-2); font-family: var(--mono); font-size: 7.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.mq-mail { display: grid; gap: 10px; text-align: left; width: 100%; max-width: 330px; margin: 0 auto; padding: 16px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--cream); }
+.mq-mail-h { display: grid; gap: 2px; padding-bottom: 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 9px; }
+.mq-mail-h b { color: var(--ink); }
+.mq-mail .mq-seal { justify-self: start; }
+.mq-code { padding: 10px; border: 1.5px dashed var(--line-strong); border-radius: 10px; color: var(--ink); font-family: var(--mono); font-size: 24px; font-weight: 700; letter-spacing: 0.16em; text-align: center; }
+.mq-mail small { color: var(--ink-3); font-size: 8.5px; line-height: 1.45; }
