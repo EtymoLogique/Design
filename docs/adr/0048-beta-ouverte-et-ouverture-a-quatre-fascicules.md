@@ -1,6 +1,6 @@
 # ADR 0048 — Bêta ouverte, puis ouverture officielle à quatre fascicules
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0069](0069-deblocage-progressif-des-fascicules.md) : un nouveau joueur n’a d’abord qu’un fascicule débloqué, et l’estimation de ce qu’il trouve le premier mois, qui supposait tout le catalogue ouvert, ne tient plus. Le reste du présent ADR reste en vigueur.
 - **Complète** : [ADR 0028](0028-gitflow-des-depots.md) (la bêta tourne en production) ; [ADR 0022](0022-fascicules-de-20-a-30-mots.md) (un fascicule par mois) ; le [plan financier](../plan-financier.md) (calendrier et budget de lancement)
 
 ## Contexte
