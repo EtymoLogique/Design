@@ -1,6 +1,6 @@
 # ADR 0070 — Comptes facultatifs, connexion par lien et code envoyés par e-mail
 
-- **Statut** : Proposé
+- **Statut** : Proposé, durée de conservation des comptes remplacée par l’[ADR 0071](0071-duree-de-conservation-des-comptes-et-des-plis.md) : un compte inactif depuis 3 ans est effacé ; le reste de la section « Supprimer, purger » reste en vigueur
 - **Remplace partiellement** : [ADR 0007](0007-etat-et-economie-autoritaires.md), pour le compte, la récupération et le multi-appareil, qu’il réservait à une décision séparée ; [ADR 0024](0024-architecture-logicielle-et-hebergement.md), section « Identité et sécurité », pour le profil invité (un joueur peut désormais avoir plusieurs appareils et un compte)
 - **Complète** : [ADR 0010](0010-observabilite-et-vie-privee.md) (aucune adresse dans les journaux ni dans la télémétrie), [ADR 0018](0018-sabliers-et-boutique.md) (le compte sera le prérequis des achats en euros)
 
