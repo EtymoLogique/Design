@@ -57,7 +57,7 @@ Les candidats ont été comparés le 14 octobre 2026 sur leurs pages officielles
 
 ### Reçu, support durable et données
 
-- Pour envoyer le reçu, Stancer reçoit l’adresse électronique du joueur, saisie sur sa page ou transmise au moment de l’achat. **Le jeu ne la conserve pas** : il ne garde que l’identifiant de l’intention de paiement, la quantité, le montant, le pays de la carte et les dates.
+- Le reçu est envoyé par Stancer, à une adresse électronique que le joueur saisit **sur la page hébergée**. **Le jeu ne la voit ni ne la conserve** : il ne garde que l’identifiant de l’intention de paiement, la quantité, le montant, le pays de la carte et les dates.
 - Le **reçu du prestataire** sert de confirmation du contrat sur un support durable. À faire confirmer par la revue juridique (M6), qui dira aussi s’il suffit pour les pièces comptables et les factures demandées.
 - Les données de carte ne transitent jamais par le jeu. Les clés `sprod_…` et le secret des webhooks vivent dans Secret Manager, jamais dans le dépôt.
 - Hors production, seules les clés de test `stest_…` sont utilisées ; aucun paiement réel n’y est possible.
@@ -65,7 +65,7 @@ Les candidats ont été comparés le 14 octobre 2026 sur leurs pages officielles
 ### Points à vérifier avant la signature
 
 - La grille tarifaire en vigueur, et si les frais de la transaction d’origine sont rendus lors d’un remboursement.
-- L’envoi automatique du reçu au payeur, et son contenu.
+- L’envoi automatique du reçu au payeur, et son contenu. Surtout : **la page hébergée collecte-t-elle l’adresse du payeur ?** Sinon, il faudrait que la feuille d’achat la demande et la transmette à Stancer sans la garder, ce qui serait un second usage passager d’une adresse en clair, que l’[ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) ne prévoit pas : il faudrait alors le décider ici.
 - La possibilité de refuser des pays de carte avant le paiement.
 - Le calendrier des webhooks asynchrones, en particulier pour les impayés.
 - Le comportement de la redirection et du 3D Secure dans une PWA installée sur iOS et sur Android.

@@ -31,7 +31,7 @@ Ce choix fait des gouttes une **monnaie de jeu achetable**. Le réseau européen
 | Quantité achetée | au choix du joueur, par pas de **60 gouttes** |
 | Achat minimum | **120 gouttes, soit 2 €** : sous ce montant, les frais fixes de paiement prennent plus de 10 % |
 | Achat maximum | le reste du plafond mensuel |
-| Plafond mensuel par compte | **20 €** par mois civil, abaissable à tout moment, relevable après un délai de 7 jours |
+| Plafond mensuel par compte | **20 €** par mois civil au plus, jamais au-delà ; abaissable à tout moment, puis relevable jusqu’à 20 € après un délai de 7 jours |
 | Achats en euros d’un compte neuf | **désactivés** |
 
 - Le prix est **unique** : 60 gouttes valent toujours 1 €, quelle que soit la quantité. Il n’y a donc qu’un prix de référence à afficher, et aucun lot « plus avantageux » ne pousse à acheter plus.
@@ -49,13 +49,13 @@ Ce choix fait des gouttes une **monnaie de jeu achetable**. Le réseau européen
 
 - Les achats en euros demandent un **compte** ([ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md)).
 - Ils sont **désactivés par défaut** sur chaque compte. Le joueur les active dans les Réglages, par un geste explicite qui rappelle le plafond mensuel. Le jeu ne promet aucun contrôle d’âge, qu’une PWA ne peut pas tenir.
-- Le plafond mensuel s’applique au **compte**, toutes cartes confondues. Le baisser prend effet tout de suite ; le relever ne prend effet qu’après 7 jours.
+- Le plafond mensuel s’applique au **compte**, toutes cartes confondues. Le baisser prend effet tout de suite ; le relever, sans jamais dépasser 20 €, ne prend effet qu’après 7 jours.
 - Aucune proposition d’achat n’apparaît au moment d’une révélation, d’un échec ou d’un pli ([ADR 0018](0018-sabliers-et-boutique.md)). L’entrée « Acheter des gouttes » n’apparaît qu’à deux endroits : la boutique, et la feuille qui constate un manque de gouttes, en lien secondaire après l’échange et le temps d’attente.
 
 ### Rétractation des gouttes achetées
 
 - Une monnaie de jeu n’est pas un contenu numérique au sens des principes CPC (principe 5) : on ne peut pas faire renoncer le joueur à son droit de rétractation sur les gouttes elles-mêmes.
-- Pendant **14 jours** après un achat, le joueur peut se rétracter. Il récupère alors le prix des **gouttes de cet achat qui restent inutilisées**, au prix unique, et ces gouttes quittent son solde.
+- Pendant **14 jours** après un achat, le joueur peut se rétracter. Il récupère alors une part du **montant payé pour cet achat**, au prorata des **gouttes de cet achat qui restent inutilisées**, arrondie au centime inférieur, et ces gouttes quittent son solde. Un changement ultérieur du prix unique ne change donc pas ce qui est rendu.
 - **Ordre de dépense** : quand le joueur dépense de l’encre, les **gouttes gagnées partent d’abord**, puis les gouttes achetées, de la plus ancienne à la plus récente. C’est l’ordre qui laisse le plus de gouttes remboursables au joueur.
 - La rétractation se fait par un **geste en ligne** dans les Réglages du compte, sans écrire à personne. Elle déclenche le remboursement par le prestataire ([ADR 0072](0072-prestataire-et-parcours-de-paiement.md)).
 - Au-delà de 14 jours, les gouttes achetées restent au joueur, sans date d’expiration.
