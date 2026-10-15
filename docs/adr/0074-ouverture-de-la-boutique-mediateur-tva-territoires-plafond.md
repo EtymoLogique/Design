@@ -24,17 +24,11 @@ Le [dossier d’ouverture de la boutique](../dossier-ouverture-boutique.md) list
 
 ### Territoires
 
-| Territoire | Boutique au lancement |
-|---|---|
-| France | Ouverte |
-| Autres États membres de l’Union, hors Belgique et Pays-Bas | Ouverte |
-| Belgique | **Fermée** |
-| Pays-Bas | **Fermée** |
-| Hors Union | **Fermée** |
-
-- La Belgique a jugé en 2018 que des coffres à butin payants relèvent des jeux de hasard. Aux Pays-Bas, le Conseil d’État a annulé en 2022 la sanction contre un éditeur, mais la question reste politique. Un sablier n’est pas un tirage ; l’ADR 0018 demande néanmoins une revue : tant que le conseil ne l’a pas faite pour ces deux pays, ils restent fermés.
-- Le pays se déduit côté serveur. Un territoire fermé voit la boutique verrouillée, sans effet sur l’échange d’encre ni sur le reste du jeu.
-- La liste est un paramètre versionné ([ADR 0009](0009-contenu-et-equilibrage.md)) et figure dans les CGV.
+- **La boutique ouvre dans tous les pays**, y compris la Belgique, les Pays-Bas et hors de l’Union. C’est une décision du porteur du projet, prise contre la prudence du relevé : l’[ADR 0018](0018-sabliers-et-boutique.md) demandait une revue juridique par territoire avant l’ouverture.
+- Le **risque assumé** : la Belgique a jugé en 2018 que des coffres à butin payants relèvent des jeux de hasard (amende et peine de prison possibles) ; aux Pays-Bas, le Conseil d’État a annulé en 2022 la sanction contre un éditeur, mais la question reste politique. Un sablier n’est pas un tirage ; le conseil confirme qu’il n’est pas un coffre à butin.
+- Le **blocage par territoire reste** : le pays se déduit côté serveur, un territoire fermé voit la boutique verrouillée sans effet sur l’échange d’encre ni sur le reste du jeu. Il sert à fermer un pays dès que le conseil, un régulateur ou un magasin d’applications le demande.
+- La liste des territoires fermés est un paramètre versionné ([ADR 0009](0009-contenu-et-equilibrage.md)), **vide au lancement**, et figure dans les CGV.
+- **TVA hors Union** : la TVA française de 20 % ne vaut que pour les acheteurs de l’Union. Pour un acheteur hors Union, la TVA ou la taxe locale (par exemple la taxe sur les services numériques) peut exiger une inscription dans son pays : le conseil et l’expert-comptable fixent, pays par pays, ce que le prix TTC affiché devient.
 
 ### Plafond mensuel par défaut
 
@@ -51,9 +45,9 @@ Le [dossier d’ouverture de la boutique](../dossier-ouverture-boutique.md) list
 
 Reporté : commission plus forte, CGV et médiateur à réécrire, pour un seuil de TVA probablement non atteint la première année.
 
-### Ouvrir la Belgique et les Pays-Bas
+### Fermer la Belgique, les Pays-Bas et le hors Union au lancement
 
-Écarté tant que le conseil ne s’est pas prononcé : le risque est une amende ou une poursuite pénale, pour un revenu marginal.
+Écarté par le porteur du projet, qui ouvre partout. C’était l’option prudente : elle évitait le risque belge et les taxes locales, au prix d’un marché plus étroit.
 
 ### Plafond mensuel plus haut ou absent
 
@@ -68,12 +62,12 @@ Reporté : commission plus forte, CGV et médiateur à réécrire, pour un seuil
 
 ### Négatives
 
-- Le marché belge et néerlandais est perdu jusqu’à la revue.
+- Un risque pénal et administratif en Belgique, et des obligations fiscales hors Union, sans avis du conseil.
 - Le suivi du seuil de TVA est un compteur de plus côté serveur.
 
 ## Critères de réévaluation
 
-- Le conseil refuse le médiateur, un territoire ou le plafond.
+- Le conseil, un régulateur ou un magasin d’applications refuse le médiateur, un territoire ou le plafond : fermer le territoire concerné.
 - Les ventes hors France approchent 8 000 € par an.
 - Le coût d’adhésion au médiateur dépasse 1 % du chiffre d’affaires de la boutique.
 - Évolution de la loi belge ou néerlandaise sur les coffres à butin.

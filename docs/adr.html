@@ -2090,8 +2090,7 @@
 <h4>TVA</h4>
 <ul><li>Le jeu vend lui-même, au prix TTC affiché, <strong>TVA française à 20 %</strong> pour tous les acheteurs.</li><li>Le serveur cumule les ventes aux particuliers des autres États membres. À <strong>8 000 €</strong> (80 % du seuil de 10 000 €), une alerte prévient le porteur du projet ; au franchissement, il s’inscrit au guichet unique OSS et la TVA du pays de l’acheteur s’applique à partir de la vente qui dépasse le seuil.</li><li>Repli, si l’OSS pèse plus que la commission : un revendeur officiel (« merchant of record »), par un ADR qui remplace celui-ci.</li></ul>
 <h4>Territoires</h4>
-<div class="table-scroll"><table><thead><tr><th>Territoire</th><th>Boutique au lancement</th></tr></thead><tbody><tr><td>France</td><td>Ouverte</td></tr><tr><td>Autres États membres de l’Union, hors Belgique et Pays-Bas</td><td>Ouverte</td></tr><tr><td>Belgique</td><td><strong>Fermée</strong></td></tr><tr><td>Pays-Bas</td><td><strong>Fermée</strong></td></tr><tr><td>Hors Union</td><td><strong>Fermée</strong></td></tr></tbody></table></div>
-<ul><li>La Belgique a jugé en 2018 que des coffres à butin payants relèvent des jeux de hasard. Aux Pays-Bas, le Conseil d’État a annulé en 2022 la sanction contre un éditeur, mais la question reste politique. Un sablier n’est pas un tirage ; l’ADR 0018 demande néanmoins une revue : tant que le conseil ne l’a pas faite pour ces deux pays, ils restent fermés.</li><li>Le pays se déduit côté serveur. Un territoire fermé voit la boutique verrouillée, sans effet sur l’échange d’encre ni sur le reste du jeu.</li><li>La liste est un paramètre versionné (<a href="#adr-0009">ADR 0009</a>) et figure dans les CGV.</li></ul>
+<ul><li><strong>La boutique ouvre dans tous les pays</strong>, y compris la Belgique, les Pays-Bas et hors de l’Union. C’est une décision du porteur du projet, prise contre la prudence du relevé : l’<a href="#adr-0018">ADR 0018</a> demandait une revue juridique par territoire avant l’ouverture.</li><li>Le <strong>risque assumé</strong> : la Belgique a jugé en 2018 que des coffres à butin payants relèvent des jeux de hasard (amende et peine de prison possibles) ; aux Pays-Bas, le Conseil d’État a annulé en 2022 la sanction contre un éditeur, mais la question reste politique. Un sablier n’est pas un tirage ; le conseil confirme qu’il n’est pas un coffre à butin.</li><li>Le <strong>blocage par territoire reste</strong> : le pays se déduit côté serveur, un territoire fermé voit la boutique verrouillée sans effet sur l’échange d’encre ni sur le reste du jeu. Il sert à fermer un pays dès que le conseil, un régulateur ou un magasin d’applications le demande.</li><li>La liste des territoires fermés est un paramètre versionné (<a href="#adr-0009">ADR 0009</a>), <strong>vide au lancement</strong>, et figure dans les CGV.</li><li><strong>TVA hors Union</strong> : la TVA française de 20 % ne vaut que pour les acheteurs de l’Union. Pour un acheteur hors Union, la TVA ou la taxe locale (par exemple la taxe sur les services numériques) peut exiger une inscription dans son pays : le conseil et l’expert-comptable fixent, pays par pays, ce que le prix TTC affiché devient.</li></ul>
 <h4>Plafond mensuel par défaut</h4>
 <ul><li><strong>10 € TTC par mois et par compte</strong> sur le web, modifiable par le titulaire du moyen de paiement. L’écran d’achat affiche le montant déjà dépensé ce mois-ci.</li><li>Sur les magasins d’applications, le contrôle parental de la plateforme s’applique.</li></ul>
 <h4>Accessibilité</h4>
@@ -2099,17 +2098,17 @@
 <h3>Options envisagées</h3>
 <h4>Revendeur officiel dès le départ</h4>
 <p>Reporté : commission plus forte, CGV et médiateur à réécrire, pour un seuil de TVA probablement non atteint la première année.</p>
-<h4>Ouvrir la Belgique et les Pays-Bas</h4>
-<p>Écarté tant que le conseil ne s’est pas prononcé : le risque est une amende ou une poursuite pénale, pour un revenu marginal.</p>
+<h4>Fermer la Belgique, les Pays-Bas et le hors Union au lancement</h4>
+<p>Écarté par le porteur du projet, qui ouvre partout. C’était l’option prudente : elle évitait le risque belge et les taxes locales, au prix d’un marché plus étroit.</p>
 <h4>Plafond mensuel plus haut ou absent</h4>
 <p>Écarté : le panier moyen est de 3,50 € TTC ; 10 € couvre l’usage normal et borne la dépense d’un mineur.</p>
 <h3>Conséquences</h3>
 <h4>Positives</h4>
 <ul><li>Chaque point du dossier a une valeur, le conseil n’a plus qu’à valider.</li><li>Le revenu reste net de toute TVA étrangère tant que le seuil n’est pas franchi.</li></ul>
 <h4>Négatives</h4>
-<ul><li>Le marché belge et néerlandais est perdu jusqu’à la revue.</li><li>Le suivi du seuil de TVA est un compteur de plus côté serveur.</li></ul>
+<ul><li>Un risque pénal et administratif en Belgique, et des obligations fiscales hors Union, sans avis du conseil.</li><li>Le suivi du seuil de TVA est un compteur de plus côté serveur.</li></ul>
 <h3>Critères de réévaluation</h3>
-<ul><li>Le conseil refuse le médiateur, un territoire ou le plafond.</li><li>Les ventes hors France approchent 8 000 € par an.</li><li>Le coût d’adhésion au médiateur dépasse 1 % du chiffre d’affaires de la boutique.</li><li>Évolution de la loi belge ou néerlandaise sur les coffres à butin.</li></ul></div><p class="xrefs"><span>En situation</span><a class="xref" href="interfaces.html#i-24">Réglages</a></p></article></div></div>
+<ul><li>Le conseil, un régulateur ou un magasin d’applications refuse le médiateur, un territoire ou le plafond : fermer le territoire concerné.</li><li>Les ventes hors France approchent 8 000 € par an.</li><li>Le coût d’adhésion au médiateur dépasse 1 % du chiffre d’affaires de la boutique.</li><li>Évolution de la loi belge ou néerlandaise sur les coffres à butin.</li></ul></div><p class="xrefs"><span>En situation</span><a class="xref" href="interfaces.html#i-24">Réglages</a></p></article></div></div>
 <!-- ADR:END -->
     </div>
   </section>
