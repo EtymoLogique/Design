@@ -12,6 +12,7 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `LICENSE`, `LICENSE-CONTENT` | Code sous AGPL 3.0 ou ultérieure, contenu sous CC BY-SA 4.0 ; nom et logo réservés (ADR 0017). |
 | `docs/game-design.md` | Vision du jeu : piliers, vocabulaire, boucle, règles de jeu, identité, périmètre du MVP. |
 | `docs/etude-de-marche.md`, `docs/plan-financier.md` | Étude de marché et plan financier sur 18 mois (développement, lancement, MCO et fascicules). Les tableaux du plan sont générés par `outils/src/bin/plan_financier.rs` (entre `<!-- PLAN:START -->` et `<!-- PLAN:END -->`) : ne pas les éditer à la main. |
+| `docs/boutique-dossier-juridique.md` | Dossier pour le conseil (pièces, 16 questions), projet de CGV et réponses à reporter, pour la boutique de gouttes. |
 | `docs/adr/*.md` | Architecture Decision Records, numérotés `NNNN-titre.md`, indexés dans `docs/adr/README.md`. |
 | `docs/adr.html` | Page générée à partir des ADR (entre `<!-- ADR:START -->` et `<!-- ADR:END -->`) : ne pas éditer à la main. |
 | `outils/` | Outils en Rust, un binaire par commande : `build_adr` génère `adr.html` et contient aussi `XREFS`, les renvois de chaque ADR vers les pages ; `plan_financier` calcule les tableaux du plan financier ; `check_identity` contrôle l'identité visuelle. |
