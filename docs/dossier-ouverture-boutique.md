@@ -39,7 +39,7 @@ Les passages entre crochets sont à compléter. Vouvoiement, comme le reste du j
 
 **Article 2 — Ce que vous achetez.** Un **sablier** est un contenu numérique du jeu : il fait avancer d’une heure la recharge de l’énergie. Il ne donne aucun tirage, ne change ni les chances, ni la garantie de nouveauté, ni le filet d’utilité. Tout ce que la boutique vend s’obtient aussi en jouant. Les lots, leurs prix TTC et le prix par sablier sont affichés sur l’écran d’achat.
 
-**Article 3 — Prix.** Les prix sont en euros, toutes taxes comprises. Le prix affiché au moment de la commande est celui que vous payez : [mention sur la TVA applicable au pays de l’acheteur, selon la décision du § 3].
+**Article 3 — Prix.** Les prix sont en euros, toutes taxes comprises. Le prix affiché au moment de la commande est celui que vous payez : la TVA française à 20 % est incluse pour tous les acheteurs.
 
 **Article 4 — Commander.** Vous choisissez un lot, vous vérifiez le récapitulatif, vous cochez la case de renonciation (article 6), puis vous appuyez sur « Commande avec obligation de paiement ». Le paiement est assuré par [prestataire], qui conserve vos données de carte et votre adresse comme responsable de traitement distinct. ÉtymoLogique ne reçoit ni votre adresse ni vos données de carte.
 
@@ -49,11 +49,11 @@ Les passages entre crochets sont à compléter. Vouvoiement, comme le reste du j
 
 **Article 7 — Garantie légale de conformité.** Le contenu numérique est conforme au contrat. En cas de défaut de conformité, vous avez droit à sa mise en conformité, puis, à défaut, à une réduction du prix ou à la résolution du contrat, dans les conditions des articles L224-25-1 et suivants du code de la consommation. [Reprendre ici le texte intégral exigé : durée, charge de la preuve, recours.]
 
-**Article 8 — Plafond de dépense.** Un plafond mensuel de [montant, § 6] est appliqué par défaut. Le titulaire du moyen de paiement peut le modifier.
+**Article 8 — Plafond de dépense.** Un plafond mensuel de 10 € TTC est appliqué par défaut. Le titulaire du moyen de paiement peut le modifier.
 
-**Article 9 — Territoires.** La boutique peut être fermée dans certains pays. Le reste du jeu reste accessible. [Liste du § 4.]
+**Article 9 — Territoires.** La boutique peut être fermée dans certains pays. Le reste du jeu reste accessible. Au lancement, la boutique est ouverte en France et dans les États membres de l’Union européenne, sauf en Belgique et aux Pays-Bas ; elle est fermée hors de l’Union.
 
-**Article 10 — Réclamations et médiation.** Écrivez d’abord à [adresse]. Sans réponse satisfaisante sous [délai], vous pouvez recourir gratuitement au médiateur de la consommation : [nom, adresse postale, site du médiateur choisi au § 2].
+**Article 10 — Réclamations et médiation.** Écrivez d’abord à [adresse]. Sans réponse satisfaisante sous 30 jours, vous pouvez recourir gratuitement au médiateur de la consommation : CM2C [adresse postale et site à relever à l’adhésion].
 
 **Article 11 — Données personnelles.** Voir la politique de confidentialité ([ADR 0010](adr/0010-observabilite-et-vie-privee.md), [ADR 0073](adr/0073-boutique-support-durable-et-pieces-comptables.md)) : le prestataire de paiement est un destinataire, les pièces comptables sont conservées 10 ans sans adresse ni nom.
 
@@ -63,7 +63,7 @@ Les passages entre crochets sont à compléter. Vouvoiement, comme le reste du j
 
 Tout professionnel qui vend à des consommateurs doit leur garantir un recours effectif à un médiateur de la consommation (C. consom., art. L612-1), et lui communiquer ses coordonnées (art. L616-1).
 
-- **Choix.** Le médiateur doit figurer sur la liste que la Commission d’évaluation et de contrôle de la médiation de la consommation (CECMC) publie. Le porteur du projet le choisit ; ce dossier ne le fait pas à sa place.
+- **Choix.** Le médiateur doit figurer sur la liste que la Commission d’évaluation et de contrôle de la médiation de la consommation (CECMC) publie. **Choix retenu : CM2C**, médiateur généraliste ouvert à tout professionnel ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)). À l’adhésion, confirmer par écrit qu’il couvre les contenus numériques vendus en ligne et relever son coût ; sinon, prendre un autre médiateur de la liste.
 - **Critères.** Le médiateur accepte les litiges de contenu numérique vendu en ligne, traite en français, ne facture rien au consommateur, et fixe un coût d’adhésion ou de saisine compatible avec un panier moyen de 3,50 € TTC ([plan financier](plan-financier.md)).
 - **Où l’afficher.** Dans les CGV (article 10), sur la page de la boutique, et sur la page des mentions légales.
 - **Pas de lien vers la plateforme ODR.** La plateforme européenne de règlement en ligne des litiges a fermé le 20 juillet 2025 (règlement (UE) 2024/3228). Aucune page, aucun texte ni aucun modèle d’e-mail ne la cite. Contrôle avant l’ouverture : chercher le mot « ODR » dans les CGV, les pages et les e-mails de l’application.
@@ -86,11 +86,11 @@ Le plan financier compte 20 % sur tous les lots. La règle change avec la prove
 | Vendeur auprès du consommateur | ÉtymoLogique (CGV ci-dessus) | Le revendeur : CGV et médiateur à réécrire |
 | Reçu et support durable | Prestataire de paiement (ADR 0073) | Revendeur, à vérifier avec l’ADR 0073 |
 
-### Proposition
+### Décision
 
-**Option A.** À 1,99 € et 4,99 €, le panier est bas et le volume incertain : le seuil de 10 000 € ne sera probablement pas dépassé au premier exercice, et la TVA française à 20 % s’applique alors partout. L’option B est le repli si l’inscription à l’OSS pèse plus que la commission. À valider avec l’expert-comptable ; la décision, une fois prise, change le plan financier (TVA par pays) et fait l’objet d’un ADR.
+**Option A** ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)). À 1,99 € et 4,99 €, le panier est bas et le volume incertain : le seuil de 10 000 € ne sera probablement pas dépassé au premier exercice, et la TVA française à 20 % s’applique alors partout. L’option B est le repli si l’inscription à l’OSS pèse plus que la commission. À valider avec l’expert-comptable.
 
-Mise en œuvre : le serveur enregistre le pays d’émission de la carte et la TVA de chaque achat ([ADR 0073](adr/0073-boutique-support-durable-et-pieces-comptables.md)) ; le cumul annuel des ventes hors France sert de compteur du seuil et alerte à 80 %.
+Mise en œuvre : le serveur enregistre le pays d’émission de la carte et la TVA de chaque achat ([ADR 0073](adr/0073-boutique-support-durable-et-pieces-comptables.md)) ; le cumul annuel des ventes hors France sert de compteur du seuil et alerte à 8 000 € (80 % du seuil).
 
 ## 4. Revue par territoire
 
@@ -98,11 +98,11 @@ L’[ADR 0018](adr/0018-sabliers-et-boutique.md) prévoit une revue juridique pa
 
 | Territoire | Raison de la revue | Décision du conseil | Boutique |
 |---|---|---|---|
-| France | Marché principal ; règles de la consommation de ce dossier | À remplir | À remplir |
-| Belgique | Règles belges sur les coffres à butin | À remplir | À remplir |
-| Pays-Bas | Règles néerlandaises sur les coffres à butin | À remplir | À remplir |
-| Autres États membres de l’Union | Droit de la consommation harmonisé ; TVA du [§ 3](#3-tva) | À remplir | À remplir |
-| Hors Union | Non ouvert au lancement, sauf avis contraire | À remplir | Fermée par défaut |
+| France | Marché principal ; règles de la consommation de ce dossier | À confirmer par le conseil | Ouverte |
+| Belgique | Règles belges sur les coffres à butin | Fermée en attendant la revue du conseil | Fermée |
+| Pays-Bas | Règles néerlandaises sur les coffres à butin | Fermée en attendant la revue du conseil | Fermée |
+| Autres États membres de l’Union | Droit de la consommation harmonisé ; TVA du [§ 3](#3-tva) | À confirmer par le conseil | Ouverte (hors Belgique et Pays-Bas) |
+| Hors Union | Non ouvert au lancement, sauf avis contraire | Non ouvert au lancement | Fermée |
 
 Exigences techniques (dans l’application, hors de ce dépôt) :
 
@@ -120,11 +120,11 @@ Quelle que soit la réponse, le projet vise déjà les critères de l’identit�
 
 L’[ADR 0018](adr/0018-sabliers-et-boutique.md) prévoit, sur le web, un plafond de dépense mensuel par défaut, modifiable par le titulaire du moyen de paiement. Sur les magasins d’applications, le contrôle parental de la plateforme s’applique.
 
-**Proposition : 10 € TTC par mois et par compte**, soit environ deux lots à 4,99 €. Il couvre largement l’usage normal (panier moyen de 3,50 €) et borne la dépense d’un mineur. Aucun ciblage ni offre personnalisée. Le plafond s’affiche sur l’écran d’achat avec le montant déjà dépensé ce mois-ci. À fixer par le porteur du projet, puis à inscrire dans un ADR ou un paramètre d’équilibrage ([ADR 0009](adr/0009-contenu-et-equilibrage.md)).
+**Décision : 10 € TTC par mois et par compte** ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)), soit environ deux lots à 4,99 €. Il couvre largement l’usage normal (panier moyen de 3,50 €) et borne la dépense d’un mineur. Aucun ciblage ni offre personnalisée. Le plafond s’affiche sur l’écran d’achat avec le montant déjà dépensé ce mois-ci. Paramètre d’équilibrage versionné ([ADR 0009](adr/0009-contenu-et-equilibrage.md)).
 
 ## Ordre de travail
 
-1. Choisir le médiateur ([§ 2](#2-médiateur-de-la-consommation)) et décider la TVA ([§ 3](#3-tva)) : ils alimentent les CGV.
+1. Adhérer à CM2C ([§ 2](#2-médiateur-de-la-consommation)) et compléter dans les CGV les données du vendeur (société, SIREN, TVA) et le prestataire de paiement : ce dossier ne les connaît pas.
 2. Envoyer au conseil les CGV, l’[ADR 0073](adr/0073-boutique-support-durable-et-pieces-comptables.md), le tableau du [§ 4](#4-revue-par-territoire) et la question du [§ 5](#5-accessibilité-european-accessibility-act).
-3. Intégrer ses retours ; passer l’ADR 0018 (« Proposé ») et l’ADR 0073 à « Accepté » ; fixer les prix dans un ADR.
+3. Intégrer ses retours ; passer les ADR 0018, 0073 et 0074 à « Accepté » ; fixer les prix dans un ADR.
 4. Ouvrir la boutique territoire par territoire, en commençant par la France.
