@@ -580,7 +580,7 @@ Le prototype doit répondre aux questions suivantes :
 - retour au 1ᵉʳ, au 7ᵉ et au 30ᵉ jour, rétention mensuelle par cohorte et passage d'un mois au suivant ;
 - jours joués par mois, quêtes du jour terminées, tampons par semaine et séances de ricochets.
 
-Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle. Les cohortes se calculent sans identifiant durable : des tâches planifiées comptent les joueurs par mois d'arrivée, et l'identifiant de la télémétrie se renouvelle au début de chaque mois civil ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
+Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle. Les cohortes se calculent sans identifiant durable : des tâches planifiées comptent les joueurs par mois d'arrivée, et l'identifiant de la télémétrie se renouvelle au début de chaque mois civil ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)). Il est calculé côté serveur, jamais écrit sur l'appareil ; le joueur s'y oppose par un interrupteur des Réglages, qui arrête la collecte et efface les événements bruts ([ADR 0072](adr/0072-identifiant-de-telemetrie-calcule-cote-serveur.md)).
 
 ### Bêta ouverte
 
