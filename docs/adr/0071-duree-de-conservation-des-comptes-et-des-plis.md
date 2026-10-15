@@ -23,7 +23,7 @@ Les autres données ont déjà leur durée : commandes 30 jours, quêtes du jour
 - Un **compte** (le joueur et toute sa progression, sur tous ses appareils) est effacé par les purges quotidiennes quand **aucun de ses appareils n’a joué depuis 3 ans**.
 - Est une activité toute session ouverte avec le serveur par un appareil du joueur : une synchronisation, une commande, une connexion. Elle repousse l’effacement de 3 ans à compter de ce jour.
 - Justification : la progression sert à reprendre la partie. Trois ans sans jouer laissent trois ans de fascicules sans aucune visite. Passé ce délai, la reprise est improbable, et une base de joueurs partis n’a plus de finalité. Un invité sans compte garde son délai de **6 mois**, plus court, faute d’adresse pour le retrouver.
-- Aucun achat en euros n’existe encore. Quand la boutique ouvrira ([ADR 0018](0018-sabliers-et-boutique.md)), une obligation comptable pourra imposer de garder les reçus plus longtemps : ce sera une décision séparée, qui ne change pas cette durée pour la progression.
+- Aucun achat en euros n’existe, et il n’y en aura pas.
 - Les 3 ans sont **à confirmer avec le conseil** avant la bêta ouverte ([ADR 0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)). Le chiffre vit en un seul endroit du code des purges (`MOIS_COMPTE_INACTIF`).
 
 ### Le joueur est prévenu sans e-mail
@@ -99,5 +99,4 @@ Le texte à montrer :
 
 - Avis du conseil sur les 3 ans, ou sur l’agrégation à 12 mois : ajuster les durées.
 - Plus de 2 % des comptes effacés qui rouvrent un profil neuf dans les 30 jours : allonger la durée ou prévoir un rappel dans le jeu.
-- Ouverture des achats en euros : durée des reçus et revue de la conservation de `mouvement`.
 - Ajout d’un historique fin pour le joueur (journal de ses plis) : revoir la durée de `ouverture_pli`.

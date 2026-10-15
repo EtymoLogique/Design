@@ -11,7 +11,6 @@ Chaque installation de la PWA est un profil invité anonyme ([ADR 0007](0007-eta
 Trois besoins arrivent ensemble :
 
 - **récupérer sa progression** et jouer sur plusieurs appareils ;
-- **les achats en euros** de la boutique, prévus plus tard ([ADR 0018](0018-sabliers-et-boutique.md)), qui exigent une identité durable pour le support et les remboursements ;
 - **une vue compétitive**, possible plus tard, qui demande un nom affichable.
 
 L’[ADR 0007](0007-etat-et-economie-autoritaires.md) écarte un compte obligatoire au premier lancement : la friction et la collecte de données ne servent pas le jeu. Il demande un ADR dédié avant toute collecte d’identité.
@@ -22,7 +21,7 @@ L’[ADR 0007](0007-etat-et-economie-autoritaires.md) écarte un compte obligato
 
 - Le premier lancement crée toujours un profil invité, comme aujourd’hui. On joue sans jamais donner d’adresse.
 - Le joueur crée un compte en **rattachant une adresse électronique à son profil invité** : la progression devient celle du compte, sans copie ni perte.
-- Le compte est **requis pour les achats en euros**, quand ils ouvriront ([ADR 0018](0018-sabliers-et-boutique.md)). Il ne donne aucun avantage de jeu : ni brique, ni encre, ni pli.
+- Le compte ne donne aucun avantage de jeu : ni brique, ni encre, ni pli.
 
 ### Relancer sans contraindre
 
@@ -112,7 +111,7 @@ Les Réglages gardent en permanence une entrée « Sauvegarder ma progression »
 - La progression survit à un changement d’appareil, et on peut jouer sur plusieurs appareils.
 - Aucune adresse en clair : une fuite de la base ne livre aucun moyen de contacter les joueurs.
 - Aucun mot de passe à protéger ni à réinitialiser.
-- La boutique en euros et une future vue compétitive disposent d’une identité.
+- Une future vue compétitive dispose d’une identité.
 - Le premier lancement reste sans friction.
 
 ### Négatives
@@ -127,5 +126,4 @@ Les Réglages gardent en permanence une entrée « Sauvegarder ma progression »
 
 - Plus de 5 % des demandes de code sans confirmation dans les 15 minutes : vérifier la délivrabilité, envisager un fournisseur d’identité tiers.
 - Moins de 10 % des joueurs actifs depuis 30 jours ont un compte : revoir les moments de relance.
-- Ouverture des achats en euros : revue de sécurité de l’identité, et décision sur la conservation de l’adresse pour les reçus.
 - Ouverture d’une vue compétitive : règles de modération des pseudos ([ADR 0075](0075-moderation-des-pseudos-et-obligations-dsa.md)).

@@ -396,12 +396,6 @@ Dans le MVP ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) :
 - **aucun plafond** : ni sur l'échange contre de l'encre, ni sur l'usage, ni sur le nombre de sabliers détenus ; l'encre, gagnée en ouvrant des plis et, en quantité bornée, par les quêtes et le cadeau de bienvenue ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)), borne à elle seule le rythme ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
 - un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit un sablier ; à 10 gouttes le sablier, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
 
-Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
-
-- les plafonds ci-dessus s'appliquent aussi aux sabliers achetés en euros ;
-- la boutique vend des lots en euros, sans monnaie intermédiaire, avec le prix par sablier affiché, sans offre limitée ni relance ; lot sans sablier utilisé remboursable pendant 14 jours ;
-- revue juridique et boutique désactivable par territoire, contrôle parental, achats validés par le serveur.
-
 ### Principes éthiques
 
 - afficher clairement le temps restant ;
@@ -549,7 +543,7 @@ Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](
 
 ### Reporté
 
-- paiements (boutique de sabliers proposée par l'[ADR 0018](adr/0018-sabliers-et-boutique.md)), publicités et monnaie premium ;
+- paiements (abandonnés), publicités et monnaie premium ;
 - soumission de mots par les joueurs ;
 - contenu généré ou validé automatiquement par IA ;
 - multijoueur, échanges et classements ;
