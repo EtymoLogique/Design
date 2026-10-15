@@ -694,7 +694,7 @@ erDiagram
 
 | Table | Rôle | Remarques |
 |---|---|---|
-| `joueur` | La partie : invitée, ou celle d'un compte. | Un identifiant aléatoire. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). Une partie invitée (sans `compte`) inactive depuis 6 mois est effacée ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
+| `joueur` | La partie : invitée, ou celle d'un compte. | Un identifiant aléatoire. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). Une partie invitée (sans `compte`) inactive depuis 6 mois est effacée ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)) ; une partie avec compte, inactive depuis 3 ans, l’est aussi ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)). |
 | `appareil` | Les installations qui jouent la partie. | L'identifiant d'installation et l'empreinte de son secret de 256 bits. Un joueur en a une au départ, plusieurs avec un compte. Se déconnecter supprime la ligne ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
 | `compte` | Le compte facultatif. | Une empreinte HMAC-SHA256 de l'adresse normalisée, avec une clé secrète dédiée : l'adresse elle-même n'est jamais stockée. Le pseudo par défaut, tiré de l'adresse, reste privé tant que `pseudo_confirme` est faux ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
 | `defi_connexion` | Demandes de connexion ou de création de compte. | Le lien et le code envoyés par e-mail, en empreintes seulement ; valables 15 minutes, 5 essais, usage unique. Purgées après un jour. |
@@ -703,7 +703,7 @@ erDiagram
 | `energie` | Charges de pli. | 2 charges au plus, une toutes les 12 h ; `prochaine_charge` est nulle quand l'énergie est pleine : le temps s'arrête ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). Un sablier avance cet instant d'une heure. |
 | `encre`, `sablier` | Soldes. | Encre jamais négative, sabliers détenus jamais négatifs et sans plafond ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)). |
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
-| `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
+| `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). Le détail est agrégé sans identifiant puis effacé après 12 mois ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)). |
 | `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois. `recupere_le` reste vide tant que le joueur n'a pas récupéré sa récompense ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)) ; la récupération passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
 | `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
