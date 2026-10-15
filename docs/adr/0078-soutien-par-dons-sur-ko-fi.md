@@ -24,13 +24,14 @@ Ko-fi n’est pas le marchand de référence : il ne collecte ni TVA ni impôt, 
 - **Réglages** : une carte « Soutenir ÉtymoLogique » tout en haut, avec le lien. Pour un abonné, le même emplacement remercie. Un bouton « Masquer pendant 30 jours » la cache, ici comme dans la Boutique ; elle revient d’elle-même après 30 jours réels (horodatage local, comme le reste du souvenir de la modale).
 - **Boutique** : la même carte sous les échanges, même si rien ne s’y achète : le don n’est pas une offre de la boutique, il le dit (« ne change rien à votre partie »).
 - **Navigation** : un lien « Soutenir » discret dans le rail des écrans larges. Sur mobile, la barre garde ses quatre onglets.
-- **Modale de rappel** : sur la table au calme, jamais pendant un rituel de pli, une fusion, une fiche ou la relance « Sauvegardez votre progression », et seulement en ligne. Première apparition à partir de 5 découvertes et de 3 jours de jeu, puis au plus tous les 30 jours de jeu. « Plus tard » comme « Offrir un café » la ferment ; le souvenir est local (IndexedDB), pas une donnée du serveur.
+- **Modale de rappel** : jamais au début. Première apparition après **15 minutes de jeu** sur l'appareil (onglet visible, joueur présent), puis au plus **tous les 7 jours**. Elle attend que la table soit calme (ni rituel de pli, ni fusion, ni fiche, ni relance « Sauvegardez votre progression »), que le joueur soit en ligne et qu'il soit resté **une minute sans toucher l'écran** ; une fois ouverte, elle reste jusqu'à sa fermeture. « Plus tard » comme « Offrir un café » la ferment. Le temps de jeu et les dates sont un souvenir local (IndexedDB), jamais envoyés au serveur.
 - Le lien est un simple `<a href>` vers Ko-fi, ouvert hors de la PWA : aucun script ni cadre tiers, la CSP ne change pas.
 
 ### Reconnaître un abonné
 
 - Ko-fi appelle `POST /soutien/kofi` à chaque paiement (webhook, `data=<JSON>` en formulaire). L’API compare le `verification_token` au secret `ETYMO_KOFI_TOKEN` à temps constant ; sans lui, le point d’entrée répond `503`.
 - Seuls les paiements d’abonnement (`is_subscription_payment`) comptent. Un don ponctuel ne retire pas la modale.
+- Chaque webhook valide envoie aussi un **e-mail à `contact@etymologique.fr`** (`ETYMO_KOFI_NOTIFICATION`) : type d’événement et montant, **sans adresse, nom ni message du donateur**. Un échec d’envoi ne fait pas échouer le webhook, pour que Ko-fi ne le rejoue pas.
 - L’adresse de l’événement est normalisée comme pour la connexion, puis réduite à son **empreinte HMAC** (la clé de l’ADR 0070). La table `soutien` ne garde que cette empreinte et la date du dernier paiement : ni nom, ni montant, ni message.
 - Un abonnement est **actif 45 jours** après son dernier paiement. La ligne est supprimée avec le compte, et les lignes de plus de 90 jours sont purgées à chaque webhook.
 - `GET /etat` renvoie `compte.soutien` (vrai ou faux). Un invité sans compte n’est jamais reconnu : il voit la modale.
