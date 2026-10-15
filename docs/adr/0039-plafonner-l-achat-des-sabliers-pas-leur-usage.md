@@ -28,7 +28,6 @@ Par ailleurs, la feuille des sabliers proposait le plus grand nombre de sabliers
 | Sabliers détenus | sans limite |
 
 - **Aucun échange entre ressources du jeu n'est plafonné.** L'encre ne s'obtient qu'en ouvrant des plis : elle borne à elle seule le rythme, et un plafond d'échange ne ferait que retenir des gouttes déjà gagnées.
-- Seul l'**achat en euros** sera plafonné, quand la boutique payante de l'ADR 0018 sera acceptée.
 - Une commande d'échange porte au plus 1 000 sabliers : c'est une borne de la requête, pas une règle de jeu.
 - Un sablier ne s'utilise toujours que si l'énergie est sous 2.
 - Les sabliers d'un jalon s'ajoutent tous à ceux détenus : aucun n'est perdu.
@@ -39,7 +38,6 @@ Par ailleurs, la feuille des sabliers proposait le plus grand nombre de sabliers
 
 - La **boutique** est un écran à part, ouvert depuis l'en-tête des plis et la carte de l'encre. Elle a deux sections :
   - **Échanges** : les ressources du jeu entre elles, aujourd'hui l'encre contre des sabliers, en lots de 1, 3 et 12 que la feuille permet d'ajuster ;
-  - **Achats** : les lots en euros de l'ADR 0018, affichés « Bientôt ouvert » et verrouillés tant que cet ADR n'est pas accepté.
 - **Raccourcis** : le joueur n'a pas à passer par la boutique quand une ressource manque. Sous les plis en attente, tant que l'énergie n'est pas pleine, un bouton propose « Remplir avec des sabliers » s'il en détient, sinon « Échanger contre des gouttes », qui ouvre directement la feuille d'échange.
 
 ### Feuille des sabliers
@@ -68,7 +66,7 @@ Par ailleurs, la feuille des sabliers proposait le plus grand nombre de sabliers
 
 ### Échanger seulement depuis l'écran des plis
 
-Écartée : l'échange se mêlait aux chances et à l'atelier du pli, et ne laissait aucune place pour la boutique en euros à venir.
+Écartée : l'échange se mêlait aux chances et à l'atelier du pli.
 
 ## Conséquences
 
