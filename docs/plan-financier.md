@@ -13,7 +13,7 @@
 | Chiffre d’affaires (scénario central) | 0 € | 3 100 € |
 | Joueurs actifs en fin de période (central) | 9 480 | 7 730 |
 
-**Ce que dit le plan.** Le jeu peut se construire et vivre 18 mois avec un budget de 310 000 € (structure allégée) à 500 000 € (structure complète). Mais la boutique de gouttes, telle que l’[ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) la conçoit (plafonnée à 20 € par mois, sans relance, sans lot ni remise), ne couvre que 2 à 5 % des coûts mensuels à 18 mois. Même le scénario favorable demande environ 230 000 joueurs actifs pour atteindre l’équilibre. Le plan montre donc un **besoin de financement**, pas une rentabilité, et appelle des décisions sur des revenus complémentaires ([§ 6](#6-leviers-pour-atteindre-léquilibre)).
+**Ce que dit le plan.** Le jeu peut se construire et vivre 18 mois avec un budget de 310 000 € (structure allégée) à 500 000 € (structure complète). Mais la boutique de gouttes, telle que l’[ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md) la conçoit (plafonnée à 20 € par mois, sans relance, sans lot ni remise), ne couvre que 2 à 5 % des coûts mensuels à 18 mois. Même le scénario favorable demande environ 230 000 joueurs actifs pour atteindre l’équilibre. Le plan montre donc un **besoin de financement**, pas une rentabilité, et appelle des décisions sur des revenus complémentaires ([§ 6](#6-leviers-pour-atteindre-léquilibre)).
 
 ## 1. Calendrier
 
@@ -24,7 +24,7 @@
 | M3 déc. 2026 | Développement | Recette, audit d’accessibilité et de sécurité, CGU et politique de confidentialité, fascicule 2 prêt, dossier de presse |
 | **M4 janv. 2027** | **Bêta ouverte** | Fascicules 1 et 2 ; la liste d’attente rejoint la bêta, en production ; mesure de la rétention dès le premier jour ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)) |
 | M5 févr. 2027 | Bêta | Fascicule 3 ; correctifs ; décision sur les comptes et la récupération de progression ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) |
-| **M6 mars 2027** | **Ouverture officielle** | Fascicule 4 ; ouverture pendant la Semaine de la langue française, si la bêta atteint ses seuils ; lancement presse et créateurs de contenu ; ADR 0071 et 0072 acceptés, revue juridique de la boutique, intégration du paiement par Stancer |
+| **M6 mars 2027** | **Ouverture officielle** | Fascicule 4 ; ouverture pendant la Semaine de la langue française, si la bêta atteint ses seuils ; lancement presse et créateurs de contenu ; ADR 0076 et 0077 acceptés, revue juridique de la boutique, intégration du paiement par Stancer |
 | **M7 avr. 2027** | **MCO et boutique** | Fascicule 5 ; ouverture de la boutique de gouttes, désactivable par territoire |
 | M8 à M11 | MCO | Fascicules 6 à 9 ; rythme d’été réduit en marketing |
 | M12 sept. 2027 | MCO | Fascicule 10 ; campagne de rentrée (enseignants, étudiants), second audit |
@@ -94,7 +94,7 @@ Communes aux trois scénarios :
 
 - **Temps forts** (presse, liste d’attente, événements) : 1 500 joueurs de la liste d’attente à l’ouverture de la bêta ; 4 000 à l’ouverture officielle de mars 2027, dont 2 000 venus de la presse et 2 000 de la Semaine de la langue française ; 2 000 à la Semaine de mars 2028 ; 1 000 à la rentrée ; 800 en février et en décembre.
 - **Rétention mensuelle d’une cohorte** : 100 % le mois d’arrivée, puis 30, 20, 16, 14, 12, 11 et 10 %, puis 95 % du mois précédent ; le fascicule mensuel est la raison de revenir.
-- **Boutique** ouverte en M7, à la moitié de son régime le premier mois ; 1 € les 60 gouttes, sans lot ni remise, achat minimum de 2 € et plafond de 20 € par mois ([ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)), panier moyen de 3 € TTC ; TVA de 20 % ; paiement par carte chez Stancer à 0,70 % + 0,15 € HT par paiement en ligne dans l’EEE ([ADR 0072](adr/0072-prestataire-et-parcours-de-paiement.md)), sans commission de magasin (PWA). Les remboursements dus à la rétractation de 14 jours ne sont pas modélisés.
+- **Boutique** ouverte en M7, à la moitié de son régime le premier mois ; 1 € les 60 gouttes, sans lot ni remise, achat minimum de 2 € et plafond de 20 € par mois ([ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md)), panier moyen de 3 € TTC ; TVA de 20 % ; paiement par carte chez Stancer à 0,70 % + 0,15 € HT par paiement en ligne dans l’EEE ([ADR 0077](adr/0077-prestataire-et-parcours-de-paiement.md)), sans commission de magasin (PWA). Les remboursements dus à la rétractation de 14 jours ne sont pas modélisés.
 - Aucune subvention, aucun crédit d’impôt ni aucun revenu complémentaire n’est compté : ils sont traités au [§ 5](#5-financement).
 
 ## 4. Résultats
@@ -298,7 +298,7 @@ Chaque levier ci-dessous change une décision ou en crée une : il demande un AD
 
 ## 7. Écarts avec les sources de vérité
 
-- **La boutique repose sur deux ADR proposés.** Les [ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) (gouttes en euros, prix et plafond de 20 € par mois) et [0072](adr/0072-prestataire-et-parcours-de-paiement.md) (Stancer) ne sont pas acceptés : le revenu à partir de M7 suppose qu’ils le soient en M6. Ils remplacent partiellement les ADR 0018 et 0039, qui parlaient de lots de sabliers. Le panier moyen de 3 € TTC est une hypothèse de ce plan, à remplacer par la mesure ; la grille de prix est dans l’[étude de marché](etude-de-marche.md#grille-de-prix-des-gouttes). La tarification de Stancer est celle de ses conditions d’août 2024, à faire confirmer par écrit.
+- **La boutique repose sur deux ADR proposés.** Les [ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md) (gouttes en euros, prix et plafond de 20 € par mois) et [0077](adr/0077-prestataire-et-parcours-de-paiement.md) (Stancer) ne sont pas acceptés : le revenu à partir de M7 suppose qu’ils le soient en M6. Ils remplacent partiellement les ADR 0018 et 0039, qui parlaient de lots de sabliers. Le panier moyen de 3 € TTC est une hypothèse de ce plan, à remplacer par la mesure ; la grille de prix est dans l’[étude de marché](etude-de-marche.md#grille-de-prix-des-gouttes). La tarification de Stancer est celle de ses conditions d’août 2024, à faire confirmer par écrit.
 - **La boutique suppose une décision sur les comptes.** L’[ADR 0018](adr/0018-sabliers-et-boutique.md) n’ouvre la boutique qu’une fois la récupération de progression décidée ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) ; le plan la place en M5.
 - **L’achat de soutien, les cosmétiques, l’offre établissement et l’abonnement** ne sont décidés nulle part ; l’abonnement est même écarté pour l’instant.
 - **Trois mois de développement** ne sont fixés par aucun document : c’est la contrainte du plan demandé.

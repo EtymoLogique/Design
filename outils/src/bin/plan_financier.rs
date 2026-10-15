@@ -34,7 +34,7 @@ const LANCEMENT: usize = 4; // M4 : bêta ouverte en production, avec les fascic
 const FASCICULES_A_LA_BETA: usize = 2; // deux fascicules paraissent dès l'ouverture de la bêta, puis un par mois
 #[allow(dead_code)]
 const OUVERTURE: usize = 6; // M6 : ouverture officielle à quatre fascicules, Semaine de la langue française (ADR 0048)
-const BOUTIQUE: usize = 7; // M7 : ouverture de la boutique de gouttes (ADR 0071 et 0072, à accepter)
+const BOUTIQUE: usize = 7; // M7 : ouverture de la boutique de gouttes (ADR 0076 et 0077, à accepter)
 
 /// Valeur d'un mois dans une table `(mois, valeur)`, ou `defaut`.
 fn au(table: &[(usize, f64)], m: usize, defaut: f64) -> f64 {
@@ -125,8 +125,8 @@ const DECLIN: f64 = 0.95; // au-delà, chaque mois garde 95 % du précédent (un
 // --- Boutique de gouttes ---------------------------------------------------------------
 const TVA: f64 = 0.20;
 const STANCER_TAUX: f64 = 0.007;
-const STANCER_FIXE: f64 = 0.15; // € HT par paiement en ligne, cartes de l'EEE (ADR 0072) ; hors EEE : 2,5 % + 0,25 €
-const PANIER_TTC: f64 = 3.00; // achat moyen, quantité libre par pas de 1 € (60 gouttes), minimum 2 € (ADR 0071) ; hypothèse à mesurer
+const STANCER_FIXE: f64 = 0.15; // € HT par paiement en ligne, cartes de l'EEE (ADR 0077) ; hors EEE : 2,5 % + 0,25 €
+const PANIER_TTC: f64 = 3.00; // achat moyen, quantité libre par pas de 1 € (60 gouttes), minimum 2 € (ADR 0076) ; hypothèse à mesurer
 const MONTEE: &[(usize, f64)] = &[(BOUTIQUE, 0.5)]; // le premier mois, la moitié du régime
 
 /// Coût d'un joueur payé, bouche-à-oreille, payeurs / MAU, dépense mensuelle TTC par payeur.

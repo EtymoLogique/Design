@@ -1,12 +1,12 @@
-# ADR 0072 — Paiement par Stancer, page hébergée et crédit vérifié par le serveur
+# ADR 0077 — Paiement par Stancer, page hébergée et crédit vérifié par le serveur
 
 - **Statut** : Proposé
-- **Portée** : après le MVP, avec la boutique de l’[ADR 0071](0071-boutique-de-gouttes-en-euros.md)
+- **Portée** : après le MVP, avec la boutique de l’[ADR 0076](0076-boutique-de-gouttes-en-euros.md)
 - **Complète** : [ADR 0024](0024-architecture-logicielle-et-hebergement.md) (un service externe de plus, sans script tiers dans la PWA, et une tâche planifiée de plus), [ADR 0018](0018-sabliers-et-boutique.md) (reçu validé par le serveur, crédit idempotent, données de paiement chez le prestataire), [ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) (reçu sans adresse conservée par le jeu), [ADR 0010](0010-observabilite-et-vie-privee.md) (aucune donnée de paiement dans les journaux ni la télémétrie)
 
 ## Contexte
 
-L’[ADR 0071](0071-boutique-de-gouttes-en-euros.md) vend des gouttes en euros, par achats de 2 € et plus. Il faut un prestataire de paiement et un parcours qui tiennent les contraintes déjà posées :
+L’[ADR 0076](0076-boutique-de-gouttes-en-euros.md) vend des gouttes en euros, par achats de 2 € et plus. Il faut un prestataire de paiement et un parcours qui tiennent les contraintes déjà posées :
 
 - **aucun script tiers** dans la PWA, CSP stricte ([ADR 0024](0024-architecture-logicielle-et-hebergement.md)) : pas de formulaire de carte intégré par un script du prestataire ;
 - **autorité du serveur** : le serveur valide chaque paiement avant de créditer, et le crédit est idempotent ([ADR 0018](0018-sabliers-et-boutique.md)) ;
@@ -29,7 +29,7 @@ Les candidats ont été comparés le 14 octobre 2026 sur leurs pages officielles
 ### Parcours d’achat
 
 1. La PWA envoie la commande d’achat (quantité de gouttes) avec sa clé d’idempotence, comme toute commande du jeu.
-2. Le serveur vérifie le compte, l’activation des achats, le plafond mensuel et le territoire ([ADR 0071](0071-boutique-de-gouttes-en-euros.md)). Il enregistre un **achat en attente**, puis crée chez Stancer une intention de paiement : montant TTC en centimes, `order_id` égal à l’identifiant de l’achat, `unique_id` pour écarter un doublon, `methods_allowed` limité à `card`, `threeds` à `required`, `capture` à `true`, et `return_url` vers la PWA.
+2. Le serveur vérifie le compte, l’activation des achats, le plafond mensuel et le territoire ([ADR 0076](0076-boutique-de-gouttes-en-euros.md)). Il enregistre un **achat en attente**, puis crée chez Stancer une intention de paiement : montant TTC en centimes, `order_id` égal à l’identifiant de l’achat, `unique_id` pour écarter un doublon, `methods_allowed` limité à `card`, `threeds` à `required`, `capture` à `true`, et `return_url` vers la PWA.
 3. La PWA **redirige** le joueur vers la page de paiement hébergée par Stancer. Aucun script tiers ne s’exécute dans l’origine du jeu, et la CSP ne change pas.
 4. Au retour, la PWA **ne crédite rien** : elle resynchronise l’état. Elle le refait chaque fois qu’elle reprend le focus, tant qu’un achat reste en attente.
 
@@ -47,7 +47,7 @@ Les candidats ont été comparés le 14 octobre 2026 sur leurs pages officielles
 
 ### Remboursement et rétractation
 
-- La rétractation de l’[ADR 0071](0071-boutique-de-gouttes-en-euros.md) retire du solde les gouttes inutilisées de l’achat, puis demande à Stancer un **remboursement partiel ou total** de l’intention de paiement, par l’API. La réconciliation suit le remboursement jusqu’à son terme.
+- La rétractation de l’[ADR 0076](0076-boutique-de-gouttes-en-euros.md) retire du solde les gouttes inutilisées de l’achat, puis demande à Stancer un **remboursement partiel ou total** de l’intention de paiement, par l’API. La réconciliation suit le remboursement jusqu’à son terme.
 - Un **impayé** signalé par Stancer retire du solde les gouttes inutilisées de l’achat contesté. Les gouttes déjà dépensées ne sont pas reprises, et le compte n’est pas suspendu sans possibilité de contester.
 
 ### Territoire

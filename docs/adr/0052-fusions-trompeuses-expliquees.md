@@ -116,7 +116,7 @@ Les trompe-l’œil ne sont pas des exclusions. Une exclusion ([ADR 0014](0014-s
 - Le joueur sait si sa piste est fausse ou s’il est tout près, au lieu de s’acharner ou d’abandonner.
 - Une frustration devient un fait de langue appris : le joueur lit pourquoi *para-* de *parasol* n’est pas celui du grec.
 - Le cas des homographes (*a-* et les autres) est traité sans saisie éditoriale, par construction.
-- Aucune table, aucune donnée personnelle ni dépense nouvelle : le changement tient au catalogue et à `resoudre`.
+- Aucune table, aucune donnée personnelle nouvelle ni dépense nouvelle : le changement tient au catalogue et à `resoudre`.
 - Rétrocompatible : une ancienne PWA affiche un échec neutre.
 
 ### Négatives

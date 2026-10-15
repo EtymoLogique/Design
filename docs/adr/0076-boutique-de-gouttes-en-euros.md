@@ -1,9 +1,10 @@
-# ADR 0071 — Boutique en euros : seules les gouttes s’achètent
+# ADR 0076 — Boutique en euros : seules les gouttes s’achètent
 
 - **Statut** : Proposé
 - **Portée** : après le MVP. Le MVP reste sans paiement tant que le présent ADR n’est pas accepté.
 - **Remplacerait partiellement**, une fois accepté : [ADR 0018](0018-sabliers-et-boutique.md), pour ce qui se vend (des lots de sabliers en euros), l’encre « non achetable et non convertible en argent », la monnaie premium écartée, le remboursement d’un lot sans sablier utilisé et la renonciation avant le premier usage ; [ADR 0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md), pour la section « Achats » de la boutique, qui renvoie aux lots de sabliers de l’ADR 0018. Le reste de ces ADR resterait en vigueur, dont les garde-fous de l’ADR 0018 (aucune offre limitée, aucune relance, boutique désactivable par territoire, autorité du serveur) et l’échange de l’encre contre des sabliers de l’ADR 0039.
-- **Complète** : [ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) (le compte est requis pour acheter), [ADR 0072](0072-prestataire-et-parcours-de-paiement.md) (prestataire et parcours de paiement), [ADR 0009](0009-contenu-et-equilibrage.md) (les prix en gouttes restent des paramètres d’équilibrage)
+- **Remplacerait partiellement**, une fois accepté : [ADR 0073](0073-boutique-support-durable-et-pieces-comptables.md), pour la renonciation au droit de rétractation avant le paiement : elle ne vaut plus pour l’achat de gouttes (la monnaie n’est pas un contenu numérique, la rétractation sur les gouttes inutilisées reste ouverte). Le reçu du prestataire comme support durable et les pièces comptables de 10 ans de l’ADR 0073 restent, avec le consentement « contenu numérique » à la première dépense de gouttes achetées.
+- **Complète** : [ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) (le compte est requis pour acheter), [ADR 0077](0077-prestataire-et-parcours-de-paiement.md) (prestataire et parcours de paiement), [ADR 0009](0009-contenu-et-equilibrage.md) (les prix en gouttes restent des paramètres d’équilibrage)
 
 ## Contexte
 
@@ -57,7 +58,7 @@ Ce choix fait des gouttes une **monnaie de jeu achetable**. Le réseau européen
 - Une monnaie de jeu n’est pas un contenu numérique au sens des principes CPC (principe 5) : on ne peut pas faire renoncer le joueur à son droit de rétractation sur les gouttes elles-mêmes.
 - Pendant **14 jours** après un achat, le joueur peut se rétracter. Il récupère alors une part du **montant payé pour cet achat**, au prorata des **gouttes de cet achat qui restent inutilisées**, arrondie au centime inférieur, et ces gouttes quittent son solde. Un changement ultérieur du prix unique ne change donc pas ce qui est rendu.
 - **Ordre de dépense** : quand le joueur dépense de l’encre, les **gouttes gagnées partent d’abord**, puis les gouttes achetées, de la plus ancienne à la plus récente. C’est l’ordre qui laisse le plus de gouttes remboursables au joueur.
-- La rétractation se fait par un **geste en ligne** dans les Réglages du compte, sans écrire à personne. Elle déclenche le remboursement par le prestataire ([ADR 0072](0072-prestataire-et-parcours-de-paiement.md)).
+- La rétractation se fait par un **geste en ligne** dans les Réglages du compte, sans écrire à personne. Elle déclenche le remboursement par le prestataire ([ADR 0077](0077-prestataire-et-parcours-de-paiement.md)).
 - Au-delà de 14 jours, les gouttes achetées restent au joueur, sans date d’expiration.
 
 ### Ce que l’encre achète : un contenu numérique
@@ -75,7 +76,7 @@ Ce choix fait des gouttes une **monnaie de jeu achetable**. Le réseau européen
 
 Ces points restent à confirmer par le conseil prévu en M6 (revue de la boutique) :
 
-- **Support durable.** Le droit de la vente à distance exige une confirmation du contrat sur un support durable, qui mentionne la renonciation à la rétractation. Le jeu ne garde aucune adresse ([ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). Pour l’achat de gouttes, le reçu du prestataire ([ADR 0072](0072-prestataire-et-parcours-de-paiement.md)) est la piste retenue. Pour les sabliers et indices payés en gouttes achetées, la piste à soumettre est un **historique des achats dans le jeu**, consultable et exportable, qui consigne chaque consentement.
+- **Support durable.** Le droit de la vente à distance exige une confirmation du contrat sur un support durable, qui mentionne la renonciation à la rétractation. Le jeu ne garde aucune adresse ([ADR 0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). Pour l’achat de gouttes, le reçu du prestataire ([ADR 0077](0077-prestataire-et-parcours-de-paiement.md)) est la piste retenue, comme dans l’[ADR 0073](0073-boutique-support-durable-et-pieces-comptables.md). Pour les sabliers et indices payés en gouttes achetées, la piste à soumettre est un **historique des achats dans le jeu**, consultable et exportable, qui consigne chaque consentement.
 - **Chaîne d’échanges.** Le principe 2 déconseille plusieurs échanges successifs avant un achat. Gouttes, sabliers, puis temps forment une chaîne de deux échanges. Le sablier est un objet consommable plutôt qu’une monnaie ; à faire confirmer, et à défaut, vendre le temps directement en gouttes.
 - **Coffres à butin.** L’encre achète du temps, donc un accès plus rapide à des plis tirés au hasard. La revue par territoire de l’ADR 0018 (Belgique, Pays-Bas) s’applique telle quelle.
 - **Bouton de commande** portant « Commander avec obligation de paiement » ou une formule équivalente, et médiateur de la consommation désigné dans les CGV.

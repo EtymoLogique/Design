@@ -392,11 +392,11 @@ Les sections précédentes décrivent des tables logiques. Elles ne sont pas sto
 
 - le **stockage des assets** : le catalogue publié, en fichiers statiques dans l'Object Storage public, derrière le CDN ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). Le client et le serveur lisent les mêmes fichiers ; aucune API ne sert le contenu ;
 - le **stockage des données du joueur** : les tables PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit (section 7) ;
-- **ailleurs** : le dépôt privé du catalogue ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)), Secret Manager, la télémétrie et le stockage local du client.
+- **ailleurs** : le dépôt du catalogue ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)), Secret Manager, la télémétrie et le stockage local du client.
 
 ```mermaid
 flowchart LR
-    DEPOT["Dépôt privé du catalogue<br/>sources, médias, manifeste daté"]
+    DEPOT["Dépôt du catalogue<br/>sources, médias, manifeste daté"]
     subgraph ASSETS["Stockage des assets · public/, lisible par nom, sans listage"]
         INDEX["index.json<br/>index global"] --> MF["f/‹sha256›.json<br/>manifeste de fascicule"]
         MF --> CARTE["r/‹sha256›.json<br/>carte"]
@@ -427,8 +427,8 @@ flowchart LR
 | `recette`, `emplacement`, préconditions, déblocages | recette | par tous, dès la parution |
 | `exclusion` relue | exclusions du fascicule | par tous, dès la parution |
 | `fait` : confiance ; `fait_libelle` : `note_simplification` ; `source` et `fait_source` des faits publiés | recopiés dans chaque carte qui les cite | par tous, dès la parution |
-| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue` | dépôt privé du catalogue | équipe éditoriale |
-| Médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt privé du catalogue | équipe éditoriale |
+| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue` | dépôt du catalogue | équipe éditoriale |
+| Médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt du catalogue | équipe éditoriale |
 | Réserve, codex, énergie, encre, sabliers, plis, indices, jalons, commandes | données du joueur (section 7) | serveur seul |
 | Événements produit, journaux opérationnels | télémétrie et journaux ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)) | équipe, accès tracés |
 | Secrets du serveur, de la base et de la CI | Secret Manager | serveur et CI |
@@ -481,14 +481,14 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | **Exclusions** | Pour chaque combinaison écartée : paire ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
 | **Asset** | Jaquette, silhouettes des cartes et des langues ([ADR 0023](adr/0023-textures-des-cartes.md)), en SVG servi en `image/svg+xml`, sous `a/‹sha256›.svg`. |
 
-Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
+Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt du catalogue.
 
 La carte d'une langue n'est pas un fichier : le client la construit à partir de l'index et des cartes déjà découvertes.
 
 ### Parution d'un fascicule
 
 1. Le compilateur produit les ressources et le manifeste, puis vérifie chaque empreinte.
-2. La CI du dépôt privé dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
+2. La CI du dépôt du catalogue dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
 3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) lit le manifeste du fascicule dans `staging/`, copie vers `public/` les ressources qu'il cite puis le manifeste, applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API accepte les commandes du fascicule dès qu'elle lit le nouvel index.
 4. Le client voit le nouveau fascicule à sa prochaine lecture de l'index.
 
@@ -694,7 +694,7 @@ erDiagram
 
 | Table | Rôle | Remarques |
 |---|---|---|
-| `joueur` | La partie : invitée, ou celle d'un compte. | Un identifiant aléatoire. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). Une partie invitée (sans `compte`) inactive depuis 6 mois est effacée ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
+| `joueur` | La partie : invitée, ou celle d'un compte. | Un identifiant aléatoire. Ni nom, ni adresse électronique, ni adresse réseau ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). `version_etat` permet de détecter un conflit (`409`). Une partie invitée (sans `compte`) inactive depuis 6 mois est effacée ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)) ; une partie avec compte, inactive depuis 3 ans, l’est aussi ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)). |
 | `appareil` | Les installations qui jouent la partie. | L'identifiant d'installation et l'empreinte de son secret de 256 bits. Un joueur en a une au départ, plusieurs avec un compte. Se déconnecter supprime la ligne ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
 | `compte` | Le compte facultatif. | Une empreinte HMAC-SHA256 de l'adresse normalisée, avec une clé secrète dédiée : l'adresse elle-même n'est jamais stockée. Le pseudo par défaut, tiré de l'adresse, reste privé tant que `pseudo_confirme` est faux ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-code-e-mail.md)). |
 | `defi_connexion` | Demandes de connexion ou de création de compte. | Le lien et le code envoyés par e-mail, en empreintes seulement ; valables 15 minutes, 5 essais, usage unique. Purgées après un jour. |
@@ -703,7 +703,7 @@ erDiagram
 | `energie` | Charges de pli. | 2 charges au plus, une toutes les 12 h ; `prochaine_charge` est nulle quand l'énergie est pleine : le temps s'arrête ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)). Un sablier avance cet instant d'une heure. |
 | `encre`, `sablier` | Soldes. | Encre jamais négative, sabliers détenus jamais négatifs et sans plafond ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)). |
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
-| `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). |
+| `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). Le détail est agrégé sans identifiant puis effacé après 12 mois ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)). |
 | `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
 | `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois. `recupere_le` reste vide tant que le joueur n'a pas récupéré sa récompense ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)) ; la récupération passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
 | `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
@@ -715,7 +715,8 @@ erDiagram
 | `ricochet` | Niveau de chaque carte trouvée. | Seule une bonne réponse à une carte à revoir fait monter son niveau ; `bonnes_niveau_3` compte les bonnes réponses données au niveau 3 et revient à 0 après une erreur ; à la troisième, la carte est maîtrisée. Une erreur sur une carte à revoir, maîtrisée ou non, la fait descendre d’un niveau et, si elle était maîtrisée, vide `maitrisee_le` ; elle revient le lendemain ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). |
 | `palier_atteint` | Paliers des quêtes au long cours. | Comme `jalon_atteint` : marqué quand il est atteint, récupéré une seule fois. |
 | `quete_initiale` | Cadeau de bienvenue et quêtes initiales. | Une ligne par quête faite ; le cadeau est atteint à la fin du tutoriel ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)). |
-| `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
+| `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois, quand le fascicule est débloqué ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md), [ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
+| `fascicule_debloque` | Fascicules débloqués par le joueur. | `joueur_id`, `fascicule_id`, `debloque_le`. Le premier fascicule paru l’est d’emblée ; chacun des suivants quand le 2ᵉ jalon du précédent est atteint. Une ligne n’est jamais supprimée, sauf par la réinitialisation du profil ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). |
 
 **Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
 

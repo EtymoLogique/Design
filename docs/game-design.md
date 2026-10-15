@@ -44,9 +44,9 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Recette** | Combinaison ordonnée de **deux** ingrédients et de transformations produisant une découverte. |
 | **Transformation** | Changement documenté entre les ingrédients et la forme résultante : adaptation phonétique, voyelle de liaison, suffixation, emprunt, etc. |
 | **Codex** | Collection de langues, mots, morphèmes, familles et relations déjà découverts. |
-| **Graine** | Brique de la réserve de départ, accordée avec quelques exemplaires pour amorcer le graphe. Ensuite, les jalons offrent des plis au contenu déterministe. |
+| **Graine** | Brique de la réserve de départ d’un fascicule, accordée avec quelques exemplaires quand le fascicule est débloqué, pour amorcer le graphe ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). Ensuite, les jalons offrent des plis au contenu déterministe. |
 | **Pli** | Pli scellé, gratuit, seule source d'exemplaires après la réserve de départ. On dit « ouvrir un pli », « l'atelier des plis ». Le mot anglais « pack » n'est jamais employé. |
-| **Fascicule** | Nouvel ensemble de 20 à 30 mots, avec leurs briques et leurs langues, publié environ tous les 30 jours. Il a sa jaquette et son pli, que le joueur peut ouvrir à tout moment. On ne dit ni « pack », ni « extension », ni « saison ». |
+| **Fascicule** | Nouvel ensemble de 20 à 30 mots, avec leurs briques et leurs langues, publié environ tous les 30 jours. Il a sa jaquette et son pli, que le joueur peut ouvrir à tout moment une fois le fascicule **débloqué** : le premier l’est d’emblée, chacun des suivants au 2ᵉ jalon du précédent ; avant, il est **verrouillé** ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). On ne dit ni « pack », ni « extension », ni « saison ». |
 | **Sablier** | Objet qui fait avancer d'une heure la recharge d'énergie, jamais un tirage. Il s'échange contre 10 gouttes d'encre ou se gagne par un jalon (ADR 0020, 0039) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
 | **Légendaire** | Brique ou mot le plus rare, marqué d’un diamant. Leur nombre reste secret ; celles que le joueur trouve se comptent à part, à côté de chaque jauge ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)). |
 | **Ricochets** | Courtes questions sur les cartes déjà trouvées. Elles ne consomment rien, et trois bonnes réponses sur trois jours différents rendent une carte **maîtrisée**, et une erreur la lui fait perdre ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). On ne dit ni « révision », ni « quiz ». |
@@ -270,7 +270,8 @@ Voir l'[ADR 0014](adr/0014-sources-et-fascicules.md), l'[ADR 0022](adr/0022-fasc
 - un fascicule publie 20 à 30 mots, et déclare tous les préfixes, suffixes et mots qui servent à les former ;
 - **un fascicule ne dévoile pas son contenu** : son annonce et sa présentation n'affichent que des nombres (mots, préfixes, suffixes, langues), légendaires exclues. Avant sa parution, même ces nombres restent cachés : seule sa date est publique ([ADR 0049](adr/0049-date-du-prochain-fascicule-publique.md)). Dans le codex, les silhouettes gardent leur piste de sens ;
 - un mot n'appartient qu'à un seul fascicule ; une brique peut être reprise d'un fascicule à l'autre ;
-- chaque fascicule a sa jaquette et son pli : dès sa publication, le joueur peut ouvrir ses plis, qui ne tirent que parmi ses briques, et revenir à tout moment aux plis d'un ancien fascicule. Les fusions entre fascicules sont permises ;
+- chaque fascicule a sa jaquette et son pli : une fois le fascicule débloqué, le joueur peut ouvrir ses plis, qui ne tirent que parmi ses briques, et revenir à tout moment aux plis d'un ancien fascicule. Les fusions entre fascicules sont permises ;
+- **un par un** : un nouveau joueur n’a que le premier fascicule paru ; atteindre le 2ᵉ jalon d’un fascicule débloque le fascicule paru suivant, pour ce joueur seulement, ou dès sa parution s’il n’est pas encore paru. Un fascicule verrouillé reste visible, avec un cadenas et sa condition ; ses graines, son pli et ses jalons attendent le déblocage, et le codex n’en montre que les mots déjà trouvés. Un mot croisé d’un fascicule verrouillé reste découvrable. La publication ne change pas ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)) ;
 - **fermeture** : si deux briques publiées, de n'importe quels fascicules, forment un mot porté par un lexème Wikidata, ce mot est publié. Les mots « croisés » ouverts par un nouvel affixe appartiennent au nouveau fascicule et comptent dans ses 20 à 30 mots ;
 - une combinaison attestée ne peut être écartée que par une exclusion déclarée et justifiée (mot archaïque, rare, offensant ou analyse non établie) ;
 - **pourquoi 30 mots au plus** : il faut environ 2 plis par mot découvert, et un joueur assidu ouvre 70 à 80 plis par mois. Au-delà de 30 mots, il ne complète plus un fascicule avant le suivant ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) ;
@@ -299,7 +300,7 @@ La page Quêtes ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md))
 - **Journalières** : chaque jour, trois quêtes, une à la table de fusion, une de mémoire et une d'adresse, renouvelées à minuit GMT. Le serveur ne tire que des quêtes que l'état du joueur rend faisables, sans dépendre de l'énergie ni du hasard. Chacune demande un acte de réflexion, jamais un simple geste. Le défi quotidien devient la quête de table : une recette que la réserve permet, donnée par sa seule piste de sens (« Trouvez le mot qui veut dire “peur de l'eau” »).
   - **La carte de lecteur** reçoit un tampon chaque jour où les trois quêtes sont faites, sans obligation de jours consécutifs. Au 7ᵉ tampon : 20 gouttes, un sablier et un pli de lecteur, tiré parmi les peu communes et les rares du fascicule choisi. Aucune flamme, aucun rappel.
   - Pendant la première semaine, les quêtes initiales s'affichent en tête de l'onglet ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
-- **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)).
+- **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). Le 2ᵉ jalon d’un fascicule débloque le suivant ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)).
 - **Au long cours** : des quêtes à paliers qui traversent les fascicules, sur les langues, les familles, les transformations, la maîtrise et les cartes de lecteur. Aucune ne compte les légendaires, sauf la première trouvée.
 
 Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot (le joueur glisse une lame sur le mot, pose ses coupes, puis valide : [ADR 0053](adr/0053-decouper-glisser-une-lame-puis-valider.md)), relier des paires, assembler un mot (le joueur choisit un préfixe et un suffixe pour former le mot dont il lit la définition actuelle : [ADR 0067](adr/0067-ricochets-assembler-un-mot-depuis-sa-definition.md)). Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents. Une carte maîtrisée reste dans le tirage, au plus deux par séance de cinq questions ; une erreur la fait descendre au niveau 2, elle perd sa maîtrise et revient le lendemain, et il lui faut de nouveau trois bonnes réponses au niveau 3 sur trois jours différents ([ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)).
@@ -320,7 +321,7 @@ Toutes les récompenses sont affichées d'avance et attendent d'être récupér�
 
 ### Interface dédiée
 
-Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **choisit d'abord un fascicule** parmi ceux qui sont parus : chacun montre sa jaquette, ses briques connues et ses exemplaires en réserve. Il ouvre ensuite le pli de ce fascicule, et peut revenir au choix à tout moment. Sur l'écran d'ouverture, on retrouve :
+Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **choisit d'abord un fascicule** parmi ceux qui sont parus et débloqués (les autres apparaissent verrouillés, [ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)) : chacun montre sa jaquette, ses briques connues et ses exemplaires en réserve. Il ouvre ensuite le pli de ce fascicule, et peut revenir au choix à tout moment. Sur l'écran d'ouverture, on retrouve :
 
 - l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2, avec l'heure du prochain pli en clair (« Prochain pli vers 21 h ») ;
 - les sabliers disponibles et, quand le temps manque, un raccourci pour les utiliser ou pour échanger de l'encre ; l'échange lui-même vit dans la boutique ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
@@ -513,8 +514,9 @@ Le compte est facultatif ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-co
 - le serveur ne garde qu'une empreinte de l'adresse, jamais l'adresse elle-même ;
 - se connecter sur un appareil qui porte une partie invitée remplace cette partie par celle du compte, après un avertissement : les deux ne se fusionnent jamais ;
 - chaque compte a un pseudo, par défaut tiré de l'adresse (`camille-martin-4821`), qui reste privé tant que le joueur ne l'a ni confirmé ni modifié ;
+- un pseudo n'est montré à un autre joueur qu'une fois confirmé et conforme aux règles de modération : signalement, examen humain, décision motivée et contact publié ([ADR 0075](adr/0075-moderation-des-pseudos-et-obligations-dsa.md)) ;
 - une carte « Sauvegardez votre progression » relance l'invité à la 3ᵉ découverte, à chaque jalon atteint, sinon tous les 7 jours de jeu. Elle se referme d'un geste et n'interrompt jamais une fusion ni un pli ;
-- une partie invitée inactive depuis 6 mois est effacée ; un compte ne l'est jamais sans demande du joueur.
+- une partie invitée inactive depuis 6 mois est effacée ; un compte inactif depuis 3 ans l'est aussi ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)) ; le détail des plis est agrégé après 12 mois.
 
 ## Architecture technique
 
@@ -524,7 +526,7 @@ Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](
 - le catalogue est un artefact statique unique, publié à chaque fascicule : un index global, un manifeste par fascicule et ses ressources (cartes, recettes, médias) sous des noms tirés de l'empreinte de leur contenu. Une fois le fascicule paru, ses recettes sont lisibles ; l'interface ne trahit jamais une légendaire inconnue (ADR 0027) ;
 - les jaquettes et les silhouettes sont des fichiers statiques au nom opaque, servis par le CDN. Le manifeste d'un fascicule paru dit quelle silhouette va avec quelle carte (ADR 0027) ;
 - un fascicule se prépare à l’avance et paraît seul à sa date : ses fichiers attendent dans un espace illisible, puis une tâche planifiée les publie et met à jour l’index. Ni le client ni personne d’autre ne lit un fascicule à venir (ADR 0029) ;
-- tout le code est dans le dépôt public, compilateur et validations du catalogue compris. Le contenu brut (sources, médias, manifeste daté, migrations déclaratives) vit dans un dépôt privé, sans aucune logique hormis la CI qui appelle les outils publics ;
+- tout le code est dans le dépôt public, compilateur et validations du catalogue compris. Le contenu brut (sources, médias, manifeste daté, migrations déclaratives) vit dans un dépôt public distinct, sans aucune logique hormis la CI qui appelle les outils publics ;
 - une seule API serverless, écrite en Rust, fait foi pour chaque fusion et chaque pli : elle valide la recette, vérifie la réserve, consomme et met à jour le codex. En ligne, le client peut prévisualiser le résultat ; hors connexion, la table se prépare, mais le résultat attend le réseau ;
 - la progression vit dans des tables relationnelles PostgreSQL, qui garantissent les plafonds et soldes, et chaque commande est une transaction.
 
@@ -579,7 +581,7 @@ Le prototype doit répondre aux questions suivantes :
 - retour au 1ᵉʳ, au 7ᵉ et au 30ᵉ jour, rétention mensuelle par cohorte et passage d'un mois au suivant ;
 - jours joués par mois, quêtes du jour terminées, tampons par semaine et séances de ricochets.
 
-Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle. Les cohortes se calculent sans identifiant durable : des tâches planifiées comptent les joueurs par mois d'arrivée, et l'identifiant de la télémétrie se renouvelle au début de chaque mois civil ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
+Ces événements doivent être agrégés avec des identifiants techniques pseudonymes à durée limitée. Les journaux ne doivent contenir ni contenu libre saisi par le joueur, ni donnée personnelle. Les cohortes se calculent sans identifiant durable : des tâches planifiées comptent les joueurs par mois d'arrivée, et l'identifiant de la télémétrie se renouvelle au début de chaque mois civil ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)). Il est calculé côté serveur, jamais écrit sur l'appareil ; le joueur s'y oppose par un interrupteur des Réglages, qui arrête la collecte et efface les événements bruts ([ADR 0072](adr/0072-identifiant-de-telemetrie-calcule-cote-serveur.md)).
 
 ### Bêta ouverte
 

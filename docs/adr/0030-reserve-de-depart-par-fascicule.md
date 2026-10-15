@@ -1,6 +1,6 @@
 # ADR 0030 — Réserve de départ déclarée par chaque fascicule
 
-- **Statut** : Proposé
+- **Statut** : Proposé, partiellement remplacé par l’[ADR 0069](0069-deblocage-progressif-des-fascicules.md) : le serveur accorde les graines d’un fascicule quand il est débloqué pour le joueur, et non plus à sa parution. Le reste du présent ADR reste en vigueur.
 - **Portée** : couche ludique du catalogue, manifeste de fascicule, données du joueur
 - **Précise** : [ADR 0012](0012-briques-rationnees.md) (réserve de départ), [ADR 0004](0004-progression-atteignable.md) (graines comme sources), [ADR 0009](0009-contenu-et-equilibrage.md) (paramètres d'équilibrage)
 - **Complète** : [ADR 0027](0027-catalogue-statique-et-donnees-joueur.md) (contenu du manifeste), le [modèle de données](../modele-donnees.md) (couche ludique et données du joueur)

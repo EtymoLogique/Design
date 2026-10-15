@@ -34,7 +34,7 @@ La politique du bucket est écrite et appliquée par le dépôt d'infrastructure
 | Identité | Droits |
 |---|---|
 | Anonyme (client, API) | `GetObject` sur `public/*` |
-| CI du dépôt privé du catalogue | Dépôt, lecture et suppression d'objets sous `staging/*`, et listing borné à `staging/` |
+| CI du dépôt du catalogue | Dépôt, lecture et suppression d'objets sous `staging/*`, et listing borné à `staging/` |
 | Tâche de parution | `GetObject` sur `staging/*`, `GetObject` et `PutObject` sur `public/*` |
 | Infrastructure | Gestion du bucket et lecture de sa configuration, comme avant |
 

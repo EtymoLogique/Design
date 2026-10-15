@@ -246,6 +246,22 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0075",
+        &[("interfaces.html#i-33", "Le compte dans les Réglages")],
+    ),
+    (
+        "0073",
+        &[("interfaces.html#i-24", "Réglages")],
+    ),
+    (
+        "0072",
+        &[("interfaces.html#i-24", "Réglages")],
+    ),
+    (
+        "0071",
+        &[("interfaces.html#i-33", "Le compte dans les Réglages")],
+    ),
+    (
         "0070",
         &[
             ("interfaces.html#i-31", "Connexion par e-mail"),
@@ -254,14 +270,14 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
-        "0071",
+        "0076",
         &[
             ("interfaces.html#i-22", "Échanges d’encre"),
             ("plis.html#encre", "L’encre dans l’atelier des plis"),
         ],
     ),
     (
-        "0072",
+        "0077",
         &[("interfaces.html#i-22", "Échanges d’encre")],
     ),
     (
@@ -269,6 +285,13 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         &[
             ("interfaces.html#i-26", "Les ricochets"),
             ("maquettes.html#m-26", "Maquette des ricochets"),
+        ],
+    ),
+    (
+        "0069",
+        &[
+            ("interfaces.html#i-19", "Choix du fascicule"),
+            ("interfaces.html#i-18", "Quêtes des fascicules"),
         ],
     ),
     (

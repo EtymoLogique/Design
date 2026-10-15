@@ -1,4 +1,4 @@
-# ADR 0050 — Cohortes de rétention et statistiques du joueur, sans donnée personnelle
+# ADR 0050 — Cohortes de rétention et statistiques du joueur, sans donnée personnelle nouvelle
 
 - **Statut** : Proposé
 - **Complète** : [ADR 0010](0010-observabilite-et-vie-privee.md) (observabilité respectueuse de la vie privée) ; [ADR 0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) (les seuils de la bêta)
@@ -13,6 +13,7 @@ Le joueur, de son côté, ne voit sa progression que dans le codex, fascicule pa
 
 ### Des cohortes sans donnée nouvelle
 
+- **Statut des données** : un identifiant d’installation lié à une activité datée est une donnée **pseudonymisée**, donc personnelle (RGPD, considérant 26). La table `joueur` et la télémétrie en contiennent déjà ; cet ADR n’ajoute pas de nouvelle sorte de donnée. Seuls les agrégats seuillés à 50 joueurs sont anonymes.
 - **Rétention mensuelle** : la table `joueur` contient déjà `cree_le` et `derniere_activite`. Une tâche mensuelle compte, pour chaque mois d’arrivée, les joueurs actifs pendant le mois qui s’achève, et ne garde que ces nombres.
 - **Retour au 1ᵉʳ, au 7ᵉ et au 30ᵉ jour** : une tâche quotidienne fait le même calcul, jour par jour, pour les profils créés 1, 7 et 30 jours plus tôt.
 - **Passage d’un mois au suivant** : une colonne de plus, `mois_activite_precedente`, mise à jour quand l’activité d’un joueur change de mois. La tâche mensuelle compte les joueurs actifs du mois dont l’activité précédente date du mois d’avant.
@@ -68,7 +69,7 @@ Déplacée : elle rejoint une évolution dédiée, avec la vue Filiation du code
 ### Positives
 
 - Les hypothèses du plan financier deviennent mesurables dès la bêta.
-- Aucun identifiant durable, et les agrégats ne gardent rien d’individuel.
+- Aucun identifiant durable de plus ; les données du joueur restent pseudonymisées, et les agrégats, seuillés à 50 joueurs, ne gardent rien d’individuel.
 - Le joueur voit le chemin parcouru d’un mois à l’autre.
 
 ### Négatives

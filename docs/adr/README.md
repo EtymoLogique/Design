@@ -31,19 +31,19 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0015](0015-codex-fascicules-et-legendaires.md) | Codex par fascicule et légendaires secrètes | Accepté, précisé par 0027 (secret dans l'interface), chance des légendaires toujours affichée par 0036, ligne de chance d’une légendaire trouvée, silhouette des mots légendaires et compte des légendaires trouvées par 0043 |
 | [0016](0016-plis-et-jaquettes-par-fascicule.md) | Un pli et une jaquette par fascicule | Accepté, briques tirables remplacées par 0035, garantie et filet hors légendaires par 0043 |
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
-| [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020, plafond quotidien remplacé par 0039, lots de sabliers remplacés par la vente de gouttes de 0071 (proposé) |
+| [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Proposé, sabliers gratuits repris par 0020, plafond quotidien remplacé par 0039, moment de la renonciation par 0073, lots de sabliers remplacés par la vente de gouttes de 0076 (proposé) |
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
 | [0020](0020-deux-plis-en-attente-et-sabliers.md) | Deux plis en attente, sabliers gagnés par l'encre | Accepté, prix de l'indice remplacé par 0038, prix et plafonds des sabliers par 0039 |
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté, dix premiers fascicules remplacés par 0054 |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
-| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt privé par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041, profil invité par 0070 |
+| [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt du catalogue par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041, profil invité par 0070 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027, fichiers à venir et bascule par l'horloge de l'API par 0029 |
-| [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt privé pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
+| [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt public pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
 | [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé, date du prochain fascicule publiée par 0049 |
-| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé |
+| [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé, moment de l’octroi des graines remplacé par 0069 |
 | [0031](0031-contrat-genere-et-outillage-de-la-pwa.md) | Contrat de l'API tiré des types Rust, PWA outillée par Vite | Proposé |
 | [0032](0032-fusion-de-deux-briques.md) | Une fusion réunit exactement deux briques | Accepté, troisième brique remplacée par 0033 |
 | [0033](0033-gestes-de-la-table-de-fusion.md) | Gestes de la table de fusion : un toucher pose, chaque brique garde sa case | Accepté |
@@ -61,9 +61,9 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0045](0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md) | Quêtes du jour, carte de lecteur et quêtes au long cours | Proposé |
 | [0046](0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md) | Démarrage généreux : cadeau de bienvenue et quêtes initiales | Proposé |
 | [0047](0047-un-tiers-facile-un-tiers-moyen-un-tiers-difficile.md) | Chaque fascicule : un tiers facile, un tiers moyen, un tiers difficile | Proposé, fascicules de lancement remplacés par 0059 |
-| [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé |
+| [0048](0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md) | Bêta ouverte, puis ouverture officielle à quatre fascicules | Proposé, estimation du premier mois remplacée par 0069 |
 | [0049](0049-date-du-prochain-fascicule-publique.md) | La date du prochain fascicule est publique | Proposé |
-| [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle | Proposé |
+| [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle nouvelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
 | [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
 | [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé, place de la lame remplacée par 0068 |
@@ -80,9 +80,14 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0066](0066-aucune-araignee-dans-les-visuels.md) | Aucune araignée dans les visuels | Accepté |
 | [0067](0067-ricochets-assembler-un-mot-depuis-sa-definition.md) | Ricochets : assembler un mot depuis sa définition | Proposé, étape « Valider » remplacée par 0068 |
 | [0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) | Ricochets : la lame n’attend jamais sur une coupe, et la seconde brique répond | Proposé |
-| [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé |
-| [0071](0071-boutique-de-gouttes-en-euros.md) | Boutique en euros : seules les gouttes s’achètent | Proposé |
-| [0072](0072-prestataire-et-parcours-de-paiement.md) | Paiement par Stancer, page hébergée et crédit vérifié par le serveur | Proposé |
+| [0069](0069-deblocage-progressif-des-fascicules.md) | Déblocage progressif des fascicules, un par un, au deuxième jalon | Proposé |
+| [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé, durée de conservation des comptes remplacée par 0071 |
+| [0071](0071-duree-de-conservation-des-comptes-et-des-plis.md) | Durée de conservation des comptes inactifs et de l’historique des plis | Proposé |
+| [0072](0072-identifiant-de-telemetrie-calcule-cote-serveur.md) | L’identifiant de télémétrie est calculé côté serveur, sur intérêt légitime, avec opposition dans les Réglages | Proposé |
+| [0073](0073-boutique-support-durable-et-pieces-comptables.md) | Boutique : le reçu du prestataire sert de support durable, le jeu ne conserve aucune adresse | Proposé |
+| [0075](0075-moderation-des-pseudos-et-obligations-dsa.md) | Modération des pseudos et obligations du règlement sur les services numériques (DSA) | Proposé |
+| [0076](0076-boutique-de-gouttes-en-euros.md) | Boutique en euros : seules les gouttes s’achètent | Proposé |
+| [0077](0077-prestataire-et-parcours-de-paiement.md) | Paiement par Stancer, page hébergée et crédit vérifié par le serveur | Proposé |
 
 ## Page HTML
 

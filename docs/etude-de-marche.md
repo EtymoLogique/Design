@@ -7,7 +7,7 @@
 - **Le marché existe et grandit** : en France, le jeu vidéo pèse 5,8 Md€ en 2025, dont 1,79 Md€ pour le mobile (+11 % en un an). 40,2 millions de Français jouent, et 59 % d’entre eux sur mobile. Les jeux de réflexion sont parmi ceux qui fidélisent le mieux.
 - **Les jeux de mots quotidiens ont prouvé l’appétit francophone** : SUTOM, Cémantix (plus de 1 600 énigmes publiées depuis 2022) et Pédantix (plus de 15 000 joueurs par jour dès 2023) ont trouvé leur public sans budget marketing. Aux États-Unis, les jeux du *New York Times* ont été joués 11,2 milliards de fois en 2025.
 - **Aucun concurrent direct** ne combine les trois promesses d’ÉtymoLogique : une étymologie **sourcée**, une mécanique de **fusion** (façon *Little Alchemy*) et une **collection** qui se renouvelle chaque mois (façon jeu de cartes à collectionner). C’est un espace libre, mais étroit : le public « curieux de la langue » est une niche.
-- **Le modèle économique choisi est éthique mais peu rémunérateur** : sans publicité, sans monnaie premium, avec seulement des gouttes à acheter, plafonnées à 20 € par mois ([ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)), le revenu par joueur actif sera nettement inférieur aux références du jeu mobile. À lui seul, il ne financera pas une équipe : il faut soit une audience de plusieurs centaines de milliers de joueurs actifs, soit des revenus complémentaires, à décider par ADR (voir [§ 9](#9-recommandations)).
+- **Le modèle économique choisi est éthique mais peu rémunérateur** : sans publicité, sans monnaie premium, avec seulement des gouttes à acheter, plafonnées à 20 € par mois ([ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md)), le revenu par joueur actif sera nettement inférieur aux références du jeu mobile. À lui seul, il ne financera pas une équipe : il faut soit une audience de plusieurs centaines de milliers de joueurs actifs, soit des revenus complémentaires, à décider par ADR (voir [§ 9](#9-recommandations)).
 
 ## 1. Le produit étudié
 
@@ -18,7 +18,7 @@
 | Contenu éditorial sourcé dans Wikidata et relu | Crédibilité auprès des enseignants, des médias culturels et des institutions de la langue française. |
 | Un fascicule de 20 à 30 mots par mois ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) | Un rendez-vous mensuel qui soutient la rétention et donne un sujet de communication chaque mois. |
 | Plis et exemplaires rationnés ([ADR 0012](adr/0012-briques-rationnees.md)) | Une boucle de retour quotidienne, comparable aux jeux de collection, sans paiement obligatoire. |
-| Aucun paiement dans le MVP, puis seulement des gouttes plafonnées ([ADR 0008](adr/0008-energie-et-plis.md), [ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)) | Argument de confiance fort (familles, enseignants) ; revenu par joueur faible. |
+| Aucun paiement dans le MVP, puis seulement des gouttes plafonnées ([ADR 0008](adr/0008-energie-et-plis.md), [ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md)) | Argument de confiance fort (familles, enseignants) ; revenu par joueur faible. |
 | PWA, hébergement en France ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)) | Pas de commission des magasins d’applications, mais pas non plus de visibilité dans leurs classements. |
 | Code AGPL, contenu CC BY-SA ([ADR 0017](adr/0017-licences.md)) | Image de bien commun ; le contenu ne peut pas être vendu comme exclusivité. |
 
@@ -107,7 +107,7 @@ Les 396 millions de francophones ne sont pas un marché à court terme : la majo
 
 ### Grille de prix des gouttes
 
-L’[ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) vend des gouttes, et rien d’autre. Proposition, à valider par l’acceptation de l’ADR :
+L’[ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md) vend des gouttes, et rien d’autre. Proposition, à valider par l’acceptation de l’ADR :
 
 | Achat | Prix TTC | Prix par sablier (10 gouttes) |
 |---|---|---|
@@ -136,7 +136,7 @@ Le partage des découvertes ne doit jamais révéler une carte : un partage mont
 
 ## 9. Recommandations
 
-1. **Lancer gratuit, mesurer, puis ouvrir la boutique.** Le MVP reste sans paiement ([ADR 0008](adr/0008-energie-et-plis.md)). Les trois premiers mois servent à mesurer la rétention mensuelle, le rythme de complétion d’un fascicule et le partage. La boutique n’ouvre qu’au 4ᵉ mois d’exploitation, après l’acceptation des ADR 0071 et 0072, la décision sur les comptes ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) et la revue juridique par territoire.
+1. **Lancer gratuit, mesurer, puis ouvrir la boutique.** Le MVP reste sans paiement ([ADR 0008](adr/0008-energie-et-plis.md)). Les trois premiers mois servent à mesurer la rétention mensuelle, le rythme de complétion d’un fascicule et le partage. La boutique n’ouvre qu’au 4ᵉ mois d’exploitation, après l’acceptation des ADR 0076 et 0077, la décision sur les comptes ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) et la revue juridique par territoire.
 2. **Ne pas compter sur les gouttes seules.** Avec les hypothèses centrales, un joueur actif rapporte environ 0,05 € HT par mois. Couvrir 17 000 à 27 000 € de coûts mensuels demande 330 000 à 510 000 joueurs actifs. Trois revenus complémentaires méritent chacun un ADR, dans le respect des piliers (rien de ce qui est vendu ne s’obtient pas aussi en jouant, aucune brique ni chance vendue) :
    - un **achat de soutien** ou des **cosmétiques** (jaquettes alternatives, thèmes), déjà évoqués et reportés par l’ADR 0018 ;
    - une **offre établissement** pour les écoles, bibliothèques et médiathèques (tableau de bord enseignant, accès sans compte individuel), sur le modèle B2B de Projet Voltaire ;
