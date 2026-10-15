@@ -11,7 +11,7 @@ Ce dossier réunit ce qu’il faut décider, rédiger et faire valider avant la 
 | 1 | [CGV](#1-conditions-générales-de-vente) relues par le conseil | Conseil | Brouillon rempli ci-dessous, à relire par le conseil |
 | 2 | [Médiateur de la consommation](#2-médiateur-de-la-consommation) désigné et cité dans les CGV | Porteur du projet | Retenu : CM2C ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)), à confirmer à l’adhésion |
 | 3 | [Régime de TVA](#3-tva) décidé | Porteur du projet, avec l’expert-comptable | Retenu : option A, TVA française puis OSS (ADR 0074) |
-| 4 | [Revue par territoire](#4-revue-par-territoire) faite, territoires fermés listés | Conseil | Rempli : France et Union ouvertes, Belgique, Pays-Bas et hors Union fermés (ADR 0074) |
+| 4 | [Revue par territoire](#4-revue-par-territoire) faite, territoires fermés listés | Conseil | Rempli : ouverte partout, blocage par pays conservé (ADR 0074) ; revue du conseil non faite |
 | 5 | [Accessibilité](#5-accessibilité-european-accessibility-act) : exemption confirmée ou conformité visée | Conseil | Microentreprise retenue, à confirmer |
 | 6 | [Plafond mensuel par défaut](#6-plafond-mensuel-par-défaut-pour-les-mineurs) fixé | Porteur du projet | Retenu : 10 € TTC par mois (ADR 0074) |
 | 7 | Aucun lien vers la plateforme européenne de règlement en ligne des litiges (ODR) | Relecture | Voir [ci-dessous](#2-médiateur-de-la-consommation) |
@@ -51,7 +51,7 @@ Les passages entre crochets sont à compléter. Vouvoiement, comme le reste du j
 
 **Article 8 — Plafond de dépense.** Un plafond mensuel de 10 € TTC est appliqué par défaut. Le titulaire du moyen de paiement peut le modifier.
 
-**Article 9 — Territoires.** La boutique peut être fermée dans certains pays. Le reste du jeu reste accessible. Au lancement, la boutique est ouverte en France et dans les États membres de l’Union européenne, sauf en Belgique et aux Pays-Bas ; elle est fermée hors de l’Union.
+**Article 9 — Territoires.** La boutique peut être fermée dans certains pays. Le reste du jeu reste accessible. La boutique est ouverte dans tous les pays. Elle peut être fermée dans un pays, notamment sur demande d’une autorité ou d’un magasin d’applications.
 
 **Article 10 — Réclamations et médiation.** Écrivez d’abord à [adresse]. Sans réponse satisfaisante sous 30 jours, vous pouvez recourir gratuitement au médiateur de la consommation : CM2C [adresse postale et site à relever à l’adhésion].
 
@@ -99,10 +99,12 @@ L’[ADR 0018](adr/0018-sabliers-et-boutique.md) prévoit une revue juridique pa
 | Territoire | Raison de la revue | Décision du conseil | Boutique |
 |---|---|---|---|
 | France | Marché principal ; règles de la consommation de ce dossier | À confirmer par le conseil | Ouverte |
-| Belgique | Règles belges sur les coffres à butin | Fermée en attendant la revue du conseil | Fermée |
-| Pays-Bas | Règles néerlandaises sur les coffres à butin | Fermée en attendant la revue du conseil | Fermée |
-| Autres États membres de l’Union | Droit de la consommation harmonisé ; TVA du [§ 3](#3-tva) | À confirmer par le conseil | Ouverte (hors Belgique et Pays-Bas) |
-| Hors Union | Non ouvert au lancement, sauf avis contraire | Non ouvert au lancement | Fermée |
+| Belgique | Règles belges sur les coffres à butin | Non faite : risque assumé | Ouverte |
+| Pays-Bas | Règles néerlandaises sur les coffres à butin | Non faite : risque assumé | Ouverte |
+| Autres États membres de l’Union | Droit de la consommation harmonisé ; TVA du [§ 3](#3-tva) | À confirmer par le conseil | Ouverte |
+| Hors Union | Ouvert (décision du porteur du projet) ; taxes locales à fixer | À confirmer par le conseil | Ouverte |
+
+**Décision du porteur du projet : ouverture dans le monde entier** ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)), sans la revue que prévoyait l’ADR 0018. Risques : amende ou poursuite en Belgique ; hors Union, la TVA française de 20 % ne couvre pas la TVA ou la taxe numérique locale, à régler pays par pays avec l’expert-comptable.
 
 Exigences techniques (dans l’application, hors de ce dépôt) :
 
