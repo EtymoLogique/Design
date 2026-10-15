@@ -3,7 +3,7 @@
 - **Statut** : Proposé
 - **Portée** : branches, fusions et déploiements des dépôts design, content, app et infra
 - **Remplace partiellement** : [ADR 0024](0024-architecture-logicielle-et-hebergement.md), pour la préversion par branche, réservée désormais au dossier de conception
-- **Précise** : [ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md) (le code public est réparti entre les dépôts design, app et infra ; le dépôt content reste privé et sans logique)
+- **Précise** : [ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md) (le code public est réparti entre les dépôts design, app et infra ; le dépôt content est public et sans logique)
 - **Complète** : [ADR 0025](0025-medias-statiques-et-publication-programmee.md) (la parution programmée s’applique dans chaque environnement)
 
 ## Contexte
@@ -13,7 +13,7 @@ Le projet vit dans quatre dépôts :
 | Dépôt | Contenu |
 |---|---|
 | design | Dossier de conception : vision, ADR, identité, maquettes, publié sur GitHub Pages |
-| content | Catalogue brut, privé, sans logique ([ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md)) |
+| content | Catalogue brut, public, sans logique ([ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md)) |
 | app | PWA et API ([ADR 0024](0024-architecture-logicielle-et-hebergement.md)) |
 | infra | Infrastructure en code, OpenTofu ou Terraform, chez Scaleway |
 

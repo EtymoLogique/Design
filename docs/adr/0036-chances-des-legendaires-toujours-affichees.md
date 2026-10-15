@@ -8,7 +8,7 @@
 
 L’ADR 0015 garde le suspense sur les légendaires : une légendaire inconnue n’a ni silhouette ni place dans les compteurs, et les légendaires inconnues d’un pli forment une seule ligne, sans leur nombre.
 
-L’écran des plis affiche les chances par rareté. Un fascicule sans légendaire affiche donc « Légendaire 0 % », ce qui révèle qu’il n’en contient aucune. Masquer la ligne dans ce cas éviterait de le révéler, mais l’écran n’afficherait plus toutes les probabilités du tirage. Or la loi impose d’afficher toutes les probabilités d’un tirage aléatoire.
+L’écran des plis affiche les chances par rareté. Un fascicule sans légendaire affiche donc « Légendaire 0 % », ce qui révèle qu’il n’en contient aucune. Masquer la ligne dans ce cas éviterait de le révéler, mais l’écran n’afficherait plus toutes les probabilités du tirage. Or aucun texte français trouvé n’impose cet affichage pour un jeu gratuit. Les obligations connues viennent des magasins d’applications (Apple, Google), des engagements des consoliers (2019) et de PEGI (objets aléatoires payants classés PEGI 16 depuis juin 2026). Le choix repose sur la loyauté envers le joueur et la préparation de la boutique ; le conseil juridique dira si un texte s’applique.
 
 ## Décision
 
@@ -20,7 +20,7 @@ L’écran des plis affiche les chances par rareté. Un fascicule sans légendai
 
 ### Masquer la ligne des légendaires quand il n’y en a aucune
 
-Écartée : l’écran n’afficherait plus toutes les probabilités du tirage, ce que la loi impose.
+Écartée : l’écran n’afficherait plus toutes les probabilités du tirage, ce qu’exigent les magasins d’applications et PEGI, et ce que la loyauté envers le joueur demande.
 
 ### Afficher une chance arrondie ou une fourchette
 
@@ -30,7 +30,7 @@ L’écran des plis affiche les chances par rareté. Un fascicule sans légendai
 
 ### Positives
 
-- Les probabilités affichées sont complètes et exactes, conformes à l’obligation de transparence.
+- Les probabilités affichées sont complètes et exactes, loyales envers le joueur, conformes aux exigences des magasins et de PEGI, prêtes pour une boutique.
 - Le nombre et la nature des légendaires restent secrets.
 
 ### Négatives
@@ -39,4 +39,4 @@ L’écran des plis affiche les chances par rareté. Un fascicule sans légendai
 
 ## Critères de réévaluation
 
-- Une évolution du cadre légal sur l’affichage des probabilités.
+- Le conseil juridique cite un texte, ou le cadre légal ou les règles des magasins changent sur l’affichage des probabilités.
