@@ -34,7 +34,7 @@ const LANCEMENT: usize = 4; // M4 : bêta ouverte en production, avec les fascic
 const FASCICULES_A_LA_BETA: usize = 2; // deux fascicules paraissent dès l'ouverture de la bêta, puis un par mois
 #[allow(dead_code)]
 const OUVERTURE: usize = 6; // M6 : ouverture officielle à quatre fascicules, Semaine de la langue française (ADR 0048)
-const BOUTIQUE: usize = 7; // M7 : ouverture de la boutique de sabliers (ADR 0018, à accepter)
+const BOUTIQUE: usize = 7; // M7 : ouverture de la boutique de gouttes (ADR 0071 et 0072, à accepter)
 
 /// Valeur d'un mois dans une table `(mois, valeur)`, ou `defaut`.
 fn au(table: &[(usize, f64)], m: usize, defaut: f64) -> f64 {
@@ -122,11 +122,11 @@ const TEMPS_FORTS: &[(usize, f64)] = &[
 const RETENTION: [f64; 8] = [1.0, 0.30, 0.20, 0.16, 0.14, 0.12, 0.11, 0.10];
 const DECLIN: f64 = 0.95; // au-delà, chaque mois garde 95 % du précédent (un fascicule par mois)
 
-// --- Boutique de sabliers --------------------------------------------------------------
+// --- Boutique de gouttes ---------------------------------------------------------------
 const TVA: f64 = 0.20;
-const STRIPE_TAUX: f64 = 0.015;
-const STRIPE_FIXE: f64 = 0.25; // cartes européennes
-const PANIER_TTC: f64 = 3.50; // achat moyen : entre le lot de 12 (1,99 €) et celui de 36 (4,99 €)
+const STANCER_TAUX: f64 = 0.007;
+const STANCER_FIXE: f64 = 0.15; // € HT par paiement en ligne, cartes de l'EEE (ADR 0072) ; hors EEE : 2,5 % + 0,25 €
+const PANIER_TTC: f64 = 3.00; // achat moyen, quantité libre par pas de 1 € (60 gouttes), minimum 2 € (ADR 0071) ; hypothèse à mesurer
 const MONTEE: &[(usize, f64)] = &[(BOUTIQUE, 0.5)]; // le premier mois, la moitié du régime
 
 /// Coût d'un joueur payé, bouche-à-oreille, payeurs / MAU, dépense mensuelle TTC par payeur.
@@ -290,7 +290,7 @@ fn simuler(s: Scenario, c: &Structure) -> Vec<Ligne> {
         let ca_ttc = payeurs * s.arppu;
         let ca_ht = ca_ttc / (1.0 + TVA);
         let transactions = ca_ttc / PANIER_TTC;
-        let frais_paiement = ca_ttc * STRIPE_TAUX + transactions * STRIPE_FIXE;
+        let frais_paiement = ca_ttc * STANCER_TAUX + transactions * STANCER_FIXE;
 
         let dev = au(c.jours_back, m, 0.0) * TJM_BACK
             + au(c.jours_front, m, 0.0) * TJM_FRONT
@@ -396,7 +396,7 @@ fn tableau_mensuel(lignes: &[Ligne], a: usize, b: usize) -> String {
         ("Contenus et outils marketing", |l| l.contenu),
         ("Frais de paiement", |l| l.frais_paiement),
         ("**Total des coûts**", |l| l.couts),
-        ("Chiffre d’affaires HT (sabliers)", |l| l.ca_ht),
+        ("Chiffre d’affaires HT (gouttes)", |l| l.ca_ht),
         ("**Résultat du mois**", |l| l.resultat),
         ("**Trésorerie cumulée**", |l| l.cumul),
     ];
@@ -497,8 +497,9 @@ fn synthese(resultats: &[(String, Scenario, Vec<Ligne>)]) -> String {
         "MAU nécessaires pour couvrir les coûts de M18",
         &|s, l| {
             let cout = l[17].couts - l[17].frais_paiement;
-            let net_par_payeur =
-                s.arppu / (1.0 + TVA) - s.arppu * STRIPE_TAUX - s.arppu / PANIER_TTC * STRIPE_FIXE;
+            let net_par_payeur = s.arppu / (1.0 + TVA)
+                - s.arppu * STANCER_TAUX
+                - s.arppu / PANIER_TTC * STANCER_FIXE;
             nb(cout / net_par_payeur / s.conversion)
         },
     );

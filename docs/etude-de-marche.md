@@ -7,7 +7,7 @@
 - **Le marché existe et grandit** : en France, le jeu vidéo pèse 5,8 Md€ en 2025, dont 1,79 Md€ pour le mobile (+11 % en un an). 40,2 millions de Français jouent, et 59 % d’entre eux sur mobile. Les jeux de réflexion sont parmi ceux qui fidélisent le mieux.
 - **Les jeux de mots quotidiens ont prouvé l’appétit francophone** : SUTOM, Cémantix (plus de 1 600 énigmes publiées depuis 2022) et Pédantix (plus de 15 000 joueurs par jour dès 2023) ont trouvé leur public sans budget marketing. Aux États-Unis, les jeux du *New York Times* ont été joués 11,2 milliards de fois en 2025.
 - **Aucun concurrent direct** ne combine les trois promesses d’ÉtymoLogique : une étymologie **sourcée**, une mécanique de **fusion** (façon *Little Alchemy*) et une **collection** qui se renouvelle chaque mois (façon jeu de cartes à collectionner). C’est un espace libre, mais étroit : le public « curieux de la langue » est une niche.
-- **Le modèle économique choisi est éthique mais peu rémunérateur** : sans publicité, sans monnaie premium, avec des sabliers plafonnés à 12 par jour ([ADR 0018](adr/0018-sabliers-et-boutique.md)), le revenu par joueur actif sera nettement inférieur aux références du jeu mobile. À lui seul, il ne financera pas une équipe : il faut soit une audience de plusieurs centaines de milliers de joueurs actifs, soit des revenus complémentaires, à décider par ADR (voir [§ 9](#9-recommandations)).
+- **Le modèle économique choisi est éthique mais peu rémunérateur** : sans publicité, sans monnaie premium, avec seulement des gouttes à acheter, plafonnées à 20 € par mois ([ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)), le revenu par joueur actif sera nettement inférieur aux références du jeu mobile. À lui seul, il ne financera pas une équipe : il faut soit une audience de plusieurs centaines de milliers de joueurs actifs, soit des revenus complémentaires, à décider par ADR (voir [§ 9](#9-recommandations)).
 
 ## 1. Le produit étudié
 
@@ -18,7 +18,7 @@
 | Contenu éditorial sourcé dans Wikidata et relu | Crédibilité auprès des enseignants, des médias culturels et des institutions de la langue française. |
 | Un fascicule de 20 à 30 mots par mois ([ADR 0022](adr/0022-fascicules-de-20-a-30-mots.md)) | Un rendez-vous mensuel qui soutient la rétention et donne un sujet de communication chaque mois. |
 | Plis et exemplaires rationnés ([ADR 0012](adr/0012-briques-rationnees.md)) | Une boucle de retour quotidienne, comparable aux jeux de collection, sans paiement obligatoire. |
-| Aucun paiement dans le MVP, puis seulement des sabliers plafonnés ([ADR 0008](adr/0008-energie-et-plis.md), [ADR 0018](adr/0018-sabliers-et-boutique.md)) | Argument de confiance fort (familles, enseignants) ; revenu par joueur faible. |
+| Aucun paiement dans le MVP, puis seulement des gouttes plafonnées ([ADR 0008](adr/0008-energie-et-plis.md), [ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)) | Argument de confiance fort (familles, enseignants) ; revenu par joueur faible. |
 | PWA, hébergement en France ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)) | Pas de commission des magasins d’applications, mais pas non plus de visibilité dans leurs classements. |
 | Code AGPL, contenu CC BY-SA ([ADR 0017](adr/0017-licences.md)) | Image de bien commun ; le contenu ne peut pas être vendu comme exclusivité. |
 
@@ -49,8 +49,8 @@ Les 396 millions de francophones ne sont pas un marché à court terme : la majo
 
 1. **Le jeu de mots quotidien est devenu un rituel.** *Wordle*, racheté par le *New York Times* en 2022, a entraîné un catalogue qui dépasse le million d’abonnés (2024) ; en français, SUTOM, Cémantix et Pédantix sont joués chaque jour, gratuitement, sur le web. ÉtymoLogique partage ce rituel (deux plis par jour) mais y ajoute une progression durable.
 2. **La gamification de la langue paie.** Duolingo compte 52,7 millions d’utilisateurs quotidiens et 12,2 millions d’abonnés payants fin 2025. Le public accepte de payer pour apprendre en jouant, surtout par abonnement.
-3. **La collection à tirages est très rentable, et de plus en plus encadrée.** *Pokémon TCG Pocket* a rapporté environ 1,3 Md$ la première année, avec une mécanique proche de nos plis et sabliers (un sablier avance d’une heure la recharge des boosters). Mais la Belgique interdit les coffres à butin payants depuis 2018, et les autorités européennes de protection des consommateurs ont publié en 2025 des principes sur les monnaies virtuelles des jeux. Le choix d’ÉtymoLogique (pas de monnaie premium, prix en euros, chances affichées, plafonds) anticipe ce mouvement.
-4. **Le web revient comme canal de distribution.** Les jeux quotidiens à succès sont nés dans le navigateur. Les règles européennes sur les marchés numériques facilitent le paiement hors magasins d’applications ; une PWA encaisse par carte (Stripe : 1,5 % + 0,25 € par paiement européen) au lieu de céder 15 à 30 % à Apple ou Google.
+3. **La collection à tirages est très rentable, et de plus en plus encadrée.** *Pokémon TCG Pocket* a rapporté environ 1,3 Md$ la première année, avec une mécanique proche de nos plis et sabliers (un sablier avance d’une heure la recharge des boosters). Mais la Belgique interdit les coffres à butin payants depuis 2018, et les autorités européennes de protection des consommateurs ont publié en 2025 des principes sur les monnaies virtuelles des jeux. Le choix d’ÉtymoLogique (gouttes seules à vendre, prix unique et équivalent en euros affiché partout, chances affichées, plafond mensuel) anticipe ce mouvement.
+4. **Le web revient comme canal de distribution.** Les jeux quotidiens à succès sont nés dans le navigateur. Les règles européennes sur les marchés numériques facilitent le paiement hors magasins d’applications ; une PWA encaisse par carte (Stancer : 0,70 % + 0,15 € HT par paiement européen) au lieu de céder 15 à 30 % à Apple ou Google.
 
 ## 4. Concurrence
 
@@ -71,7 +71,7 @@ Les 396 millions de francophones ne sont pas un marché à court terme : la majo
 
 | Cible | Profil | Motivation | Rôle économique |
 |---|---|---|---|
-| **Curieux cultivés** (cœur) | 30-65 ans, lecteurs, joueurs de SUTOM ou Cémantix, auditeurs de radio culturelle | Comprendre d’où viennent les mots, compléter le codex | Premiers payeurs de sabliers, ambassadeurs. |
+| **Curieux cultivés** (cœur) | 30-65 ans, lecteurs, joueurs de SUTOM ou Cémantix, auditeurs de radio culturelle | Comprendre d’où viennent les mots, compléter le codex | Premiers payeurs de gouttes, ambassadeurs. |
 | **Étudiants** | Lettres, langues anciennes, classes préparatoires, concours | Réviser les racines grecques et latines en jouant | Audience et partage ; peu de dépense. |
 | **Enseignants** | Français, lettres classiques, documentalistes | Un support sourcé et sans publicité pour la classe | Prescripteurs ; futurs clients d’une offre établissement. |
 | **Apprenants avancés de français** | Niveau B2 et plus, dans le monde | Enrichir leur vocabulaire par les familles de mots | Audience internationale ; revenu faible à court terme. |
@@ -99,24 +99,26 @@ Les 396 millions de francophones ne sont pas un marché à court terme : la majo
 |---|---|---|---|
 | Rétention des jeux de réflexion | J1 31,85 %, J7 12,18 %, J30 5,35 % | GameAnalytics 2025 | Rétention mensuelle : 30 % le 2ᵉ mois, 10 % au 8ᵉ, soutenue par le fascicule mensuel. |
 | Part de joueurs payeurs | 1,5 à 3,5 % des actifs | Rapports de monétisation 2025-2026 | 0,8 à 2,5 % : pas de relance commerciale, boutique discrète. |
-| Dépense mensuelle par payeur, jeux de réflexion grand public | 8 à 15 $ | GameAnalytics 2025 | 3,50 à 6 € TTC : plafond de 12 sabliers par jour, aucune offre limitée. |
+| Dépense mensuelle par payeur, jeux de réflexion grand public | 8 à 15 $ | GameAnalytics 2025 | 3,50 à 6 € TTC : plafond de 20 € par mois, aucune offre limitée. |
 | Coût d’installation d’un jeu de réflexion | 3 $ sur iOS, 2 $ sur Android | Business of Apps, 2025 | Sans magasin, on raisonne en coût par joueur venu d’une publicité : 1,80 à 3,50 €. |
 | Clic publicitaire sur Meta en France | 0,40 à 0,95 € | Junto, 2025 | Avec 25 à 35 % des clics qui commencent une partie. |
-| Paiement par carte européenne | 1,5 % + 0,25 € | Stripe, 2026 | Pas de lot sous 1,99 € : la part fixe mangerait la marge. |
+| Paiement par carte de l’EEE | 0,70 % + 0,15 € HT | Stancer, conditions d’août 2024 | Pas d’achat sous 2 € : la part fixe mangerait la marge. |
 | Tarif journalier d’un développeur indépendant | React 500 à 600 €, Rust 550 à 750 € | Malt et baromètres 2026 | 550 € (front) et 650 € (back) dans le plan. |
 
-### Grille de prix proposée pour les sabliers
+### Grille de prix des gouttes
 
-L’[ADR 0018](adr/0018-sabliers-et-boutique.md) laisse les prix à une décision ultérieure. Proposition, à valider par ADR :
+L’[ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) vend des gouttes, et rien d’autre. Proposition, à valider par l’acceptation de l’ADR :
 
-| Lot | Prix TTC | Prix par sablier | Équivaut à |
-|---|---|---|---|
-| 12 sabliers | 1,99 € | 0,17 € | un pli avancé de 12 h |
-| 36 sabliers | 4,99 € | 0,14 € | le plafond de détention |
+| Achat | Prix TTC | Prix par sablier (10 gouttes) |
+|---|---|---|
+| 120 gouttes (minimum) | 2 € | 0,17 € |
+| 360 gouttes | 6 € | 0,17 € |
+| 1 200 gouttes (plafond mensuel) | 20 € | 0,17 € |
 
-- Aucun lot sous 1,99 € : à 0,99 €, les frais de paiement et la TVA laisseraient environ 0,56 € sur 0,99 €.
-- Dépense maximale théorique : 12 sabliers par 24 h, soit 360 par mois, environ 50 € ; le plafond mensuel par défaut proposé sur le web est de **20 €**, modifiable par le titulaire du moyen de paiement.
-- Revenu net d’un panier moyen de 3,50 € TTC : environ 2,61 € après TVA (20 %) et frais de paiement, soit 75 %.
+- **Un seul prix** : 60 gouttes pour 1 €, par pas de 60, sans lot ni remise de quantité. Le joueur choisit la quantité ; un sablier revient à 0,17 € et les indices à 0,07, 0,13 et 0,27 €.
+- Achat minimum de 2 € : sous ce montant, la part fixe de Stancer prend plus de 7 % du prix (0,16 € sur 2 €), et la TVA retire encore 17 %.
+- Plafond de **20 € par mois et par compte**, soit 1 200 gouttes. Il ne se déduit plus d’une dépense maximale de sabliers, puisque l’[ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) a supprimé les plafonds de sabliers : c’est un choix de protection du titulaire de la carte, abaissable à tout moment, relevable après 7 jours. À 4,50 € par payeur et par mois (scénario central), le plafond est loin d’être atteint.
+- Revenu net d’un panier moyen de 3 € TTC : environ 2,33 € après TVA (20 %) et frais de paiement, soit 78 %. Le plan financier retient ce panier ; la rétractation de 14 jours en rendra une part, non modélisée.
 
 ## 8. Canaux d’acquisition
 
@@ -134,8 +136,8 @@ Le partage des découvertes ne doit jamais révéler une carte : un partage mont
 
 ## 9. Recommandations
 
-1. **Lancer gratuit, mesurer, puis ouvrir la boutique.** Le MVP reste sans paiement ([ADR 0008](adr/0008-energie-et-plis.md)). Les trois premiers mois servent à mesurer la rétention mensuelle, le rythme de complétion d’un fascicule et le partage. La boutique n’ouvre qu’au 4ᵉ mois d’exploitation, après l’acceptation de l’ADR 0018, la décision sur les comptes ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) et la revue juridique par territoire.
-2. **Ne pas compter sur les sabliers seuls.** Avec les hypothèses centrales, un joueur actif rapporte environ 0,05 € HT par mois. Couvrir 17 000 à 27 000 € de coûts mensuels demande 340 000 à 530 000 joueurs actifs. Trois revenus complémentaires méritent chacun un ADR, dans le respect des piliers (rien de ce qui est vendu ne s’obtient pas aussi en jouant, aucune brique ni chance vendue) :
+1. **Lancer gratuit, mesurer, puis ouvrir la boutique.** Le MVP reste sans paiement ([ADR 0008](adr/0008-energie-et-plis.md)). Les trois premiers mois servent à mesurer la rétention mensuelle, le rythme de complétion d’un fascicule et le partage. La boutique n’ouvre qu’au 4ᵉ mois d’exploitation, après l’acceptation des ADR 0071 et 0072, la décision sur les comptes ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) et la revue juridique par territoire.
+2. **Ne pas compter sur les gouttes seules.** Avec les hypothèses centrales, un joueur actif rapporte environ 0,05 € HT par mois. Couvrir 17 000 à 27 000 € de coûts mensuels demande 330 000 à 510 000 joueurs actifs. Trois revenus complémentaires méritent chacun un ADR, dans le respect des piliers (rien de ce qui est vendu ne s’obtient pas aussi en jouant, aucune brique ni chance vendue) :
    - un **achat de soutien** ou des **cosmétiques** (jaquettes alternatives, thèmes), déjà évoqués et reportés par l’ADR 0018 ;
    - une **offre établissement** pour les écoles, bibliothèques et médiathèques (tableau de bord enseignant, accès sans compte individuel), sur le modèle B2B de Projet Voltaire ;
    - des **financements publics et participatifs** : aides du CNC, Bpifrance, appels à projets de la politique de la langue française, campagne de financement participatif avant le lancement.
@@ -152,7 +154,7 @@ Le partage des découvertes ne doit jamais révéler une carte : un partage mont
 - AppMagic, [Mobile Games Monetization Report 2025](https://gamedevreports.substack.com/p/appmagic-mobile-games-monetization).
 - Business of Apps, [Cost per Install Rates 2025](https://www.businessofapps.com/ads/cpi/research/cost-per-install/).
 - Junto, [Tarifs Meta Ads 2025](https://junto.fr/blog/tarifs-meta-ads).
-- Stripe, [tarifs en France](https://affonso.io/resources/stripe-fee-calculator/france) (calculateur tiers, 2026).
+- Stancer, [conditions tarifaires](https://stancer.com/fr/pricing-conditions.pdf) (août 2024).
 - Malt, [baromètre des développeurs React](https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend/developpeur-reactjs) ; [TJM Rust confirmé](https://travail-industrie.com/simulateur-tjm/developpement-it/rust-developer/confirme).
 - Wikipédia, [Pédantix](https://fr.wikipedia.org/wiki/P%C3%A9dantix) ; [The New York Times Games](https://en.wikipedia.org/wiki/The_New_York_Times_Games) ; [Fast Company sur Wordle](https://www.fastcompany.com/91539885/wordle-statistics-show-why-new-york-times-is-turning-game-into-nbc-tv-show).
 - Duolingo, [résultats financiers](https://investors.duolingo.com/news-releases/news-release-details/duolingo-adds-record-number-daus-surpasses-10-million-paid) et [synthèse 2025](https://alphabourse.substack.com/p/analyse-de-resultats-duolingo-duol-464).

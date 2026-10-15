@@ -7,13 +7,13 @@
 | | Phases 1 et 2 : M1 à M6 | Phase 3 : M7 à M18 |
 |---|---|---|
 | Période | octobre 2026 à mars 2027 | avril 2027 à mars 2028 |
-| Contenu | 3 mois de développement, bêta ouverte en janvier 2027 avec deux fascicules, ouverture officielle en mars avec quatre, sans paiement | MCO, un fascicule par mois, boutique de sabliers ouverte en avril 2027 |
+| Contenu | 3 mois de développement, bêta ouverte en janvier 2027 avec deux fascicules, ouverture officielle en mars avec quatre, sans paiement | MCO, un fascicule par mois, boutique de gouttes ouverte en avril 2027 |
 | Coûts, structure complète | 224 600 € | 281 700 € |
 | Coûts, structure allégée | 144 000 € | 167 700 € |
 | Chiffre d’affaires (scénario central) | 0 € | 3 100 € |
 | Joueurs actifs en fin de période (central) | 9 480 | 7 730 |
 
-**Ce que dit le plan.** Le jeu peut se construire et vivre 18 mois avec un budget de 310 000 € (structure allégée) à 500 000 € (structure complète). Mais la boutique de sabliers, telle que l’[ADR 0018](adr/0018-sabliers-et-boutique.md) la conçoit (plafonnée, sans relance, sans monnaie premium), ne couvre que 2 à 5 % des coûts mensuels à 18 mois. Même le scénario favorable demande environ 240 000 joueurs actifs pour atteindre l’équilibre. Le plan montre donc un **besoin de financement**, pas une rentabilité, et appelle des décisions sur des revenus complémentaires ([§ 6](#6-leviers-pour-atteindre-léquilibre)).
+**Ce que dit le plan.** Le jeu peut se construire et vivre 18 mois avec un budget de 310 000 € (structure allégée) à 500 000 € (structure complète). Mais la boutique de gouttes, telle que l’[ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) la conçoit (plafonnée à 20 € par mois, sans relance, sans lot ni remise), ne couvre que 2 à 5 % des coûts mensuels à 18 mois. Même le scénario favorable demande environ 230 000 joueurs actifs pour atteindre l’équilibre. Le plan montre donc un **besoin de financement**, pas une rentabilité, et appelle des décisions sur des revenus complémentaires ([§ 6](#6-leviers-pour-atteindre-léquilibre)).
 
 ## 1. Calendrier
 
@@ -24,8 +24,8 @@
 | M3 déc. 2026 | Développement | Recette, audit d’accessibilité et de sécurité, CGU et politique de confidentialité, fascicule 2 prêt, dossier de presse |
 | **M4 janv. 2027** | **Bêta ouverte** | Fascicules 1 et 2 ; la liste d’attente rejoint la bêta, en production ; mesure de la rétention dès le premier jour ([ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md)) |
 | M5 févr. 2027 | Bêta | Fascicule 3 ; correctifs ; décision sur les comptes et la récupération de progression ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) |
-| **M6 mars 2027** | **Ouverture officielle** | Fascicule 4 ; ouverture pendant la Semaine de la langue française, si la bêta atteint ses seuils ; lancement presse et créateurs de contenu ; ADR 0018 accepté, revue juridique de la boutique, intégration du paiement |
-| **M7 avr. 2027** | **MCO et boutique** | Fascicule 5 ; ouverture de la boutique de sabliers, désactivable par territoire |
+| **M6 mars 2027** | **Ouverture officielle** | Fascicule 4 ; ouverture pendant la Semaine de la langue française, si la bêta atteint ses seuils ; lancement presse et créateurs de contenu ; ADR 0071 et 0072 acceptés, revue juridique de la boutique, intégration du paiement par Stancer |
+| **M7 avr. 2027** | **MCO et boutique** | Fascicule 5 ; ouverture de la boutique de gouttes, désactivable par territoire |
 | M8 à M11 | MCO | Fascicules 6 à 9 ; rythme d’été réduit en marketing |
 | M12 sept. 2027 | MCO | Fascicule 10 ; campagne de rentrée (enseignants, étudiants), second audit |
 | M13 à M17 | MCO | Fascicules 11 à 15 ; au-delà de dix, chaque fascicule demande une jaquette nouvelle ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)) ; campagne de fin d’année en M15 |
@@ -87,14 +87,14 @@ Pas de publicité dans le jeu : le marketing est une dépense d’acquisition, j
 |---|---|---|---|
 | Coût d’un joueur venu d’une publicité | 3,50 € | 2,50 € | 1,80 € |
 | Nouveaux joueurs par bouche-à-oreille, en part des actifs du mois précédent | 7 % | 10 % | 14 % |
-| Joueurs actifs qui achètent des sabliers dans le mois | 0,8 % | 1,5 % | 2,5 % |
+| Joueurs actifs qui achètent des gouttes dans le mois | 0,8 % | 1,5 % | 2,5 % |
 | Dépense mensuelle par payeur, TTC | 3,50 € | 4,50 € | 6,00 € |
 
 Communes aux trois scénarios :
 
 - **Temps forts** (presse, liste d’attente, événements) : 1 500 joueurs de la liste d’attente à l’ouverture de la bêta ; 4 000 à l’ouverture officielle de mars 2027, dont 2 000 venus de la presse et 2 000 de la Semaine de la langue française ; 2 000 à la Semaine de mars 2028 ; 1 000 à la rentrée ; 800 en février et en décembre.
 - **Rétention mensuelle d’une cohorte** : 100 % le mois d’arrivée, puis 30, 20, 16, 14, 12, 11 et 10 %, puis 95 % du mois précédent ; le fascicule mensuel est la raison de revenir.
-- **Boutique** ouverte en M7, à la moitié de son régime le premier mois ; lots de 12 sabliers à 1,99 € et de 36 à 4,99 €, panier moyen de 3,50 € TTC ; TVA de 20 % ; paiement par carte à 1,5 % + 0,25 €, sans commission de magasin (PWA).
+- **Boutique** ouverte en M7, à la moitié de son régime le premier mois ; 1 € les 60 gouttes, sans lot ni remise, achat minimum de 2 € et plafond de 20 € par mois ([ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md)), panier moyen de 3 € TTC ; TVA de 20 % ; paiement par carte chez Stancer à 0,70 % + 0,15 € HT par paiement en ligne dans l’EEE ([ADR 0072](adr/0072-prestataire-et-parcours-de-paiement.md)), sans commission de magasin (PWA). Les remboursements dus à la rétractation de 14 jours ne sont pas modélisés.
 - Aucune subvention, aucun crédit d’impôt ni aucun revenu complémentaire n’est compté : ils sont traités au [§ 5](#5-financement).
 
 ## 4. Résultats
@@ -112,12 +112,12 @@ Communes aux trois scénarios :
 | CA HT M7 à M18 | 960 € | 3 100 € | 9 600 € | 3 100 € |
 | CA HT mensuel en M18 | 140 € | 430 € | 1 300 € | 430 € |
 | Coûts M1 à M6 | 224 600 € | 224 600 € | 224 600 € | 144 000 € |
-| Coûts M7 à M18 | 281 400 € | 281 700 € | 282 500 € | 167 700 € |
-| Résultat M7 à M18 | −280 500 € | −278 600 € | −272 900 € | −164 600 € |
-| Trésorerie cumulée au plus bas (besoin de financement) | −505 000 € | −503 200 € | −497 500 € | −308 700 € |
+| Coûts M7 à M18 | 281 400 € | 281 600 € | 282 200 € | 167 600 € |
+| Résultat M7 à M18 | −280 400 € | −278 500 € | −272 600 € | −164 500 € |
+| Trésorerie cumulée au plus bas (besoin de financement) | −505 000 € | −503 100 € | −497 200 € | −308 600 € |
 | Coûts mensuels en M18 | 26 700 € | 26 700 € | 26 800 € | 17 200 € |
 | Couverture des coûts par la boutique en M18 | 1 % | 2 % | 5 % | 3 % |
-| MAU nécessaires pour couvrir les coûts de M18 | 1 276 230 | 529 570 | 238 420 | 341 130 |
+| MAU nécessaires pour couvrir les coûts de M18 | 1 227 850 | 509 490 | 229 390 | 328 200 |
 
 
 ### Phase 1 : développement, de M1 à M3 (scénario central)
@@ -134,7 +134,7 @@ Communes aux trois scénarios :
 | Contenus et outils marketing | 1 500 | 1 500 | 3 000 | 6 000 |
 | Frais de paiement | 0 | 0 | 0 | 0 |
 | **Total des coûts** | **35 800** | **38 900** | **47 900** | **122 700** |
-| Chiffre d’affaires HT (sabliers) | 0 | 0 | 0 | 0 |
+| Chiffre d’affaires HT (gouttes) | 0 | 0 | 0 | 0 |
 | **Résultat du mois** | **−35 800** | **−38 900** | **−47 900** | **−122 700** |
 | **Trésorerie cumulée** | **−35 800** | **−74 800** | **−122 700** |  |
 
@@ -153,7 +153,7 @@ Communes aux trois scénarios :
 | Contenus et outils marketing | 2 000 | 1 000 | 1 000 | 4 000 |
 | Frais de paiement | 0 | 0 | 0 | 0 |
 | **Total des coûts** | **26 700** | **29 600** | **45 600** | **101 800** |
-| Chiffre d’affaires HT (sabliers) | 0 | 0 | 0 | 0 |
+| Chiffre d’affaires HT (gouttes) | 0 | 0 | 0 | 0 |
 | **Résultat du mois** | **−26 700** | **−29 600** | **−45 600** | **−101 800** |
 | **Trésorerie cumulée** | **−149 400** | **−179 000** | **−224 600** |  |
 
@@ -179,10 +179,10 @@ Communes aux trois scénarios :
 | Achat média | 2 000 | 2 000 | 2 000 | 1 500 | 1 500 | 3 500 | 12 500 |
 | Relations presse et influence | 1 000 | 1 000 | 1 000 | 500 | 500 | 1 500 | 5 500 |
 | Contenus et outils marketing | 800 | 800 | 800 | 800 | 800 | 1 000 | 5 000 |
-| Frais de paiement | 10 | 20 | 20 | 20 | 20 | 30 | 130 |
+| Frais de paiement | 10 | 20 | 10 | 10 | 10 | 20 | 90 |
 | **Total des coûts** | **22 500** | **22 500** | **22 500** | **21 500** | **21 500** | **26 700** | **137 200** |
-| Chiffre d’affaires HT (sabliers) | 140 | 230 | 210 | 200 | 190 | 290 | 1 300 |
-| **Résultat du mois** | **−22 400** | **−22 300** | **−22 300** | **−21 300** | **−21 300** | **−26 400** | **−136 000** |
+| Chiffre d’affaires HT (gouttes) | 140 | 230 | 210 | 200 | 190 | 290 | 1 300 |
+| **Résultat du mois** | **−22 400** | **−22 300** | **−22 300** | **−21 300** | **−21 300** | **−26 400** | **−135 900** |
 | **Trésorerie cumulée** | **−246 900** | **−269 200** | **−291 500** | **−312 800** | **−334 100** | **−360 500** |  |
 
 
@@ -198,11 +198,11 @@ Communes aux trois scénarios :
 | Achat média | 2 500 | 2 500 | 4 000 | 3 000 | 2 500 | 4 500 | 19 000 |
 | Relations presse et influence | 1 000 | 1 000 | 1 500 | 1 000 | 1 000 | 2 500 | 8 000 |
 | Contenus et outils marketing | 800 | 800 | 1 000 | 800 | 800 | 1 000 | 5 200 |
-| Frais de paiement | 30 | 30 | 30 | 30 | 30 | 50 | 190 |
-| **Total des coûts** | **23 000** | **23 000** | **25 200** | **23 500** | **23 000** | **26 700** | **144 500** |
-| Chiffre d’affaires HT (sabliers) | 250 | 240 | 320 | 290 | 280 | 430 | 1 800 |
-| **Résultat du mois** | **−22 800** | **−22 800** | **−24 900** | **−23 200** | **−22 700** | **−26 300** | **−142 700** |
-| **Trésorerie cumulée** | **−383 300** | **−406 000** | **−430 900** | **−454 200** | **−476 900** | **−503 200** |  |
+| Frais de paiement | 20 | 20 | 20 | 20 | 20 | 30 | 120 |
+| **Total des coûts** | **23 000** | **23 000** | **25 200** | **23 500** | **23 000** | **26 700** | **144 400** |
+| Chiffre d’affaires HT (gouttes) | 250 | 240 | 320 | 290 | 280 | 430 | 1 800 |
+| **Résultat du mois** | **−22 800** | **−22 800** | **−24 900** | **−23 200** | **−22 700** | **−26 300** | **−142 600** |
+| **Trésorerie cumulée** | **−383 200** | **−406 000** | **−430 900** | **−454 100** | **−476 800** | **−503 100** |  |
 
 
 ### Audience et boutique, de M7 à M18 (scénario central)
@@ -237,7 +237,7 @@ Communes aux trois scénarios :
 | Contenus et outils marketing | 1 500 | 1 500 | 3 000 | 2 000 | 1 000 | 1 000 | 10 000 |
 | Frais de paiement | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | **Total des coûts** | **22 600** | **23 700** | **32 700** | **13 700** | **17 700** | **33 700** | **144 000** |
-| Chiffre d’affaires HT (sabliers) | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Chiffre d’affaires HT (gouttes) | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | **Résultat du mois** | **−22 600** | **−23 700** | **−32 700** | **−13 700** | **−17 700** | **−33 700** | **−144 000** |
 | **Trésorerie cumulée** | **−22 600** | **−46 300** | **−79 000** | **−92 600** | **−110 300** | **−144 000** |  |
 
@@ -254,11 +254,11 @@ Communes aux trois scénarios :
 | Achat média | 2 000 | 2 000 | 2 000 | 1 500 | 1 500 | 3 500 | 2 500 | 2 500 | 4 000 | 3 000 | 2 500 | 4 500 | 31 500 |
 | Relations presse et influence | 1 000 | 1 000 | 1 000 | 500 | 500 | 1 500 | 1 000 | 1 000 | 1 500 | 1 000 | 1 000 | 2 500 | 13 500 |
 | Contenus et outils marketing | 800 | 800 | 800 | 800 | 800 | 1 000 | 800 | 800 | 1 000 | 800 | 800 | 1 000 | 10 200 |
-| Frais de paiement | 10 | 20 | 20 | 20 | 20 | 30 | 30 | 30 | 30 | 30 | 30 | 50 | 320 |
-| **Total des coûts** | **13 000** | **13 000** | **13 000** | **12 000** | **12 000** | **17 200** | **13 500** | **13 500** | **15 700** | **14 000** | **13 500** | **17 200** | **167 700** |
-| Chiffre d’affaires HT (sabliers) | 140 | 230 | 210 | 200 | 190 | 290 | 250 | 240 | 320 | 290 | 280 | 430 | 3 100 |
-| **Résultat du mois** | **−12 900** | **−12 800** | **−12 800** | **−11 800** | **−11 800** | **−16 900** | **−13 300** | **−13 300** | **−15 400** | **−13 700** | **−13 200** | **−16 800** | **−164 600** |
-| **Trésorerie cumulée** | **−156 900** | **−169 700** | **−182 400** | **−194 200** | **−206 000** | **−223 000** | **−236 200** | **−249 500** | **−264 900** | **−278 600** | **−291 900** | **−308 700** |  |
+| Frais de paiement | 10 | 20 | 10 | 10 | 10 | 20 | 20 | 20 | 20 | 20 | 20 | 30 | 210 |
+| **Total des coûts** | **13 000** | **13 000** | **13 000** | **12 000** | **12 000** | **17 200** | **13 500** | **13 500** | **15 700** | **14 000** | **13 500** | **17 200** | **167 600** |
+| Chiffre d’affaires HT (gouttes) | 140 | 230 | 210 | 200 | 190 | 290 | 250 | 240 | 320 | 290 | 280 | 430 | 3 100 |
+| **Résultat du mois** | **−12 900** | **−12 800** | **−12 800** | **−11 800** | **−11 800** | **−16 900** | **−13 300** | **−13 300** | **−15 400** | **−13 700** | **−13 200** | **−16 800** | **−164 500** |
+| **Trésorerie cumulée** | **−156 900** | **−169 600** | **−182 400** | **−194 200** | **−206 000** | **−222 900** | **−236 200** | **−249 400** | **−264 800** | **−278 500** | **−291 800** | **−308 600** |  |
 
 
 <!-- PLAN:END -->
@@ -294,12 +294,12 @@ Chaque levier ci-dessous change une décision ou en crée une : il demande un AD
 | Cosmétiques (jaquettes alternatives, thèmes) | Comparable au soutien | À cadrer : « une couleur, un seul sens » et jaquettes qui ne trahissent rien ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | Offre établissement (écoles, bibliothèques), par exemple 300 € par an | 50 établissements : 15 000 € par an | Demande un tableau de bord, un accès sans compte individuel et un ADR sur les mineurs. |
 | Abonnement de mécène (par exemple 2,99 € par mois), sans avantage de jeu | 0,5 % des actifs : environ 750 € HT par mois à 60 000 actifs | Écarté pour l’instant par l’ADR 0018 (attente de contenu) ; à rouvrir si le rythme mensuel tient un an. |
-| Audience bien plus large (réussite de type Cémantix, bouche-à-oreille fort) | Équilibre de la structure allégée vers 340 000 joueurs actifs | Dépend du jeu, pas d’un choix de modèle. |
+| Audience bien plus large (réussite de type Cémantix, bouche-à-oreille fort) | Équilibre de la structure allégée vers 330 000 joueurs actifs | Dépend du jeu, pas d’un choix de modèle. |
 
 ## 7. Écarts avec les sources de vérité
 
-- **La boutique repose sur un ADR proposé.** L’[ADR 0018](adr/0018-sabliers-et-boutique.md) n’est pas accepté : le revenu à partir de M7 suppose qu’il le soit en M6, avec des prix fixés. Les prix de la [grille proposée](etude-de-marche.md#grille-de-prix-proposée-pour-les-sabliers) sont une hypothèse de ce plan.
-- **La boutique suppose une décision sur les comptes.** L’ADR 0018 n’ouvre la boutique qu’une fois la récupération de progression décidée ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) ; le plan la place en M5.
+- **La boutique repose sur deux ADR proposés.** Les [ADR 0071](adr/0071-boutique-de-gouttes-en-euros.md) (gouttes en euros, prix et plafond de 20 € par mois) et [0072](adr/0072-prestataire-et-parcours-de-paiement.md) (Stancer) ne sont pas acceptés : le revenu à partir de M7 suppose qu’ils le soient en M6. Ils remplacent partiellement les ADR 0018 et 0039, qui parlaient de lots de sabliers. Le panier moyen de 3 € TTC est une hypothèse de ce plan, à remplacer par la mesure ; la grille de prix est dans l’[étude de marché](etude-de-marche.md#grille-de-prix-des-gouttes). La tarification de Stancer est celle de ses conditions d’août 2024, à faire confirmer par écrit.
+- **La boutique suppose une décision sur les comptes.** L’[ADR 0018](adr/0018-sabliers-et-boutique.md) n’ouvre la boutique qu’une fois la récupération de progression décidée ([ADR 0007](adr/0007-etat-et-economie-autoritaires.md)) ; le plan la place en M5.
 - **L’achat de soutien, les cosmétiques, l’offre établissement et l’abonnement** ne sont décidés nulle part ; l’abonnement est même écarté pour l’instant.
 - **Trois mois de développement** ne sont fixés par aucun document : c’est la contrainte du plan demandé.
 - **Le calendrier de lancement repose sur un ADR proposé.** La bêta ouverte en janvier, avec les fascicules 1 et 2, et l’ouverture officielle en mars viennent de l’[ADR 0048](adr/0048-beta-ouverte-et-ouverture-a-quatre-fascicules.md), qui n’est pas encore accepté. Le partage des 3 500 joueurs du lancement initial entre la liste d’attente (1 500) et la presse de mars (2 000) est une hypothèse de ce plan.
