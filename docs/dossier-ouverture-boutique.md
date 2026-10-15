@@ -8,12 +8,12 @@ Ce dossier réunit ce qu’il faut décider, rédiger et faire valider avant la 
 
 | # | Point | Qui décide | État |
 |---|---|---|---|
-| 1 | [CGV](#1-conditions-générales-de-vente) relues par le conseil | Conseil | Brouillon ci-dessous |
-| 2 | [Médiateur de la consommation](#2-médiateur-de-la-consommation) désigné et cité dans les CGV | Porteur du projet | À choisir |
-| 3 | [Régime de TVA](#3-tva) décidé | Porteur du projet, avec l’expert-comptable | Options ci-dessous |
-| 4 | [Revue par territoire](#4-revue-par-territoire) faite, territoires fermés listés | Conseil | Tableau à remplir |
-| 5 | [Accessibilité](#5-accessibilité-european-accessibility-act) : exemption confirmée ou conformité visée | Conseil | À confirmer |
-| 6 | [Plafond mensuel par défaut](#6-plafond-mensuel-par-défaut-pour-les-mineurs) fixé | Porteur du projet | Proposition ci-dessous |
+| 1 | [CGV](#1-conditions-générales-de-vente) relues par le conseil | Conseil | Brouillon rempli ci-dessous, à relire par le conseil |
+| 2 | [Médiateur de la consommation](#2-médiateur-de-la-consommation) désigné et cité dans les CGV | Porteur du projet | Retenu : CM2C ([ADR 0074](adr/0074-ouverture-de-la-boutique-mediateur-tva-territoires-plafond.md)), à confirmer à l’adhésion |
+| 3 | [Régime de TVA](#3-tva) décidé | Porteur du projet, avec l’expert-comptable | Retenu : option A, TVA française puis OSS (ADR 0074) |
+| 4 | [Revue par territoire](#4-revue-par-territoire) faite, territoires fermés listés | Conseil | Rempli : France et Union ouvertes, Belgique, Pays-Bas et hors Union fermés (ADR 0074) |
+| 5 | [Accessibilité](#5-accessibilité-european-accessibility-act) : exemption confirmée ou conformité visée | Conseil | Microentreprise retenue, à confirmer |
+| 6 | [Plafond mensuel par défaut](#6-plafond-mensuel-par-défaut-pour-les-mineurs) fixé | Porteur du projet | Retenu : 10 € TTC par mois (ADR 0074) |
 | 7 | Aucun lien vers la plateforme européenne de règlement en ligne des litiges (ODR) | Relecture | Voir [ci-dessous](#2-médiateur-de-la-consommation) |
 
 Dépendances : la décision sur le support durable (ADR 0073, [Design#32](https://github.com/EtymoLogique/Design/issues/32)) et la récupération de progression de l’[ADR 0007](adr/0007-etat-et-economie-autoritaires.md), sans lesquelles la boutique ne s’ouvre pas ([ADR 0018](adr/0018-sabliers-et-boutique.md)).
