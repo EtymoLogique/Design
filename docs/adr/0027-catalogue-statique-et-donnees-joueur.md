@@ -37,13 +37,13 @@ Le pipeline de l'[ADR 0005](0005-pipeline-de-contenu.md) compile, pour chaque ve
 - **L'index global est le seul fichier modifiable.** Il prend la place du manifeste public de l'[ADR 0025](0025-medias-statiques-et-publication-programmee.md) : il ne liste que les fascicules déjà parus, jamais un fascicule à venir.
 - **Parution programmée** : elle suit l'[ADR 0025](0025-medias-statiques-et-publication-programmee.md). Les fichiers sont déposés à l'avance. À la date d'effet, une tâche planifiée ajoute le fascicule à l'index global et applique les migrations. Avant cette date, aucun chemin n'est publié, et l'empreinte d'un contenu inconnu ne se devine pas.
 - **Corrections** : une ressource corrigée a un nouveau hash, donc un nouveau manifeste, donc un nouvel index. Les versions restent immuables ([ADR 0002](0002-graphe-linguistique-editorial.md)).
-- **Jamais dans l'artefact** : `note_interne`, brouillons, faits rejetés ou `non_retenue`, état de relecture, imports du Wiktionnaire, manifeste serveur daté. Ils restent dans le dépôt privé ([ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md)).
+- **Jamais dans l'artefact** : `note_interne`, brouillons, faits rejetés ou `non_retenue`, état de relecture, imports du Wiktionnaire, manifeste serveur daté. Ils restent dans les sources du dépôt du catalogue ([ADR 0026](0026-depot-prive-du-catalogue-sans-logique.md)).
 
 ### Ce qui change dans les ADR 0024, 0025 et 0026
 
 - **ADR 0024** : plus d'artefact serveur, plus de bucket privé du catalogue, plus de projection de contenu par joueur. L'API lit le même artefact public, le garde en mémoire et relit l'index global. La projection du joueur ne contient plus que son **état** (réserve, découvertes, énergie, encre, sabliers, compteurs) : des identifiants et des nombres, jamais de texte du catalogue.
 - **ADR 0025** : la correspondance entre une carte et sa silhouette est dans le manifeste de son fascicule, pas dans un artefact serveur. Les médias gardent leur nom opaque, et le service worker ne précache toujours aucun lot.
-- **ADR 0026** : le dépôt privé reste privé et ne contient toujours que des données. Mais ce qu'il compile pour un fascicule paru, recettes comprises, est public.
+- **ADR 0026** : le dépôt du catalogue ne contient toujours que des données, et il est public. Ce qu'il compile pour un fascicule paru, recettes comprises, est publié dans l'artefact.
 - L'hébergement, le backend Rust, les tables PostgreSQL, l'identité, la sécurité et la publication programmée de ces ADR restent en vigueur.
 
 ### Les recettes sont publiques, le serveur fait foi

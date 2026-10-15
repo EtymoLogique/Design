@@ -392,11 +392,11 @@ Les sections précédentes décrivent des tables logiques. Elles ne sont pas sto
 
 - le **stockage des assets** : le catalogue publié, en fichiers statiques dans l'Object Storage public, derrière le CDN ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). Le client et le serveur lisent les mêmes fichiers ; aucune API ne sert le contenu ;
 - le **stockage des données du joueur** : les tables PostgreSQL de l'[ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md), que seul le serveur lit et écrit (section 7) ;
-- **ailleurs** : le dépôt privé du catalogue ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)), Secret Manager, la télémétrie et le stockage local du client.
+- **ailleurs** : le dépôt du catalogue ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)), Secret Manager, la télémétrie et le stockage local du client.
 
 ```mermaid
 flowchart LR
-    DEPOT["Dépôt privé du catalogue<br/>sources, médias, manifeste daté"]
+    DEPOT["Dépôt du catalogue<br/>sources, médias, manifeste daté"]
     subgraph ASSETS["Stockage des assets · public/, lisible par nom, sans listage"]
         INDEX["index.json<br/>index global"] --> MF["f/‹sha256›.json<br/>manifeste de fascicule"]
         MF --> CARTE["r/‹sha256›.json<br/>carte"]
@@ -427,8 +427,8 @@ flowchart LR
 | `recette`, `emplacement`, préconditions, déblocages | recette | par tous, dès la parution |
 | `exclusion` relue | exclusions du fascicule | par tous, dès la parution |
 | `fait` : confiance ; `fait_libelle` : `note_simplification` ; `source` et `fait_source` des faits publiés | recopiés dans chaque carte qui les cite | par tous, dès la parution |
-| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue` | dépôt privé du catalogue | équipe éditoriale |
-| Médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt privé du catalogue | équipe éditoriale |
+| `fait.note_interne`, `etat_relecture`, faits `brouillon`, `rejete` ou `non_retenue` | dépôt du catalogue | équipe éditoriale |
+| Médias bruts, manifeste serveur daté, migrations déclaratives ([ADR 0026](adr/0026-depot-prive-du-catalogue-sans-logique.md)) | dépôt du catalogue | équipe éditoriale |
 | Réserve, codex, énergie, encre, sabliers, plis, indices, jalons, commandes | données du joueur (section 7) | serveur seul |
 | Événements produit, journaux opérationnels | télémétrie et journaux ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)) | équipe, accès tracés |
 | Secrets du serveur, de la base et de la CI | Secret Manager | serveur et CI |
@@ -481,14 +481,14 @@ Un fascicule à paraître n'apparaît pas dans l'index, même sous forme de comp
 | **Exclusions** | Pour chaque combinaison écartée : paire ordonnée de briques et raison, qui permettent un retour honnête au joueur ([ADR 0014](adr/0014-sources-et-fascicules.md)). |
 | **Asset** | Jaquette, silhouettes des cartes et des langues ([ADR 0023](adr/0023-textures-des-cartes.md)), en SVG servi en `image/svg+xml`, sous `a/‹sha256›.svg`. |
 
-Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt privé du catalogue.
+Une carte recopie les faits dont elle a besoin : les sources ou les étymons partagés sont dupliqués d'une carte à l'autre. C'est le prix d'une carte lisible en un seul fichier ; la source de vérité reste le dépôt du catalogue.
 
 La carte d'une langue n'est pas un fichier : le client la construit à partir de l'index et des cartes déjà découvertes.
 
 ### Parution d'un fascicule
 
 1. Le compilateur produit les ressources et le manifeste, puis vérifie chaque empreinte.
-2. La CI du dépôt privé dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
+2. La CI du dépôt du catalogue dépose les fichiers **à l'avance** sous `staging/`, illisible pour le client, et inscrit la date d'effet dans le calendrier `staging/parutions.json` ([ADR 0029](adr/0029-parution-par-promotion-de-prefixe.md)).
 3. À la date d'effet, la **tâche planifiée** de l'[ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md) lit le manifeste du fascicule dans `staging/`, copie vers `public/` les ressources qu'il cite puis le manifeste, applique les migrations de progression, puis ajoute le fascicule à l'index global. Elle est idempotente : relancée, elle ne change rien. L'API accepte les commandes du fascicule dès qu'elle lit le nouvel index.
 4. Le client voit le nouveau fascicule à sa prochaine lecture de l'index.
 
