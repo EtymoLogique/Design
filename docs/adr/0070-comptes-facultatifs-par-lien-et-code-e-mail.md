@@ -128,4 +128,4 @@ Les Réglages gardent en permanence une entrée « Sauvegarder ma progression »
 - Plus de 5 % des demandes de code sans confirmation dans les 15 minutes : vérifier la délivrabilité, envisager un fournisseur d’identité tiers.
 - Moins de 10 % des joueurs actifs depuis 30 jours ont un compte : revoir les moments de relance.
 - Ouverture des achats en euros : revue de sécurité de l’identité, et décision sur la conservation de l’adresse pour les reçus.
-- Ouverture d’une vue compétitive : règles de modération des pseudos.
+- Ouverture d’une vue compétitive : règles de modération des pseudos ([ADR 0075](0075-moderation-des-pseudos-et-obligations-dsa.md)).

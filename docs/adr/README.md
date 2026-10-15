@@ -85,6 +85,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0071](0071-duree-de-conservation-des-comptes-et-des-plis.md) | Durée de conservation des comptes inactifs et de l’historique des plis | Proposé |
 | [0072](0072-identifiant-de-telemetrie-calcule-cote-serveur.md) | L’identifiant de télémétrie est calculé côté serveur, sur intérêt légitime, avec opposition dans les Réglages | Proposé |
 | [0073](0073-boutique-support-durable-et-pieces-comptables.md) | Boutique : le reçu du prestataire sert de support durable, le jeu ne conserve aucune adresse | Proposé |
+| [0075](0075-moderation-des-pseudos-et-obligations-dsa.md) | Modération des pseudos et obligations du règlement sur les services numériques (DSA) | Proposé |
 
 ## Page HTML
 
