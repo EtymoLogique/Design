@@ -328,7 +328,7 @@ Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **c
 - les chances du fascicule choisi par rareté (les quatre, légendaire comprise : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique non légendaire (les briques inconnues restent en silhouette). Toutes les légendaires du fascicule, connues ou non, forment une seule ligne à 1,2 %, sans leur nombre, et les chances par type se calculent sans elles ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
 - la garantie de nouveauté, le filet d'utilité et la garantie des légendaires, avec leurs compteurs ;
 - la réserve de chaque brique (« ×2 / 5 » ou « épuisée ») ;
-- l'encre disponible et l'échange contre un niveau d'indice (5 à 80 gouttes) ;
+- l'encre disponible et l'échange contre un niveau d'indice (4, 8 ou 16 gouttes, [ADR 0051](adr/0051-indices-a-la-carte.md)) ;
 - l'historique des derniers tirages ;
 - les règles du pli.
 
@@ -396,11 +396,14 @@ Dans le MVP ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) :
 - **aucun plafond** : ni sur l'échange contre de l'encre, ni sur l'usage, ni sur le nombre de sabliers détenus ; l'encre, gagnée en ouvrant des plis et, en quantité bornée, par les quêtes et le cadeau de bienvenue ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)), borne à elle seule le rythme ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
 - un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit un sablier ; à 10 gouttes le sablier, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
 
-Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
+Après le MVP, propositions de l'[ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md) et de l'[ADR 0077](adr/0077-prestataire-et-parcours-de-paiement.md) (qui reprennent en partie l'[ADR 0018](adr/0018-sabliers-et-boutique.md)) :
 
-- les plafonds ci-dessus s'appliquent aussi aux sabliers achetés en euros ;
-- la boutique vend des lots en euros, sans monnaie intermédiaire, avec le prix par sablier affiché, sans offre limitée ni relance ; lot sans sablier utilisé remboursable pendant 14 jours ;
-- revue juridique et boutique désactivable par territoire, contrôle parental, achats validés par le serveur.
+- la boutique vend des **gouttes d'encre en euros**, et rien d'autre : 1 € les 60 gouttes, prix unique sans remise, quantité au choix par pas de 60, minimum 2 € ; les sabliers et les indices restent payés en gouttes ;
+- le **prix en euros s'affiche partout** où un prix est donné en gouttes (« 10 gouttes · 0,17 € »), même pour des gouttes gagnées ;
+- achats **désactivés par défaut**, compte obligatoire, plafond de 20 € par mois et par compte, aucune offre limitée ni relance ;
+- **rétractation** de 14 jours, au prorata des gouttes inutilisées de l'achat, les gouttes gagnées étant dépensées d'abord ; consentement « contenu numérique » à la première dépense de gouttes achetées ;
+- les gouttes **restent gagnables en jouant** : tout ce qu'elles achètent s'obtient aussi sans payer ;
+- revue juridique, boutique désactivable par territoire, achats validés par le serveur.
 
 ### Principes éthiques
 
@@ -411,7 +414,7 @@ Après le MVP, proposition de l'[ADR 0018](adr/0018-sabliers-et-boutique.md) :
 - borner l'attente quand la réserve ne permet plus aucune découverte (filet au 5ᵉ pli) ;
 - ne pas préparer des mécanismes trompeurs sous prétexte d'une monétisation future ;
 - régler la générosité du départ et le ralentissement qui suit sur la rétention, jamais sur les achats : aucune frustration dosée pour pousser à l'achat ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)) ;
-- ne jamais vendre un tirage, une brique ou une chance : une future boutique ne vend que du temps, plafonné (ADR 0018) ;
+- ne jamais vendre un tirage, une brique ou une chance : une future boutique ne vend que des gouttes, qui n'achètent que du temps et de l'aide, jamais un tirage, une brique ou une chance (ADR 0076) ;
 - soumettre toute future boutique à une décision séparée.
 
 ## Interfaces
@@ -549,7 +552,7 @@ Voir les ADR [0024](adr/0024-architecture-logicielle-et-hebergement.md), [0025](
 
 ### Reporté
 
-- paiements (boutique de sabliers proposée par l'[ADR 0018](adr/0018-sabliers-et-boutique.md)), publicités et monnaie premium ;
+- paiements (boutique de gouttes proposée par l'[ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md), paiement par Stancer, [ADR 0077](adr/0077-prestataire-et-parcours-de-paiement.md)), publicités et monnaie premium ;
 - soumission de mots par les joueurs ;
 - contenu généré ou validé automatiquement par IA ;
 - multijoueur, échanges et classements ;

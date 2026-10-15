@@ -518,6 +518,7 @@ erDiagram
     JOUEUR ||--o{ INDICE : "a obtenu"
     JOUEUR ||--o{ JALON_ATTEINT : "a atteint"
     JOUEUR ||--o{ REGLAGE : "choisit"
+    JOUEUR ||--o{ ACHAT : "a acheté"
     JOUEUR ||--o{ COMMANDE : "envoie"
     JOUEUR ||--o{ MOUVEMENT : "cumule"
     JOUEUR ||--o{ MIGRATION : "a suivi"
@@ -704,11 +705,12 @@ erDiagram
 | `encre`, `sablier` | Soldes. | Encre jamais négative, sabliers détenus jamais négatifs et sans plafond ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)). |
 | `compteur_pli` | Garantie de nouveauté et filet d'utilité. | Tenus par fascicule ([ADR 0016](adr/0016-plis-et-jaquettes-par-fascicule.md)). |
 | `ouverture_pli` | Historique des plis. | Brique tirée, résultat et règle appliquée, pour le diagnostic sans donnée personnelle ([ADR 0008](adr/0008-energie-et-plis.md)). Le détail est agrégé sans identifiant puis effacé après 12 mois ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)). |
-| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : 5, 10, 20, 40 puis 80 gouttes ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). |
+| `indice` | Indices obtenus. | Un niveau d'une recette n'est payé qu'une fois, dans l'ordre : silhouette 4, définition 8, sens littéral 16 gouttes ([ADR 0051](adr/0051-indices-a-la-carte.md)). |
 | `jalon_atteint` | Jalons atteints. | Un jalon ne se touche qu'une fois. `recupere_le` reste vide tant que le joueur n'a pas récupéré sa récompense ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md)) ; la récupération passe par une `ouverture_pli` d'origine `jalon` ou par un `mouvement`. |
-| `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. |
+| `achat` | Boutique de gouttes (après le MVP, [ADR 0076](adr/0076-boutique-de-gouttes-en-euros.md), [ADR 0077](adr/0077-prestataire-et-parcours-de-paiement.md), [ADR 0073](adr/0073-boutique-support-durable-et-pieces-comptables.md)). | Un achat de gouttes : `joueur_id` (détaché à la suppression du compte), `gouttes` (multiple de 60, au moins 120), `montant_ttc_centimes`, `tva_centimes`, `intention_id` du prestataire (`pi_…`, unique), `etat` (`en_attente`, `paye`, `refuse`, `retracte`, `rembourse`, `conteste`, `anomalie`), `gouttes_restantes` (gouttes de cet achat non dépensées, qui fixent le remboursement), `pays_carte`, `cree_le`, `paye_le`, `retracte_le`. Aucune adresse, aucun nom, aucune donnée de carte. Le crédit est idempotent sur l'achat ; l'enregistrement comptable est gardé 10 ans, même après la suppression du compte. |
+| `reglage` | Préférences non sensibles. | Valeurs énumérées seulement, jamais de texte libre. Le client en garde une copie. Après le MVP : `achats_actives` (faux par défaut), `plafond_mensuel_centimes` (au plus 2 000, relevable 7 jours après la demande) et `consentement_contenu_numerique` (version du texte et horodatage, retirable). |
 | `commande` | Commandes reçues. | La clé d'idempotence vient du client. Une commande rejouée renvoie la `reponse` enregistrée sans rien modifier. Purgée après 30 jours ([ADR 0024](adr/0024-architecture-logicielle-et-hebergement.md)). |
-| `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. |
+| `mouvement` | Journal des gains et consommations, en ajout seul. | Chaque variation d'exemplaires, d'encre, de sabliers ou de charges est une ligne. Après le MVP, de nouveaux motifs : `achat` (gouttes créditées), `retractation` et `impaye` (gouttes inutilisées retirées) ; une dépense de gouttes consomme d'abord les gouttes gagnées, puis celles de l'achat le plus ancien, et décrémente `achat.gouttes_restantes`. `exemplaire`, `encre`, `sablier` et `energie` en sont les soldes. |
 | `migration` | Migrations de progression. | Une ligne par passage d'une version du catalogue à une autre, appliquée par la tâche planifiée de parution ([ADR 0025](adr/0025-medias-statiques-et-publication-programmee.md)). |
 | `quete_du_jour` | Les trois quêtes du jour. | Tirées à la première visite après minuit GMT, seulement parmi les quêtes faisables ; jamais sur un mot légendaire ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
 | `carte_lecteur` | Cartes de lecteur et leurs tampons. | Un tampon par jour où les trois quêtes sont faites ; au 7ᵉ, la récompense attend d’être récupérée et une nouvelle carte commence. |
@@ -752,6 +754,7 @@ Cette copie n'est jamais une autorité : à la reconnexion, le serveur traite la
 - Une `decouverte` par (joueur, mot) ; son `recette_id` produit bien ce mot dans la version active.
 - Une `commande` par (joueur, clé d'idempotence). Tous les effets d'une commande réussissent ou échouent ensemble.
 - Pour chaque ressource, la somme des `mouvement` égale le solde correspondant.
+- Après le MVP : la somme des `achat.gouttes_restantes` ne dépasse jamais `encre.gouttes` ; la somme des achats payés et en attente d'un compte sur un mois civil ne dépasse jamais 20 € ni le plafond choisi ; une rétractation ne rembourse que `gouttes_restantes` au prix payé, arrondi au centime inférieur ; aucune colonne d'`achat` ne contient d'adresse ni de donnée de carte.
 - Tout identifiant du catalogue référencé existe dans la version du joueur et appartient à un fascicule paru.
 - Aucune colonne ne contient de texte libre saisi par le joueur, sauf `compte.pseudo`, limité à `^[a-z0-9]+(-[a-z0-9]+)*$` et 3 à 24 caractères.
 - Un `compte` par joueur, une `empreinte_courriel` et un `pseudo` uniques ; aucune colonne ne contient une adresse électronique, un code ou un jeton en clair.

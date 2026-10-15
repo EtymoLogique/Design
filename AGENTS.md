@@ -17,7 +17,7 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `outils/` | Outils en Rust, un binaire par commande : `build_adr` génère `adr.html` et contient aussi `XREFS`, les renvois de chaque ADR vers les pages ; `plan_financier` calcule les tableaux du plan financier ; `check_identity` contrôle l'identité visuelle. |
 | `docs/index.html` | Accueil du dossier de direction. |
 | `docs/identite.html`, `design-system.html`, `typographie.html`, `mouvement.html` | Identité visuelle et design système. |
-| `docs/interfaces.html`, `maquettes.html` | Inventaire des 34 interfaces de la PWA et les maquettes statiques de 27 d’entre elles et de I-30 à I-34, mobile et ordinateur (styles dans `docs/assets/maquettes.css`, préfixe `mq-`). |
+| `docs/interfaces.html`, `maquettes.html` | Inventaire des 34 interfaces de la PWA et les maquettes statiques de 27 d’entre elles et de I-30 à I-34, mobile et ordinateur, plus quatre maquettes « Plus tard » de la boutique de gouttes (m-40 à m-43) (styles dans `docs/assets/maquettes.css`, préfixe `mq-`). |
 | `docs/jeu.html`, `plis.html`, `codex.html` | Démonstrations jouables (table de fusion, plis, codex). |
 | `docs/boussole.html`, `moodboard.html` | Piliers, à cultiver / à éviter, ambiance. |
 | `docs/logo.html` | Page de travail hors navigation : les dix pistes de logo, dont le sceau ÉL retenu (ADR 0021). |

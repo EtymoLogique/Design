@@ -32,6 +32,7 @@ Objectif : aucune modification ne contredit en silence une décision prise. Ce s
 - [ ] Une fusion réussit seulement si elle correspond à une **recette éditoriale ordonnée**, jamais sur une simple ressemblance de chaînes (ADR 0003).
 - [ ] Fait linguistique et équilibrage restent **séparés** : la couche ludique ne crée aucun fait, et le **niveau de confiance n'est jamais une rareté** (ADR 0009, 0011).
 - [ ] Énergie et plis **gratuits**. Aucun paiement, publicité récompensée ni monnaie premium dans le MVP. L'énergie n'est jamais requise pour fusionner. Pas de fausse urgence (ADR 0008).
+- [ ] Boutique (après le MVP, ADR 0076 et 0077, **proposés** : écart = « à trancher »). La boutique ne vend que des **gouttes d'encre**, jamais un pli, une brique, une chance ni un tirage ; prix unique de 1 € les 60 gouttes, prix en euros affiché à côté de chaque prix en gouttes, achats désactivés par défaut, plafond de 20 € par mois, rétractation de 14 jours sur les gouttes inutilisées (gouttes gagnées dépensées d'abord). Dans l'interface : « gouttes d'encre », jamais « monnaie » ni « gemmes ».
 - [ ] L'état et l'économie sont **sous autorité serveur** : réservation locale et visuelle, consommation dans une transaction idempotente (ADR 0007, 0012).
 - [ ] PWA pensée mobile d'abord, avec des alternatives accessibles au glisser-déposer (ADR 0001).
 - [ ] Architecture multilingue : langues en toutes lettres, codes jamais affichés, formes originales et translittérations conservées, attribut `lang` (ADR 0006).
