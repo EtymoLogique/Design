@@ -514,6 +514,7 @@ Le compte est facultatif ([ADR 0070](adr/0070-comptes-facultatifs-par-lien-et-co
 - le serveur ne garde qu'une empreinte de l'adresse, jamais l'adresse elle-même ;
 - se connecter sur un appareil qui porte une partie invitée remplace cette partie par celle du compte, après un avertissement : les deux ne se fusionnent jamais ;
 - chaque compte a un pseudo, par défaut tiré de l'adresse (`camille-martin-4821`), qui reste privé tant que le joueur ne l'a ni confirmé ni modifié ;
+- un pseudo n'est montré à un autre joueur qu'une fois confirmé et conforme aux règles de modération : signalement, examen humain, décision motivée et contact publié ([ADR 0075](adr/0075-moderation-des-pseudos-et-obligations-dsa.md)) ;
 - une carte « Sauvegardez votre progression » relance l'invité à la 3ᵉ découverte, à chaque jalon atteint, sinon tous les 7 jours de jeu. Elle se referme d'un geste et n'interrompt jamais une fusion ni un pli ;
 - une partie invitée inactive depuis 6 mois est effacée ; un compte inactif depuis 3 ans l'est aussi ([ADR 0071](adr/0071-duree-de-conservation-des-comptes-et-des-plis.md)) ; le détail des plis est agrégé après 12 mois.
 
