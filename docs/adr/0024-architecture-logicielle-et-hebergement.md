@@ -101,7 +101,7 @@ Règles :
 - Chaque commande est validée par schéma, taille bornée, propriétés inconnues refusées. Débit limité par profil et par adresse réseau, sans conserver celle-ci.
 - Moindre privilège : l’API lit le seul bucket privé du catalogue et n’accède qu’à sa base. Les secrets vivent dans Secret Manager, jamais dans le dépôt. La CI audite les dépendances (`cargo audit`, `npm audit`).
 - Le code est public ([ADR 0017](0017-licences.md)) : aucune sécurité ne repose sur le secret du code. Seuls les clés, les réglages et l’artefact serveur restent privés.
-- La télémétrie passe par la même API, dans des tables séparées de la progression ([ADR 0010](0010-observabilite-et-vie-privee.md)). Son identifiant pseudonyme est distinct de celui du joueur et change tous les 30 jours.
+- La télémétrie passe par la même API, dans des tables séparées de la progression ([ADR 0010](0010-observabilite-et-vie-privee.md)). Son identifiant pseudonyme est distinct de celui du joueur, calculé côté serveur et renouvelé chaque mois civil ([ADR 0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md), [ADR 0072](0072-identifiant-de-telemetrie-calcule-cote-serveur.md)).
 - Durées de conservation : commandes traitées 30 jours, événements de télémétrie bruts 90 jours puis agrégats seuls, journaux opérationnels 30 jours. Les purges tournent chaque jour dans un Serverless Job.
 
 ## Options envisagées

@@ -83,6 +83,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0069](0069-deblocage-progressif-des-fascicules.md) | Déblocage progressif des fascicules, un par un, au deuxième jalon | Proposé |
 | [0070](0070-comptes-facultatifs-par-lien-et-code-e-mail.md) | Comptes facultatifs, connexion par lien et code envoyés par e-mail | Proposé, durée de conservation des comptes remplacée par 0071 |
 | [0071](0071-duree-de-conservation-des-comptes-et-des-plis.md) | Durée de conservation des comptes inactifs et de l’historique des plis | Proposé |
+| [0072](0072-identifiant-de-telemetrie-calcule-cote-serveur.md) | L’identifiant de télémétrie est calculé côté serveur, sur intérêt légitime, avec opposition dans les Réglages | Proposé |
 
 ## Page HTML
 
