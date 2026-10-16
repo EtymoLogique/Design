@@ -86,6 +86,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0072](0072-identifiant-de-telemetrie-calcule-cote-serveur.md) | L’identifiant de télémétrie est calculé côté serveur, sur intérêt légitime, avec opposition dans les Réglages | Proposé |
 | [0075](0075-moderation-des-pseudos-et-obligations-dsa.md) | Modération des pseudos et obligations du règlement sur les services numériques (DSA) | Proposé |
 | [0078](0078-soutien-par-dons-sur-ko-fi.md) | Soutien par dons sur Ko-fi, sans vente dans le jeu | Proposé |
+| [0079](0079-exemples-concrets-au-dos-des-cartes.md) | Exemples concrets au dos des cartes | Proposé |
 
 ## Page HTML
 
