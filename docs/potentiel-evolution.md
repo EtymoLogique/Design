@@ -46,7 +46,7 @@ Le corpus publiable écarte les mots archaïques, trop techniques ou trop rares,
 
 ## Piste : les fascicules spéciaux
 
-> Piste ouverte, non décidée. Elle demandera un ADR avant toute mise en œuvre.
+> Piste écartée en octobre 2026, lors de la revue des pistes de rétention ([game design](game-design.md#pistes-de-rétention-écartées)). Elle ne revient qu’avec un ADR ; le texte ci-dessous reste pour mémoire.
 
 Au-delà du fascicule mensuel, l'équipe pourrait publier, **hors calendrier et quand elle le souhaite**, un fascicule spécial qui ajoute d'un coup beaucoup de contenu : une grande famille de mots, une langue d'origine, un thème (la médecine, la navigation, les sciences).
 

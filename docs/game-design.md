@@ -615,7 +615,12 @@ Ces pistes ont été examinées en octobre 2026, puis écartées. Elles ne revie
 - la copie d'une brique contre de l'encre ;
 - une recharge plus rapide la première semaine ;
 - des quêtes faites de simples gestes, et une série de jours consécutifs ;
-- une frustration dosée pour pousser à l'achat.
+- une frustration dosée pour pousser à l'achat ;
+- un pli qui propose deux briques pour n’en garder qu’une ;
+- la réserve affichée en tableau préfixes × suffixes ;
+- l’annonce d’un mot croisé à la révélation ;
+- des ricochets de chronologie ou fondés sur les exemples concrets ;
+- des fascicules spéciaux hors calendrier.
 
 ## Expérimentations UX prioritaires
 
