@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quatre pistes pour rendre la partie plus vive et donner des raisons de revenir, avec une démo jouable pour chacune : page de travail.">
+  <meta name="theme-color" content="#f3eee3">
+  <meta name="robots" content="noindex">
+  <title>Pistes de rétention · ÉtymoLogique</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site-nav.css">
+  <link rel="stylesheet" href="assets/etymo.css">
+  <style>
+    /* Page de travail : un texte par piste, sa démo à côté (empilés sous 980 px). Jetons et composants : etymo.css. */
+    .pr-intro-note { margin-top: 14px; color: var(--ink-3); font-size: 14px; }
+    .pr-h3 { margin: clamp(48px, 6vw, 80px) 0 20px; font-family: var(--serif); font-size: clamp(28px, 3.2vw, 40px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance; }
+    .pr-h3 em { color: var(--c-action-deep); }
+    body.nocturne .pr-h3 em { color: var(--c-action); }
+    .pr-lead { max-width: 68ch; margin-bottom: 22px; color: var(--ink-2); font-size: 17px; }
+    .pr-k { display: block; margin-bottom: 6px; color: var(--ink); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .pr-diag { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .pr-diag li { min-width: 0; padding: 18px 20px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--cream); color: var(--ink-2); font-size: 15px; }
+    .pr-diag b { display: block; margin-bottom: 6px; color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.2; }
+    .pr-num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+    .pr-found { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: clamp(20px, 3vw, 30px); border: 1.5px solid var(--line-strong); border-radius: 18px; background: var(--paper-2); }
+    .pr-found ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: f; }
+    .pr-found li { min-width: 0; padding: 16px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--cream); color: var(--ink-2); font-size: 15px; }
+    .pr-found li b { display: block; margin-bottom: 4px; color: var(--ink); }
+    .pr-found p { max-width: 72ch; color: var(--ink-2); }
+    .pr-found code, .pr-piste code { padding: 1px 5px; border-radius: 4px; background: var(--paper); font-family: var(--mono); font-size: 0.88em; }
+
+    .pr-piste { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 3vw, 40px); align-items: start; margin-top: clamp(40px, 5vw, 64px); padding-top: clamp(28px, 3vw, 40px); border-top: 1.5px solid var(--line-strong); scroll-margin-top: 90px; }
+    .pr-piste-txt { display: grid; gap: 16px; min-width: 0; }
+    .pr-tag { display: inline-flex; align-items: center; gap: 10px; color: var(--c-action-deep); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    body.nocturne .pr-tag { color: var(--c-action); }
+    .pr-tag span { padding: 3px 9px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink-2); font-weight: 400; letter-spacing: 0.06em; }
+    .pr-piste h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 40px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance; }
+    .pr-piste h3 em { color: var(--c-action-deep); }
+    body.nocturne .pr-piste h3 em { color: var(--c-action); }
+    .pr-facts { display: grid; gap: 14px; margin: 0; }
+    .pr-facts div { min-width: 0; }
+    .pr-facts dt { margin-bottom: 3px; color: var(--ink-3); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pr-facts dd { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+    .pr-facts dd strong { color: var(--ink); }
+
+    .pr-demo { position: relative; display: grid; gap: 16px; min-width: 0; padding: clamp(16px, 2.4vw, 26px); border: 1.5px solid var(--line-strong); border-radius: 20px; background: var(--cream); box-shadow: 6px 6px 0 var(--pop-shadow); }
+    .pr-demo [hidden] { display: none !important; }
+    .pr-demo-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+    .pr-demo-title { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pr-demo-title::before { width: 8px; height: 8px; border-radius: 50%; background: var(--c-action); content: ""; }
+    .pr-seg { display: inline-flex; gap: 2px; padding: 4px; border: 1.5px solid var(--line-strong); border-radius: 12px; }
+    .pr-seg button { min-height: 44px; padding: 6px 12px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; }
+    .pr-seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .pr-small { color: var(--ink-3); font-size: 13px; }
+    .pr-label { color: var(--ink-3); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .pr-reset { min-height: 44px; padding: 6px 12px; border: 1.5px solid var(--line-strong); border-radius: 10px; background: transparent; color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pr-reset:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+
+    /* Briques compactes, toujours avec leur trait d’union. */
+    .pr-tray { display: flex; flex-wrap: wrap; gap: 10px 12px; }
+    .brick.pr-brick { min-width: 0; padding: 8px 12px 9px; }
+    .pr-brick .b-label { font-size: 18px; }
+    .pr-brick .b-meta { font-size: 9px; }
+    .brick.pr-brick.is-on { opacity: 0.4; box-shadow: none; }
+    .brick.pr-brick.pr-secret { border-style: dashed; background: var(--cream); color: var(--ink); box-shadow: none; }
+
+    /* Table de deux cases. */
+    .pr-table { display: grid; gap: 12px; padding: 14px; border: 1.5px dashed var(--line-strong); border-radius: 16px; background: var(--paper); }
+    .pr-slots { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .pr-slot { display: grid; place-items: center; min-width: 112px; min-height: 52px; padding: 4px; border: 1.5px dashed var(--line-strong); border-radius: 12px; color: var(--ink-3); font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pr-slot.is-full { border-style: solid; border-color: transparent; padding: 0; }
+    .pr-slot .brick { animation: land 0.45s var(--ease-spring); }
+    .pr-plus { color: var(--ink-3); font-family: var(--serif); font-size: 22px; }
+    .pr-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pr-actions .btn { min-height: 44px; padding: 10px 18px; }
+
+    /* Retour d’une tentative : cercle d’état, jamais de rouge. */
+    .pr-msg { display: flex; align-items: flex-start; gap: 10px; min-height: 24px; color: var(--ink); font-size: 15px; }
+    .pr-msg:empty { display: none; }
+    .pr-dot { flex: none; width: 14px; height: 14px; margin-top: 3px; border: 1.5px solid var(--ink); border-radius: 50%; }
+    .pr-dot[data-etat="decouverte"] { border-color: var(--fixed-ink); background: var(--c-action); }
+    .pr-dot[data-etat="presque"] { background: transparent; }
+    .pr-dot[data-etat="echec"] { border-color: var(--ink-3); background: var(--ink-3); }
+    .pr-dot[data-etat="connu"] { background: var(--ink); }
+    .pr-dot[data-etat="vide"] { border-style: dashed; border-color: var(--ink-3); }
+    .pr-msg .bchip { margin-inline: 2px; }
+    .pr-msg button { min-height: 44px; margin-left: 6px; padding: 2px 14px; border: 1.5px solid var(--line-strong); border-radius: 8px; background: transparent; color: var(--ink); cursor: pointer; font: inherit; font-size: 13px; }
+    .pr-shake { animation: prShake 0.5s var(--ease-out); }
+    @keyframes prShake { 20% { transform: translateX(-6px); } 45% { transform: translateX(5px); } 70% { transform: translateX(-2px); } 100% { transform: none; } }
+
+    .pr-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0; padding: 0; list-style: none; color: var(--ink-2); font-size: 13px; }
+    .pr-legend li { display: inline-flex; align-items: center; gap: 7px; }
+    .pr-legend .pr-dot { width: 12px; height: 12px; margin: 0; }
+
+    /* Démo 1 : grille de la réserve. */
+    .pr-gridwrap { overflow-x: auto; padding: 8px 4px 6px; }
+    .pr-grid { border-collapse: separate; border-spacing: 4px; margin: 0 auto; }
+    .pr-grid th { padding: 0; font-weight: 400; }
+    .pr-grid thead th { vertical-align: bottom; height: 108px; }
+    .pr-grid thead .bchip { writing-mode: vertical-rl; transform: rotate(180deg); padding: 8px 2px; }
+    .pr-grid tbody th { text-align: right; white-space: nowrap; padding-right: 4px; }
+    .pr-hcount { display: block; margin-top: 3px; color: var(--ink-3); font-family: var(--mono); font-size: 10px; font-variant-numeric: tabular-nums; text-align: center; }
+    .pr-grid tbody th .pr-hcount { display: inline; margin: 0 0 0 4px; }
+    .pr-grid .bchip.is-spent { border-style: dashed; background: var(--paper-2); color: var(--ink-3); box-shadow: none; }
+    .pr-cell { display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); cursor: pointer; transition: transform var(--dur-rapide) var(--ease-spring), border-color var(--dur-rapide); }
+    .pr-cell:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--line-strong); }
+    .pr-cell[aria-pressed="true"] { border: 2px solid var(--ink); }
+    .pr-cell:disabled { cursor: not-allowed; opacity: 0.4; }
+    .pr-cell .pr-dot { margin: 0; }
+    .pr-cell.is-new .pr-dot { animation: newBrick 0.9s var(--ease-spring); }
+    .pr-readout { min-height: 22px; color: var(--ink-2); font-size: 14px; text-align: center; }
+    .pr-readout b { font-family: var(--serif); font-size: 16px; }
+    .pr-stats { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--ink-3); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+    .pr-stats b { color: var(--ink); }
+
+    /* Démo 2 : le carré. */
+    .pr-quest { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--paper); }
+    .pr-quest b { font-family: var(--serif); font-size: 18px; }
+    .pr-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1.5px solid var(--line-strong); border-radius: 999px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+    .pr-pill.is-done { border-color: var(--fixed-ink); background: var(--ink); color: var(--paper); }
+    .pr-square { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px; max-width: calc(var(--n) * 136px); margin: 0 auto; width: 100%; }
+    .pr-square .mini { cursor: default; padding: 28px 9px 9px; }
+    .pr-square .mini:hover { transform: none; box-shadow: none; }
+    .pr-square .mini.is-new:hover { box-shadow: var(--new-halo); }
+    .pr-square .m-def { display: -webkit-box; overflow: hidden; color: var(--ink); font-family: var(--serif); font-size: clamp(10px, 9.5cqi, 14px); line-height: 1.2; -webkit-box-orient: vertical; -webkit-line-clamp: 5; line-clamp: 5; }
+    .pr-square .mini.locked { justify-content: center; border-style: dashed; }
+    .pr-square .mini.locked .m-q { font-size: clamp(28px, 30cqi, 52px); }
+    .pr-check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink-2); font-size: 14px; cursor: pointer; }
+    .pr-check input { width: 18px; height: 18px; accent-color: var(--ink); }
+
+    /* Démo 3 : le pli à choix. */
+    .pr-pli-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+    .pr-stage { display: grid; place-items: center; gap: 14px; min-height: 290px; padding: 18px 12px; border: 1.5px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .pr-pli { position: relative; display: grid; place-items: center; width: 150px; aspect-ratio: 3 / 4; border: 1.5px solid var(--fixed-ink); border-radius: 14px; background: var(--c-pli-tint); color: var(--fixed-ink); box-shadow: 5px 5px 0 var(--pop-shadow); }
+    .pr-pli svg { width: 100%; height: 100%; }
+    .pr-pli-name { position: absolute; inset: auto 0 10px; font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-align: center; text-transform: uppercase; }
+    .pr-pli-seal { position: absolute; top: 44%; left: 50%; display: grid; place-items: center; width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1.5px solid var(--fixed-ink); border-radius: 9px; background: var(--c-pli); font-family: var(--serif); font-size: 14px; font-weight: 700; rotate: -6deg; }
+    .pr-pli.is-shaking { animation: prPliShake 0.42s var(--ease-out); }
+    @keyframes prPliShake { 20% { transform: rotate(-4deg); } 40% { transform: rotate(4deg); } 60% { transform: rotate(-2deg); } 80% { transform: rotate(2deg); } 100% { transform: none; } }
+    .pr-offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: 100%; }
+    .pr-offer { display: grid; justify-items: center; align-content: start; gap: 8px; min-width: 0; padding: 14px 10px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--cream); text-align: center; animation: pkLand 0.7s var(--ease-spring) both; }
+    .pr-offer:nth-child(2) { animation-delay: 0.11s; }
+    .pr-offer.is-left { border-style: dashed; opacity: 0.4; }
+    .pr-offer.is-kept { border: 2px solid var(--ink); }
+    .pr-offer .brick { cursor: default; }
+    .pr-offer .b-label { font-size: clamp(20px, 3vw, 26px); }
+    .pr-rarity { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .pr-origin { color: var(--ink-2); font-family: var(--serif); font-size: 14px; font-style: italic; line-height: 1.3; }
+    .pr-state { color: var(--ink); font-family: var(--mono); font-size: 11px; font-variant-numeric: tabular-nums; }
+    .pr-offer .btn { min-height: 44px; width: 100%; padding: 8px 10px; font-size: 12px; }
+    .pr-odds { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+    .pr-odds li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; color: var(--ink-2); }
+    .pr-odds b { color: var(--ink); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .pr-side { display: grid; gap: 14px; min-width: 0; }
+    .pr-box { display: grid; gap: 10px; padding: 14px; border: 1.5px solid var(--line); border-radius: 14px; }
+    .pr-ink { display: flex; align-items: baseline; gap: 8px; }
+    .pr-ink strong { font-family: var(--serif); font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .pr-drop { width: 13px; height: 13px; border: 1.5px solid var(--fixed-ink); border-radius: 50% 0 50% 50%; background: var(--c-pli); rotate: -45deg; align-self: center; }
+    .pr-gauge { height: 8px; overflow: hidden; border: 1px solid var(--ink); border-radius: 999px; background: var(--paper-2); }
+    .pr-gauge i { display: block; height: 100%; background: var(--c-pli); transition: width var(--dur-lent) var(--ease-out); }
+    .pr-mini-tray { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+    .pr-mini-tray .bchip { position: relative; }
+    .pr-mini-tray .bchip small { margin-left: 5px; font-family: var(--mono); font-size: 10px; font-weight: 700; }
+    .pr-mini-tray .bchip.is-spent { border-style: dashed; background: var(--paper-2); color: var(--ink-3); box-shadow: none; }
+
+    /* Démo 4 : la constellation. */
+    .pr-graphwrap { overflow-x: auto; border: 1.5px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .pr-graph { display: block; width: 100%; min-width: 560px; height: auto; }
+    .pr-graph .e { stroke: var(--ink-3); stroke-width: 1.3; transition: stroke var(--dur-rapide), stroke-width var(--dur-rapide); }
+    .pr-graph .e.is-hl { stroke: var(--ink); stroke-width: 2.6; }
+    .pr-graph .e.is-last { stroke: var(--c-action); stroke-width: 3; }
+    .pr-graph .n rect.b { stroke: var(--fixed-ink); stroke-width: 1.5; }
+    .pr-graph .n text { fill: var(--fixed-ink); font-family: var(--serif); font-weight: 700; pointer-events: none; }
+    .pr-graph .n .track { fill: var(--paper-2); stroke: var(--ink-3); stroke-width: 0.8; }
+    .pr-graph .n .fill { fill: var(--c-family); }
+    .pr-graph .n .hit { fill: transparent; }
+    .pr-graph .n { cursor: pointer; transition: opacity var(--dur-rapide); }
+    .pr-graph .n:focus-visible rect.b { stroke-width: 3; }
+    .pr-graph.has-focus .n:not(.is-hl) { opacity: 0.4; }
+    .pr-graph.has-focus .e:not(.is-hl):not(.is-last) { stroke: var(--line); }
+    .pr-graph .n.is-born { animation: prBorn 0.5s var(--ease-spring); transform-box: fill-box; transform-origin: center; }
+    @keyframes prBorn { from { transform: scale(0.2); } }
+    .pr-range { display: grid; gap: 6px; }
+    .pr-range input { width: 100%; accent-color: var(--ink); }
+    .pr-info { min-height: 72px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; color: var(--ink-2); font-size: 14px; }
+    .pr-info .bchip { margin-right: 4px; }
+    .pr-info em { font-family: var(--serif); }
+    .pr-bar { display: inline-block; width: 64px; height: 6px; margin: 0 6px; overflow: hidden; border: 1px solid var(--ink-3); border-radius: 999px; background: var(--paper-2); vertical-align: middle; }
+    .pr-bar i { display: block; height: 100%; background: var(--c-family); }
+
+    /* Autres pistes, ordre, écart. */
+    .pr-more { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .pr-more li { min-width: 0; padding: 18px 20px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--cream); color: var(--ink-2); font-size: 15px; }
+    .pr-more b { display: block; margin-bottom: 6px; color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.2; }
+    .pr-more small { display: block; margin-top: 10px; color: var(--ink-3); font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pr-order { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .pr-order li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: start; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--cream); color: var(--ink-2); font-size: 15px; }
+    .pr-order li > span { display: grid; place-items: center; width: 40px; height: 40px; border: 1.5px solid var(--fixed-ink); border-radius: 10px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 14px; font-weight: 700; }
+    .pr-order li b { color: var(--ink); }
+    .pr-gap { padding: 18px 20px; border: 1.5px dashed var(--line-strong); border-radius: var(--radius); color: var(--ink-2); font-size: 15px; }
+    .pr-gap b { color: var(--ink); }
+
+    @media (max-width: 980px) {
+      .pr-piste { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .pr-pli-row { grid-template-columns: minmax(0, 1fr); }
+      .pr-slot { min-width: 96px; }
+      .pr-square { gap: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pr-offer, .pr-slot .brick, .pr-cell.is-new .pr-dot, .pr-graph .n.is-born, .pr-pli.is-shaking, .pr-shake { animation: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<header class="site-nav"></header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rar-commune" viewBox="0 0 16 16"><path d="M8 1.8 14.8 14H1.2Z"/></symbol>
+  <symbol id="rar-peu" viewBox="0 0 16 16"><rect x="2.3" y="2.3" width="11.4" height="11.4" rx="0.6"/></symbol>
+  <symbol id="rar-rare" viewBox="0 0 16 16"><path d="M8 1.3 14.8 6.3 12.2 14.4H3.8L1.2 6.3Z"/></symbol>
+  <symbol id="rar-legendaire" viewBox="0 0 16 16"><path d="M8 .6 13.6 8 8 15.4 2.4 8Z"/></symbol>
+</svg>
+
+<main id="contenu">
+  <section class="section" id="pistes">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="sec-num">Jeu · Page de travail</span><h2>Dynamiser la partie, <em>la faire durer</em></h2></div>
+        <div class="sec-intro">
+          <p>Quatre pistes pour rendre la séance plus vive et donner au joueur des raisons de revenir pendant des mois, chacune avec une démo jouable. Elles partent de l’état du jeu au 18&nbsp;octobre 2026 et respectent la boussole&nbsp;: aucune série, aucune notification, aucune récompense qui expire, rien à vendre, et se tromper ne coûte toujours rien. Aucune ne figure parmi les pistes écartées en octobre 2026.</p>
+          <p class="pr-intro-note">Les mots des démos viennent des fascicules Rosette et Argile du dépôt Content, dont la plupart des faits sont encore en brouillon&nbsp;: ce sont des exemples, pas des faits de production. Les légendaires et les mots légendaires en sont exclus.</p>
+          <p class="xrefs"><span>Voir aussi</span><a class="xref" href="boussole.html">La boussole</a><a class="xref" href="adr.html#adr-0045">Quêtes du jour</a><a class="xref" href="adr.html#adr-0051">Indices à la carte</a><a class="xref" href="jeu.html">La table de fusion</a></p>
+        </div>
+      </div>
+
+      <h3 class="pr-h3" id="diagnostic">Ce qui freine <em>aujourd’hui</em></h3>
+      <ul class="pr-diag">
+        <li><b>La découverte revient une fois par jour.</b>Une charge toutes les 12&nbsp;h et environ deux plis par mot (<a href="adr.html#adr-0022">ADR 0022</a>)&nbsp;: le moment fort du jeu, formuler une hypothèse et la voir confirmée, revient à peu près une fois par jour. Le reste de la séance, ce sont surtout des ricochets.</li>
+        <li><b>La recherche tourne au tâtonnement.</b>Rosette compte 7&nbsp;préfixes et 16&nbsp;suffixes, soit <span class="pr-num">112</span> paires pour 50&nbsp;mots&nbsp;; Routes des mots, 27&nbsp;×&nbsp;19&nbsp;=&nbsp;<span class="pr-num">513</span> paires pour 106&nbsp;mots. Les essais sont gratuits, mais rien ne garde la trace de ceux déjà faits.</li>
+        <li><b>Le joueur ne choisit rien dans un pli.</b>Il choisit le fascicule, puis le hasard décide. Le game design pose déjà la question&nbsp;: «&nbsp;Faut-il plusieurs briques par pli sur un grand catalogue&nbsp;?&nbsp;»</li>
+        <li><b>Rien ne montre la forme de ce qu’il a construit.</b>Le Cabinet donne des nombres, le codex des cartes. Le réseau que forment ses mots, qui fait l’originalité du jeu, reste invisible&nbsp;; la vue Relations attend toujours la validation de son intérêt.</li>
+      </ul>
+
+      <h3 class="pr-h3" id="fondations">D’abord, <em>de quoi mesurer</em></h3>
+      <div class="pr-found">
+        <p>Trois chantiers déjà prévus pèsent plus lourd sur la rétention que n’importe quelle piste nouvelle. Sans eux, aucune ne pourra être jugée.</p>
+        <ol>
+          <li><b>La première session (J5).</b>Le tutoriel n’existe pas encore et le cadeau de bienvenue se récupère dès la création du profil. La bêta vise 80&nbsp;% de tutoriels terminés et 25&nbsp;% de retours au 7ᵉ&nbsp;jour (<a href="adr.html#adr-0048">ADR 0048</a>).</li>
+          <li><b>Les agrégats (<a href="adr.html#adr-0050">ADR 0050</a>).</b><code>agreger-jour</code> et <code>agreger-mois</code> sont écrits et testés dans l’App, mais pas encore planifiés dans Infra. D’ici là, le retour au 1ᵉʳ, au 7ᵉ et au 30ᵉ&nbsp;jour reste invisible.</li>
+          <li><b>La télémétrie (J7).</b>Elle dira quelles quêtes se terminent, combien de tentatives précèdent une découverte et combien de joueurs restent sans découverte possible.</li>
+        </ol>
+        <p>La télémétrie n’a pas d’identifiant durable (<a href="adr.html#adr-0050">ADR 0050</a>) et aucun test A/B n’est prévu&nbsp;: le plus simple est de comparer les cohortes mensuelles. Livrez une piste par mois pour pouvoir attribuer un effet.</p>
+      </div>
+
+      <!-- Piste 1 : la grille -->
+      <article class="pr-piste" id="grille" aria-labelledby="grille-titre">
+        <div class="pr-piste-txt">
+          <span class="pr-tag">Piste 1 <span>App seule</span></span>
+          <h3 id="grille-titre">La grille&nbsp;: la réserve en tableau, <em>avec la mémoire des essais</em></h3>
+          <dl class="pr-facts">
+            <div><dt>Constat</dt><dd>Passé une vingtaine de briques, le joueur oublie ce qu’il a essayé, refait les mêmes échecs et ne voit pas les régularités&nbsp;: si <span class="bchip">géo-</span> va avec <span class="bchip" data-kind="suffixe">-logie</span> et <span class="bchip" data-kind="suffixe">-graphie</span>, que donne <span class="bchip">hydro-</span>&nbsp;?</dd></div>
+            <div><dt>Proposition</dt><dd>Une seconde vue de la réserve, en tableau à double entrée&nbsp;: les préfixes en lignes, les suffixes en colonnes. Chaque case garde l’état de sa paire avec les cercles d’état de la charte. Toucher une case pose les deux briques sur la table&nbsp;; une paire déjà tentée l’annonce avant la fusion.</dd></div>
+            <div><dt>Garde-fous</dt><dd>La grille ne montre que les essais et les découvertes du joueur&nbsp;: <strong>une case vide ne dit jamais si un mot existe</strong>. Une brique épuisée grise sa ligne ou sa colonne. Les mots ingrédients (<em>biologie</em> + <span class="bchip" data-kind="suffixe">-iste</span>) restent dans la liste.</dd></div>
+            <div><dt>À construire</dt><dd>Aucun changement de règle. Un essai ne modifie pas l’état du joueur&nbsp;: sa trace peut vivre dans IndexedDB, sans synchronisation entre appareils. Une maquette de plus pour la table (I-09).</dd></div>
+            <div><dt>À mesurer</dt><dd>Tentatives avant une découverte, durée passée avec une réserve sans découverte possible.</dd></div>
+            <div><dt>Risque</dt><dd>Le balayage systématique devient plus confortable. Il devient aussi lisible&nbsp;: le joueur voit les motifs et raisonne par analogie plutôt qu’au hasard. À vérifier en test.</dd></div>
+          </dl>
+        </div>
+        <div class="pr-demo" id="demo-grille">
+          <div class="pr-demo-head">
+            <span class="pr-demo-title">Démo · Votre réserve</span>
+            <div class="pr-seg" role="group" aria-label="Vue de la réserve">
+              <button type="button" data-vue="grille" aria-pressed="true">Grille</button>
+              <button type="button" data-vue="liste" aria-pressed="false">Liste</button>
+            </div>
+          </div>
+          <div class="pr-gridwrap" data-role="grille"></div>
+          <div class="pr-tray" data-role="liste" hidden></div>
+          <p class="pr-readout" data-role="readout" aria-live="polite"></p>
+          <ul class="pr-legend" aria-label="Légende">
+            <li><span class="pr-dot" data-etat="connu"></span>Déjà au codex</li>
+            <li><span class="pr-dot" data-etat="decouverte"></span>Découverte du jour</li>
+            <li><span class="pr-dot" data-etat="echec"></span>Déjà tentée</li>
+            <li><span class="pr-dot" data-etat="vide"></span>À tenter</li>
+          </ul>
+          <div class="pr-table">
+            <div class="pr-slots" data-role="slots"></div>
+            <div class="pr-actions">
+              <button class="btn btn-primary" type="button" data-role="fusion">Fusionner</button>
+              <button class="btn btn-secondary" type="button" data-role="vider">Vider</button>
+            </div>
+            <p class="pr-msg" data-role="msg" role="status"></p>
+          </div>
+          <div class="pr-demo-head">
+            <p class="pr-stats" data-role="stats"></p>
+            <button class="pr-reset" type="button" data-role="reset">Recommencer</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Piste 2 : le carré -->
+      <article class="pr-piste" id="carre" aria-labelledby="carre-titre">
+        <div class="pr-piste-txt">
+          <span class="pr-tag">Piste 2 <span>ADR · API · PWA</span></span>
+          <h3 id="carre-titre">Le carré&nbsp;: une quête de table <em>par analogie</em></h3>
+          <dl class="pr-facts">
+            <div><dt>Constat</dt><dd>La quête de table donne une piste de sens («&nbsp;le mot qui veut dire “peur de l’eau”&nbsp;»). Elle se résout en traduisant des gloses, sans raisonner sur la forme des mots, alors que le pilier Déduction veut des découvertes qui s’anticipent.</dd></div>
+            <div><dt>Proposition</dt><dd>Une nouvelle sorte de quête de table&nbsp;: des cartes déjà trouvées rangées en carré, et une ou deux cases vides. Le joueur déduit les briques manquantes de leurs voisines&nbsp;: <em>géologie</em>, <em>géographie</em>, <em>hydrologie</em>… donc <span class="bchip">hydro-</span> + <span class="bchip" data-kind="suffixe">-graphie</span>. La découverte se fait à la vraie table, avec la vraie réserve, et consomme comme toujours.</dd></div>
+            <div><dt>Garde-fous</dt><dd>Le serveur ne tire un carré que si la réserve permet chaque case vide (<a href="adr.html#adr-0045">ADR 0045</a>). La case vide ne montre ni silhouette ni sens, devenus des indices payants (<a href="adr.html#adr-0051">ADR 0051</a>). Une fusion hors du carré reste une vraie découverte. La version difficile montre les définitions au lieu des mots, et le tirage tourne entre les tiers de difficulté (<a href="adr.html#adr-0047">ADR 0047</a>).</dd></div>
+            <div><dt>À construire</dt><dd>Un ADR qui complète l’ADR 0045. API&nbsp;: chercher les carrés parmi les recettes publiées, sur des identifiants seulement&nbsp;; la quête est faite quand toutes ses cases sont au codex. PWA&nbsp;: la carte du carré dans l’onglet Journalières.</dd></div>
+            <div><dt>À mesurer</dt><dd>Quêtes du jour terminées, tampons par semaine.</dd></div>
+            <div><dt>Variante</dt><dd>Pour les ricochets, sans rien consommer&nbsp;: quatre définitions de mots trouvés, retrouvez les deux préfixes et les deux suffixes.</dd></div>
+          </dl>
+        </div>
+        <div class="pr-demo" id="demo-carre">
+          <div class="pr-demo-head">
+            <span class="pr-demo-title">Démo · Quête de table du jour</span>
+            <div class="pr-seg" role="group" aria-label="Taille du carré">
+              <button type="button" data-carre="deux" aria-pressed="true">2 × 2</button>
+              <button type="button" data-carre="trois" aria-pressed="false">3 × 3</button>
+            </div>
+          </div>
+          <div class="pr-quest">
+            <b data-role="consigne">Complétez le carré.</b>
+            <span class="pr-pill" data-role="progres">0 / 1</span>
+          </div>
+          <div class="pr-square" data-role="carre"></div>
+          <label class="pr-check" for="carre-difficile"><input type="checkbox" id="carre-difficile"> Version difficile&nbsp;: les définitions à la place des mots</label>
+          <div>
+            <span class="pr-label">Votre réserve</span>
+            <div class="pr-tray" data-role="reserve" style="margin-top:10px"></div>
+          </div>
+          <div class="pr-table">
+            <div class="pr-slots" data-role="slots"></div>
+            <div class="pr-actions">
+              <button class="btn btn-primary" type="button" data-role="fusion">Fusionner</button>
+              <button class="btn btn-secondary" type="button" data-role="vider">Vider</button>
+            </div>
+            <p class="pr-msg" data-role="msg" role="status"></p>
+          </div>
+          <div class="pr-demo-head">
+            <p class="pr-small">Touchez une brique pour la poser dans la première case libre.</p>
+            <button class="pr-reset" type="button" data-role="reset">Recommencer</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Piste 3 : le pli à choix -->
+      <article class="pr-piste" id="pli-a-choix" aria-labelledby="pli-titre">
+        <div class="pr-piste-txt">
+          <span class="pr-tag">Piste 3 <span>ADR · simulation</span></span>
+          <h3 id="pli-titre">Le pli à choix&nbsp;: deux briques, <em>vous en gardez une</em></h3>
+          <dl class="pr-facts">
+            <div><dt>Constat</dt><dd>Le pli est le seul geste d’acquisition, et le joueur n’y décide de rien une fois le fascicule choisi. Sur un grand fascicule, une brique tirée au hasard tombe souvent loin de la piste qu’il suit.</dd></div>
+            <div><dt>Proposition</dt><dd>Le pli s’ouvre sur deux briques distinctes. Le joueur en garde une&nbsp;; l’autre devient de l’encre, au barème d’un doublon. Il choisit avec ce qu’il sait&nbsp;: sa réserve, son carré du jour, les indices qu’il a achetés.</dd></div>
+            <div><dt>Garde-fous</dt><dd><strong>Un pli donne toujours une brique.</strong> Les chances affichées deviennent celles d’être proposée. Les légendaires gardent 1,2&nbsp;% par pli, pas par brique (<a href="adr.html#adr-0043">ADR 0043</a>). La garantie de nouveauté porte sur ce qui est proposé&nbsp;: au 6ᵉ&nbsp;pli, l’une des deux est nouvelle. Le filet d’utilité ne change pas.</dd></div>
+            <div><dt>À construire</dt><dd>Un ADR qui remplace en partie les ADR 0011, 0035 et 0043, et une simulation du rythme par fascicule (<a href="adr.html#adr-0022">ADR 0022</a>). Pour commencer, le pli de lecteur et les plis offerts seulement, déjà hors énergie et hors garanties&nbsp;; puis, si la mesure le confirme, les plis des grands fascicules.</dd></div>
+            <div><dt>À mesurer</dt><dd>Retour après disponibilité d’un pli, joueurs actifs restés plus de deux jours sans découverte possible.</dd></div>
+            <div><dt>Risque</dt><dd>Plus d’utilité et un peu plus d’encre par pli&nbsp;: un fascicule se complète plus vite et les sabliers arrivent plus tôt. À resimuler avant de généraliser.</dd></div>
+          </dl>
+        </div>
+        <div class="pr-demo" id="demo-pli">
+          <div class="pr-demo-head">
+            <span class="pr-demo-title">Démo · Pli d’Argile</span>
+            <button class="pr-reset" type="button" data-role="reset">Recommencer</button>
+          </div>
+          <div class="pr-pli-row">
+            <div class="pr-stage" data-role="scene" aria-live="polite"></div>
+            <div class="pr-side">
+              <div class="pr-box">
+                <span class="pr-label">Encre</span>
+                <div class="pr-ink"><span class="pr-drop" aria-hidden="true"></span><strong data-role="encre">0</strong><span class="pr-small">gouttes</span></div>
+              </div>
+              <div class="pr-box">
+                <span class="pr-label">Chance d’être proposée</span>
+                <ul class="pr-odds" data-role="chances"></ul>
+              </div>
+              <div class="pr-box">
+                <span class="pr-label">Nouveauté garantie au 6ᵉ pli</span>
+                <div class="pr-gauge" role="img" data-role="jauge"><i></i></div>
+                <span class="pr-small" data-role="jauge-txt"></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="pr-label">Votre réserve d’Argile</span>
+            <div class="pr-mini-tray" data-role="reserve" style="margin-top:10px"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Piste 4 : la constellation -->
+      <article class="pr-piste" id="constellation" aria-labelledby="const-titre">
+        <div class="pr-piste-txt">
+          <span class="pr-tag">Piste 4 <span>ADR · maquette</span></span>
+          <h3 id="const-titre">La constellation&nbsp;: le codex <em>en réseau de familles</em></h3>
+          <dl class="pr-facts">
+            <div><dt>Constat</dt><dd>Après des semaines de jeu, le joueur a des dizaines de cartes mais ne voit pas le réseau qu’elles forment. La promesse du jeu, «&nbsp;un monde de puzzles interconnectés&nbsp;», ne se voit nulle part.</dd></div>
+            <div><dt>Proposition</dt><dd>Une vue du codex où chaque brique trouvée est un nœud et chaque mot trouvé un lien entre ses deux briques. Les familles deviennent des étoiles&nbsp;: <span class="bchip" data-kind="suffixe">-logie</span> rayonne, <span class="bchip">xylo-</span> attend. Sous chaque brique, une barre Rosée donne la progression de sa famille, comme au verso de sa carte («&nbsp;4 mots formés sur 5&nbsp;»).</dd></div>
+            <div><dt>Garde-fous</dt><dd>Seuls les briques et les mots trouvés y figurent&nbsp;; les nombres restants sont ceux que le verso montre déjà, sans compter les fascicules verrouillés (<a href="adr.html#adr-0069">ADR 0069</a>). Aucun mot légendaire, aucune légendaire inconnue (<a href="adr.html#adr-0043">ADR 0043</a>). Ni carte géographique ni drapeau&nbsp;: un graphe de briques.</dd></div>
+            <div><dt>À construire</dt><dd>Elle rejoint l’évolution déjà prévue avec la vue Filiation et la carte des routes des mots (potentiel d’évolution)&nbsp;: un ADR, une maquette. Le calcul se fait côté client, sur la projection du codex.</dd></div>
+            <div><dt>À mesurer</dt><dd>Ouvertures de la vue et du Cabinet (<a href="adr.html#adr-0050">ADR 0050</a>), familles commencées et complétées.</dd></div>
+          </dl>
+        </div>
+        <div class="pr-demo" id="demo-constellation">
+          <div class="pr-demo-head">
+            <span class="pr-demo-title">Démo · Votre codex, Rosette et Argile</span>
+            <button class="pr-reset" type="button" data-role="rejouer">Rejouer la croissance</button>
+          </div>
+          <div class="pr-range">
+            <label class="pr-label" for="const-jour" data-role="jour-txt">Jour</label>
+            <input type="range" id="const-jour" min="1" max="60" value="34">
+          </div>
+          <div class="pr-graphwrap"><svg class="pr-graph" data-role="graphe" viewBox="0 0 820 560" role="group" aria-label="Réseau des briques et des mots trouvés"></svg></div>
+          <div class="pr-info" data-role="info" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <h3 class="pr-h3" id="autres">D’autres pistes, <em>sans démo</em></h3>
+      <ul class="pr-more">
+        <li><b>Le mot croisé, dit à la révélation</b>Quand une découverte réunit deux briques de fascicules différents, la fiche le dit&nbsp;: «&nbsp;Mot croisé&nbsp;: Rosette rencontre Argile.&nbsp;» Rien n’est annoncé avant, puisque l’annonce des familles qu’un fascicule prolonge reste écartée.<small>App seule</small></li>
+        <li><b>Les enquêtes en cours sur la table</b>Les indices déjà achetés (silhouette, définition, sens littéral) restent visibles au-dessus de la réserve, là où le joueur cherche, plutôt que dans la feuille des indices.<small>App seule</small></li>
+        <li><b>Ricochets «&nbsp;Chronologie&nbsp;»</b>Lequel est le plus ancien, <em>géographie</em> ou <em>thermomètre</em>&nbsp;? L’ADR 0044 l’a écarté faute de date de première attestation. L’ADR 0056 prévoit cette date et le schéma du catalogue la porte, mais aucune unité n’en a encore.<small>Content d’abord, puis un ADR</small></li>
+        <li><b>Ricochets «&nbsp;Exemple&nbsp;»</b>Reconnaître un mot à partir d’un exemple concret. L’ADR 0079 interdit aujourd’hui qu’une quête dépende d’un exemple, et seuls quatre sens en portent.<small>Plus tard, avec un ADR</small></li>
+        <li><b>Les fascicules spéciaux</b>Hors calendrier, gratuits et ouverts pour toujours (potentiel d’évolution)&nbsp;: une réserve de nouveauté pour les joueurs qui ont tout fini, sans fausse urgence.<small>Piste ouverte, ADR à écrire</small></li>
+      </ul>
+
+      <h3 class="pr-h3" id="ordre">Dans quel <em>ordre</em></h3>
+      <ol class="pr-order">
+        <li><span>0</span><div><b>Les fondations.</b> Première session (J5), agrégats planifiés dans Infra, télémétrie (J7). Avant la bêta de janvier 2027.</div></li>
+        <li><span>1</span><div><b>La grille.</b> App seule, sans règle nouvelle&nbsp;; elle devient utile dès que la réserve dépasse une vingtaine de briques, c’est-à-dire dès le deuxième fascicule débloqué.</div></li>
+        <li><span>2</span><div><b>Le carré.</b> Un ADR court, un tirage de plus dans <code>quetes_jour.rs</code>, une carte dans Journalières.</div></li>
+        <li><span>3</span><div><b>Le pli à choix</b>, d’abord sur le pli de lecteur et les plis offerts. Un ADR et une simulation, puis une décision mesurée pour les autres plis.</div></li>
+        <li><span>4</span><div><b>La constellation</b>, avec la vue Filiation et la carte des routes des mots. Un ADR et une maquette.</div></li>
+      </ol>
+
+      <h3 class="pr-h3" id="ecart">Un écart <em>à trancher</em></h3>
+      <p class="pr-gap">Le game design range parmi les pistes écartées «&nbsp;un mot découvert qui deviendrait une brique sans compteur d’exemplaires&nbsp;». La roadmap de l’App (J3, «&nbsp;Mot ingrédient&nbsp;») a pourtant décidé qu’un mot ingrédient comme <em>biologie</em> offre sa brique, «&nbsp;qui ne se consomme jamais&nbsp;». <b>Aucun ADR ne tranche entre les deux</b>, alors que l’ADR 0035 demandait de «&nbsp;décider comment une découverte donne des exemplaires de son mot&nbsp;».</p>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site-nav.js"></script>
+<script>
+/* DONNEES:START */
+// Extrait du dépôt Content (fascicules Rosette et Argile, légendaires exclues), le 18 octobre 2026.
+window.DONNEES = {"briques":{"psycho":{"f":"psycho","n":"p","g":"âme, esprit","r":"commune","e":{"langue":"grec ancien","forme":"ψυχή","glose":"souffle, âme"}},"zoo":{"f":"zoo","n":"p","g":"animal","r":"commune","e":{"langue":"grec ancien","forme":"ζῷον","glose":"être vivant, animal"}},"astro":{"f":"astro","n":"p","g":"astre","r":"commune","e":{"langue":"grec ancien","forme":"ἄστρον","glose":"astre"}},"thermo":{"f":"thermo","n":"p","g":"chaleur","r":"commune","e":{"langue":"grec ancien","forme":"θερμός","glose":"chaud"}},"socio":{"f":"socio","n":"p","g":"société","r":"peu_commune","e":{"langue":"latin","forme":"socius","glose":"compagnon"}},"neuro":{"f":"neuro","n":"p","g":"nerf","r":"peu_commune","e":{"langue":"grec ancien","forme":"νεῦρον","glose":"nerf"}},"hydro":{"f":"hydro","n":"p","g":"eau","r":"commune","e":{"langue":"grec ancien","forme":"ὕδωρ","glose":"eau"}},"xylo":{"f":"xylo","n":"p","g":"bois","r":"rare","e":{"langue":"grec ancien","forme":"ξύλον","glose":"bois"}},"anthropo":{"f":"anthropo","n":"p","g":"être humain","r":"peu_commune","e":{"langue":"grec ancien","forme":"ἄνθρωπος","glose":"être humain"}},"géo":{"f":"géo","n":"p","g":"terre","r":"commune","e":{"langue":"grec ancien","forme":"γῆ","glose":"terre"}},"morphe":{"f":"morphe","n":"s","g":"forme","r":"peu_commune","e":{"langue":"grec ancien","forme":"μορφή","glose":"forme"}},"pathie":{"f":"pathie","n":"s","g":"affection","r":"peu_commune","e":{"langue":"grec ancien","forme":"πάθος","glose":"ce qu’on éprouve, souffrance"}},"graphie":{"f":"graphie","n":"s","g":"écriture","r":"commune","e":{"langue":"grec ancien","forme":"γραφή","glose":"écriture"}},"phone":{"f":"phone","n":"s","g":"voix, son","r":"commune","e":{"langue":"grec ancien","forme":"φωνή","glose":"voix, son"}},"logie":{"f":"logie","n":"s","g":"étude","r":"commune","e":{"langue":"grec ancien","forme":"λογία","glose":"étude, discours"}},"phobie":{"f":"phobie","n":"s","g":"peur","r":"peu_commune","e":{"langue":"grec ancien","forme":"φόβος","glose":"fuite, crainte"}},"logue":{"f":"logue","n":"s","g":"spécialiste","r":"commune","e":{"langue":"grec ancien","forme":"λόγος","glose":"parole, discours"}},"thérapie":{"f":"thérapie","n":"s","g":"soin","r":"peu_commune","e":{"langue":"grec ancien","forme":"θεραπεία","glose":"soin"}},"sphère":{"f":"sphère","n":"s","g":"globe","r":"commune","e":{"langue":"grec ancien","forme":"σφαῖρα","glose":"balle, globe"}},"mètre":{"f":"mètre","n":"s","g":"mesure","r":"commune","e":{"langue":"grec ancien","forme":"μέτρον","glose":"mesure"}},"phage":{"f":"phage","n":"s","g":"qui mange","r":"rare","e":{"langue":"grec ancien","forme":"φαγεῖν","glose":"manger"}},"bio":{"f":"bio","n":"p","g":"vie","r":"commune","e":{"langue":"grec ancien","forme":"βίος","glose":"vie"}},"graphe":{"f":"graphe","n":"s","g":"qui écrit","r":"commune","e":{"langue":"grec ancien","forme":"γράφειν","glose":"écrire"}},"nomie":{"f":"nomie","n":"s","g":"règle, gestion","r":"peu_commune","e":{"langue":"grec ancien","forme":"νόμος","glose":"loi, règle"}},"gène":{"f":"gène","n":"s","g":"qui engendre","r":"peu_commune","e":{"langue":"grec ancien","forme":"γεννάω","glose":"engendrer"}},"gramme":{"f":"gramme","n":"s","g":"écrit, tracé","r":"commune","e":{"langue":"grec ancien","forme":"γράμμα","glose":"lettre, écrit"}},"phile":{"f":"phile","n":"s","g":"qui aime","r":"commune","e":{"langue":"grec ancien","forme":"φίλος","glose":"ami"}},"agro":{"f":"agro","n":"p","g":"champ","r":"peu_commune","e":{"langue":"grec ancien","forme":"ἀγρός","glose":"champ"}},"archéo":{"f":"archéo","n":"p","g":"ancien","r":"peu_commune","e":{"langue":"grec ancien","forme":"ἀρχαῖος","glose":"ancien"}},"scope":{"f":"scope","n":"s","g":"qui observe","r":"commune","e":{"langue":"grec ancien","forme":"σκοπεῖν","glose":"observer"}},"sophie":{"f":"sophie","n":"s","g":"sagesse","r":"peu_commune","e":{"langue":"grec ancien","forme":"σοφία","glose":"sagesse"}}},"mots":{"psycho|pathie":{"m":"psychopathie","l":"affection de l’âme","d":"Trouble grave de la personnalité, marqué par l’absence d’empathie.","seg":[[0,6],[6,12]],"fa":1},"psycho|graphie":{"m":"psychographie","l":"écriture de l’âme","d":"Écriture automatique que les spirites attribuent à une inspiration venue des esprits.","seg":[[0,6],[6,13]],"fa":1},"psycho|logie":{"m":"psychologie","l":"étude de l’âme","d":"Science qui étudie les pensées, les émotions et les comportements.","seg":[[0,6],[6,11]],"fa":1},"psycho|logue":{"m":"psychologue","l":"spécialiste de l’âme","d":"Spécialiste de la psychologie, qui peut aussi accompagner des patients.","seg":[[0,6],[6,11]],"fa":1},"psycho|thérapie":{"m":"psychothérapie","l":"soin de l’âme","d":"Traitement des troubles de l’esprit par des moyens psychologiques.","seg":[[0,6],[6,14]],"fa":1},"zoo|morphe":{"m":"zoomorphe","l":"à forme d’animal","d":"Qui a la forme d’un animal.","seg":[[0,3],[3,9]],"fa":1},"zoo|graphie":{"m":"zoographie","l":"écriture des animaux","d":"Description des animaux.","seg":[[0,3],[3,10]],"fa":5},"zoo|logie":{"m":"zoologie","l":"étude des animaux","d":"Science qui étudie les animaux.","seg":[[0,3],[3,8]],"fa":1},"zoo|phobie":{"m":"zoophobie","l":"peur des animaux","d":"Peur des animaux.","seg":[[0,3],[3,9]],"fa":1},"zoo|logue":{"m":"zoologue","l":"spécialiste des animaux","d":"Spécialiste de la zoologie.","seg":[[0,3],[3,8]],"fa":1},"zoo|thérapie":{"m":"zoothérapie","l":"soin par les animaux","d":"Thérapie qui s’appuie sur la présence d’animaux.","seg":[[0,3],[3,11]],"fa":1},"zoo|mètre":{"m":"zoomètre","l":"mesure des animaux","d":"Instrument qui mesure les proportions des animaux.","seg":[[0,3],[3,8]],"fa":5},"astro|logie":{"m":"astrologie","l":"discours sur les astres","d":"Croyance qui prétend lire le caractère et l’avenir dans la position des astres.","seg":[[0,5],[5,10]],"fa":2},"astro|phobie":{"m":"astrophobie","l":"peur des astres","d":"Peur excessive des astres, du tonnerre et des éclairs.","seg":[[0,5],[5,11]],"fa":2},"astro|logue":{"m":"astrologue","l":"spécialiste des astres","d":"Personne qui pratique l’astrologie.","seg":[[0,5],[5,10]],"fa":2},"thermo|graphie":{"m":"thermographie","l":"écriture de la chaleur","d":"Image de la chaleur qu’émet un corps.","seg":[[0,6],[6,13]],"fa":2},"thermo|phone":{"m":"thermophone","l":"son de la chaleur","d":"Appareil qui produit un son par des variations de température.","seg":[[0,6],[6,11]],"fa":5},"thermo|logie":{"m":"thermologie","l":"étude de la chaleur","d":"Étude de la chaleur ; en médecine, mesure de la température du corps.","seg":[[0,6],[6,11]],"fa":5},"thermo|phobie":{"m":"thermophobie","l":"peur de la chaleur","d":"Aversion pour la chaleur.","seg":[[0,6],[6,12]],"fa":2},"thermo|thérapie":{"m":"thermothérapie","l":"soin par la chaleur","d":"Traitement par la chaleur.","seg":[[0,6],[6,14]],"fa":2},"thermo|sphère":{"m":"thermosphère","l":"globe de la chaleur","d":"Couche de l’atmosphère où la température augmente avec l’altitude.","seg":[[0,6],[6,12]],"fa":2},"thermo|mètre":{"m":"thermomètre","l":"mesure de la chaleur","d":"Instrument qui mesure la température.","seg":[[0,6],[6,11]],"fa":2},"socio|pathie":{"m":"sociopathie","l":"affection de la société","d":"Trouble de la personnalité qui pousse à ignorer les règles de la vie en société.","seg":[[0,5],[5,11]],"fa":1},"socio|logie":{"m":"sociologie","l":"étude de la société","d":"Science qui étudie les sociétés humaines et les relations entre leurs membres.","seg":[[0,5],[5,10]],"fa":1},"socio|logue":{"m":"sociologue","l":"spécialiste de la société","d":"Spécialiste de la sociologie.","seg":[[0,5],[5,10]],"fa":1},"neuro|pathie":{"m":"neuropathie","l":"affection des nerfs","d":"Maladie des nerfs.","seg":[[0,5],[5,11]],"fa":1},"neuro|logie":{"m":"neurologie","l":"étude des nerfs","d":"Branche de la médecine qui soigne le système nerveux.","seg":[[0,5],[5,10]],"fa":1},"neuro|logue":{"m":"neurologue","l":"spécialiste des nerfs","d":"Médecin spécialiste du système nerveux.","seg":[[0,5],[5,10]],"fa":1},"hydro|morphe":{"m":"hydromorphe","l":"forme de l’eau","d":"Se dit d’un sol saturé d’eau pendant une partie de l’année.","seg":[[0,5],[5,11]],"fa":2},"hydro|graphie":{"m":"hydrographie","l":"description des eaux","d":"Description et cartographie des mers, des cours d’eau et des lacs.","seg":[[0,5],[5,12]],"fa":2},"hydro|phone":{"m":"hydrophone","l":"voix de l’eau","d":"Micro qui capte les sons sous l’eau.","seg":[[0,5],[5,10]],"fa":2},"hydro|logie":{"m":"hydrologie","l":"étude de l’eau","d":"Science qui étudie les eaux, leur cycle et leurs propriétés.","seg":[[0,5],[5,10]],"fa":2},"hydro|phobie":{"m":"hydrophobie","l":"peur de l’eau","d":"Peur de l’eau, symptôme de la rage.","seg":[[0,5],[5,11]],"fa":2},"hydro|logue":{"m":"hydrologue","l":"spécialiste de l’eau","d":"Spécialiste de l’hydrologie.","seg":[[0,5],[5,10]],"fa":2},"hydro|thérapie":{"m":"hydrothérapie","l":"soin par l’eau","d":"Traitement par l’eau, froide ou chaude.","seg":[[0,5],[5,13]],"fa":2},"hydro|sphère":{"m":"hydrosphère","l":"globe de l’eau","d":"Ensemble des eaux de la Terre.","seg":[[0,5],[5,11]],"fa":2},"hydro|mètre":{"m":"hydromètre","l":"mesure de l’eau","d":"Instrument qui mesure la densité ou le débit d’un liquide.","seg":[[0,5],[5,10]],"fa":5},"xylo|graphie":{"m":"xylographie","l":"écriture sur le bois","d":"Gravure sur bois ; impression tirée d’une planche de bois gravée.","seg":[[0,4],[4,11]],"fa":5},"xylo|phone":{"m":"xylophone","l":"son du bois","d":"Instrument de musique fait de lames de bois qu’on frappe.","seg":[[0,4],[4,9]],"fa":2},"anthropo|morphe":{"m":"anthropomorphe","l":"à forme humaine","d":"Qui a la forme d’un être humain.","seg":[[0,8],[8,14]],"fa":1},"anthropo|graphie":{"m":"anthropographie","l":"description de l’être humain","d":"Description de l’être humain, considéré comme une espèce parmi les animaux.","seg":[[0,8],[8,15]],"fa":1},"anthropo|logie":{"m":"anthropologie","l":"étude de l’être humain","d":"Science qui étudie l’être humain dans ses aspects physiques, sociaux et culturels.","seg":[[0,8],[8,13]],"fa":1},"anthropo|phobie":{"m":"anthropophobie","l":"peur des humains","d":"Peur maladive des autres humains.","seg":[[0,8],[8,14]],"fa":1},"anthropo|logue":{"m":"anthropologue","l":"spécialiste de l’être humain","d":"Spécialiste de l’anthropologie.","seg":[[0,8],[8,13]],"fa":1},"géo|graphie":{"m":"géographie","l":"description de la terre","d":"Science qui décrit la surface de la Terre, ses reliefs, ses climats et ses peuplements.","seg":[[0,3],[3,10]],"fa":2},"géo|phone":{"m":"géophone","l":"voix de la terre","d":"Capteur qui enregistre les vibrations du sol.","seg":[[0,3],[3,8]],"fa":2},"géo|logie":{"m":"géologie","l":"étude de la terre","d":"Science qui étudie la structure, l’histoire et l’évolution de la Terre.","seg":[[0,3],[3,8]],"fa":2},"géo|logue":{"m":"géologue","l":"spécialiste de la terre","d":"Spécialiste de la géologie.","seg":[[0,3],[3,8]],"fa":2},"géo|sphère":{"m":"géosphère","l":"globe de la terre","d":"Ensemble des parties solides de la Terre, du noyau à la croûte.","seg":[[0,3],[3,9]],"fa":2},"géo|mètre":{"m":"géomètre","l":"qui mesure la terre","d":"Technicien qui mesure les terrains et en dresse les plans.","seg":[[0,3],[3,8]],"fa":2}},"constellation":[{"m":"anthropographie","p":"anthropo","s":"graphie","fa":1,"l":"description de l’être humain"},{"m":"anthropologie","p":"anthropo","s":"logie","fa":1,"l":"étude de l’être humain"},{"m":"anthropologue","p":"anthropo","s":"logue","fa":1,"l":"spécialiste de l’être humain"},{"m":"anthropomorphe","p":"anthropo","s":"morphe","fa":1,"l":"à forme humaine"},{"m":"anthropophage","p":"anthropo","s":"phage","fa":1,"l":"qui mange les humains"},{"m":"anthropophobie","p":"anthropo","s":"phobie","fa":1,"l":"peur des humains"},{"m":"biographe","p":"bio","s":"graphe","fa":1,"l":"qui écrit une vie"},{"m":"biographie","p":"bio","s":"graphie","fa":1,"l":"écriture d’une vie"},{"m":"biologie","p":"bio","s":"logie","fa":1,"l":"étude de la vie"},{"m":"biologue","p":"bio","s":"logue","fa":1,"l":"spécialiste de la vie"},{"m":"biomorphe","p":"bio","s":"morphe","fa":1,"l":"à forme du vivant"},{"m":"bionomie","p":"bio","s":"nomie","fa":1,"l":"règle de la vie"},{"m":"biosphère","p":"bio","s":"sphère","fa":1,"l":"globe du vivant"},{"m":"biothérapie","p":"bio","s":"thérapie","fa":1,"l":"soin par le vivant"},{"m":"neurologie","p":"neuro","s":"logie","fa":1,"l":"étude des nerfs"},{"m":"neurologue","p":"neuro","s":"logue","fa":1,"l":"spécialiste des nerfs"},{"m":"neuropathie","p":"neuro","s":"pathie","fa":1,"l":"affection des nerfs"},{"m":"psychogène","p":"psycho","s":"gène","fa":1,"l":"engendré par l’âme"},{"m":"psychologie","p":"psycho","s":"logie","fa":1,"l":"étude de l’âme"},{"m":"psychologue","p":"psycho","s":"logue","fa":1,"l":"spécialiste de l’âme"},{"m":"psychothérapie","p":"psycho","s":"thérapie","fa":1,"l":"soin de l’âme"},{"m":"sociogramme","p":"socio","s":"gramme","fa":1,"l":"tracé de la société"},{"m":"sociologie","p":"socio","s":"logie","fa":1,"l":"étude de la société"},{"m":"sociologue","p":"socio","s":"logue","fa":1,"l":"spécialiste de la société"},{"m":"zoologie","p":"zoo","s":"logie","fa":1,"l":"étude des animaux"},{"m":"zoologue","p":"zoo","s":"logue","fa":1,"l":"spécialiste des animaux"},{"m":"zoomorphe","p":"zoo","s":"morphe","fa":1,"l":"à forme d’animal"},{"m":"zoonomie","p":"zoo","s":"nomie","fa":1,"l":"règle des animaux"},{"m":"zoophile","p":"zoo","s":"phile","fa":1,"l":"qui aime les animaux"},{"m":"zoophobie","p":"zoo","s":"phobie","fa":1,"l":"peur des animaux"},{"m":"zoothérapie","p":"zoo","s":"thérapie","fa":1,"l":"soin par les animaux"},{"m":"agrologie","p":"agro","s":"logie","fa":2,"l":"étude des champs"},{"m":"agronomie","p":"agro","s":"nomie","fa":2,"l":"règle des champs"},{"m":"archéographie","p":"archéo","s":"graphie","fa":2,"l":"description de l’ancien"},{"m":"archéologie","p":"archéo","s":"logie","fa":2,"l":"étude de ce qui est ancien"},{"m":"archéologue","p":"archéo","s":"logue","fa":2,"l":"spécialiste de l’ancien"},{"m":"astronomie","p":"astro","s":"nomie","fa":2,"l":"règle des astres"},{"m":"astrophobie","p":"astro","s":"phobie","fa":2,"l":"peur des astres"},{"m":"géographe","p":"géo","s":"graphe","fa":2,"l":"qui décrit la terre"},{"m":"géographie","p":"géo","s":"graphie","fa":2,"l":"description de la terre"},{"m":"géologie","p":"géo","s":"logie","fa":2,"l":"étude de la terre"},{"m":"géologue","p":"géo","s":"logue","fa":2,"l":"spécialiste de la terre"},{"m":"géophage","p":"géo","s":"phage","fa":2,"l":"qui mange la terre"},{"m":"géosphère","p":"géo","s":"sphère","fa":2,"l":"globe de la terre"},{"m":"hydrogramme","p":"hydro","s":"gramme","fa":2,"l":"tracé de l’eau"},{"m":"hydrographe","p":"hydro","s":"graphe","fa":2,"l":"qui écrit l’eau"},{"m":"hydrographie","p":"hydro","s":"graphie","fa":2,"l":"description des eaux"},{"m":"hydrologie","p":"hydro","s":"logie","fa":2,"l":"étude de l’eau"},{"m":"hydrologue","p":"hydro","s":"logue","fa":2,"l":"spécialiste de l’eau"},{"m":"hydrophobie","p":"hydro","s":"phobie","fa":2,"l":"peur de l’eau"},{"m":"hydrosphère","p":"hydro","s":"sphère","fa":2,"l":"globe de l’eau"},{"m":"hydrothérapie","p":"hydro","s":"thérapie","fa":2,"l":"soin par l’eau"},{"m":"thermogramme","p":"thermo","s":"gramme","fa":2,"l":"tracé de la chaleur"},{"m":"thermographe","p":"thermo","s":"graphe","fa":2,"l":"qui écrit la chaleur"},{"m":"thermographie","p":"thermo","s":"graphie","fa":2,"l":"écriture de la chaleur"},{"m":"thermogène","p":"thermo","s":"gène","fa":2,"l":"qui engendre la chaleur"},{"m":"thermomètre","p":"thermo","s":"mètre","fa":2,"l":"mesure de la chaleur"},{"m":"thermophile","p":"thermo","s":"phile","fa":2,"l":"qui aime la chaleur"},{"m":"thermophobie","p":"thermo","s":"phobie","fa":2,"l":"peur de la chaleur"},{"m":"thermoscope","p":"thermo","s":"scope","fa":2,"l":"qui observe la chaleur"},{"m":"thermothérapie","p":"thermo","s":"thérapie","fa":2,"l":"soin par la chaleur"},{"m":"xylophage","p":"xylo","s":"phage","fa":2,"l":"qui mange le bois"},{"m":"anthroposophie","p":"anthropo","s":"sophie","fa":1,"l":"sagesse de l’être humain"},{"m":"biogène","p":"bio","s":"gène","fa":1,"l":"qui engendre la vie"},{"m":"psychographie","p":"psycho","s":"graphie","fa":1,"l":"écriture de l’âme"},{"m":"psychopathie","p":"psycho","s":"pathie","fa":1,"l":"affection de l’âme"},{"m":"sociopathie","p":"socio","s":"pathie","fa":1,"l":"affection de la société"},{"m":"astrologie","p":"astro","s":"logie","fa":2,"l":"discours sur les astres"},{"m":"astrologue","p":"astro","s":"logue","fa":2,"l":"spécialiste des astres"},{"m":"géomètre","p":"géo","s":"mètre","fa":2,"l":"qui mesure la terre"},{"m":"géophone","p":"géo","s":"phone","fa":2,"l":"voix de la terre"},{"m":"hydrogène","p":"hydro","s":"gène","fa":2,"l":"qui engendre l’eau"},{"m":"hydromorphe","p":"hydro","s":"morphe","fa":2,"l":"forme de l’eau"},{"m":"hydrophile","p":"hydro","s":"phile","fa":2,"l":"qui aime l’eau"},{"m":"hydrophone","p":"hydro","s":"phone","fa":2,"l":"voix de l’eau"},{"m":"thermosphère","p":"thermo","s":"sphère","fa":2,"l":"globe de la chaleur"},{"m":"xylophone","p":"xylo","s":"phone","fa":2,"l":"son du bois"}],"argile":{"archéo":{"f":"archéo","n":"p","g":"ancien","r":"peu_commune","e":{"langue":"grec ancien","forme":"ἀρχαῖος","glose":"ancien"}},"logue":{"f":"logue","n":"s","g":"spécialiste","r":"commune","e":{"langue":"grec ancien","forme":"λόγος","glose":"parole, discours"}},"scope":{"f":"scope","n":"s","g":"qui observe","r":"commune","e":{"langue":"grec ancien","forme":"σκοπεῖν","glose":"observer"}},"sphère":{"f":"sphère","n":"s","g":"globe","r":"commune","e":{"langue":"grec ancien","forme":"σφαῖρα","glose":"balle, globe"}},"xylo":{"f":"xylo","n":"p","g":"bois","r":"rare","e":{"langue":"grec ancien","forme":"ξύλον","glose":"bois"}},"astro":{"f":"astro","n":"p","g":"astre","r":"commune","e":{"langue":"grec ancien","forme":"ἄστρον","glose":"astre"}},"logie":{"f":"logie","n":"s","g":"étude","r":"commune","e":{"langue":"grec ancien","forme":"λογία","glose":"étude, discours"}},"agro":{"f":"agro","n":"p","g":"champ","r":"peu_commune","e":{"langue":"grec ancien","forme":"ἀγρός","glose":"champ"}},"phobie":{"f":"phobie","n":"s","g":"peur","r":"peu_commune","e":{"langue":"grec ancien","forme":"φόβος","glose":"fuite, crainte"}},"gramme":{"f":"gramme","n":"s","g":"écrit, tracé","r":"commune","e":{"langue":"grec ancien","forme":"γράμμα","glose":"lettre, écrit"}},"phone":{"f":"phone","n":"s","g":"voix, son","r":"commune","e":{"langue":"grec ancien","forme":"φωνή","glose":"voix, son"}},"hydro":{"f":"hydro","n":"p","g":"eau","r":"commune","e":{"langue":"grec ancien","forme":"ὕδωρ","glose":"eau"}},"morphe":{"f":"morphe","n":"s","g":"forme","r":"peu_commune","e":{"langue":"grec ancien","forme":"μορφή","glose":"forme"}},"phile":{"f":"phile","n":"s","g":"qui aime","r":"commune","e":{"langue":"grec ancien","forme":"φίλος","glose":"ami"}},"graphe":{"f":"graphe","n":"s","g":"qui écrit","r":"commune","e":{"langue":"grec ancien","forme":"γράφειν","glose":"écrire"}},"graphie":{"f":"graphie","n":"s","g":"écriture","r":"commune","e":{"langue":"grec ancien","forme":"γραφή","glose":"écriture"}},"thermo":{"f":"thermo","n":"p","g":"chaleur","r":"commune","e":{"langue":"grec ancien","forme":"θερμός","glose":"chaud"}},"gène":{"f":"gène","n":"s","g":"qui engendre","r":"peu_commune","e":{"langue":"grec ancien","forme":"γεννάω","glose":"engendrer"}},"thérapie":{"f":"thérapie","n":"s","g":"soin","r":"peu_commune","e":{"langue":"grec ancien","forme":"θεραπεία","glose":"soin"}},"mètre":{"f":"mètre","n":"s","g":"mesure","r":"commune","e":{"langue":"grec ancien","forme":"μέτρον","glose":"mesure"}},"géo":{"f":"géo","n":"p","g":"terre","r":"commune","e":{"langue":"grec ancien","forme":"γῆ","glose":"terre"}},"nomie":{"f":"nomie","n":"s","g":"règle, gestion","r":"peu_commune","e":{"langue":"grec ancien","forme":"νόμος","glose":"loi, règle"}},"phage":{"f":"phage","n":"s","g":"qui mange","r":"rare","e":{"langue":"grec ancien","forme":"φαγεῖν","glose":"manger"}}}};
+/* DONNEES:END */
+</script>
+<script>
+(() => {
+  "use strict";
+  // ---------- Thème : même clé que les autres pages du dossier ----------
+  const THEME_KEY = "etymologique.theme";
+  const applyTheme = (on) => {
+    document.body.classList.toggle("nocturne", on);
+    document.querySelectorAll(".theme-btn").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(on));
+      btn.setAttribute("aria-label", on ? "Activer le mode atelier" : "Activer le mode nocturne");
+    });
+  };
+  try { applyTheme(localStorage.getItem(THEME_KEY) === "nocturne"); } catch { applyTheme(false); }
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".theme-btn")) return;
+    const on = !document.body.classList.contains("nocturne");
+    applyTheme(on);
+    try { localStorage.setItem(THEME_KEY, on ? "nocturne" : "atelier"); } catch { /* stockage indisponible */ }
+  });
+
+  // ---------- Outils communs ----------
+  const D = window.DONNEES;
+  const NB = "\u00a0";
+  const guil = (t) => `«${NB}${t}${NB}»`;
+  const pct = (x) => `${(x * 100).toFixed(1).replace(".", ",")}${NB}%`;
+  const calme = matchMedia("(prefers-reduced-motion: reduce)");
+  const brq = (f) => D.briques[f];
+  const etiquette = (f) => (brq(f).n === "p" ? `${f}-` : `-${f}`);
+  const genre = (f) => (brq(f).n === "p" ? "prefixe" : "suffixe");
+  const motDe = (p, s) => D.mots[`${p}|${s}`];
+  const FASCICULES = { 1: "Rosette", 2: "Argile", 5: "Routes des mots" };
+  const RAR = {
+    commune: { id: "commune", label: "Commune" },
+    peu_commune: { id: "peu", label: "Peu commune" },
+    rare: { id: "rare", label: "Rare" },
+    legendaire: { id: "legendaire", label: "Légendaire" },
+  };
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    n.append(...kids.filter((x) => x != null));
+    return n;
+  };
+  const SVG = "http://www.w3.org/2000/svg";
+  const svgEl = (tag, attrs = {}) => {
+    const n = document.createElementNS(SVG, tag);
+    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+    return n;
+  };
+  const chip = (f, extra = "") => el("span", { class: `bchip ${extra}`.trim(), "data-kind": genre(f) }, etiquette(f));
+  const rarete = (r, nommee) => {
+    const s = svgEl("svg", { class: "rar", viewBox: "0 0 16 16" });
+    s.append(svgEl("use", { href: `#rar-${RAR[r].id}` }));
+    if (nommee) { s.setAttribute("role", "img"); s.setAttribute("aria-label", `Rareté\u00a0: ${RAR[r].label}`); }
+    else s.setAttribute("aria-hidden", "true");
+    return s;
+  };
+  // Un mot surligné morceau par morceau, aux couleurs de ses briques (filet neutre entre deux couleurs).
+  const motColore = (m, p, s) => {
+    const span = el("span");
+    const couleurs = ["var(--c-prefix)", "var(--c-suffix)"];
+    m.seg.forEach(([a, b], i) => {
+      const part = el("span", { class: "seg" }, m.m.slice(a, b));
+      part.style.setProperty("--c", couleurs[i] || "transparent");
+      span.append(part);
+    });
+    span.setAttribute("aria-label", m.m);
+    return span;
+  };
+  const brique = (f, { compte, etat, bouton, onclick } = {}) => {
+    const b = el(bouton ? "button" : "span", {
+      class: `brick pr-brick${etat ? ` ${etat}` : ""}`, "data-kind": genre(f), type: bouton ? "button" : null, onclick,
+      "aria-label": bouton ? `${etiquette(f)}, ${guil(brq(f).g)}${compte != null ? `, ${compte} exemplaire${compte > 1 ? "s" : ""}` : ""}` : null,
+    },
+    el("span", { class: "b-label" }, etiquette(f)),
+    el("span", { class: "b-meta" }, brq(f).g));
+    if (compte != null) b.append(el("span", { class: `b-count${compte === 0 ? " zero" : ""}` }, compte === 0 ? "Épuisée" : `×${compte}`));
+    return b;
+  };
+  const message = (zone, etat, ...contenu) => {
+    zone.replaceChildren(el("span", { class: "pr-dot", "data-etat": etat, "aria-hidden": "true" }), el("span", {}, ...contenu));
+    if (etat === "echec" || etat === "presque") {
+      zone.classList.remove("pr-shake"); void zone.offsetWidth; zone.classList.add("pr-shake");
+    }
+  };
+  // Résolution d’une fusion, sur les recettes du catalogue (ordre préfixe puis suffixe).
+  const resoudre = (a, b, connus) => {
+    if (brq(a).n === "p" && brq(b).n === "s") {
+      const m = motDe(a, b);
+      if (!m) return { etat: "echec" };
+      return { etat: connus.has(`${a}|${b}`) ? "connu" : "decouverte", m };
+    }
+    if (brq(a).n === "s" && brq(b).n === "p" && motDe(b, a)) return { etat: "presque" };
+    return { etat: "echec" };
+  };
+  // Table de deux cases, partagée par la grille et le carré.
+  function table(cadre, { exemplaires, poser }) {
+    const zone = cadre.querySelector('[data-role="slots"]');
+    const cases = [null, null];
+    const render = () => {
+      zone.replaceChildren(
+        ...[0, 1].flatMap((i) => {
+          const f = cases[i];
+          const slot = el("div", { class: `pr-slot${f ? " is-full" : ""}` },
+            f ? brique(f, { bouton: true, onclick: () => { cases[i] = null; render(); poser(); } }) : `Case ${i + 1}`);
+          return i === 0 ? [slot, el("span", { class: "pr-plus", "aria-hidden": "true" }, "+")] : [slot];
+        }),
+      );
+      cadre.querySelector('[data-role="fusion"]').disabled = !(cases[0] && cases[1]);
+    };
+    const enUsage = (f) => cases.filter((c) => c === f).length;
+    return {
+      cases, render, enUsage,
+      poserBrique(f) {
+        if (exemplaires[f] - enUsage(f) <= 0) return false;
+        const i = cases.indexOf(null);
+        if (i < 0) return false;
+        cases[i] = f; render(); return true;
+      },
+      remplir(a, b) { cases[0] = a; cases[1] = b; render(); },
+      vider() { cases[0] = null; cases[1] = null; render(); },
+      inverser() { cases.reverse(); render(); },
+    };
+  }
+
+  // ======================================================================
+  // Démo 1 : la grille de la réserve
+  // ======================================================================
+  (() => {
+    const R = document.getElementById("demo-grille");
+    const P = ["géo", "hydro", "psycho", "neuro", "socio", "xylo", "astro"];
+    const S = ["logie", "graphie", "pathie", "phone", "thérapie", "phobie", "sphère"];
+    const DEPART = {
+      exemplaires: { géo: 2, hydro: 3, psycho: 2, neuro: 1, socio: 1, xylo: 1, astro: 1, logie: 2, graphie: 2, pathie: 1, phone: 1, thérapie: 1, phobie: 1, sphère: 1 },
+      connus: ["géo|logie", "géo|graphie", "hydro|logie", "psycho|logie", "socio|logie", "xylo|phone"],
+      tentees: ["géo|pathie", "xylo|logie", "astro|graphie", "neuro|phone", "socio|phobie"],
+    };
+    let exemplaires, etats, connus, vue = "grille", choix = null, dernier = null;
+    const zone = (r) => R.querySelector(`[data-role="${r}"]`);
+    const msg = zone("msg");
+    const t = table(R, { exemplaires: new Proxy({}, { get: (_, f) => exemplaires[f] }), poser: () => { choix = null; dessiner(); } });
+
+    const init = () => {
+      exemplaires = { ...DEPART.exemplaires };
+      connus = new Set(DEPART.connus);
+      etats = new Map([...DEPART.connus.map((k) => [k, "connu"]), ...DEPART.tentees.map((k) => [k, "echec"])]);
+      choix = null; dernier = null; msg.replaceChildren(); t.vider(); dessiner();
+    };
+    const lire = (k) => {
+      const [p, s] = k.split("|");
+      const m = motDe(p, s);
+      const e = etats.get(k);
+      if (e === "connu" || e === "decouverte") return [el("b", {}, m.m), ` · ${guil(m.l)}`];
+      if (e === "echec") return [chip(p), " + ", chip(s), ` · déjà tentée, aucune recette`];
+      if (!exemplaires[p] || !exemplaires[s]) return [chip(p), " + ", chip(s), ` · plus d’exemplaire`];
+      return [chip(p), " + ", chip(s), " · à tenter"];
+    };
+    function dessiner() {
+      const g = zone("grille");
+      const tete = el("tr", {}, el("th", { scope: "col" }, el("span", { class: "sr-only" }, "Préfixes et suffixes")));
+      S.forEach((s) => tete.append(el("th", { scope: "col" }, chip(s, exemplaires[s] ? "" : "is-spent"), el("span", { class: "pr-hcount" }, `×${exemplaires[s]}`))));
+      const corps = el("tbody");
+      P.forEach((p) => {
+        const ligne = el("tr", {}, el("th", { scope: "row" }, chip(p, exemplaires[p] ? "" : "is-spent"), el("span", { class: "pr-hcount" }, `×${exemplaires[p]}`)));
+        S.forEach((s) => {
+          const k = `${p}|${s}`;
+          const e = etats.get(k) || "vide";
+          const epuise = e === "vide" && (!exemplaires[p] || !exemplaires[s]);
+          const etiq = e === "connu" || e === "decouverte" ? `${motDe(p, s).m}, ${e === "connu" ? "déjà au codex" : "découverte du jour"}`
+            : `${etiquette(p)} plus ${etiquette(s)}, ${e === "echec" ? "déjà tentée" : epuise ? "plus d’exemplaire" : "à tenter"}`;
+          const cell = el("button", {
+            class: `pr-cell${k === dernier ? " is-new" : ""}`, type: "button", disabled: epuise, "aria-label": etiq,
+            "aria-pressed": String(choix === k), title: etiq,
+            onclick: () => { choix = k; t.remplir(p, s); dessiner(); annoncer(k); },
+            onmouseenter: () => { zone("readout").replaceChildren(...lire(k)); },
+            onfocus: () => { zone("readout").replaceChildren(...lire(k)); },
+          }, el("span", { class: "pr-dot", "data-etat": e, "aria-hidden": "true" }));
+          ligne.append(el("td", {}, cell));
+        });
+        corps.append(ligne);
+      });
+      g.replaceChildren(el("table", { class: "pr-grid" }, el("thead", {}, tete), corps));
+      // Vue liste : la réserve telle qu’aujourd’hui.
+      zone("liste").replaceChildren(...[...P, ...S].map((f) => {
+        const libre = exemplaires[f] - t.enUsage(f);
+        return brique(f, {
+          compte: exemplaires[f], bouton: true, etat: !exemplaires[f] ? "is-spent" : libre <= 0 ? "is-on" : "",
+          onclick: () => { if (!exemplaires[f]) { message(msg, "presque", `Plus aucun exemplaire de `, chip(f), `. Ouvrez un pli pour en retrouver.`); return; } t.poserBrique(f); choix = null; dessiner(); },
+        });
+      }));
+      zone("grille").hidden = vue !== "grille";
+      zone("liste").hidden = vue !== "liste";
+      R.querySelectorAll(".pr-legend, [data-role='readout']").forEach((n) => { n.hidden = vue !== "grille"; });
+      const tentees = [...etats.values()].length;
+      const trouves = [...etats.values()].filter((e) => e === "connu" || e === "decouverte").length;
+      zone("stats").replaceChildren(
+        el("span", {}, "Paires tentées ", el("b", {}, `${tentees} / ${P.length * S.length}`)),
+        el("span", {}, "Mots au codex ", el("b", {}, String(trouves))),
+      );
+      if (!zone("readout").childNodes.length) zone("readout").textContent = "Survolez ou touchez une case.";
+    }
+    const annoncer = (k) => {
+      const e = etats.get(k);
+      if (e === "echec") message(msg, "echec", "Déjà tentée\u00a0: aucune recette connue. Rien n’est perdu à réessayer.");
+      else if (e === "connu" || e === "decouverte") message(msg, "connu", el("em", {}, motDe(...k.split("|")).m), " est déjà dans votre codex.");
+      else msg.replaceChildren();
+    };
+    zone("fusion").addEventListener("click", () => {
+      const [a, b] = t.cases;
+      if (!a || !b) return;
+      const r = resoudre(a, b, connus);
+      if (r.etat === "presque") {
+        message(msg, "presque", "Bonnes briques… mais l’ordre compte.", el("button", { type: "button", onclick: () => { t.inverser(); msg.replaceChildren(); } }, "Inverser"));
+        return;
+      }
+      const k = `${a}|${b}`;
+      if (r.etat === "connu") { message(msg, "connu", el("em", {}, r.m.m), " est déjà dans votre codex. Rien n’est consommé."); return; }
+      if (r.etat === "echec") {
+        const deja = etats.get(k) === "echec";
+        if (brq(a).n === "p" && brq(b).n === "s") etats.set(k, "echec");
+        message(msg, "echec", deja ? "Toujours aucune recette connue. La grille s’en souvenait." : "Aucune recette connue. Rien n’est perdu.");
+        t.vider(); choix = null; dessiner(); return;
+      }
+      exemplaires[a] -= 1; exemplaires[b] -= 1; connus.add(k); etats.set(k, "decouverte"); dernier = k;
+      message(msg, "decouverte", "Nouvelle découverte\u00a0: ", el("em", {}, r.m.m), `\u00a0! ${guil(r.m.l)}. −1 `, chip(a), " et −1 ", chip(b), ".");
+      t.vider(); choix = null; dessiner();
+    });
+    zone("vider").addEventListener("click", () => { t.vider(); choix = null; msg.replaceChildren(); dessiner(); });
+    zone("reset").addEventListener("click", init);
+    R.querySelectorAll("[data-vue]").forEach((b) => b.addEventListener("click", () => {
+      vue = b.dataset.vue;
+      R.querySelectorAll("[data-vue]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      dessiner();
+    }));
+    init();
+  })();
+
+  // ======================================================================
+  // Démo 2 : le carré
+  // ======================================================================
+  (() => {
+    const R = document.getElementById("demo-carre");
+    const CARRES = {
+      deux: { lignes: ["géo", "hydro"], colonnes: ["logie", "graphie"], vides: ["hydro|graphie"],
+        exemplaires: { géo: 2, hydro: 2, thermo: 1, logie: 1, graphie: 2, sphère: 1 } },
+      trois: { lignes: ["anthropo", "hydro", "zoo"], colonnes: ["logue", "morphe", "phobie"], vides: ["hydro|morphe", "zoo|phobie"],
+        exemplaires: { anthropo: 1, hydro: 1, zoo: 1, logue: 1, morphe: 1, phobie: 1 } },
+    };
+    let cle = "deux", exemplaires, connus, trouvees, nouveau = null;
+    const zone = (r) => R.querySelector(`[data-role="${r}"]`);
+    const msg = zone("msg");
+    const difficile = document.getElementById("carre-difficile");
+    const t = table(R, { exemplaires: new Proxy({}, { get: (_, f) => exemplaires[f] }), poser: () => dessiner() });
+    const C = () => CARRES[cle];
+
+    const init = () => {
+      const c = C();
+      exemplaires = { ...c.exemplaires };
+      trouvees = new Set();
+      connus = new Set();
+      c.lignes.forEach((p) => c.colonnes.forEach((s) => { const k = `${p}|${s}`; if (!c.vides.includes(k)) connus.add(k); }));
+      nouveau = null; msg.replaceChildren(); t.vider(); dessiner();
+    };
+    function carte(p, s) {
+      const k = `${p}|${s}`;
+      const c = C();
+      const m = motDe(p, s);
+      const vide = c.vides.includes(k) && !trouvees.has(k);
+      if (vide) {
+        return el("div", { class: "mini locked", style: "--tc: var(--paper-2); --tt: var(--ink-2)", "aria-label": "Case à trouver" },
+          el("span", { class: "m-top" }, el("span", {}, "À trouver")), el("span", { class: "m-q", "aria-hidden": "true" }, "?"));
+      }
+      const fiche = el("div", { class: `mini${k === nouveau ? " is-new" : ""}`, style: "--tc: var(--fixed-ink); --tt: #f3eee3" },
+        el("span", { class: "m-top" }, el("span", {}, "Mot"), el("span", {}, FASCICULES[m.fa])));
+      if (difficile.checked && k !== nouveau) {
+        fiche.append(el("span", { class: "m-def" }, m.d), el("span", { class: "m-foot" }, el("span", {}, "Définition")));
+        fiche.setAttribute("aria-label", `Définition\u00a0: ${m.d}`);
+      } else {
+        fiche.append(el("span", { class: "m-word" }, motColore(m, p, s)), el("span", { class: "m-lit" }, guil(m.l)));
+      }
+      return fiche;
+    }
+    function dessiner() {
+      const c = C();
+      const grille = zone("carre");
+      grille.style.setProperty("--n", c.colonnes.length);
+      grille.replaceChildren(...c.lignes.flatMap((p) => c.colonnes.map((s) => carte(p, s))));
+      const faites = c.vides.filter((k) => trouvees.has(k)).length;
+      zone("consigne").textContent = c.vides.length > 1 ? "Complétez les deux cases du carré." : "Complétez le carré.";
+      const prog = zone("progres");
+      prog.textContent = faites === c.vides.length ? "Faite" : `${faites} / ${c.vides.length}`;
+      prog.classList.toggle("is-done", faites === c.vides.length);
+      const formes = Object.keys(exemplaires).sort((a, b) => (brq(a).n === brq(b).n ? 0 : brq(a).n === "p" ? -1 : 1));
+      zone("reserve").replaceChildren(...formes.map((f) => {
+        const libre = exemplaires[f] - t.enUsage(f);
+        return brique(f, {
+          compte: exemplaires[f], bouton: true, etat: !exemplaires[f] ? "is-spent" : libre <= 0 ? "is-on" : "",
+          onclick: () => {
+            if (!exemplaires[f]) { message(msg, "presque", "Plus aucun exemplaire de ", chip(f), ". Ouvrez un pli pour en retrouver."); return; }
+            if (!t.poserBrique(f)) message(msg, "presque", "La table est pleine\u00a0: touchez une brique posée pour la retirer.");
+            else dessiner();
+          },
+        });
+      }));
+    }
+    zone("fusion").addEventListener("click", () => {
+      const [a, b] = t.cases;
+      if (!a || !b) return;
+      const r = resoudre(a, b, connus);
+      if (r.etat === "presque") {
+        message(msg, "presque", "Bonnes briques… mais l’ordre compte.", el("button", { type: "button", onclick: () => { t.inverser(); msg.replaceChildren(); } }, "Inverser"));
+        return;
+      }
+      if (r.etat === "connu") { message(msg, "connu", el("em", {}, r.m.m), " est déjà dans votre codex. Rien n’est consommé."); return; }
+      if (r.etat === "echec") { message(msg, "echec", "Aucune recette connue. Rien n’est perdu."); return; }
+      const k = `${a}|${b}`;
+      exemplaires[a] -= 1; exemplaires[b] -= 1; connus.add(k);
+      const c = C();
+      if (c.vides.includes(k)) {
+        trouvees.add(k); nouveau = k;
+        const fini = c.vides.every((v) => trouvees.has(v));
+        message(msg, "decouverte", "Nouvelle découverte\u00a0: ", el("em", {}, r.m.m), `\u00a0! ${guil(r.m.l)}. `, fini ? "Carré complété\u00a0: la quête du jour est faite." : "Une case de plus.");
+      } else {
+        message(msg, "decouverte", "Nouvelle découverte hors du carré\u00a0: ", el("em", {}, r.m.m), `\u00a0! ${guil(r.m.l)}. La table ne refuse jamais un vrai mot.`);
+      }
+      t.vider(); dessiner();
+    });
+    zone("vider").addEventListener("click", () => { t.vider(); msg.replaceChildren(); dessiner(); });
+    zone("reset").addEventListener("click", init);
+    difficile.addEventListener("change", dessiner);
+    R.querySelectorAll("[data-carre]").forEach((b) => b.addEventListener("click", () => {
+      cle = b.dataset.carre;
+      R.querySelectorAll("[data-carre]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      init();
+    }));
+    init();
+  })();
+
+  // ======================================================================
+  // Démo 3 : le pli à choix
+  // ======================================================================
+  (() => {
+    const R = document.getElementById("demo-pli");
+    const zone = (r) => R.querySelector(`[data-role="${r}"]`);
+    // Équilibrage du dépôt Content (ludique/equilibrage.json, version 2026-10-02a).
+    const POIDS = { commune: 62, peu_commune: 26, rare: 10 };
+    const LEGENDAIRE = 0.012, BASE = 2, GARANTIE = 6;
+    const DOUBLON = { commune: 1, peu_commune: 2, rare: 4, legendaire: 10 };
+    const PLEINE = { commune: 2, peu_commune: 4, rare: 8, legendaire: 20 };
+    const POOL = Object.values(D.argile).filter((b) => b.r !== "legendaire");
+    const PLURIEL = { commune: "communes", peu_commune: "peu communes", rare: "rares" };
+    const DEPART = { géo: 3, hydro: 1, thermo: 0, astro: 2, logie: 5, graphie: 0, mètre: 2, logue: 1, phone: 1 };
+    let reserve, encre, sansNouveaute, phase;
+    const somme = POOL.reduce((t, b) => t + POIDS[b.r], 0);
+    const q = (b) => POIDS[b.r] / somme;
+    // Chance qu’une brique figure parmi les deux proposées : tirage sans remise, légendaire à part (1,2 % par pli).
+    const proposee = (b) => {
+      const qi = q(b);
+      const deux = qi + POOL.filter((x) => x !== b).reduce((t, x) => t + (q(x) * qi) / (1 - q(x)), 0);
+      return LEGENDAIRE * qi + (1 - LEGENDAIRE) * deux;
+    };
+    const tirer = (exclus, filtre = () => true) => {
+      let c = POOL.filter((b) => !exclus.includes(b) && filtre(b));
+      if (!c.length) c = POOL.filter((b) => !exclus.includes(b));
+      let x = Math.random() * c.reduce((t, b) => t + POIDS[b.r], 0);
+      for (const b of c) { x -= POIDS[b.r]; if (x <= 0) return b; }
+      return c[c.length - 1];
+    };
+    const connue = (b) => b.f in reserve;
+    const gouttes = (n) => `+${n} goutte${n > 1 ? "s" : ""}`;
+    const etatDe = (b) => {
+      if (b.legendaire) return { texte: "Nouvelle légendaire", encre: 0 };
+      if (!connue(b)) return { texte: "Nouvelle brique", encre: 0 };
+      const n = reserve[b.f];
+      if (n >= 5) return { texte: `Réserve pleine · ${gouttes(PLEINE[b.r])}`, encre: PLEINE[b.r] };
+      return { texte: `${n === 0 ? "De retour\u00a0! " : ""}+1 exemplaire · ×${n + 1} / 5 · ${gouttes(DOUBLON[b.r])}`, encre: DOUBLON[b.r] };
+    };
+    const init = () => { reserve = { ...DEPART }; encre = 12; sansNouveaute = 2; phase = "ferme"; scene(); cotes(); };
+    function cotes() {
+      zone("encre").textContent = String(encre);
+      const parRarete = Object.keys(POIDS).map((r) => {
+        const membres = POOL.filter((b) => b.r === r);
+        return el("li", {}, rarete(r), el("span", {}, `${membres.length} ${PLURIEL[r]}`), el("b", {}, `${pct(proposee(membres[0]))} chacune`));
+      });
+      parRarete.push(el("li", {}, rarete("legendaire"), el("span", {}, "Légendaires"), el("b", {}, `${pct(LEGENDAIRE)} par pli`)));
+      zone("chances").replaceChildren(...parRarete);
+      const jauge = zone("jauge");
+      jauge.firstElementChild.style.width = `${(sansNouveaute / (GARANTIE - 1)) * 100}%`;
+      jauge.setAttribute("aria-label", `${sansNouveaute} plis sans nouveauté sur ${GARANTIE - 1}`);
+      zone("jauge-txt").textContent = sansNouveaute >= GARANTIE - 1
+        ? "Ce pli proposera au moins une brique nouvelle."
+        : sansNouveaute === 0
+          ? `Le dernier pli proposait une nouveauté. La suivante viendra au plus tard au ${GARANTIE}ᵉ pli.`
+          : `${sansNouveaute} pli${sansNouveaute > 1 ? "s" : ""} sans nouveauté\u00a0: au plus tard au ${GARANTIE}ᵉ, l’une des deux est nouvelle.`;
+      const connues = POOL.filter(connue);
+      zone("reserve").replaceChildren(
+        ...connues.sort((a, b) => (a.n === b.n ? 0 : a.n === "p" ? -1 : 1)).map((b) => {
+          const c = el("span", { class: `bchip${reserve[b.f] ? "" : " is-spent"}`, "data-kind": b.n === "p" ? "prefixe" : "suffixe" }, etiquette(b.f));
+          c.append(el("small", {}, reserve[b.f] ? `×${reserve[b.f]}` : "épuisée"));
+          return c;
+        }),
+        el("span", { class: "bchip missing" }, `${POOL.length - connues.length} à trouver`),
+      );
+    }
+    const pli = () => {
+      const seau = svgEl("svg", { viewBox: "0 0 150 200", "aria-hidden": "true" });
+      // Jaquette Argile : des coins pressés dans la tablette, en Encre sur Ambre clair.
+      const coins = [[28, 40], [56, 34], [86, 46], [114, 36], [36, 150], [70, 160], [104, 148], [30, 120], [118, 118]];
+      coins.forEach(([x, y], i) => seau.append(svgEl("path", { d: `M${x} ${y} l14 -6 l-4 16 z`, fill: "currentColor", transform: `rotate(${(i * 37) % 90 - 30} ${x} ${y})` })));
+      return el("div", { class: "pr-pli", "data-role": "pli" }, seau, el("span", { class: "pr-pli-seal", "aria-hidden": "true" }, "ÉL"), el("span", { class: "pr-pli-name" }, "Argile"));
+    };
+    function scene() {
+      const s = zone("scene");
+      if (phase === "ferme") {
+        s.replaceChildren(pli(), el("button", { class: "btn btn-primary", type: "button", onclick: ouvrir }, "Ouvrir le pli"),
+          el("p", { class: "pr-small" }, "Deux briques s’offrent à vous. Gardez-en une. Dans la démo, les plis sont illimités."));
+      }
+    }
+    function ouvrir() {
+      const p = zone("scene").querySelector('[data-role="pli"]');
+      const suite = () => {
+        let a, b;
+        if (Math.random() < LEGENDAIRE) { a = { f: "légendaire", n: "p", g: "masquée dans cette démo", r: "legendaire", legendaire: true }; b = tirer([]); }
+        else {
+          a = sansNouveaute >= GARANTIE - 1 ? tirer([], (x) => !connue(x)) : tirer([]);
+          b = tirer([a]);
+        }
+        proposer([a, b].sort(() => Math.random() - 0.5));
+      };
+      if (calme.matches || !p) { suite(); return; }
+      p.classList.add("is-shaking");
+      setTimeout(suite, 420);
+    }
+    function offre(b, autre) {
+      const e = etatDe(b);
+      const titre = b.legendaire ? "la légendaire" : etiquette(b.f);
+      const corps = b.legendaire
+        ? el("span", { class: "brick pr-brick pr-secret" }, el("span", { class: "b-label" }, "?"), el("span", { class: "b-meta" }, "nom masqué"))
+        : el("span", { class: "brick pr-brick", "data-kind": b.n === "p" ? "prefixe" : "suffixe" }, el("span", { class: "b-label" }, etiquette(b.f)), el("span", { class: "b-meta" }, b.g));
+      return el("div", { class: "pr-offer", "data-f": b.f },
+        el("span", { class: "pr-rarity" }, rarete(b.r), RAR[b.r].label),
+        corps,
+        el("span", { class: "pr-origin" }, b.legendaire ? "Son nom reste secret ici." : `du ${b.e.langue} ${b.e.forme} ${guil(b.e.glose)}`),
+        el("span", { class: "pr-state" }, e.texte),
+        el("button", { class: "btn btn-secondary", type: "button", onclick: () => garder(b, autre) }, `Garder ${titre}`));
+    }
+    function proposer([a, b]) {
+      phase = "choix";
+      const s = zone("scene");
+      s.replaceChildren(el("div", { class: "pr-offers" }, offre(a, b), offre(b, a)),
+        el("p", { class: "pr-small" }, "L’autre brique deviendra de l’encre, au barème d’un doublon."));
+    }
+    function garder(b, autre) {
+      const offres = [...zone("scene").querySelectorAll(".pr-offer")];
+      const e = etatDe(b);
+      const nouvelle = b.legendaire || !connue(b) || !connue(autre);
+      if (!b.legendaire) reserve[b.f] = Math.min(5, (reserve[b.f] ?? 0) + 1);
+      const restante = DOUBLON[autre.r];
+      const gagne = BASE + e.encre + restante;
+      encre += gagne;
+      sansNouveaute = nouvelle ? 0 : sansNouveaute + 1;
+      offres.forEach((o) => {
+        const garde = o.dataset.f === b.f;
+        o.classList.add(garde ? "is-kept" : "is-left");
+        o.querySelector(".btn").replaceWith(el("span", { class: "pr-state" }, garde ? "Gardée" : `${gouttes(restante)} d’encre`));
+      });
+      zone("scene").querySelector(".pr-small").replaceWith(
+        el("p", { class: "pr-small" }, `${gouttes(gagne)} en tout, dont ${BASE} pour le pli.`),
+        el("button", { class: "btn btn-primary", type: "button", onclick: () => { phase = "ferme"; scene(); } }, "Ouvrir un autre pli"));
+      cotes();
+    }
+    zone("reset").addEventListener("click", init);
+    init();
+  })();
+
+  // ======================================================================
+  // Démo 4 : la constellation
+  // ======================================================================
+  (() => {
+    const R = document.getElementById("demo-constellation");
+    const zone = (r) => R.querySelector(`[data-role="${r}"]`);
+    const svg = zone("graphe");
+    const curseur = document.getElementById("const-jour");
+    const W = 820, H = 560;
+    // Ordre de découverte simulé : Rosette d’abord, Argile une fois son 2ᵉ jalon (25 mots) atteint (ADR 0069).
+    let graine = 7;
+    const hasard = () => { graine = (graine * 16807) % 2147483647; return graine / 2147483647; };
+    const melanger = (l) => l.map((x) => [hasard() + ({ facile: 0, moyen: 0.6, difficile: 1.2 }[x.d] || 0.6), x]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
+    const ros = melanger(D.constellation.filter((m) => m.fa === 1));
+    const arg = melanger(D.constellation.filter((m) => m.fa === 2));
+    const ordre = [...ros.slice(0, 25)];
+    let i = 25, j = 0;
+    while (i < ros.length || j < arg.length) { if (j < arg.length) ordre.push(arg[j++]); if (i < ros.length) ordre.push(ros[i++]); }
+    const PAR_JOUR = 1.3;
+    curseur.max = String(Math.ceil(ordre.length / PAR_JOUR));
+    // Familles : tous les mots (non légendaires) de Rosette et Argile formés sur chaque brique.
+    const famille = new Map(), familleRosette = new Map();
+    D.constellation.forEach((m) => {
+      [m.p, m.s].forEach((f) => {
+        famille.set(f, (famille.get(f) || 0) + 1);
+        if (m.fa === 1) familleRosette.set(f, (familleRosette.get(f) || 0) + 1);
+      });
+    });
+    // Argile se débloque au 2ᵉ jalon de Rosette : avant, ses mots n’entrent dans aucun total (ADR 0069).
+    const totalDe = (f, k) => (k >= 25 ? famille.get(f) : familleRosette.get(f) || 0);
+    // Disposition : forces calculées une fois sur tout le graphe (rien ne saute quand un mot arrive), puis séparation des briques qui se chevauchent.
+    const taille = (d) => 12 + Math.min(d, 10) * 0.7;
+    const boite = (f, d) => ({ w: etiquette(f).length * taille(d) * 0.56 + 16, h: taille(d) + 12 });
+    const noeuds = [...famille.keys()].map((f, k) => ({ f, x: W / 2 + Math.cos(k * 2.4) * (60 + k * 6), y: H / 2 + Math.sin(k * 2.4) * (50 + k * 5), ...boite(f, famille.get(f)) }));
+    const parForme = new Map(noeuds.map((n) => [n.f, n]));
+    const liens = D.constellation.map((m) => [parForme.get(m.p), parForme.get(m.s)]);
+    const borner = (n) => {
+      n.x = Math.min(W - n.w / 2 - 6, Math.max(n.w / 2 + 6, n.x));
+      n.y = Math.min(H - n.h / 2 - 14, Math.max(n.h / 2 + 6, n.y));
+    };
+    const K = Math.sqrt((W * H) / noeuds.length) * 0.82;
+    let temp = W / 6;
+    for (let it = 0; it < 500; it++) {
+      noeuds.forEach((n) => { n.dx = (W / 2 - n.x) * 0.04; n.dy = (H / 2 - n.y) * 0.06; });
+      for (let a = 0; a < noeuds.length; a++) for (let b = a + 1; b < noeuds.length; b++) {
+        const u = noeuds[a], v = noeuds[b], dx = u.x - v.x, dy = u.y - v.y, d = Math.max(Math.hypot(dx, dy), 1), f = (K * K) / d;
+        u.dx += (dx / d) * f; u.dy += (dy / d) * f; v.dx -= (dx / d) * f; v.dy -= (dy / d) * f;
+      }
+      for (const [u, v] of liens) {
+        const dx = u.x - v.x, dy = u.y - v.y, d = Math.max(Math.hypot(dx, dy), 1), f = (d * d) / K / 3;
+        u.dx -= (dx / d) * f; u.dy -= (dy / d) * f; v.dx += (dx / d) * f; v.dy += (dy / d) * f;
+      }
+      for (const n of noeuds) {
+        const l = Math.max(Math.hypot(n.dx, n.dy), 0.01), pas = Math.min(l, temp);
+        n.x += (n.dx / l) * pas; n.y += (n.dy / l) * pas; borner(n);
+      }
+      temp = Math.max(temp * 0.985, 1);
+    }
+    for (let it = 0; it < 300; it++) {
+      for (let a = 0; a < noeuds.length; a++) for (let b = a + 1; b < noeuds.length; b++) {
+        const u = noeuds[a], v = noeuds[b];
+        const ox = (u.w + v.w) / 2 + 8 - Math.abs(u.x - v.x), oy = (u.h + v.h) / 2 + 16 - Math.abs(u.y - v.y);
+        if (ox <= 0 || oy <= 0) continue;
+        if (ox < oy) { const e = ((u.x < v.x ? -1 : 1) * ox) / 2; u.x += e; v.x -= e; }
+        else { const e = ((u.y < v.y ? -1 : 1) * oy) / 2; u.y += e; v.y -= e; }
+      }
+      noeuds.forEach(borner);
+    }
+    const gLiens = svgEl("g"), gNoeuds = svgEl("g");
+    svg.append(gLiens, gNoeuds);
+    let focus = null, vus = new Set();
+    const dessiner = (k, anime) => {
+      const trouves = ordre.slice(0, k);
+      const dernier = trouves[trouves.length - 1];
+      const degre = new Map();
+      trouves.forEach((m) => { degre.set(m.p, (degre.get(m.p) || 0) + 1); degre.set(m.s, (degre.get(m.s) || 0) + 1); });
+      gLiens.replaceChildren(...trouves.map((m) => {
+        const u = parForme.get(m.p), v = parForme.get(m.s);
+        const hl = focus && (m.p === focus || m.s === focus);
+        return svgEl("line", { class: `e${hl ? " is-hl" : ""}${m === dernier ? " is-last" : ""}`, x1: u.x, y1: u.y, x2: v.x, y2: v.y });
+      }));
+      const nes = [];
+      gNoeuds.replaceChildren(...noeuds.filter((n) => degre.has(n.f)).map((n) => {
+        const d = degre.get(n.f), tot = Math.max(totalDe(n.f, k), d);
+        const lab = etiquette(n.f);
+        const { w, h } = boite(n.f, d);
+        const voisin = focus && (n.f === focus || trouves.some((m) => (m.p === focus && m.s === n.f) || (m.s === focus && m.p === n.f)));
+        const place = svgEl("g", { transform: `translate(${n.x} ${n.y})` });
+        const g = svgEl("g", { class: `n${voisin ? " is-hl" : ""}${anime && !vus.has(n.f) ? " is-born" : ""}`, tabindex: "0", role: "button",
+          "aria-label": `${lab}, ${d} mot${d > 1 ? "s" : ""} formé${d > 1 ? "s" : ""} sur ${tot}` });
+        place.append(g);
+        g.append(svgEl("rect", { class: "hit", x: -w / 2 - 4, y: -22, width: w + 8, height: 44 }));
+        g.append(svgEl("rect", { class: "b", x: -w / 2, y: -h / 2, width: w, height: h, rx: 6, fill: brq(n.f).n === "p" ? "var(--c-prefix)" : "var(--c-suffix)" }));
+        const tx = svgEl("text", { "text-anchor": "middle", "dominant-baseline": "central", "font-size": taille(d) }); tx.textContent = lab; g.append(tx);
+        g.append(svgEl("rect", { class: "track", x: -w / 2, y: h / 2 + 4, width: w, height: 4.5, rx: 2.25 }));
+        g.append(svgEl("rect", { class: "fill", x: -w / 2, y: h / 2 + 4, width: (w * d) / tot, height: 4.5, rx: 2.25 }));
+        const choisir = () => { focus = focus === n.f ? null : n.f; dessiner(Number(curseur.dataset.k), false); infos(); };
+        g.addEventListener("click", choisir);
+        g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); choisir(); } });
+        nes.push(n.f);
+        return place;
+      }));
+      nes.forEach((f) => vus.add(f));
+      svg.classList.toggle("has-focus", !!focus);
+      const jour = Number(curseur.value);
+      zone("jour-txt").textContent = `Jour ${jour} · ${trouves.length} mots · ${degre.size} briques`;
+      curseur.dataset.k = String(k);
+      infos(trouves, dernier);
+    };
+    function infos(trouves = ordre.slice(0, Number(curseur.dataset.k)), dernier = trouves[trouves.length - 1]) {
+      const z = zone("info");
+      if (focus) {
+        const siens = trouves.filter((m) => m.p === focus || m.s === focus);
+        const tot = Math.max(totalDe(focus, trouves.length), siens.length);
+        const barre = el("span", { class: "pr-bar", "aria-hidden": "true" }, el("i", { style: `width:${(siens.length / tot) * 100}%` }));
+        z.replaceChildren(el("p", {}, chip(focus), ` ${guil(brq(focus).g)} · ${siens.length} mot${siens.length > 1 ? "s" : ""} formé${siens.length > 1 ? "s" : ""} sur ${tot}`, barre),
+          el("p", { style: "margin-top:6px" }, siens.map((m) => m.m).join(", ") || "Aucun mot encore.", tot > siens.length ? ` · ${tot - siens.length} encore à former.` : " · Famille complète."));
+        return;
+      }
+      const top = [...famille.keys()].map((f) => [f, trouves.filter((m) => m.p === f || m.s === f).length]).sort((a, b) => b[1] - a[1])[0];
+      z.replaceChildren(el("p", {}, "Dernière découverte\u00a0: ", dernier ? el("em", {}, dernier.m) : "aucune", dernier ? ` ${guil(dernier.l)}` : "", "."),
+        el("p", { style: "margin-top:6px" }, "Plus grande famille\u00a0: ", chip(top[0]), ` ${top[1]} mots. Touchez une brique pour voir sa famille.`));
+    }
+    const versK = (jour) => Math.min(ordre.length, Math.max(1, Math.round(jour * PAR_JOUR)));
+    curseur.addEventListener("input", () => dessiner(versK(Number(curseur.value)), true));
+    let minuterie = null;
+    zone("rejouer").addEventListener("click", () => {
+      clearInterval(minuterie); focus = null; vus = new Set();
+      if (calme.matches) { curseur.value = curseur.max; dessiner(ordre.length, false); return; }
+      let jour = 1;
+      minuterie = setInterval(() => {
+        curseur.value = String(jour); dessiner(versK(jour), true);
+        if (++jour > Number(curseur.max)) clearInterval(minuterie);
+      }, 110);
+    });
+    vus = new Set();
+    dessiner(versK(Number(curseur.value)), false);
+  })();
+})();
+</script>
+</body>
+</html>
