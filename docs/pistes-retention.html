@@ -10,6 +10,7 @@
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site-nav.css">
   <link rel="stylesheet" href="assets/etymo.css">
+  <link rel="stylesheet" href="assets/maquettes.css">
   <style>
     /* Page de travail : un texte par piste, sa démo à côté (empilés sous 980 px). Jetons et composants : etymo.css. */
     .pr-intro-note { margin-top: 14px; color: var(--ink-3); font-size: 14px; }
@@ -60,6 +61,27 @@
     @media (max-width: 980px) {
       .pr-piste { grid-template-columns: minmax(0, 1fr); }
     }
+
+    /* Mise en situation de la constellation : la coque des maquettes (maquettes.css), à l’échelle réelle de l’App. */
+    .pr-situation { margin-top: clamp(32px, 4vw, 48px); }
+    .pr-situation-cadres { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 28px; }
+    .pr-situation figure { display: grid; gap: 10px; min-width: 0; margin: 0; }
+    .pr-situation figcaption { color: var(--ink-3); font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pr-situation-defile { max-width: 100%; overflow-x: auto; padding: 0 10px 10px 0; }
+    .pr-situation .mq { font-size: 13px; }
+    .pr-situation .mq-phone { width: 390px; max-width: calc(100vw - 48px); height: 820px; }
+    .pr-situation .mq-desk { width: 820px; min-width: 820px; height: 820px; }
+    .pr-situation .mq-sb, .pr-situation .mq-mono, .pr-situation .mq-bar span { font-size: 12px; }
+    .pr-situation .mq-views { gap: 18px; overflow-x: auto; scrollbar-width: none; }
+    .pr-situation .mq-views span { font-size: 13px; }
+    .pr-situation .mq-tabs { grid-template-columns: repeat(5, 1fr); }
+    .pr-situation .mq-tabs > span, .pr-situation .mq-rail > span:not(.mq-seal) { font-size: 11px; }
+    .pr-situation .mq-bd { overflow-y: auto; overscroll-behavior: contain; }
+    /* Dans l’App, la vue n’a ni titre de démo, ni curseur des jours, ni légende de démo. */
+    .pr-situation [data-constellation] { display: grid; gap: 12px; min-width: 0; }
+    :is(#situation-mobile, #situation-ordinateur) :is(.pr-demo-head, .pr-constellation-temps, .pr-constellation-resume, .pr-legend, .pr-constellation-choix > .pr-seg:not(.pr-constellation-vues)) { display: none; }
+    .pr-situation [data-constellation] .pr-constellation-panneau { margin: 0; }
+    .pr-situation .pr-demo[data-constellation] { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
     .pr-list { display: grid; gap: 10px; max-width: 78ch; margin: 0; padding: 0; list-style: none; }
     .pr-list li { position: relative; padding-left: 22px; color: var(--ink-2); font-size: 15px; }
     .pr-list li::before { position: absolute; top: 0.62em; left: 4px; width: 8px; height: 8px; border: 1.5px solid var(--ink); border-radius: 50%; content: ""; }
@@ -132,8 +154,7 @@
     @media (prefers-reduced-motion: reduce) { .pr-slot .brick, .pr-shake { animation: none; } }
 
     /* Démo : memoire. */
-/* Démo de la piste 1 : la mémoire des essais, en pastilles sur la feuille de réserve (ou en carnet). */
-#demo-memoire .pr-memoire-vue { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+/* Démo de la piste 1 : la mémoire des essais, briques déjà essayées grisées en fin de réserve. */
 
 /* Table : seule la brique qui arrive se pose en rebond ; la case visée prend la teinte de la nature attendue. */
 #demo-memoire .pr-slot .brick { animation: none; }
@@ -165,32 +186,16 @@
 /* Plateau : une marge intérieure à gauche, sur chaque brique, loge la pastille sans rien faire bouger quand elle apparaît. */
 #demo-memoire .pr-memoire-plateau { margin: 0; padding: 4px 0 0; list-style: none; }
 #demo-memoire .pr-memoire-plateau li { display: flex; }
-#demo-memoire .pr-memoire-plateau .brick.pr-brick { padding-left: 25px; }
 
 /* Pastille d’essai : disque Gris encre (aucune recette) ou anneau Encre (presque). */
-#demo-memoire .pr-memoire-pastille { --bord: var(--ink); --creux: var(--paper); display: inline-block; flex: none; width: 12px; height: 12px; border: 1.5px solid var(--bord); border-radius: 50%; background: var(--creux); }
-#demo-memoire .pr-memoire-pastille[data-etat="echec"] { background: var(--ink-3); }
-#demo-memoire .pr-brick .pr-memoire-pastille { position: absolute; top: 12px; left: 7px; pointer-events: none; }
 /* Sur une brique vive, aux couleurs fixes : contour Encre fixe, et l’anneau garde son creux clair en nocturne. */
-#demo-memoire .pr-brick:not(.is-spent) .pr-memoire-pastille { --bord: var(--fixed-ink); }
-body.nocturne #demo-memoire .pr-brick:not(.is-spent) .pr-memoire-pastille { --creux: var(--ink); }
 
 /* Tous les exemplaires posés : la brique s’efface à 40 %, sa pastille reste nette. */
 #demo-memoire .brick.pr-brick.is-on { border-color: color-mix(in srgb, var(--fixed-ink) 40%, transparent); background: color-mix(in srgb, var(--c-prefix) 40%, transparent); opacity: 1; cursor: not-allowed; }
 #demo-memoire .brick.pr-brick.is-on[data-kind="suffixe"] { background: color-mix(in srgb, var(--c-suffix) 40%, transparent); }
-#demo-memoire .brick.pr-brick.is-on > :not(.pr-memoire-pastille) { opacity: 0.4; }
 #demo-memoire button.brick.is-on:hover, #demo-memoire button.brick.is-on:active { box-shadow: none; transform: none; }
 
 /* Légende et carnet, sous la consigne. */
-#demo-memoire .pr-memoire-aide { display: grid; gap: 8px; }
-#demo-memoire .pr-memoire-legende { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0; color: var(--ink-2); font-size: 14px; }
-#demo-memoire .pr-memoire-cle { display: inline-flex; align-items: center; gap: 6px; }
-#demo-memoire .pr-memoire-sep { color: var(--ink-3); }
-#demo-memoire .pr-memoire-carnet { display: grid; gap: 8px; padding: 10px 12px 12px; border: 1.5px dashed var(--line-strong); border-radius: 12px; background: var(--cream); }
-#demo-memoire .pr-memoire-carnet-titre { margin: 0; color: var(--ink); font-size: 14px; font-weight: 700; }
-#demo-memoire .pr-memoire-groupe { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
-#demo-memoire .pr-memoire-groupe .pr-label { min-width: 120px; font-size: 12px; }
-#demo-memoire .pr-memoire-partenaires { display: flex; flex-wrap: wrap; gap: 8px; }
 
 /* Pied : le codex du joueur et la parution simulée. */
 #demo-memoire .pr-memoire-pied { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
@@ -203,6 +208,13 @@ body.nocturne #demo-memoire .pr-brick:not(.is-spent) .pr-memoire-pastille { --cr
   #demo-memoire .pr-slot .brick.pr-memoire-arrivee { animation: none; }
   #demo-memoire .b-minus { animation: none; opacity: 1; transform: translateX(-50%); }
 }
+
+/* Déjà essayée avec la brique posée : fond neutre, libellé en Gris encre, sans ombre. Toujours jouable : ce n’est ni « désactivée » (40 %) ni « épuisée » (hachures). */
+#demo-memoire .brick.pr-brick.pr-memoire-essayee { border-color: var(--ink-3); background: var(--paper-2); box-shadow: none; }
+#demo-memoire .brick.pr-brick.pr-memoire-essayee .b-label { color: var(--ink-2); }
+#demo-memoire .brick.pr-brick.pr-memoire-essayee .b-meta { color: var(--ink-2); opacity: 1; }
+#demo-memoire button.brick.pr-brick.pr-memoire-essayee:hover { box-shadow: 3px 3px 0 var(--pop-shadow); }
+#demo-memoire .pr-memoire-intertitre { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink-2); font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
 
     /* Démo : collection. */
 /* Démo de la piste 2 : les quêtes de collection, onglet « Fascicules » de la page Quêtes. */
@@ -292,102 +304,102 @@ body.nocturne #demo-memoire .pr-brick:not(.is-spent) .pr-memoire-pastille { --cr
 /* Démo de la piste 3 : la constellation du codex, en deux rives. */
 
 /* Commandes : jour, vue, présentation. */
-#demo-constellation .pr-constellation-temps { display: grid; gap: 2px; }
-#demo-constellation .pr-constellation-glissiere { display: flex; flex-wrap: wrap; align-items: center; gap: 0 14px; }
-#demo-constellation .pr-constellation-glissiere input { flex: 1 1 200px; min-width: 0; height: 44px; margin: 0; accent-color: var(--ink); cursor: pointer; }
-#demo-constellation .pr-constellation-sortie { color: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
-#demo-constellation .pr-constellation-choix { display: flex; flex-wrap: wrap; gap: 10px 12px; min-width: 0; }
-#demo-constellation .pr-constellation-vues { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
-#demo-constellation .pr-seg button { flex: none; color: var(--ink); font-size: 12px; white-space: nowrap; }
-#demo-constellation .pr-seg button[aria-pressed="true"] { color: var(--paper); }
-#demo-constellation .pr-seg button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
-#demo-constellation .pr-constellation-resume em { font-family: var(--serif); }
-#demo-constellation .pr-legend .bchip { font-family: var(--serif); font-size: 13px; }
-#demo-constellation .pr-constellation-echantillon { flex: none; overflow: visible; }
-#demo-constellation .pr-constellation-fleche { color: var(--ink-2); font-family: var(--mono); font-size: 12px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-temps { display: grid; gap: 2px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-glissiere { display: flex; flex-wrap: wrap; align-items: center; gap: 0 14px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-glissiere input { flex: 1 1 200px; min-width: 0; height: 44px; margin: 0; accent-color: var(--ink); cursor: pointer; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-sortie { color: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-choix { display: flex; flex-wrap: wrap; gap: 10px 12px; min-width: 0; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-vues { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+:is(#demo-constellation, [data-constellation]) .pr-seg button { flex: none; color: var(--ink); font-size: 12px; white-space: nowrap; }
+:is(#demo-constellation, [data-constellation]) .pr-seg button[aria-pressed="true"] { color: var(--paper); }
+:is(#demo-constellation, [data-constellation]) .pr-seg button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-resume em { font-family: var(--serif); }
+:is(#demo-constellation, [data-constellation]) .pr-legend .bchip { font-family: var(--serif); font-size: 13px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-echantillon { flex: none; overflow: visible; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fleche { color: var(--ink-2); font-family: var(--mono); font-size: 12px; }
 
 /* Cadre du réseau : à l’échelle 1, il défile en hauteur avec la page, en largeur dans son propre cadre. */
-#demo-constellation .pr-constellation-cadre { min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; border: 1.5px solid var(--line); border-radius: 14px; background: var(--paper); }
-#demo-constellation .pr-constellation-svg { display: block; }
-#demo-constellation .pr-constellation-vide { margin: 0; padding: 18px 16px; color: var(--ink-2); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-cadre { min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; border: 1.5px solid var(--line); border-radius: 14px; background: var(--paper); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-svg { display: block; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-vide { margin: 0; padding: 18px 16px; color: var(--ink-2); }
 
-#demo-constellation .pr-constellation-filet { fill: none; stroke: var(--line-strong); stroke-opacity: 0.35; stroke-width: 1; }
-#demo-constellation .pr-constellation-titre { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-weight: 700; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-filet { fill: none; stroke: var(--line-strong); stroke-opacity: 0.35; stroke-width: 1; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-titre { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-weight: 700; }
 
 /* Courbes : neutres, 1 px ; la dernière découverte en Corail (nouveauté) ; la famille suivie en Encre. */
-#demo-constellation .pr-constellation-lien { fill: none; stroke: var(--ink-3); stroke-width: 1; }
-#demo-constellation .pr-constellation-lien.is-dernier { stroke: var(--c-action); stroke-width: 2.5; }
-#demo-constellation .pr-constellation-antenne { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-linecap: round; }
-#demo-constellation .pr-constellation-compte { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
-#demo-constellation .has-focus .pr-constellation-lien,
-#demo-constellation .has-focus .pr-constellation-antenne { stroke: var(--line); }
-#demo-constellation .has-focus .pr-constellation-compte { opacity: 0.45; }
-#demo-constellation .has-focus .pr-constellation-lien.is-famille { stroke: var(--ink); stroke-width: 2.5; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-lien { fill: none; stroke: var(--ink-3); stroke-width: 1; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-lien.is-dernier { stroke: var(--c-action); stroke-width: 2.5; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-antenne { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-linecap: round; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-compte { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+:is(#demo-constellation, [data-constellation]) .has-focus .pr-constellation-lien,
+:is(#demo-constellation, [data-constellation]) .has-focus .pr-constellation-antenne { stroke: var(--line); }
+:is(#demo-constellation, [data-constellation]) .has-focus .pr-constellation-compte { opacity: 0.45; }
+:is(#demo-constellation, [data-constellation]) .has-focus .pr-constellation-lien.is-famille { stroke: var(--ink); stroke-width: 2.5; }
 
 /* Briques : toute la rangée est la cible. */
-#demo-constellation .pr-constellation-n { cursor: pointer; outline: none; }
-#demo-constellation .pr-constellation-cible { fill: transparent; stroke: none; }
-#demo-constellation .pr-constellation-n:hover .pr-constellation-cible { fill: color-mix(in srgb, var(--ink) 6%, transparent); }
-#demo-constellation .pr-constellation-n:focus-visible .pr-constellation-cible { stroke: var(--ink); stroke-width: 2; }
-#demo-constellation .pr-constellation-ombre { fill: var(--pop-shadow); }
-#demo-constellation .pr-constellation-brique { stroke: var(--fixed-ink); stroke-width: 1.5; }
-#demo-constellation .pr-constellation-brique.is-prefixe { fill: var(--c-prefix); }
-#demo-constellation .pr-constellation-brique.is-suffixe { fill: var(--c-suffix); }
-#demo-constellation .pr-constellation-etiquette { fill: var(--fixed-ink); font-family: var(--serif); font-weight: 700; pointer-events: none; }
-#demo-constellation .pr-constellation-rail { fill: var(--paper-2); stroke: var(--ink-3); stroke-width: 0.75; }
-#demo-constellation .pr-constellation-part { fill: var(--c-family); }
-#demo-constellation .pr-constellation-cpt { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
-#demo-constellation .pr-constellation-n.is-focus .pr-constellation-brique { stroke-width: 3; }
-#demo-constellation .pr-constellation-n.is-focus .pr-constellation-cible { fill: color-mix(in srgb, var(--ink) 8%, transparent); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n { cursor: pointer; outline: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-cible { fill: transparent; stroke: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n:hover .pr-constellation-cible { fill: color-mix(in srgb, var(--ink) 6%, transparent); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n:focus-visible .pr-constellation-cible { stroke: var(--ink); stroke-width: 2; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-ombre { fill: var(--pop-shadow); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-brique { stroke: var(--fixed-ink); stroke-width: 1.5; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-brique.is-prefixe { fill: var(--c-prefix); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-brique.is-suffixe { fill: var(--c-suffix); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-etiquette { fill: var(--fixed-ink); font-family: var(--serif); font-weight: 700; pointer-events: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-rail { fill: var(--paper-2); stroke: var(--ink-3); stroke-width: 0.75; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-part { fill: var(--c-family); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-cpt { fill: var(--ink-2); font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-focus .pr-constellation-brique { stroke-width: 3; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-focus .pr-constellation-cible { fill: color-mix(in srgb, var(--ink) 8%, transparent); }
 /* Hors famille : la brique pâlit, son étiquette reste lisible (Encre fixe sur couleur vive). */
-#demo-constellation .pr-constellation-n.is-loin .pr-constellation-brique { fill-opacity: 0.45; stroke-opacity: 0.45; }
-#demo-constellation .pr-constellation-n.is-loin .pr-constellation-ombre,
-#demo-constellation .pr-constellation-n.is-loin .pr-constellation-rail,
-#demo-constellation .pr-constellation-n.is-loin .pr-constellation-part { opacity: 0.45; }
-#demo-constellation .pr-constellation-n.is-loin .pr-constellation-cpt { fill: var(--ink-3); }
-body.nocturne #demo-constellation .pr-constellation-n.is-loin .pr-constellation-brique { fill-opacity: 0.65; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-brique { fill-opacity: 0.45; stroke-opacity: 0.45; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-ombre,
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-rail,
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-part { opacity: 0.45; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-cpt { fill: var(--ink-3); }
+body.nocturne :is(#demo-constellation, [data-constellation]) .pr-constellation-n.is-loin .pr-constellation-brique { fill-opacity: 0.65; }
 
 /* Panneau de la famille suivie : collé en bas de la démo, repliable. */
-#demo-constellation .pr-constellation-panneau { container-type: inline-size; position: sticky; bottom: 0; z-index: 2; display: grid; gap: 8px; margin: 0 -6px; padding: 6px 10px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--cream); box-shadow: 4px 4px 0 var(--pop-shadow); }
-#demo-constellation .pr-constellation-tete { display: flex; align-items: center; gap: 8px; min-width: 0; }
-#demo-constellation .pr-constellation-deplier { display: flex; flex: 1 1 auto; align-items: center; gap: 8px; min-width: 0; min-height: 48px; padding: 4px 6px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); cursor: pointer; font: inherit; font-size: 14px; text-align: left; }
-#demo-constellation .pr-constellation-deplier:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
-#demo-constellation .pr-constellation-deplier:focus-visible, #demo-constellation .pr-constellation-partenaire:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
-#demo-constellation .pr-constellation-deplier .bchip { font-family: var(--serif); font-size: 15px; }
-#demo-constellation .pr-constellation-resume-fam { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 0 8px; min-width: 0; }
-#demo-constellation .pr-constellation-glose { font-family: var(--serif); }
-#demo-constellation .pr-constellation-nb { color: var(--ink-2); font-family: var(--mono); font-size: 12px; }
-#demo-constellation .pr-constellation-chevron { flex: none; color: var(--ink-2); transition: transform var(--dur-rapide) var(--ease-out); }
-#demo-constellation .pr-constellation-deplier[aria-expanded="true"] .pr-constellation-chevron { transform: rotate(180deg); }
-#demo-constellation .pr-constellation-fermer { flex: none; min-width: 44px; min-height: 44px; padding: 6px 12px; border: 1.5px solid var(--line-strong); border-radius: 10px; background: transparent; color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
-#demo-constellation .pr-constellation-fermer:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
-#demo-constellation .pr-constellation-fermer:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-panneau { container-type: inline-size; position: sticky; bottom: 0; z-index: 2; display: grid; gap: 8px; margin: 0 -6px; padding: 6px 10px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: var(--cream); box-shadow: 4px 4px 0 var(--pop-shadow); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-tete { display: flex; align-items: center; gap: 8px; min-width: 0; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-deplier { display: flex; flex: 1 1 auto; align-items: center; gap: 8px; min-width: 0; min-height: 48px; padding: 4px 6px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); cursor: pointer; font: inherit; font-size: 14px; text-align: left; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-deplier:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-deplier:focus-visible, :is(#demo-constellation, [data-constellation]) .pr-constellation-partenaire:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-deplier .bchip { font-family: var(--serif); font-size: 15px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-resume-fam { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 0 8px; min-width: 0; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-glose { font-family: var(--serif); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-nb { color: var(--ink-2); font-family: var(--mono); font-size: 12px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-chevron { flex: none; color: var(--ink-2); transition: transform var(--dur-rapide) var(--ease-out); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-deplier[aria-expanded="true"] .pr-constellation-chevron { transform: rotate(180deg); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fermer { flex: none; min-width: 44px; min-height: 44px; padding: 6px 12px; border: 1.5px solid var(--line-strong); border-radius: 10px; background: transparent; color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fermer:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fermer:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 /* Panneau étroit : le compte passe sous la brique, sans point de séparation en début de ligne. */
 @container (max-width: 459px) {
-  #demo-constellation .pr-constellation-sep { display: none; }
-  #demo-constellation .pr-constellation-nb { flex-basis: 100%; }
+  :is(#demo-constellation, [data-constellation]) .pr-constellation-sep { display: none; }
+  :is(#demo-constellation, [data-constellation]) .pr-constellation-nb { flex-basis: 100%; }
 }
-#demo-constellation .pr-constellation-mots { display: flex; flex-wrap: wrap; gap: 0 14px; max-height: 38vh; margin: 0; padding: 0 0 4px; overflow-y: auto; list-style: none; }
-#demo-constellation .pr-constellation-mots li { display: inline-flex; align-items: center; gap: 2px; }
-#demo-constellation .pr-constellation-mots em { font-family: var(--serif); font-size: 15px; }
-#demo-constellation .pr-constellation-partenaire { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 6px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; }
-#demo-constellation .pr-constellation-partenaire .bchip { font-family: var(--serif); font-size: 14px; }
-#demo-constellation .pr-constellation-partenaire:hover .bchip { box-shadow: 3px 3px 0 var(--pop-shadow); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-mots { display: flex; flex-wrap: wrap; gap: 0 14px; max-height: 38vh; margin: 0; padding: 0 0 4px; overflow-y: auto; list-style: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-mots li { display: inline-flex; align-items: center; gap: 2px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-mots em { font-family: var(--serif); font-size: 15px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-partenaire { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 6px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-partenaire .bchip { font-family: var(--serif); font-size: 14px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-partenaire:hover .bchip { box-shadow: 3px 3px 0 var(--pop-shadow); }
 
 /* Liste en repli. */
-#demo-constellation .pr-constellation-liste { display: grid; gap: 18px; }
-#demo-constellation .pr-constellation-bande h3 { margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1.5px solid var(--line); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
-#demo-constellation .pr-constellation-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 24px; }
-#demo-constellation .pr-constellation-familles { display: grid; gap: 10px; margin: 6px 0 0; padding: 0; list-style: none; }
-#demo-constellation .pr-constellation-fam-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-#demo-constellation .pr-constellation-fam-tete .bchip { font-family: var(--serif); font-size: 15px; }
-#demo-constellation .pr-constellation-barre { display: inline-block; width: 72px; height: 7px; overflow: hidden; border: 1px solid var(--ink-3); border-radius: 999px; background: var(--paper-2); }
-#demo-constellation .pr-constellation-barre i { display: block; height: 100%; background: var(--c-family); }
-#demo-constellation .pr-constellation-num { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
-#demo-constellation .pr-constellation-familles .pr-small { margin-top: 2px; font-family: var(--serif); font-style: italic; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-liste { display: grid; gap: 18px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-bande h3 { margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1.5px solid var(--line); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 24px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-familles { display: grid; gap: 10px; margin: 6px 0 0; padding: 0; list-style: none; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fam-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-fam-tete .bchip { font-family: var(--serif); font-size: 15px; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-barre { display: inline-block; width: 72px; height: 7px; overflow: hidden; border: 1px solid var(--ink-3); border-radius: 999px; background: var(--paper-2); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-barre i { display: block; height: 100%; background: var(--c-family); }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-num { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+:is(#demo-constellation, [data-constellation]) .pr-constellation-familles .pr-small { margin-top: 2px; font-family: var(--serif); font-style: italic; }
 
 @media (prefers-reduced-motion: reduce) {
-  #demo-constellation .pr-constellation-chevron { transition: none; }
+  :is(#demo-constellation, [data-constellation]) .pr-constellation-chevron { transition: none; }
 }
 
     /* Démo : enquetes. */
@@ -498,6 +510,31 @@ body.nocturne #demo-constellation .pr-constellation-n.is-loin .pr-constellation-
   <symbol id="rar-peu" viewBox="0 0 16 16"><rect x="2.3" y="2.3" width="11.4" height="11.4" rx="0.6"/></symbol>
   <symbol id="rar-rare" viewBox="0 0 16 16"><path d="M8 1.3 14.8 6.3 12.2 14.4H3.8L1.2 6.3Z"/></symbol>
   <symbol id="rar-legendaire" viewBox="0 0 16 16"><path d="M8 .6 13.6 8 8 15.4 2.4 8Z"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><rect x="2.5" y="8" width="7.5" height="8" rx="2"/><rect x="14" y="8" width="7.5" height="8" rx="2"/><path d="M12 10.8v2.4M10.8 12h2.4"/></symbol>
+<symbol id="i-codex" viewBox="0 0 24 24"><rect x="7" y="3.5" width="12" height="16" rx="2"/><path d="M7 7.5h12"/><path d="M4 7v11.5a2 2 0 0 0 2 2h9"/></symbol>
+<symbol id="i-quest" viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="15" rx="2.5"/><path d="M8 9.5h8M8 14l2.5 2.5L16 12"/></symbol>
+<symbol id="i-pli" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><circle cx="12" cy="12" r="3.2"/></symbol>
+<symbol id="i-energy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke-dasharray="34 50.3"/><path d="M12 4V2.5"/></symbol>
+<symbol id="i-ink" viewBox="0 0 24 24"><path d="M12 3c3.2 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.8-6.8 6-11z"/></symbol>
+<symbol id="i-hint" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.7"/><path d="M12 17.2h.01"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-danger" viewBox="0 0 24 24"><path d="M8.3 3h7.4L21 8.3v7.4L15.7 21H8.3L3 15.7V8.3z"/><path d="M12 7.5v5.5M12 16.4h.01"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6.5h16M7 12h10M10 17.5h4"/></symbol>
+<symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 5v14M5 16l3 3 3-3M16 19V5M13 8l3-3 3 3"/></symbol>
+<symbol id="i-flip" viewBox="0 0 24 24"><path d="M4.5 11a7.5 7.5 0 0 1 13-4.6L20 9"/><path d="M20 4.5V9h-4.5"/><path d="M19.5 13a7.5 7.5 0 0 1-13 4.6L4 15"/><path d="M4 19.5V15h4.5"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4.5 10v4h3.5l4.5 4V6L8 10H4.5z"/><path d="M16 9a4.2 4.2 0 0 1 0 6"/><path d="M18.5 6.5a7.8 7.8 0 0 1 0 11"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></symbol>
+<symbol id="i-rarity" viewBox="0 0 24 24"><path d="M7 4h10l4.5 5.5L12 20.5 2.5 9.5z"/><path d="M2.5 9.5h19M9 9.5l3 11 3-11M9 9.5 12 4l3 5.5"/></symbol>
+<symbol id="i-offline" viewBox="0 0 24 24"><path d="M7 18.5h10a4 4 0 0 0 .6-8 6 6 0 0 0-11.2-1.3A4.6 4.6 0 0 0 7 18.5z"/><path d="M4 4l16 16"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/></symbol>
+<symbol id="i-calm" viewBox="0 0 24 24"><path d="M3 12h4l2-4 3 8 2-4h7"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-mast" viewBox="0 0 24 24"><ellipse cx="12" cy="10" rx="9" ry="5" fill="currentColor" stroke="none"/><path d="M4 17.5q8 4 16 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
 </svg>
 
 <main id="contenu">
@@ -514,9 +551,9 @@ body.nocturne #demo-constellation .pr-constellation-n.is-loin .pr-constellation-
 
       <h3 class="pr-h3" id="changements">Ce qui change <em>depuis la v1</em></h3>
       <ul class="pr-list">
-        <li><b>Mémoire des essais.</b> La grille préfixes × suffixes et l’annonce «&nbsp;déjà tentée&nbsp;» disparaissent. À leur place, une pastille discrète sur les briques de la réserve déjà essayées avec la brique posée, tenue par le serveur et oubliée à chaque parution.</li>
+        <li><b>Mémoire des essais.</b> La grille préfixes × suffixes et l’annonce «&nbsp;déjà tentée&nbsp;» disparaissent. À leur place, les briques déjà essayées avec celle qui est sur la table se grisent et passent en fin de réserve, dynamiquement. La trace est tenue par le serveur et oubliée à chaque parution.</li>
         <li><b>Quêtes de collection.</b> Le carré laisse place à vos quêtes&nbsp;: tous les préfixes, tous les suffixes d’un fascicule. «&nbsp;Toutes les cartes de difficulté X&nbsp;» devient «&nbsp;tous les mots communs, peu communs, rares&nbsp;»&nbsp;: <a href="#collection">voir pourquoi</a>, la décision vous revient.</li>
-        <li><b>Constellation.</b> Le graphe à forces est remplacé par une disposition en deux rives, sans aucun chevauchement, où une brique ne bouge plus quand un mot arrive.</li>
+        <li><b>Constellation.</b> Le graphe à forces est remplacé par une disposition en deux rives, sans aucun chevauchement, où une brique ne bouge plus quand un mot arrive. <a href="#constellation-situation">Voir la vue en situation</a>, sur téléphone et sur ordinateur.</li>
         <li><b>Enquêtes en cours.</b> Elles ont leur démo.</li>
         <li><b>Écartés et consignés</b> dans la liste des pistes de rétention écartées du game design&nbsp;: le pli à choix, la réserve en tableau, l’annonce du mot croisé, les ricochets «&nbsp;Chronologie&nbsp;» et «&nbsp;Exemple&nbsp;», les fascicules spéciaux.</li>
       </ul>
@@ -544,14 +581,15 @@ body.nocturne #demo-constellation .pr-constellation-n.is-loin .pr-constellation-
       <article class="pr-piste" id="memoire" aria-labelledby="memoire-titre">
         <div class="pr-piste-txt">
           <span class="pr-tag">Piste 1 <span>ADR · API · PWA</span></span>
-          <h3 id="memoire-titre">La mémoire des essais&nbsp;: <em>une pastille dans la réserve</em></h3>
+          <h3 id="memoire-titre">La mémoire des essais&nbsp;: <em>les briques déjà essayées passent en fin de réserve</em></h3>
           <dl class="pr-facts">
             <div><dt>Besoin</dt><dd>Garder la trace de ce qui a déjà été essayé, pour ne pas refaire les mêmes essais en boucle. Passé une vingtaine de briques, le joueur oublie ses échecs.</dd></div>
-            <div><dt>Proposition</dt><dd>Quand <strong>une seule</strong> brique est sur la table et que le joueur choisit l’autre dans la réserve, chaque brique déjà essayée avec elle, dans cet ordre, porte une pastille de 12&nbsp;px&nbsp;: pleine en Gris encre pour «&nbsp;aucune recette&nbsp;», anneau Encre pour «&nbsp;presque&nbsp;». Une ligne nomme les états présents («&nbsp;Avec <span class="bchip">géo-</span>&nbsp;: ● aucune recette&nbsp;»). Rien d’autre ne change&nbsp;: ni la table, ni Fusionner, ni le retour de tentative.</dd></div>
-            <div><dt>Ce qui ne se voit jamais</dt><dd>Rien sur une paire jamais essayée&nbsp;: pas de marque «&nbsp;à tenter&nbsp;», pas de compteur, pas de tri. Aucune pastille sur une paire qui donne un mot&nbsp;: le codex garde déjà les découvertes. L’état est recalculé à chaque affichage par la règle de fusion&nbsp;: un «&nbsp;presque&nbsp;» dont le mot a été trouvé redevient «&nbsp;aucune recette&nbsp;».</dd></div>
-            <div><dt>Données</dt><dd>Une table <code>essai</code>&nbsp;: le joueur, les deux briques dans l’ordre des cases, le dernier fascicule paru. Ni issue, ni date, ni texte du catalogue. Le serveur l’écrit dans la transaction de <code>POST /fusion</code>, pour un échec ou un «&nbsp;presque&nbsp;», seulement si le joueur possède les deux briques, avec un plafond de 3&nbsp;000 lignes. Une découverte efface sa ligne. Elle suit le compte sur tous ses appareils, part avec la partie et entre dans l’export.</dd></div>
-            <div><dt>Oubli</dt><dd>À chaque parution, <strong>toutes</strong> les lignes s’effacent en bloc, avec un seul message&nbsp;: de vieilles paires peuvent devenir des mots (31 recettes de Routes des mots réunissent deux briques déjà parues, comme <span class="bchip">thermo-</span> + <span class="bchip" data-kind="suffixe">-phone</span>). Une purge paire par paire désignerait les familles que prolonge le fascicule, une piste écartée.</dd></div>
-            <div><dt>À trancher</dt><dd>Un ADR doit revenir sur «&nbsp;les propositions de fusion ne sont jamais stockées&nbsp;» (<a href="adr.html#adr-0027">ADR 0027</a>, modèle de données §&nbsp;7). Acceptez-vous l’oubli à chaque parution (une par semaine au lancement)&nbsp;? Faut-il un réglage pour masquer les pastilles&nbsp;? La démo montre aussi l’autre forme jugée, un carnet à relire, pour comparer.</dd></div>
+            <div><dt>Proposition</dt><dd>La réserve se réordonne selon ce qui est sur la table. Dès qu’une brique est posée, les briques déjà essayées avec elle, dans cet ordre, se grisent et passent en fin de liste, sous l’intertitre «&nbsp;Déjà essayées avec <span class="bchip">géo-</span>&nbsp;». Leur ligne de sens dit pourquoi&nbsp;: «&nbsp;aucune recette&nbsp;», «&nbsp;presque&nbsp;: inversez&nbsp;» ou «&nbsp;au codex&nbsp;». Retirez la brique ou posez-en une autre&nbsp;: la liste se recalcule aussitôt, les briques glissent vers leur nouvelle place.</dd></div>
+            <div><dt>Le gris</dt><dd>Un fond neutre Sable, le libellé en Encre secondaire, sans ombre. Une brique grisée reste jouable, puisque se tromper ne coûte rien&nbsp;: ce n’est ni l’état désactivé (opacité de 40&nbsp;%), ni l’état épuisé (pointillés hachurés).</dd></div>
+            <div><dt>Ce qui ne se voit jamais</dt><dd>Une paire jamais essayée ne bouge pas&nbsp;: les briques non grisées gardent l’ordre habituel de la réserve, sans tri ni compteur. Seuls passent en fin de liste les échecs, les «&nbsp;presque&nbsp;» et les mots déjà au codex&nbsp;: rien que le joueur ne sache déjà.</dd></div>
+            <div><dt>Données</dt><dd>Une table <code>essai</code>&nbsp;: le joueur, les deux briques dans l’ordre des cases, le dernier fascicule paru. Ni issue, ni date, ni texte du catalogue. Le serveur l’écrit dans la transaction de <code>POST /fusion</code>, pour un échec ou un «&nbsp;presque&nbsp;», seulement si le joueur possède les deux briques, avec un plafond de 3&nbsp;000 lignes. Les mots au codex n’ont besoin d’aucune ligne&nbsp;: le client les déduit de la règle de fusion. La trace suit le compte sur tous ses appareils, part avec la partie et entre dans l’export.</dd></div>
+            <div><dt>Oubli</dt><dd>À chaque parution, toutes les lignes s’effacent en bloc, avec un seul message&nbsp;: de vieilles paires peuvent devenir des mots (31 recettes de Routes des mots réunissent deux briques déjà parues, comme <span class="bchip">thermo-</span> + <span class="bchip" data-kind="suffixe">-phone</span>). Une purge paire par paire désignerait les familles que prolonge le fascicule, une piste écartée.</dd></div>
+            <div><dt>À trancher</dt><dd>Un ADR doit revenir sur «&nbsp;les propositions de fusion ne sont jamais stockées&nbsp;» (<a href="adr.html#adr-0027">ADR 0027</a>, modèle de données §&nbsp;7). Acceptez-vous l’oubli à chaque parution (une par semaine au lancement)&nbsp;?</dd></div>
             <div><dt>À mesurer</dt><dd>Tentatives avant une découverte (indicateur du game design).</dd></div>
           </dl>
         </div>
@@ -590,6 +628,43 @@ body.nocturne #demo-constellation .pr-constellation-n.is-loin .pr-constellation-
         </div>
         <div class="pr-demo" id="demo-constellation"></div>
       </article>
+
+      <section class="pr-situation" id="constellation-situation" aria-labelledby="situation-titre">
+        <h3 class="pr-h3" id="situation-titre">La constellation <em>en situation</em></h3>
+        <p class="pr-lead">Telle qu’elle pourrait paraître dans l’App, comme une vue du codex à côté de Tout, Récentes et Familles, au même moment de la partie&nbsp;: Rosette complet, Argile ouvert et en cours. Les deux écrans sont jouables&nbsp;: touchez une brique pour suivre sa famille, changez de fascicule ou passez en liste.</p>
+        <div class="pr-situation-cadres">
+          <figure>
+            <div class="mq mq-phone" aria-label="Écran du codex sur téléphone, vue Réseau">
+              <div class="mq-sb"><span>9:41</span><span>●●●</span></div>
+              <div class="mq-hd"><b>Codex</b><span class="mq-tools"><span class="mq-iconbtn"><svg class="mq-ic s"><use href="#i-search"/></svg></span></span></div>
+              <div class="mq-bd">
+                <div class="mq-views"><span>Tout</span><span>Récentes</span><span>Familles</span><span class="on">Réseau</span><span>Cabinet</span></div>
+                <div class="pr-demo" data-constellation id="situation-mobile"></div>
+              </div>
+              <nav class="mq-tabs"><span><svg class="mq-ic"><use href="#i-table"/></svg>Table</span><span><svg class="mq-ic"><use href="#i-pli"/></svg>Plis</span><span class="on"><svg class="mq-ic"><use href="#i-codex"/></svg>Codex</span><span><svg class="mq-ic"><use href="#i-quest"/></svg>Quêtes</span><span><svg class="mq-ic"><use href="#i-settings"/></svg>Réglages</span></nav>
+            </div>
+            <figcaption>Téléphone · 390 px</figcaption>
+          </figure>
+          <figure>
+            <div class="pr-situation-defile">
+              <div class="mq mq-desk" aria-label="Écran du codex sur ordinateur, vue Réseau">
+                <div class="mq-bar"><i></i><i></i><i></i><span>etymologique · codex · réseau</span></div>
+                <div class="mq-app">
+                  <nav class="mq-rail"><span class="mq-seal">ÉL</span><span><svg class="mq-ic"><use href="#i-table"/></svg>Table</span><span><svg class="mq-ic"><use href="#i-pli"/></svg>Plis</span><span class="on"><svg class="mq-ic"><use href="#i-codex"/></svg>Codex</span><span><svg class="mq-ic"><use href="#i-quest"/></svg>Quêtes</span><span class="end"><svg class="mq-ic"><use href="#i-settings"/></svg>Réglages</span></nav>
+                  <div class="mq-main">
+                    <div class="mq-hd"><b>Codex</b><span class="mq-tools"><span class="mq-mono">Vue Réseau</span></span></div>
+                    <div class="mq-bd">
+                      <div class="mq-views"><span>Tout</span><span>Récentes</span><span>Mots</span><span>Briques</span><span>Langues</span><span>Familles</span><span class="on">Réseau</span><span>Cabinet</span></div>
+                      <div class="pr-demo" data-constellation id="situation-ordinateur"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figcaption>Ordinateur · fenêtre de 820 px</figcaption>
+          </figure>
+        </div>
+      </section>
 
       <!-- Piste 4 : les enquêtes en cours -->
       <article class="pr-piste" id="enquetes" aria-labelledby="enquetes-titre">
@@ -740,7 +815,7 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
 })();
 </script>
 <script>
-// Démo de la piste 1 : la mémoire des essais, en pastilles sur la feuille de réserve (ou en carnet, pour comparer).
+// Démo de la piste 1 : la mémoire des essais. Dans la réserve, les briques déjà essayées avec la brique posée sont grisées et passent en fin de liste.
 (() => {
   "use strict";
   const { D, NB, guil, el, chip, brique, message, etiquette, brq, motColore } = window.PR;
@@ -758,7 +833,7 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
   const TRACE = ["géo|phobie", "géo|scope", "thermo|phone", "hydro|mètre", "xylo|logie", "astro|graphie", "agro|phile", "phone|géo"];
   const CODEX = ["géologie", "géographie", "hydrologie", "thermomètre", "xylophone", "astrologie"];
   const LIGNE_PARUTION = `Nouveau fascicule paru${NB}: vos essais sans recette repartent à zéro. De vieilles paires peuvent maintenant former un mot.`;
-  const ETATS = { echec: "aucune recette", presque: "presque" };
+  const ETATS = { echec: "aucune recette", presque: "presque", connu: "mot déjà au codex" };
 
   const neuf = () => ({
     reserve: new Map([...PREFIXES, ...SUFFIXES].map((f) => [f, EXEMPLAIRES[f] ?? 1])),
@@ -773,7 +848,6 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     note: null,
   });
   let etat = neuf();
-  let vue = "pastilles";
   let toutes = false;
 
   const ordinal = (rang) => (rang === 0 ? "1ʳᵉ" : `${rang + 1}ᵉ`);
@@ -807,13 +881,15 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     return pleines.length === 1 ? { rang: pleines[0], f: etat.cases[pleines[0]] } : null;
   };
   const cleAvec = (posee, f) => (posee.rang === 0 ? `${posee.f}|${f}` : `${f}|${posee.f}`);
+  // Déjà essayée avec la brique posée : un mot déjà au codex (rien à retrouver), ou une paire de la trace sans recette ou « presque ».
+  const dejaEssayee = (posee, f) => {
+    const cle = cleAvec(posee, f);
+    return resoudre(...cle.split("|")).type === "connu" ? "connu" : etatEssai(cle);
+  };
 
-  const pastille = (type) => el("span", { class: "pr-memoire-pastille", "data-etat": type, "aria-hidden": "true" });
 
   /* ---------- Squelette ---------- */
   const bReset = el("button", { class: "pr-reset", type: "button", onclick: () => recommencer() }, "Recommencer");
-  const boutonsVue = [["pastilles", "Pastilles"], ["carnet", "Carnet"]].map(([v, libelle]) =>
-    el("button", { type: "button", "data-vue": v, onclick: () => { vue = v; rendre(); } }, libelle));
   const slots = el("div", { class: "pr-slots", role: "group", "aria-label": "Table de fusion, dans l’ordre" });
   const bFusion = el("button", { class: "btn btn-primary", type: "button", onclick: () => fusionner() }, "Fusionner");
   const bVider = el("button", { class: "btn btn-secondary", type: "button", onclick: () => vider() }, "Vider");
@@ -821,18 +897,16 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
   const compte = el("span", { class: "pr-memoire-compte" });
   const bToutes = el("button", { class: "pr-memoire-toutes", type: "button", onclick: () => { toutes = !toutes; rendre(); } }, "Toutes les briques");
   const consigne = el("p", { class: "pr-memoire-consigne" });
-  const aide = el("div", { class: "pr-memoire-aide" });
   const note = el("p", { class: "pr-memoire-note" });
   const plateau = el("ul", { class: "pr-tray pr-memoire-plateau", "aria-label": "Briques de la réserve" });
+  const intertitre = el("p", { class: "pr-memoire-intertitre" });
+  const plateauEssayees = el("ul", { class: "pr-tray pr-memoire-plateau", "aria-label": "Briques déjà essayées" });
   const bParution = el("button", { class: "btn btn-secondary pr-memoire-parution", type: "button", onclick: () => paraitre() });
   const codex = el("p", { class: "pr-small pr-memoire-codex" });
   const annonce = el("p", { class: "sr-only", "aria-live": "polite" });
 
   racine.replaceChildren(
     el("div", { class: "pr-demo-head" }, el("span", { class: "pr-demo-title" }, "Démo · La mémoire des essais"), bReset),
-    el("div", { class: "pr-memoire-vue" },
-      el("span", { class: "pr-label", id: "memoire-vue-titre" }, "Vos essais"),
-      el("div", { class: "pr-seg", role: "group", "aria-labelledby": "memoire-vue-titre" }, ...boutonsVue)),
     el("section", { class: "pr-table", "aria-labelledby": "memoire-table-titre" },
       el("span", { class: "pr-label", id: "memoire-table-titre" }, "Table de fusion"),
       slots,
@@ -843,15 +917,27 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
       el("div", { class: "pr-memoire-entete" },
         el("p", { class: "pr-memoire-titre" }, el("span", { id: "memoire-reserve-titre" }, "Réserve"), compte),
         bToutes),
-      consigne, aide, note, plateau),
+      consigne, note, plateau, intertitre, plateauEssayees),
     el("div", { class: "pr-memoire-pied" }, codex, bParution),
     el("div", { class: "pr-memoire-legendes" },
-      el("p", { class: "pr-small" }, "Rien n’apparaît sur une paire jamais essayée."),
+      el("p", { class: "pr-small" }, "Posez une brique : celles déjà essayées avec elle, dans cet ordre, se grisent et passent en fin de liste. Elles restent jouables."),
       el("p", { class: "pr-small" }, "Dans le jeu, la trace est tenue par le serveur et suit votre compte sur tous vos appareils.")),
     annonce,
   );
 
   /* ---------- Affichage ---------- */
+  // Les briques qui changent de groupe glissent vers leur nouvelle place (FLIP, 240 ms ; rien en mouvement réduit).
+  const positions = () => new Map([...racine.querySelectorAll(".pr-memoire-plateau li")].map((li) => [li.dataset.f, li.getBoundingClientRect()]));
+  const glisser = (avant) => {
+    if (window.PR.calme.matches) return;
+    racine.querySelectorAll(".pr-memoire-plateau li").forEach((li) => {
+      const a = avant.get(li.dataset.f);
+      if (!a) return;
+      const b = li.getBoundingClientRect();
+      const dx = a.left - b.left, dy = a.top - b.top;
+      if (dx || dy) li.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], { duration: 240, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
+    });
+  };
   const caseDeTable = (i) => {
     const f = etat.cases[i];
     if (!f) {
@@ -868,45 +954,19 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     const possedes = etat.reserve.get(f);
     const n = libres(f);
     const classe = possedes === 0 ? "is-spent" : n <= 0 ? "is-on" : null;
-    const essai = vue === "pastilles" && posee ? etatEssai(cleAvec(posee, f)) : null;
+    const essai = posee ? dejaEssayee(posee, f) : null;
     const nom = `${etiquette(f)}, ${guil(brq(f).g)}, ${possedes === 0 ? "épuisée" : n <= 0 ? "tous vos exemplaires sont sur la table" : pluriel(n, "exemplaire")}`;
     const label = essai ? `${nom}, déjà essayée avec ${etiquette(posee.f)}, dans cet ordre${NB}: ${ETATS[essai]}.` : nom;
     const b = brique(f, { bouton: true, etat: classe, onclick: () => poser(f), label });
     b.dataset.cle = `brique:${f}`;
     if (classe) b.setAttribute("aria-disabled", "true");
-    if (essai) b.prepend(pastille(essai));
+    if (essai) {
+      b.classList.add("pr-memoire-essayee");
+      b.querySelector(".b-meta").textContent = { echec: "aucune recette", presque: "presque : inversez", connu: "au codex" }[essai];
+    }
     b.append(el("span", { class: `b-count${possedes === 0 ? " zero" : ""}`, "aria-hidden": "true" }, possedes === 0 ? "Épuisée" : `×${Math.max(n, 0)}`));
     if (etat.consommees.includes(f)) b.append(el("span", { class: "b-minus", "aria-hidden": "true" }, "−1"));
-    return el("li", {}, b);
-  };
-
-  // Légende des pastilles : seulement les états visibles sur la feuille.
-  const legende = (posee, visibles) => {
-    const presents = Object.keys(ETATS).filter((type) => visibles.some((f) => etatEssai(cleAvec(posee, f)) === type));
-    if (!presents.length) return null;
-    const items = presents.flatMap((type, i) => [
-      i ? el("span", { class: "pr-memoire-sep", "aria-hidden": "true" }, "·") : null,
-      el("span", { class: "pr-memoire-cle" }, pastille(type), ETATS[type]),
-    ]);
-    return el("p", { class: "pr-memoire-legende" }, el("span", {}, "Avec ", chip(posee.f), `${NB}:`), ...items);
-  };
-
-  // Carnet : les partenaires essayés avec la brique posée, à sa place, dans l’ordre des essais.
-  const carnet = (posee) => {
-    const essais = [...etat.trace]
-      .map((cle) => ({ cle, paire: cle.split("|") }))
-      .filter(({ paire }) => paire[posee.rang] === posee.f)
-      .map(({ cle, paire }) => ({ partenaire: paire[1 - posee.rang], type: etatEssai(cle) }))
-      .filter((e) => e.type);
-    const groupes = Object.keys(ETATS)
-      .map((type) => [type, essais.filter((e) => e.type === type)])
-      .filter(([, liste]) => liste.length)
-      .map(([type, liste]) => el("div", { class: "pr-memoire-groupe" },
-        el("span", { class: "pr-label" }, type === "echec" ? "Aucune recette" : "Presque"),
-        el("span", { class: "pr-memoire-partenaires" }, ...liste.map((e) => chip(e.partenaire)))));
-    return el("div", { class: "pr-memoire-carnet" },
-      el("p", { class: "pr-memoire-carnet-titre" }, "Vos essais avec ", chip(posee.f)),
-      ...(groupes.length ? groupes : [el("p", { class: "pr-small" }, "Aucun essai noté pour l’instant.")]));
+    return el("li", { "data-f": f }, b);
   };
 
   const rendre = (repli) => {
@@ -916,7 +976,6 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     const posee = seulePosee();
     const pleine = cible < 0;
 
-    boutonsVue.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vue === vue)));
     slots.replaceChildren(caseDeTable(0), el("span", { class: "pr-plus", "aria-hidden": "true" }, "+"), caseDeTable(1));
     bFusion.setAttribute("aria-disabled", String(!pleine));
     bVider.setAttribute("aria-disabled", String(!etat.cases.some(Boolean)));
@@ -927,11 +986,16 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     consigne.textContent = pleine ? `La table est prête${NB}: fusionnez.` : `Choisissez la ${ordinal(cible)} brique`;
 
     const visibles = toutes ? [...PREFIXES, ...SUFFIXES] : etat.zone === 0 ? PREFIXES : SUFFIXES;
-    aide.replaceChildren(...[posee ? (vue === "pastilles" ? legende(posee, visibles) : carnet(posee)) : null].filter(Boolean));
-    aide.hidden = !aide.childElementCount;
     note.textContent = etat.note ?? "";
     note.hidden = !etat.note;
-    plateau.replaceChildren(...visibles.map((f) => briqueDeReserve(f, posee)));
+    // Deux groupes, recalculés à chaque changement de la table : jamais essayées d’abord, déjà essayées ensuite.
+    const avant = positions();
+    const essayees = posee ? visibles.filter((f) => dejaEssayee(posee, f)) : [];
+    plateau.replaceChildren(...visibles.filter((f) => !essayees.includes(f)).map((f) => briqueDeReserve(f, posee)));
+    plateauEssayees.replaceChildren(...essayees.map((f) => briqueDeReserve(f, posee)));
+    intertitre.replaceChildren(...(essayees.length ? ["Déjà essayées avec ", chip(posee.f), ` · ${essayees.length}`] : []));
+    intertitre.hidden = plateauEssayees.hidden = !essayees.length;
+    glisser(avant);
 
     bParution.textContent = etat.parue ? `${FASCICULE} est paru` : `Simuler la parution de ${FASCICULE}`;
     bParution.setAttribute("aria-disabled", String(etat.parue));
@@ -1302,8 +1366,8 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
 (() => {
   "use strict";
   const { D, NB, guil, el, svgEl, chip, etiquette, brq, calme } = window.PR;
-  const racine = document.getElementById("demo-constellation");
-  if (!racine) return;
+  // Une instance par conteneur : la démo de la page et ses mises en situation (téléphone, ordinateur).
+  const monter = (racine) => {
 
   const MOTS = D.constellation.map((m, id) => ({ ...m, id }));
   const NUMS = [...new Set(MOTS.map((m) => m.fa))].sort((a, b) => a - b);
@@ -1427,7 +1491,7 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     ...[["reseau", "Réseau"], ["liste", "Liste"]].map(([m, t]) => el("button", { type: "button", "data-mode": m, onclick: () => { arreter(); etat.mode = m; rendre(); } }, t)));
   const sortie = el("span", { class: "pr-constellation-sortie", "aria-hidden": "true" });
   const curseur = el("input", {
-    type: "range", id: "pr-constellation-curseur", min: "1", max: String(CHRONO.dernierJour), step: "1", value: String(etat.jour),
+    type: "range", id: `${racine.id}-curseur`, min: "1", max: String(CHRONO.dernierJour), step: "1", value: String(etat.jour),
     oninput: (ev) => { arreter(); etat.jour = Number(ev.target.value); rendre(true); },
   });
   const resume = el("p", { class: "pr-small pr-constellation-resume" });
@@ -1441,7 +1505,7 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
   racine.replaceChildren(
     el("div", { class: "pr-demo-head" }, el("span", { class: "pr-demo-title" }, "Démo · La constellation du codex"), bRejouer),
     el("div", { class: "pr-constellation-temps" },
-      el("label", { class: "pr-label", for: "pr-constellation-curseur" }, "Jour"),
+      el("label", { class: "pr-label", for: `${racine.id}-curseur` }, "Jour"),
       el("div", { class: "pr-constellation-glissiere" }, curseur, sortie)),
     el("div", { class: "pr-constellation-choix" }, segVue, segMode),
     resume, legende, cadre, liste, panneau);
@@ -1671,14 +1735,14 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     if (etat.deplie === null) etat.deplie = false;
     const { formes: siens, d, tot } = famille(b, s);
     const partenaire = (m) => (m.p === b ? m.s : m.p);
-    const liste_ = el("ul", { class: "pr-constellation-mots", id: "pr-constellation-mots", hidden: !etat.deplie },
+    const liste_ = el("ul", { class: "pr-constellation-mots", id: `${racine.id}-mots`, hidden: !etat.deplie },
       ...siens.map((m) => el("li", {},
         el("em", {}, m.m),
         el("button", { type: "button", class: "pr-constellation-partenaire", onclick: () => suivre(partenaire(m)), "aria-label": `${m.m}${NB}: suivre la famille de ${etiquette(partenaire(m))}` }, chip(partenaire(m))))));
     panneau.replaceChildren(
       el("div", { class: "pr-constellation-tete" },
         el("button", {
-          type: "button", class: "pr-constellation-deplier", "aria-expanded": String(etat.deplie), "aria-controls": "pr-constellation-mots",
+          type: "button", class: "pr-constellation-deplier", "aria-expanded": String(etat.deplie), "aria-controls": `${racine.id}-mots`,
           onclick: (ev) => { etat.deplie = !etat.deplie; ev.currentTarget.setAttribute("aria-expanded", String(etat.deplie)); liste_.hidden = !etat.deplie; },
         }, el("span", { class: "pr-constellation-resume-fam" }, chip(b), el("span", { class: "pr-constellation-glose" }, guil(brq(b).g)),
           el("span", { class: "pr-constellation-nb" }, el("span", { class: "pr-constellation-sep", "aria-hidden": "true" }, "·", NB), formes(d, tot))),
@@ -1731,6 +1795,8 @@ window.DONNEES = {"fascicules":{"1":"Rosette","2":"Argile","3":"Aleph","4":"Bous
     rendre();
   }).observe(cadre);
   rendre();
+  };
+  document.querySelectorAll("#demo-constellation, [data-constellation]").forEach(monter);
 })();
 </script>
 <script>
