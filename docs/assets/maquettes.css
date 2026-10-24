@@ -405,3 +405,33 @@ body.nocturne .mq-lang { color: var(--c-lang); }
 .mq-mail .mq-seal { justify-self: start; }
 .mq-code { padding: 10px; border: 1.5px dashed var(--line-strong); border-radius: 10px; color: var(--ink); font-family: var(--mono); font-size: 24px; font-weight: 700; letter-spacing: 0.16em; text-align: center; }
 .mq-mail small { color: var(--ink-3); font-size: 8.5px; line-height: 1.45; }
+
+/* Mémoire des essais (ADR 0081) : déjà essayée avec la brique de la table, grisée mais jouable. */
+.mq-brick.tried { border-color: var(--ink-3); background: var(--paper-2); box-shadow: none; color: var(--ink-2); }
+.mq-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--ink-2); font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+.mq-sub .mq-chip { letter-spacing: 0; text-transform: none; }
+
+/* Enquêtes en cours (ADR 0080) et silhouette achetée. */
+.mq-enq { display: grid; gap: 6px; padding: 7px 10px; border: 1.5px solid var(--line-strong); border-radius: 10px; background: var(--paper); font-size: 10.5px; }
+.mq-enq.open { border-color: var(--fixed-ink); background: var(--cream); }
+.mq-enq b { font-family: var(--mono); font-size: 9px; }
+.mq-enq small { overflow: hidden; color: var(--ink-3); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.mq-sil { display: block; width: 46px; aspect-ratio: 3 / 4; flex: none; border: 1.5px solid var(--fixed-ink); border-top-width: 8px; border-radius: 6px; background: radial-gradient(circle at 50% 62%, var(--line-strong) 0 30%, transparent 31%) var(--paper-2); opacity: 0.85; }
+
+/* Vue Réseau du codex (ADR 0083). */
+.mq-net { display: block; width: 100%; height: auto; flex: none; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); }
+.mq-net .filet { fill: none; stroke: var(--line-strong); stroke-opacity: 0.35; }
+.mq-net .t { fill: var(--ink-2); font-family: var(--mono); font-size: 7.5px; font-weight: 700; }
+.mq-net .lien { fill: none; stroke: var(--ink-3); stroke-width: 0.9; }
+.mq-net .lien.pale { stroke: var(--line); }
+.mq-net .lien.new { stroke: var(--c-action); stroke-width: 2.2; }
+.mq-net .lien.fam { stroke: var(--ink); stroke-width: 2.2; }
+.mq-net .ombre { fill: var(--pop-shadow); }
+.mq-net .b { fill: var(--c-prefix); stroke: var(--fixed-ink); stroke-width: 1.2; }
+.mq-net .b.s { fill: var(--c-suffix); }
+.mq-net .b.sel { stroke-width: 2.4; }
+.mq-net text { fill: var(--fixed-ink); font-family: var(--serif); font-size: 11px; font-weight: 700; }
+.mq-net text.cpt { fill: var(--ink-2); font-family: var(--mono); font-size: 7.5px; font-weight: 400; }
+.mq-net .rail { fill: var(--paper-2); stroke: var(--ink-3); stroke-width: 0.6; }
+.mq-net .part { fill: var(--c-family); }
+.mq-net .loin { opacity: 0.45; }
