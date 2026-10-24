@@ -17,11 +17,12 @@ Tout le contenu est **en français**. Rédigez en français (documentation, micr
 | `outils/` | Outils en Rust, un binaire par commande : `build_adr` génère `adr.html` et contient aussi `XREFS`, les renvois de chaque ADR vers les pages ; `plan_financier` calcule les tableaux du plan financier ; `check_identity` contrôle l'identité visuelle. |
 | `docs/index.html` | Accueil du dossier de direction. |
 | `docs/identite.html`, `design-system.html`, `typographie.html`, `mouvement.html` | Identité visuelle et design système. |
-| `docs/interfaces.html`, `maquettes.html` | Inventaire des 34 interfaces de la PWA et les maquettes statiques de 27 d’entre elles et de I-30 à I-34, mobile et ordinateur (styles dans `docs/assets/maquettes.css`, préfixe `mq-`). |
+| `docs/interfaces.html`, `maquettes.html` | Inventaire des 35 interfaces de la PWA et les maquettes statiques de 27 d’entre elles et de I-30 à I-35, mobile et ordinateur (styles dans `docs/assets/maquettes.css`, préfixe `mq-`). |
 | `docs/jeu.html`, `plis.html`, `codex.html` | Démonstrations jouables (table de fusion, plis, codex). |
 | `docs/boussole.html`, `moodboard.html` | Piliers, à cultiver / à éviter, ambiance. |
 | `docs/logo.html` | Page de travail hors navigation : les dix pistes de logo, dont le sceau ÉL retenu (ADR 0021). |
 | `docs/cartes-visuels.html` | Page de travail hors navigation : dix pistes de texture pour les cartes du codex, dont la piste 02 (aplat découpé) retenue par l’ADR 0023. Les silhouettes du codex sont dans `cardArt` (`assets/etymo.js`). |
+| `docs/pistes-retention.html` | Page de travail hors navigation : quatre pistes pour dynamiser la partie et la faire durer (mémoire des essais, quêtes de collection, constellation, enquêtes en cours), chacune avec sa démo, sur des mots de Rosette et Argile extraits du dépôt Content (légendaires exclues). Retenues par le propriétaire, elles sont consignées dans les ADR 0080 à 0083 (proposés). |
 | `docs/assets/etymo.css` | **Jetons de référence** (couleurs, polices, rayons, easing) et styles partagés. |
 | `docs/assets/etymo.js` | Démo partagée (réserve, découvertes, plis) stockée dans `localStorage` (`etymologique.demo.v1`, thème `etymologique.theme`). |
 | `docs/assets/logo.svg` | Icône des pages : le sceau ÉL (ADR 0021). |
