@@ -113,3 +113,20 @@ body.nocturne .sn-seal { box-shadow: 3px 3px 0 var(--dark-shadow, rgba(243, 238,
 @media (prefers-reduced-motion: reduce) {
   .sn-seal, .sn-theme, .sp-link, .xref, .sn-menu { transition: none; }
 }
+
+/* Réseaux sociaux, dans le pied (bande Corail, texte en Encre). */
+.foot-follow {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin: 48px 0 0;
+  font-family: var(--mono, ui-monospace, monospace); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.foot-follow span { margin-right: 4px; }
+@media (max-width: 640px) { .foot-follow span { flex-basis: 100%; } }
+.foot-follow a {
+  display: inline-grid; place-items: center; width: 48px; height: 48px;
+  border: 1.5px solid var(--fixed-ink, #0f1f19); border-radius: 999px;
+  color: var(--fixed-ink, #0f1f19);
+  transition: background-color 0.2s;
+}
+.foot-follow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.foot-follow a:hover { background: color-mix(in srgb, var(--fixed-ink, #0f1f19) 10%, transparent); }
+@media (prefers-reduced-motion: reduce) { .foot-follow a { transition: none; } }

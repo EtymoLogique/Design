@@ -80,6 +80,21 @@
     );
   }
 
+  // Réseaux sociaux du projet, dans le pied de chaque page.
+  const footer = document.querySelector(".footer");
+  if (footer) {
+    const reseau = (href, nom, traces) => {
+      const lien = el("a", { href, rel: "noreferrer", "aria-label": nom, title: nom });
+      lien.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${traces}</svg>`;
+      return lien;
+    };
+    const follow = el("p", { class: "foot-follow" }, el("span", {}, "Suivez l’avancée du projet en direct"),
+      reseau("https://www.instagram.com/etymologique_fr/", "Instagram",
+        '<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><path d="M17 7h.01"/>'),
+      reseau("https://x.com/etymologique_fr", "X", '<path d="M4 4l11.7 16H20L8.3 4z"/><path d="M4 20l6.8-6.8M13.2 10.8L20 4"/>'));
+    footer.insertBefore(follow, footer.querySelector(".foot-meta"));
+  }
+
   const hub = document.querySelector("[data-site-hub]");
   if (hub) {
     GROUPS.forEach((g, gi) => {
