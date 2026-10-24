@@ -162,6 +162,8 @@ Quand il ne reste qu'un exemplaire d'une brique utile à plusieurs mots, le joue
 
 Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éditorial ne permet pas de justifier cette proximité.
 
+**Mémoire des essais** ([ADR 0081](adr/0081-memoire-des-essais.md), proposé) : une brique posée, la réserve range en fin de liste, grisées mais jouables, les briques déjà essayées avec elle dans cet ordre, avec leur raison (« aucune recette », « presque : inversez », « au codex »). Le serveur garde la paire d'un échec ou d'un « presque », sans issue ni date, et l'oublie à la parution suivante.
+
 ## Le codex
 
 ### Vues
@@ -172,6 +174,7 @@ Le jeu ne doit pas marquer une tentative « presque correcte » si le graphe éd
 - **Langues** : progression par langue et liens historiques déjà rencontrés.
 - **Familles** : branches découvertes, silhouettes restantes et objectifs.
 - **Relations** : vue avancée du chemin entre les formes, après validation de son intérêt UX.
+- **Réseau** : la constellation en deux rives, les briques de la 1ʳᵉ case à gauche, celles de la 2ᵉ à droite, une bande par fascicule débloqué ; chaque mot trouvé est une courbe entre ses deux briques ([ADR 0083](adr/0083-vue-reseau-du-codex.md), proposé).
 - **Cabinet** (onglet du codex, fusionné avec les objectifs) : les nombres du joueur, jamais comparés à ceux des autres : jours de jeu, mots trouvés, langues rencontrées, mot au plus long voyage, cartes maîtrisées, légendaires trouvées, cartes de lecteur remplies ([ADR 0050](adr/0050-cohortes-de-retention-et-statistiques-du-joueur.md)).
 
 ### Vue globale
@@ -285,13 +288,9 @@ Le corpus disponible, le nombre de fascicules possibles et la piste des fascicul
 
 ### Indices
 
-Les indices peuvent être débloqués par l'expérimentation, le temps, des objectifs ou l'encre (5, 10, 20, 40 puis 80 gouttes du premier niveau à la solution, [ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md) ; au moins 2 gouttes par pli), mais pas par un paiement dans le MVP :
+Chaque carte à trouver vend trois indices à la carte, achetés dans l'ordre, une fois chacun, contre de l'encre : sa silhouette (4 gouttes), sa définition (8), son sens littéral (16). Jamais un paiement dans le MVP, jamais une légendaire ([ADR 0051](adr/0051-indices-a-la-carte.md)).
 
-1. famille ou langue du résultat ;
-2. nature des deux briques (préfixe, suffixe ou mot) ;
-3. présence d'une transformation ;
-4. emplacement d'une brique connue ;
-5. solution, en dernier recours, sans punir durablement la progression.
+Un indice acheté reste lisible : sous la table, les **enquêtes en cours** listent les cartes à trouver dont un indice est payé, et ne montrent que ce qui l'a été, jusqu'à la découverte du mot ([ADR 0080](adr/0080-enquetes-en-cours.md), proposé).
 
 ### Quêtes et ricochets
 
@@ -300,7 +299,7 @@ La page Quêtes ([ADR 0042](adr/0042-page-quetes-et-recompenses-a-recuperer.md))
 - **Journalières** : chaque jour, trois quêtes, une à la table de fusion, une de mémoire et une d'adresse, renouvelées à minuit GMT. Le serveur ne tire que des quêtes que l'état du joueur rend faisables, sans dépendre de l'énergie ni du hasard. Chacune demande un acte de réflexion, jamais un simple geste. Le défi quotidien devient la quête de table : une recette que la réserve permet, donnée par sa seule piste de sens (« Trouvez le mot qui veut dire “peur de l'eau” »).
   - **La carte de lecteur** reçoit un tampon chaque jour où les trois quêtes sont faites, sans obligation de jours consécutifs. Au 7ᵉ tampon : 20 gouttes, un sablier et un pli de lecteur, tiré parmi les peu communes et les rares du fascicule choisi. Aucune flamme, aucun rappel.
   - Pendant la première semaine, les quêtes initiales s'affichent en tête de l'onglet ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)).
-- **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). Le 2ᵉ jalon d’un fascicule débloque le suivant ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)).
+- **Fascicules** : les jalons de chaque fascicule ([ADR 0038](adr/0038-indices-a-prix-croissant-et-format-des-jalons.md)). Le 2ᵉ jalon d’un fascicule débloque le suivant ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). Sous les jalons, les **quêtes de collection** du fascicule : tous ses préfixes, tous ses suffixes, tous ses mots communs, peu communs ou rares, hors légendaires ([ADR 0082](adr/0082-quetes-de-collection-par-fascicule.md), proposé).
 - **Au long cours** : des quêtes à paliers qui traversent les fascicules, sur les langues, les familles, les transformations, la maîtrise et les cartes de lecteur. Aucune ne compte les légendaires, sauf la première trouvée.
 
 Les **ricochets** ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md)) sont de courtes questions sur les cartes déjà trouvées : le sens d'une brique, la brique d'un sens, le mot d'un sens littéral, sens littéral ou sens actuel, découper un mot (le joueur glisse une lame sur le mot, pose ses coupes, puis valide : [ADR 0053](adr/0053-decouper-glisser-une-lame-puis-valider.md)), relier des paires, assembler un mot (le joueur choisit un préfixe et un suffixe pour former le mot dont il lit la définition actuelle : [ADR 0067](adr/0067-ricochets-assembler-un-mot-depuis-sa-definition.md)). Ils ne consomment rien, n'ont pas de chronomètre et rendent une carte maîtrisée après trois bonnes réponses sur trois jours différents. Une carte maîtrisée reste dans le tirage, au plus deux par séance de cinq questions ; une erreur la fait descendre au niveau 2, elle perd sa maîtrise et revient le lendemain, et il lui faut de nouveau trois bonnes réponses au niveau 3 sur trois jours différents ([ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)).
@@ -615,7 +614,12 @@ Ces pistes ont été examinées en octobre 2026, puis écartées. Elles ne revie
 - la copie d'une brique contre de l'encre ;
 - une recharge plus rapide la première semaine ;
 - des quêtes faites de simples gestes, et une série de jours consécutifs ;
-- une frustration dosée pour pousser à l'achat.
+- une frustration dosée pour pousser à l'achat ;
+- un pli qui propose deux briques pour n’en garder qu’une ;
+- la réserve affichée en tableau préfixes × suffixes (remplacée par la mémoire des essais, [ADR 0081](adr/0081-memoire-des-essais.md)) ;
+- l’annonce d’un mot croisé à la révélation ;
+- des ricochets de chronologie ou fondés sur les exemples concrets ;
+- des fascicules spéciaux hors calendrier.
 
 ## Expérimentations UX prioritaires
 

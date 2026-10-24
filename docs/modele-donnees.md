@@ -526,6 +526,7 @@ erDiagram
     JOUEUR ||--o{ CARTE_LECTEUR : "remplit"
     JOUEUR ||--o{ RICOCHET : "révise"
     JOUEUR ||--o{ PALIER_ATTEINT : "a atteint"
+    JOUEUR ||--o{ ESSAI : "a essayé"
     JOUEUR ||--o{ QUETE_INITIALE : "a reçu"
     JOUEUR ||--|{ APPAREIL : "joue sur"
     JOUEUR ||--o| COMPTE : "est rattaché à"
@@ -678,6 +679,12 @@ erDiagram
         instant atteint_le
         instant recupere_le "nullable"
     }
+    ESSAI {
+        id joueur_id PK, FK
+        id gauche PK "catalogue : brique de la 1re case"
+        id droite PK "catalogue : brique de la 2e case"
+        id fascicule_juge "catalogue : dernier fascicule paru à l'essai"
+    }
     QUETE_INITIALE {
         id joueur_id PK, FK
         id quete_id PK "catalogue ; le cadeau de bienvenue en est une"
@@ -713,12 +720,13 @@ erDiagram
 | `quete_du_jour` | Les trois quêtes du jour. | Tirées à la première visite après minuit GMT, seulement parmi les quêtes faisables ; jamais sur un mot légendaire ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
 | `carte_lecteur` | Cartes de lecteur et leurs tampons. | Un tampon par jour où les trois quêtes sont faites ; au 7ᵉ, la récompense attend d’être récupérée et une nouvelle carte commence. |
 | `ricochet` | Niveau de chaque carte trouvée. | Seule une bonne réponse à une carte à revoir fait monter son niveau ; `bonnes_niveau_3` compte les bonnes réponses données au niveau 3 et revient à 0 après une erreur ; à la troisième, la carte est maîtrisée. Une erreur sur une carte à revoir, maîtrisée ou non, la fait descendre d’un niveau et, si elle était maîtrisée, vide `maitrisee_le` ; elle revient le lendemain ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). |
-| `palier_atteint` | Paliers des quêtes au long cours. | Comme `jalon_atteint` : marqué quand il est atteint, récupéré une seule fois. |
+| `palier_atteint` | Paliers des quêtes au long cours et quêtes de collection. | Comme `jalon_atteint` : marqué quand il est atteint, récupéré une seule fois. Une quête de collection d’un fascicule ([ADR 0082](adr/0082-quetes-de-collection-par-fascicule.md)) se récupère de la même façon, par l’identifiant de palier que lui donne le catalogue. |
+| `essai` | Mémoire des essais. | Une paire essayée sans succès (échec ou « presque »), dans l’ordre des cases, si le joueur connaît les deux briques. Ni issue, ni date. 3 000 lignes au plus par joueur ; les lignes jugées sous un fascicule plus ancien s’oublient en bloc à la parution suivante ([ADR 0081](adr/0081-memoire-des-essais.md)). |
 | `quete_initiale` | Cadeau de bienvenue et quêtes initiales. | Une ligne par quête faite ; le cadeau est atteint à la fin du tutoriel ([ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)). |
 | `graine_accordee` | Réserves de départ reçues. | Une ligne par fascicule semé : ses graines ne sont accordées qu'une fois, quand le fascicule est débloqué ([ADR 0030](adr/0030-reserve-de-depart-par-fascicule.md), [ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). Chaque exemplaire accordé est un `mouvement` de motif `depart`. |
 | `fascicule_debloque` | Fascicules débloqués par le joueur. | `joueur_id`, `fascicule_id`, `debloque_le`. Le premier fascicule paru l’est d’emblée ; chacun des suivants quand le 2ᵉ jalon du précédent est atteint. Une ligne n’est jamais supprimée, sauf par la réinitialisation du profil ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). |
 
-**Ce qui n'est jamais stocké** : les propositions de fusion (échecs, « presque », recettes déjà connues). Elles ne modifient rien, donc elles ne laissent aucune ligne ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
+**Ce qui n'est jamais stocké** : l'issue et la date d'une proposition de fusion, et toute proposition d'une recette déjà connue. Seule la paire d'un échec ou d'un « presque » est gardée dans `essai`, jusqu'à la parution suivante, pour que la réserve range ce qui a déjà été essayé ([ADR 0081](adr/0081-memoire-des-essais.md)) ; la télémétrie n'en garde qu'un compteur par résultat ([ADR 0010](adr/0010-observabilite-et-vie-privee.md)).
 
 ### Exemple : une découverte
 

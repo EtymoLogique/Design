@@ -40,7 +40,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0024](0024-architecture-logicielle-et-hebergement.md) | Architecture serverless chez Scaleway, backend Rust, état relationnel | Accepté, publication des fascicules remplacée par 0025, contenu du dépôt du catalogue par 0026, artefacts et projection du contenu par 0027, préversion par branche par 0028, préparation hors connexion par 0041, profil invité par 0070 |
 | [0025](0025-medias-statiques-et-publication-programmee.md) | Médias du catalogue en statique, publication programmée des fascicules | Accepté, correspondance des médias remplacée par 0027, fichiers à venir et bascule par l'horloge de l'API par 0029 |
 | [0026](0026-depot-prive-du-catalogue-sans-logique.md) | Un dépôt public pour le catalogue brut, sans aucune logique | Accepté, recettes jamais envoyées au client remplacé par 0027 |
-| [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029 |
+| [0027](0027-catalogue-statique-et-donnees-joueur.md) | Catalogue statique par fascicules, données du joueur sous autorité serveur | Proposé, dépôt à l'avance remplacé par 0029, propositions de fusion jamais stockées par 0081 |
 | [0028](0028-gitflow-des-depots.md) | Gitflow des dépôts : master pour la prod, develop pour la hors-prod | Proposé |
 | [0029](0029-parution-par-promotion-de-prefixe.md) | Parution par promotion de préfixe, dans un seul bucket | Proposé, date du prochain fascicule publiée par 0049 |
 | [0030](0030-reserve-de-depart-par-fascicule.md) | Réserve de départ déclarée par chaque fascicule | Proposé, moment de l’octroi des graines remplacé par 0069 |
@@ -87,6 +87,10 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0075](0075-moderation-des-pseudos-et-obligations-dsa.md) | Modération des pseudos et obligations du règlement sur les services numériques (DSA) | Proposé |
 | [0078](0078-soutien-par-dons-sur-ko-fi.md) | Soutien par dons sur Ko-fi, sans vente dans le jeu | Proposé |
 | [0079](0079-exemples-concrets-au-dos-des-cartes.md) | Exemples concrets au dos des cartes | Proposé |
+| [0080](0080-enquetes-en-cours.md) | Enquêtes en cours : un indice acheté reste lisible | Proposé |
+| [0081](0081-memoire-des-essais.md) | Mémoire des essais : les briques déjà essayées passent en fin de réserve | Proposé |
+| [0082](0082-quetes-de-collection-par-fascicule.md) | Quêtes de collection par fascicule | Proposé |
+| [0083](0083-vue-reseau-du-codex.md) | Vue Réseau du codex : la constellation en deux rives | Proposé |
 
 ## Page HTML
 
