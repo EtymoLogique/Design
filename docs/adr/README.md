@@ -66,7 +66,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0050](0050-cohortes-de-retention-et-statistiques-du-joueur.md) | Cohortes de rétention et statistiques du joueur, sans donnée personnelle nouvelle | Proposé |
 | [0051](0051-indices-a-la-carte.md) | Indices à la carte : silhouette, sens littéral, définition | Accepté |
 | [0052](0052-fusions-trompeuses-expliquees.md) | Fusions trompeuses expliquées : trompe-l’œil et mauvais homographe | Proposé |
-| [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé, place de la lame remplacée par 0068 |
+| [0053](0053-decouper-glisser-une-lame-puis-valider.md) | Découper : glisser une lame, puis valider | Proposé, place de la lame remplacée par 0068, plusieurs découpes par mot complétées par 0084 |
 | [0054](0054-fascicules-de-lancement-plus-gros-et-plus-rapproches.md) | Fascicules de lancement plus gros et plus rapprochés | Proposé |
 | [0055](0055-prononciation-des-mots.md) | Prononciation des mots : transcription phonétique, sans audio | Proposé, origine des transcriptions remplacée par 0060 |
 | [0056](0056-date-de-premiere-attestation.md) | Date de première attestation d’un mot | Proposé, source de la date remplacée par 0060 |
@@ -109,3 +109,4 @@ Chaque ADR contient :
 3. les options envisagées ;
 4. les conséquences positives et négatives ;
 5. les critères de réévaluation.
+| [0084](0084-ricochets-decouper-toutes-les-decoupes-justes.md) | Ricochets : découper un mot de toutes ses façons, dont les compositions chaînées | Proposé |
