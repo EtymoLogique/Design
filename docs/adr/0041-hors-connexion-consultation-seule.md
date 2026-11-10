@@ -1,6 +1,6 @@
 # ADR 0041 — Hors connexion, la PWA ne sert qu'à consulter
 
-- **Statut** : Accepté
+- **Statut** : Accepté, partiellement remplacé par l'[ADR 0085](0085-reseau-instable-meme-commande-et-table-hors-connexion.md) : hors connexion, la table se prépare (pose, déplacement, retrait) ; une même commande peut être renvoyée, avec la même clé, tant que le joueur attend sa réponse. Le reste est en vigueur : consultation seule pour toute mutation, aucune file, aucun résultat local.
 - **Portée** : MVP, dépôt App (PWA) et dépôt design
 - **Remplace partiellement** : [ADR 0001](0001-pwa-responsive.md) (préparation d'une fusion et tentative conservée hors connexion), [ADR 0007](0007-etat-et-economie-autoritaires.md) (« opérations en attente rejouables »), [ADR 0024](0024-architecture-logicielle-et-hebergement.md) (la table se prépare hors connexion)
 
