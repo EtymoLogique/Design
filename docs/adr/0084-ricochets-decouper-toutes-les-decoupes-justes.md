@@ -1,65 +1,64 @@
-# ADR 0084 — Ricochets : découper un mot de toutes ses façons, dont les compositions chaînées
+# ADR 0084 — Ricochets : découper un mot de toutes ses coupes, parties composées comprises
 
 - **Statut** : Proposé
-- **Complète** : [ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md) (la lame, « Couper ici » et « Reprendre » ne changent pas ; la réponse peut porter plusieurs découpes) ; [ADR 0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) (la lame repart après chaque coupe, sur un leurre) ; [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) (la maîtrise ne change pas) ; [ADR 0007](0007-etat-et-economie-autoritaires.md) (le serveur juge)
+- **Complète** : [ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md) (la lame, « Couper ici » et « Reprendre » ne changent pas ; seul le nombre de coupes attendues change) ; [ADR 0068](0068-ricochets-moins-de-touchers-pour-decouper-et-assembler.md) (la lame repart après chaque coupe, sur un leurre) ; [ADR 0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) (la maîtrise ne change pas) ; [ADR 0007](0007-etat-et-economie-autoritaires.md) (le serveur juge)
 
 ## Contexte
 
-Le format *Découper* ([ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md)) attendait une seule découpe : celle de la composition préférée de la carte. L’application accepte pourtant déjà qu’un mot en ait plusieurs, et le joueur doit alors les trouver toutes (*écologiste* : *écologie · iste* et *éco · logiste*) ; le champ `autres_coupes` du manifeste porte ces découpes. Cette évolution a été livrée sans ADR, et le compilateur de contenu ne publiait jamais `autres_coupes` : sur le vrai catalogue, un mot se découpait toujours d’une seule façon.
+Le format *Découper* ([ADR 0053](0053-decouper-glisser-une-lame-puis-valider.md)) attendait les coupes de la composition préférée de la carte, sur un seul niveau. Mais une partie d’une composition est une unité, et cette unité peut être elle-même un mot composé : *étymologiste* est *étymologie · iste*, et *étymologie* est *étymo- · -logie*. Couper *étymologiste* en *étymo · logie · iste* est juste, et le joueur qui connaît le mot le sait.
 
-Or le catalogue sait dire davantage. Une partie d’une composition est une unité, et cette unité peut être elle-même un mot composé : *étymologiste* est *étymologie · iste*, et *étymologie* est *étymo- · -logie*. Couper *étymologiste* en *étymo · logie · iste* est juste, et le joueur qui connaît le mot le sait.
+Une première version de cet ADR faisait trouver chaque niveau comme une découpe distincte (`[10]`, puis `[5, 10]`), l’une après l’autre. Le joueur devait reposer les coupes communes, et il ne coupait jamais le mot « d’un coup » : le parcours était pénible.
 
 ## Décision
 
 ### Ce que le joueur fait
 
-- Rien de nouveau dans le geste : il pose des coupes comme dans l’ADR 0053. Chaque découpe juste est gardée, puis le joueur passe à la suivante tant qu’il en reste ; la dernière découpe juste achève la question.
-- Une découpe fausse arrête la question, fausse. Les découpes justes déjà trouvées ne comptent pas : une seule réponse compte par question ([ADR 0065](0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). Aucun crédit partiel.
-- La commande de réponse reste unique, envoyée à la dernière découpe : une découpe seule part à plat, plusieurs ensemble. Le serveur fait foi.
-- L’ordre des coupes, celui des découpes et les doublons ne comptent pas.
+- Il coupe le mot **une seule fois**, du geste de l’ADR 0053, et pose **toutes** les coupes : *étymo · logie · iste*. La consigne dit combien de morceaux : « Coupez ce mot en 3 morceaux. »
+- **Seule la coupe complète est juste.** *Étymologie · iste* seul est faux : on demande tous les morceaux. Une coupe en trop est fausse aussi.
+- La commande de réponse reste unique, avec la liste des coupes. Le serveur fait foi. L’ordre des coupes et les doublons ne comptent pas.
+- Au verdict, tous les morceaux élémentaires apparaissent, aux couleurs de leurs briques ; la leçon dit le mot en briques.
 
-### Les découpes d’un mot
+### Les coupes d’un mot
 
-- La **découpe préférée** est celle de la composition préférée du mot : les frontières entre ses parties (`coupes`).
-- Chaque partie qui est elle-même un mot composé (sa propre composition préférée) peut se couper à son tour. Chaque partie compte pour un choix indépendant (coupée ou non, et de chacune de ses façons) : le mot a **toutes les combinaisons** de ces choix pour découpes justes. *Étymologiste* en a deux, `[10]` puis `[5, 10]` ; un mot dont deux parties se coupent en a jusqu’à quatre.
-- Une partie **élidée** dans le mot (*biologie* dans *biologiste* : segment `[0, 6)` pour un mot de huit lettres) est bornée par son segment : une coupe qui tomberait au-delà n’existe pas dans le mot.
+- Les coupes d’un mot sont les frontières de sa composition préférée, **plus celles de chaque partie qui est elle-même un mot composé** (sa propre composition préférée), de proche en proche. *Étymologiste* : `[5, 10]`.
+- Une partie **élidée** dans le mot (*biologie* dans *biologiste* : segment `[0, 6)` pour un mot de huit lettres) est bornée par son segment : une coupe qui tomberait au-delà n’existe pas dans le mot. *Biologiste* : `[3, 6]`.
 - Une partie ne se coupe pas si elle n’a pas de composition préférée aux segments continus, ou si elle reviendrait sur un mot déjà en cours (aucune boucle).
-- Plafonds de l’API : **quatre découpes** par mot et huit coupes par découpe. Au-delà de quatre découpes, **aucune découpe supplémentaire n’est publiée** : le joueur ne pourrait pas deviner lesquelles poser, mieux vaut la seule découpe préférée.
+- Plafond de l’API : huit coupes par réponse. Au-delà, le contenu ne publie que les frontières du premier niveau : mieux vaut une coupe juste que des coupes que le joueur ne pourrait pas poser.
 
 ### Les données
 
-- Le compilateur de contenu publie `autres_coupes` dans le bloc `ricochets` du manifeste, pour chaque mot qui a plus d’une découpe : des listes de positions triées, la préférée exclue. Des positions seulement, aucun texte copié. Le champ est facultatif : un manifeste sans `autres_coupes` se juge comme avant.
-- Les coupes équivalentes à lettre partagée (`coupes_alternatives` : *hom · onyme* et *homo · nyme*) restent un autre champ du manifeste, que le contenu ne publie pas encore ; cet ADR n’y touche pas.
+- Le compilateur de contenu publie ces coupes dans `coupes`, dans le bloc `ricochets` du manifeste : des positions seulement, aucun texte copié. Le contrat et l’application ne changent pas.
+- Les autres découpes justes d’un même mot (`autres_coupes` : *écologiste* en *écologie · iste* ou *éco · logiste*) et les coupes équivalentes à lettre partagée (`coupes_alternatives`) restent des champs du manifeste que l’application sait juger ; le contenu ne les publie pas encore et cet ADR n’y touche pas.
 
 ## Options envisagées
 
-### Un arbre de coupes jugé coupe par coupe, une commande par coupe
+### Faire trouver chaque niveau comme une découpe distincte
 
-Écartée. Une question qui s’achève au fil des coupes demande un contrat de réponse à état (« continuer », « terminé », « faux »), une commande qui n’écrit rien tant que la question reste ouverte, et un jugement côté client et côté serveur. L’application juge déjà des découpes complètes : réutiliser `autres_coupes` donne le même parcours pour le joueur sans nouveau contrat.
+Retenue d’abord, écartée : le joueur repose les coupes communes (`10`, puis `5` et `10`), valide plusieurs fois et ne coupe jamais le mot en une fois.
 
-### Une question par niveau (« Recoupez *étymologie* »)
+### Accepter toute coupe qui reste dans une décomposition valide
 
-Écartée : la consigne dit alors qu’un morceau se coupe encore.
+Écartée : *étymologie · iste* serait juste, et on ne mesurerait plus que le joueur a tout trouvé.
 
-### Publier un sous-ensemble quand il y a plus de quatre découpes
+### Un arbre de coupes jugé coupe par coupe
 
-Écartée : le joueur serait tenu de poser des découpes qu’il ne peut pas deviner.
+Écartée : un contrat de réponse à état, une commande qui n’écrit rien tant que la question reste ouverte et un jugement dupliqué, pour un parcours que la coupe complète donne sans rien changer au contrat.
 
 ## Conséquences
 
 ### Positives
 
-- Les mots dont une partie est composée se découpent en entier ; le format mesure toute la chaîne.
-- Aucun changement de contrat, de base ni de code applicatif : le contenu publie ce que l’application sait déjà juger. L’API et la PWA ne changent pas.
+- Le joueur coupe le mot en une fois et le format mesure toute la chaîne.
+- Aucun changement de contrat, de base ni de code applicatif côté serveur.
 - Une donnée absente laisse le jeu comme avant.
 
 ### Négatives
 
-- Le joueur repose les coupes communes (*étymo · logie · iste* demande `[10]` puis `[5, 10]`, soit la coupe `10` deux fois).
-- Quatre découpes au plus : un mot dont plus de deux parties se coupent garde sa seule découpe préférée.
-- La justesse d’une découpe dépend de la saisie des compositions du contenu : une partie sans composition préférée ne se coupe pas.
+- Un mot dont une partie se coupe devient plus difficile : seule la coupe complète compte, et le joueur qui connaît *étymologie · iste* sans connaître *étymo · logie* se trompe.
+- La justesse dépend de la saisie des compositions : une partie sans composition préférée ne se coupe pas.
+- Le verdict colore les morceaux par recalcul côté client (même règle que le compilateur) : une divergence se verrait aux couleurs, pas au jugement.
 
 ## Critères de réévaluation
 
-- Si des mots réels dépassent quatre découpes, relever le plafond de l’API plutôt que de les taire.
-- Si les joueurs trouvent pénible de reposer les coupes communes, passer à un parcours qui garde les coupes déjà posées d’une découpe à l’autre.
+- Si la part de réponses fausses des mots à plusieurs niveaux dépasse de plus de 15 points celle des autres mots sur un mois, ouvrir la question d’un crédit pour le premier niveau.
+- Si des mots réels dépassent huit coupes, relever le plafond de l’API plutôt que de les taire.
