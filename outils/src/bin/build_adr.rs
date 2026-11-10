@@ -273,6 +273,13 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0085",
+        &[
+            ("interfaces.html#i-04", "Hors connexion et resynchronisation"),
+            ("design-system.html#ds-2-8", "Hors ligne et erreurs"),
+        ],
+    ),
+    (
         "0084",
         &[
             ("interfaces.html#i-26", "Les ricochets"),

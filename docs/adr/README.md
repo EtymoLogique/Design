@@ -54,7 +54,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0038](0038-indices-a-prix-croissant-et-format-des-jalons.md) | Indices à prix croissant et format des jalons | Accepté, sabliers de jalon sans plafond depuis 0039, octroi et affichage des jalons remplacés par 0042 |
 | [0039](0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md) | Sabliers échangés à part, à 10 gouttes et sans plafond, dans une boutique | Accepté, encre gagnée aussi par les quêtes depuis 0045 et 0046 |
 | [0040](0040-rarete-des-mots.md) | Rareté des mots, dérivée de leurs briques | Proposé, mot légendaire inconnu sans silhouette ni rareté depuis 0043 |
-| [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté |
+| [0041](0041-hors-connexion-consultation-seule.md) | Hors connexion, la PWA ne sert qu'à consulter | Accepté, table préparée hors connexion et commande renvoyée sous la même clé par 0085 |
 | [0042](0042-page-quetes-et-recompenses-a-recuperer.md) | Page Quêtes et récompenses de jalon à récupérer | Proposé, contenu de l’onglet Journalières et troisième onglet par 0045 |
 | [0043](0043-legendaires-chance-fixe-hors-garanties-et-secretes.md) | Légendaires : une chance fixe, hors des garanties, toujours secrètes | Proposé |
 | [0044](0044-ricochets-reviser-et-maitriser-les-cartes.md) | Ricochets : réviser les cartes trouvées et les maîtriser | Proposé, format Découper remplacé par 0053, maîtrise définitive remplacée par 0065, format Assembler ajouté par 0067 |
@@ -110,3 +110,4 @@ Chaque ADR contient :
 4. les conséquences positives et négatives ;
 5. les critères de réévaluation.
 | [0084](0084-ricochets-decouper-toutes-les-decoupes-justes.md) | Ricochets : découper un mot de toutes ses coupes, parties composées comprises | Proposé |
+| [0085](0085-reseau-instable-meme-commande-et-table-hors-connexion.md) | Réseau instable : la même commande se renvoie, la table se prépare hors connexion | Proposé |
