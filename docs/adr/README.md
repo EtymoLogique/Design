@@ -33,7 +33,7 @@ Une modification importante se fait dans un nouvel ADR. Les corrections factuell
 | [0017](0017-licences.md) | Code sous AGPL, contenu sous CC BY-SA, nom réservé | Accepté |
 | [0018](0018-sabliers-et-boutique.md) | Sabliers pour avancer la recharge des plis, boutique après le MVP | Accepté pour les sabliers (repris par 0020, plafond quotidien remplacé par 0039) ; boutique en euros abandonnée le 15 octobre 2026 |
 | [0019](0019-encre-a-chaque-doublon.md) | Chaque doublon rapporte de l'encre | Accepté, base d'encre et prix de l'indice remplacés par 0020 |
-| [0020](0020-deux-plis-en-attente-et-sabliers.md) | Deux plis en attente, sabliers gagnés par l'encre | Accepté, prix de l'indice remplacé par 0038, prix et plafonds des sabliers par 0039 |
+| [0020](0020-deux-plis-en-attente-et-sabliers.md) | Deux plis en attente, sabliers gagnés par l'encre | Accepté, prix de l'indice remplacé par 0038, prix et plafonds des sabliers par 0039, capacité d'énergie et durée de recharge par 0086 |
 | [0021](0021-logo-sceau-el.md) | Logo : le sceau ÉL affiné | Accepté |
 | [0022](0022-fascicules-de-20-a-30-mots.md) | Fascicules de 20 à 30 mots, un par mois | Accepté, dix premiers fascicules remplacés par 0054 |
 | [0023](0023-textures-des-cartes.md) | Une silhouette monochrome en fond de chaque carte | Accepté |
@@ -111,3 +111,4 @@ Chaque ADR contient :
 5. les critères de réévaluation.
 | [0084](0084-ricochets-decouper-toutes-les-decoupes-justes.md) | Ricochets : découper un mot de toutes ses coupes, parties composées comprises | Proposé |
 | [0085](0085-reseau-instable-meme-commande-et-table-hors-connexion.md) | Réseau instable : la même commande se renvoie, la table se prépare hors connexion | Proposé |
+| [0086](0086-douze-plis-en-attente-un-par-heure.md) | Douze plis en attente, un par heure | Proposé |

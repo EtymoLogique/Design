@@ -47,7 +47,7 @@ Les pages se renvoient les unes aux autres là où une règle est appliquée ou 
 | **Graine** | Brique de la réserve de départ d’un fascicule, accordée avec quelques exemplaires quand le fascicule est débloqué, pour amorcer le graphe ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). Ensuite, les jalons offrent des plis au contenu déterministe. |
 | **Pli** | Pli scellé, gratuit, seule source d'exemplaires après la réserve de départ. On dit « ouvrir un pli », « l'atelier des plis ». Le mot anglais « pack » n'est jamais employé. |
 | **Fascicule** | Nouvel ensemble de 20 à 30 mots, avec leurs briques et leurs langues, publié environ tous les 30 jours. Il a sa jaquette et son pli, que le joueur peut ouvrir à tout moment une fois le fascicule **débloqué** : le premier l’est d’emblée, chacun des suivants au 2ᵉ jalon du précédent ; avant, il est **verrouillé** ([ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)). On ne dit ni « pack », ni « extension », ni « saison ». |
-| **Sablier** | Objet qui fait avancer d'une heure la recharge d'énergie, jamais un tirage. Il s'échange contre 10 gouttes d'encre ou se gagne par un jalon (ADR 0020, 0039) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
+| **Sablier** | Objet qui fait avancer la recharge d'énergie d'un douzième (5 minutes), jamais un tirage. Il s'échange contre 10 gouttes d'encre ou se gagne par un jalon (ADR 0020, 0039) ; son achat n'arrivera qu'après le MVP (ADR 0018, proposé). On ne dit ni « boost », ni « accélérateur ». |
 | **Légendaire** | Brique ou mot le plus rare, marqué d’un diamant. Leur nombre reste secret ; celles que le joueur trouve se comptent à part, à côté de chaque jauge ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)). |
 | **Ricochets** | Courtes questions sur les cartes déjà trouvées. Elles ne consomment rien, et trois bonnes réponses sur trois jours différents rendent une carte **maîtrisée**, et une erreur la lui fait perdre ([ADR 0044](adr/0044-ricochets-reviser-et-maitriser-les-cartes.md), [ADR 0065](adr/0065-ricochets-la-maitrise-se-perd-et-se-regagne.md)). On ne dit ni « révision », ni « quiz ». |
 | **Quête** | Objectif de la page Quêtes : trois quêtes du jour, renouvelées à minuit GMT, des quêtes au long cours à paliers, et les jalons de chaque fascicule ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md)). |
@@ -310,9 +310,9 @@ Toutes les récompenses sont affichées d'avance et attendent d'être récupér�
 
 ### Proposition MVP
 
-- Une charge d'énergie permet d'ouvrir un pli gratuit. L'énergie compte **2 charges au plus** : deux plis peuvent attendre le joueur ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)).
-- Une charge revient toutes les **douze heures**, durée configurable. Quand les deux charges sont prêtes, le temps s'arrête ; ouvrir un pli relance la recharge. Un joueur qui vient une fois par jour ne perd donc rien.
-- Des **sabliers**, à 10 gouttes d'encre chacun, avancent la recharge d'une heure (voir plus bas).
+- Une charge d'énergie permet d'ouvrir un pli gratuit. L'énergie compte **12 charges au plus** : douze plis peuvent attendre le joueur ([ADR 0086](adr/0086-douze-plis-en-attente-un-par-heure.md), qui remplace en partie l'[ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)).
+- Une charge revient toutes les **heures**, durée configurable. Quand les douze charges sont prêtes, le temps s'arrête ; ouvrir un pli relance la recharge. Un joueur qui revient dans la demi-journée ne perd donc rien.
+- Des **sabliers**, à 10 gouttes d'encre chacun, avancent la recharge d'un douzième, soit 5 minutes (voir plus bas).
 - Le serveur calcule la disponibilité afin d'éviter la manipulation de l'horloge locale.
 - L'énergie limite uniquement les plis, jamais les fusions avec des briques possédées.
 - Les plis sont la seule source d'exemplaires après la réserve de départ.
@@ -322,7 +322,7 @@ Toutes les récompenses sont affichées d'avance et attendent d'être récupér�
 
 Les plis ont leur propre écran, distinct de la table de fusion. Le joueur y **choisit d'abord un fascicule** parmi ceux qui sont parus et débloqués (les autres apparaissent verrouillés, [ADR 0069](adr/0069-deblocage-progressif-des-fascicules.md)) : chacun montre sa jaquette, ses briques connues et ses exemplaires en réserve. Il ouvre ensuite le pli de ce fascicule, et peut revenir au choix à tout moment. Sur l'écran d'ouverture, on retrouve :
 
-- l'énergie (« 1 / 2 ») et le temps de recharge, arrêté à 2 / 2, avec l'heure du prochain pli en clair (« Prochain pli vers 21 h ») ;
+- l'énergie (« 1 / 12 ») et le temps de recharge, arrêté à 12 / 12, avec l'heure du prochain pli en clair (« Prochain pli vers 21 h ») ;
 - les sabliers disponibles et, quand le temps manque, un raccourci pour les utiliser ou pour échanger de l'encre ; l'échange lui-même vit dans la boutique ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
 - les chances du fascicule choisi par rareté (les quatre, légendaire comprise : [ADR 0036](adr/0036-chances-des-legendaires-toujours-affichees.md)) et par type, et les chances exactes de chaque brique non légendaire (les briques inconnues restent en silhouette). Toutes les légendaires du fascicule, connues ou non, forment une seule ligne à 1,2 %, sans leur nombre, et les chances par type se calculent sans elles ([ADR 0043](adr/0043-legendaires-chance-fixe-hors-garanties-et-secretes.md)) ;
 - la garantie de nouveauté, le filet d'utilité et la garantie des légendaires, avec leurs compteurs ;
@@ -389,11 +389,11 @@ Les poids, les raretés et la garantie relèvent de l'équilibrage. Ils doivent 
 
 Dans le MVP ([ADR 0020](adr/0020-deux-plis-en-attente-et-sabliers.md)) :
 
-- un **sablier** fait avancer d'une heure la recharge en cours. Il ne s'utilise que si l'énergie est sous 2 ; le temps en trop passe à la charge suivante. La feuille propose, et permet au plus, le nombre de sabliers qui remplit l'énergie ; seul le dernier peut n'avancer qu'une partie de son heure ;
+- un **sablier** fait avancer la recharge en cours d'un douzième de sa durée, soit 5 minutes ([ADR 0086](adr/0086-douze-plis-en-attente-un-par-heure.md)). Il ne s'utilise que si l'énergie est sous 12 ; le temps en trop passe à la charge suivante. La feuille propose, et permet au plus, le nombre de sabliers qui remplit l'énergie ; seul le dernier peut n'avancer qu'une partie de ses 5 minutes ;
 - il s'**échange contre 10 gouttes d'encre**, dans un geste distinct de son usage ; seuls les sabliers détenus s'utilisent. Certains jalons en donnent aussi ;
 - il achète du temps, jamais un tirage : chances, garantie, filet et contenu du pli ne changent pas ;
 - **aucun plafond** : ni sur l'échange contre de l'encre, ni sur l'usage, ni sur le nombre de sabliers détenus ; l'encre, gagnée en ouvrant des plis et, en quantité bornée, par les quêtes et le cadeau de bienvenue ([ADR 0045](adr/0045-quetes-du-jour-carte-de-lecteur-et-quetes-au-long-cours.md), [ADR 0046](adr/0046-demarrage-genereux-cadeau-de-bienvenue-et-quetes-initiales.md)), borne à elle seule le rythme ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)) ;
-- un joueur qui vient chaque jour ouvre 6 plis en 3 jours et gagne au moins 12 gouttes, soit un sablier ; à 10 gouttes le sablier, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
+- à 10 gouttes les 5 minutes, l'encre accélère peu le rythme et sert d'abord aux indices ([ADR 0039](adr/0039-plafonner-l-achat-des-sabliers-pas-leur-usage.md)).
 
 ### Principes éthiques
 

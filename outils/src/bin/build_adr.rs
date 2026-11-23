@@ -308,6 +308,13 @@ const XREFS: &[(&str, &[(&str, &str)])] = &[
         ],
     ),
     (
+        "0086",
+        &[
+            ("plis.html#energie", "L’énergie des plis"),
+            ("plis.html#sablier", "Les sabliers"),
+        ],
+    ),
+    (
         "0064",
         &[
             ("plis.html#plis", "Ouvrir un pli"),
